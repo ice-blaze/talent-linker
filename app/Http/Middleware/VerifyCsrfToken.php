@@ -11,7 +11,10 @@ class VerifyCsrfToken extends BaseVerifier
      *
      * @var array
      */
+
+    // TODO change it to handle the post requests
     protected $except = [
-        //
+        '*'
     ];
+
 }
