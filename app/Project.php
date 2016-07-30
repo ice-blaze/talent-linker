@@ -20,6 +20,11 @@ class Project extends Model
     return $this->comments()->save($comment);
   }
 
+  public function languages()
+  {
+      return $this->belongsToMany('App\Language');
+  }
+
   public function path()
   {
     return '/projects/' . $this->id;

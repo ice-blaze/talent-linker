@@ -6,9 +6,9 @@
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><a href="/projects">Projects</a></li>
-        <li><a href="/talents">Talents</a></li>
-        <li><a href="/about">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="/projects">Projects</a></li>
+        <li class="nav-item"><a class="nav-link" href="/talents">Talents</a></li>
+        <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
           <!-- Authentication Links -->

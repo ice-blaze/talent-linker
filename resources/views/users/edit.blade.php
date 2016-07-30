@@ -8,10 +8,6 @@
   {{"/talents/" . $user->id}}
 @endsection
 
-@section('name'){{$user->name}}@endsection
-
-@section('email'){{$user->email}}@endsection
-
 @section('button_name')
-Save User
+  Save User
 @endsection
