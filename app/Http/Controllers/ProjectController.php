@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Project;
+use App\Language;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -34,13 +35,25 @@ class ProjectController extends Controller
 
     public function edit(Project $project)
     {
-      return view('projects.edit', compact('project'));
+      $languages = Language::all();
+      return view('projects.edit', compact('project', 'languages'));
     }
 
     public function update(Project $project)
     {
       $project->update(request()->all());
-      return back();
+
+      // managed the langauges
+      // TODO certainly another way to do that
+      $project->languages()->detach();
+      $languages = Language::find(request()->languages);
+      if($languages){
+        foreach($languages as $language){
+          $project->languages()->save($language);
+        }
+      }
+
+      return view('projects.show', compact('project'));
     }
 
     public function delete(Project $project)
