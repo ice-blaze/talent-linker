@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use App\Project;
 use App\Language;
+use App\GeneralSkill;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -17,6 +19,7 @@ class ProjectController extends Controller
 
     public function show(Project $project)
     {
+      $general_skills = $project->general_skills;
       return view('projects.show', compact('project'));
     }
 
@@ -36,7 +39,8 @@ class ProjectController extends Controller
     public function edit(Project $project)
     {
       $languages = Language::all();
-      return view('projects.edit', compact('project', 'languages'));
+      $general_skills = GeneralSkill::all();
+      return view('projects.edit', compact('project', 'languages', 'general_skills'));
     }
 
     public function update(Project $project)
@@ -44,13 +48,20 @@ class ProjectController extends Controller
       $project->update(request()->all());
 
       // managed the langauges
-      // TODO certainly another way to do that
-      $project->languages()->detach();
-      $languages = Language::find(request()->languages);
-      if($languages){
-        foreach($languages as $language){
-          $project->languages()->save($language);
-        }
+      $project->languages()->sync((array)request()->languages);
+
+      //TODO maybe there is a better way
+      $project->general_skills()->detach();
+      foreach(request()->general_skills as $id => $count){
+        if($count < 1){ continue; }
+
+        $skill = [
+          'general_skill_id' => $id,
+          'project_id' => $project->id,
+          'count' => $count,
+        ];
+
+        DB::table('general_skill_project')->insert($skill);
       }
 
       return view('projects.show', compact('project'));

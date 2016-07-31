@@ -35,6 +35,15 @@
   </div>
 
   <div class="row">
+    <label class="col-sm-2 control-label">Skills</label>
+    <div class="col-sm-10">
+      @foreach($project->general_skills as $skill)
+        {{$skill->name}}:{{$skill->pivot->count}},
+      @endforeach
+    </div>
+  </div>
+
+  <div class="row">
     <label class="col-sm-2 control-label">Languages</label>
     <div class="col-sm-10">
       @foreach($project->languages as $language)

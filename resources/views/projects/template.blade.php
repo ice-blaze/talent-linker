@@ -34,6 +34,19 @@
     </div>
 
     <div class="form-group">
+      <label for="general_skills">Skills</label>
+      <ul name="general_skills[]">
+        @foreach($general_skills as $skill)
+          <li>
+            {{$skill->name}}
+            <input type="number" name="general_skills[{{$skill->id}}]" value="{{ $project->general_skill_count($skill) }}"
+              placeholder="0">
+          </li>
+        @endforeach
+      </ul>
+    </div>
+
+    <div class="form-group">
       <label for="languages">Languages</label>
       <select name="languages[]" class="selectpicker" multiple>
         @foreach($languages as $language)
