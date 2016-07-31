@@ -4,6 +4,8 @@
   <form method="post" action="@yield('action')">
     @yield('method_type')
 
+    {{ csrf_field() }}
+
     {{-- <div class="form-group">
       <label for="name">Name</label>
       <input name="name" type="text" class="form-control" id="name" placeholder="User Name"
