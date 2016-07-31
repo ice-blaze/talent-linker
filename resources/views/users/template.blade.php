@@ -53,6 +53,17 @@
     </div>
 
     <div class="form-group">
+      <label for="general_skills">Skills</label>
+      <select name="general_skills[]" class="selectpicker" multiple>
+        @foreach($general_skills as $skill)
+          <option value="{{$skill->id}}"
+            {{ $user->general_skills->contains($skill->id) ? "selected" : ""}}
+          >{{$skill->name}}</option>
+        @endforeach
+      </select>
+    </div>
+
+    <div class="form-group">
       <label for="languages">Languages</label>
       <select name="languages[]" class="selectpicker" multiple>
         @foreach($languages as $language)

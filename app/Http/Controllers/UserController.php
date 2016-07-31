@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\User;
 use App\Language;
+use App\GeneralSkill;
 use App\Form;
 use App\Http\Requests;
 
@@ -19,14 +20,14 @@ class UserController extends Controller
 
     public function show(User $user)
     {
-      $languages = Language::all();
-      return view('users.show', compact('user', 'languages'));
+      return view('users.show', compact('user'));
     }
 
     public function edit(User $user)
     {
       $languages = Language::all();
-      return view('users.edit', compact('user', 'languages'));
+      $general_skills = GeneralSkill::all();
+      return view('users.edit', compact('user', 'languages', 'general_skills'));
     }
 
     public function update(User $user)
@@ -34,15 +35,16 @@ class UserController extends Controller
       $user->update(request()->all());
 
       // managed the langauges
-      // TODO certainly another way to do that
-      $user->languages()->detach();
-      $languages = Language::find(request()->languages);
-      if($languages){
-        foreach($languages as $language){
-          $user->languages()->save($language);
+      $user->languages()->sync((array)request()->languages);
+
+      $user->general_skills()->detach();
+      $general_skills = GeneralSkill::find(request()->general_skills);
+      if($general_skills){
+        foreach($general_skills as $skill){
+          $user->general_skills()->save($skill);
         }
       }
-      
+
       return view('users.show', compact('user'));
     }
 }

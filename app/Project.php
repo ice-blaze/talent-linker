@@ -20,6 +20,20 @@ class Project extends Model
     return $this->comments()->save($comment);
   }
 
+  public function general_skills()
+  {
+    return $this->belongsToMany('App\GeneralSkill', 'general_skill_project')->withPivot('count');
+  }
+
+  public function general_skill_count(GeneralSkill $skill)
+  {
+    $skill = $this->general_skills()->find($skill->id);
+    if($skill){
+      return $skill->pivot->count;
+    }
+    return null;
+  }
+
   public function languages()
   {
       return $this->belongsToMany('App\Language');

@@ -50,6 +50,15 @@
   </div>
 
   <div class="row">
+    <label class="col-sm-2 control-label">Skills</label>
+    <div class="col-sm-10">
+      @foreach($user->general_skills as $skill)
+        {{$skill->name}},
+      @endforeach
+    </div>
+  </div>
+
+  <div class="row">
     <label class="col-sm-2 control-label">Website</label>
     <div class="col-sm-10">
       <a href="{{$user->website}}">{{$user->website}}</a>
