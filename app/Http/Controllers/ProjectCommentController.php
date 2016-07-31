@@ -9,20 +9,29 @@ use App\Project;
 
 class ProjectCommentController extends Controller
 {
-    public function store(Project $project){
-      $project->addComment(
-        new ProjectComment(request()->all())
-      );
+  public function store(Request $request, Project $project){
+    $this->validate($request, [
+      'content' => 'required',
+      //TODO user_id
+    ]);
 
-      return back();
-    }
+    $project->addComment(
+      new ProjectComment(request()->all())
+    );
 
-    public function edit(ProjectComment $comment){
-      return view('project_comments.edit', compact('comment'));
-    }
+    return back();
+  }
 
-    public function update(ProjectComment $comment){
-      $comment->update(request()->all());
-      return back();
-    }
+  public function edit(ProjectComment $comment){
+    return view('project_comments.edit', compact('comment'));
+  }
+
+  public function update(ProjectComment $comment){
+    $this->validate($request, [
+      'content' => 'required',
+      //TODO user_id
+    ]);
+    $comment->update(request()->all());
+    return back();
+  }
 }
