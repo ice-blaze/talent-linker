@@ -4,13 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ProjectComment extends Model
+class Feedback extends Model
 {
   protected $fillable = ['content'];
-
-  public function project(){
-    return $this->belongsTo(Project::class);
-  }
 
   public function user(){
     return $this->belongsTo(User::class);

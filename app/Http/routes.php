@@ -26,6 +26,10 @@ Route::group(['middleware' => 'web'], function(){
   Route::get('comments/{comment}/edit', 'ProjectCommentController@edit');
   Route::patch('comments/{comment}', 'ProjectCommentController@update');
 
+  // Feedbacks
+  Route::post('feedbacks', 'FeedbackController@store');
+  Route::get('feedbacks', 'FeedbackController@index');
+
   // Users
   Route::get('talents', 'UserController@index');
   Route::get('talents/{user}', 'UserController@show');

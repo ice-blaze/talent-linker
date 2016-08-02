@@ -17,16 +17,33 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css">
 
   @yield('header')
-  {{-- because of the nav bar that stay at the top of the page. Bootstrap solution for their component... --}}
   <style media="screen">
     .control-label {
       text-align: right;
     }
+
+    #feedback{
+      display:block;
+      position:fixed;
+      top:200px;
+      right:0;
+      background:#007bff;
+      padding:7px 7px;
+      color: white;
+    }
+    #feedback:hover{
+      background-color:#0056b3;
+    }
+
+    {{-- because of the nav bar that stay at the top of the page. Bootstrap solution for their component... --}}
     body { padding-top: 70px; }
   </style>
 </head>
 
 <body>
+  <a id="feedback" href="/feedbacks">
+    <div>feedback</div>
+  </a>
 
   <div class="container">
     @include('nav_bar')
