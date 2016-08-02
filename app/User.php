@@ -15,6 +15,11 @@ class User extends Authenticatable
       'password', 'remember_token',
   ];
 
+  public function feedbacks()
+  {
+      return $this->hasMany('App\Feedback');
+  }
+
   public function languages()
   {
       return $this->belongsToMany('App\Language');
