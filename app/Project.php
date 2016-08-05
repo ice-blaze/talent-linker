@@ -4,7 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\ProjectComment;
+use App\ProjectCollaborator;
+use App\User;
 use Illuminate\Support\Facades\Auth;
+use DB;
 
 class Project extends Model
 {
@@ -48,6 +51,17 @@ class Project extends Model
   public function path()
   {
     return '/projects/' . $this->id;
+  }
+
+  public function collaborators()
+  {
+    $proj_collabs = ProjectCollaborator::all()->where('project_id', $this->id);
+    $collab = array();
+    foreach($proj_collabs as $proj_collab){
+      array_push($collab, $proj_collab->user_id);
+    }
+    return User::all()->whereIn('id', $collab);
+    // return $this->belongsToMany('App\ProjectCollaborator', 'project_collaborators', 'user_id', 'project_id');
   }
 
   public function belongsToCurrentAuth()

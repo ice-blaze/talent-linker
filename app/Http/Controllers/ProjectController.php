@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use DB;
 use App\Project;
+use App\User;
 use App\Language;
 use App\GeneralSkill;
 use Illuminate\Http\Request;
@@ -43,7 +44,8 @@ class ProjectController extends Controller
   {
     $languages = Language::all();
     $general_skills = GeneralSkill::all();
-    return view('projects.edit', compact('project', 'languages', 'general_skills'));
+    $all_users = User::all();
+    return view('projects.edit', compact('project', 'languages', 'general_skills', 'all_users'));
   }
 
   public function update(Request $request, Project $project)
@@ -66,9 +68,24 @@ class ProjectController extends Controller
     // managed the langauges
     $project->languages()->sync((array)request()->languages);
 
+    // managed the collaborators
+    //TODO maybe there is a better way
+    DB::table('project_collaborators')->where('project_id', $project->id)->delete();
+    foreach(request()->collaborators as $id){
+
+      $collaboration = [
+        'project_id' => $project->id,
+        'user_id' => $id,
+      ];
+
+      DB::table('project_collaborators')->insert($collaboration);
+    }
+
+
     //TODO maybe there is a better way
     $project->general_skills()->detach();
     foreach(request()->general_skills as $id => $count){
+      // ignore relations with 0 skills
       if($count < 1){ continue; }
 
       $skill = [
