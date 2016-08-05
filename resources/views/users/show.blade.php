@@ -1,9 +1,17 @@
 @extends('layout')
 
 @section('content')
-  <div class="row">
-    <a class="btn btn-primary" href="/talents/{{ $user->id }}/edit">Edit Profile</a>
-  </div>
+  @if($user->belongsToCurrentAuth())
+    <div class="row">
+      <a class="btn btn-primary" href="/talents/{{ $user->id }}/edit">Edit Profile</a>
+    </div>
+  @endif
+  @if(Auth::user() && !$user->belongsToCurrentAuth())
+    <div class="row">
+      <a class="btn btn-primary" href="/talents/{{ $user->id }}/chat">Chat with this talent</a>
+    </div>
+  @endif
+
 
   <div class="row">
     <label class="col-sm-2 control-label">Name</label>

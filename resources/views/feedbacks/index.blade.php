@@ -14,9 +14,7 @@
   </form>
 
   <h1>Your feedbacks</h1>
-  <li class="list-group">
-    @foreach($feedbacks as $feedback)
-      <li class="list-group-item">{{ $feedback->content}}</li>
-    @endforeach
-  </li>
+  @foreach($feedbacks as $feedback)
+    <li class="list-group-item">{{ $feedback->content}}</li>
+  @endforeach
 @endsection

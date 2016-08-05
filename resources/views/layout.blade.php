@@ -31,6 +31,11 @@
       padding:7px 7px;
       color: white;
     }
+
+    .comment_user{
+      float: right;
+    }
+
     #feedback:hover{
       background-color:#0056b3;
     }

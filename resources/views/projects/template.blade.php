@@ -2,14 +2,13 @@
 
 @section('content')
 
-  @if(count($errors))
+  {{-- @if(count($errors))
     <ul>
       @foreach($errors->all() as $error)
         <li>{{ $error }}</li>
       @endforeach
     </ul>
-
-  @endif
+  @endif --}}
 
   <form method="post" action="@yield('action')">
     @yield('method_type')
@@ -50,7 +49,10 @@
         @foreach($general_skills as $skill)
           <li>
             {{$skill->name}}
-            <input type="number" name="general_skills[{{$skill->id}}]" value="{{ $project->general_skill_count($skill) }}"
+              <input type="number" name="general_skills[{{$skill->id}}]"
+              @if(isset($project))
+                value="{{ $project->general_skill_count($skill)  }}"
+              @endif
               placeholder="0">
           </li>
         @endforeach
@@ -62,7 +64,9 @@
       <select name="languages[]" class="selectpicker" multiple>
         @foreach($languages as $language)
           <option value="{{$language->id}}"
-            {{ $project->languages->contains($language->id) ? "selected" : ""}}
+            @if(isset($project))
+              {{ $project->languages->contains($language->id) ? "selected" : ""}}
+            @endif
           >{{$language->name}}</option>
         @endforeach
       </select>
