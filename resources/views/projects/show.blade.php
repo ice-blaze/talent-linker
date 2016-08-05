@@ -6,7 +6,7 @@
       <h1>{{$project->title}}</h1>
     </div>
 
-    @if($project->belongsToCurrentAuth())
+    {{-- @if($project->belongsToCurrentAuth()) --}}
       <div class="col-md-1">
         <a class="btn btn-primary" href="/projects/{{ $project->id }}/edit">Edit</a>
       </div>
@@ -20,7 +20,7 @@
           </div>
         </form>
       </div>
-    @endif
+    {{-- @endif --}}
   </div>
 
   <div class="row">
@@ -51,6 +51,15 @@
     <div class="col-sm-10">
       @foreach($project->languages as $language)
         {{$language->name}},
+      @endforeach
+    </div>
+  </div>
+
+  <div class="row">
+    <label class="col-sm-2 control-label">Collaborators</label>
+    <div class="col-sm-10">
+      @foreach($project->collaborators() as $collaborator)
+        {{$collaborator->name}},
       @endforeach
     </div>
   </div>
