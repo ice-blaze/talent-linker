@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 
 class ProjectComment extends Model
@@ -14,5 +15,13 @@ class ProjectComment extends Model
 
   public function user(){
     return $this->belongsTo(User::class);
+  }
+
+  public function belongsToCurrentAuth()
+  {
+    if(!Auth::user()){
+      return false;
+    }
+    return $this->user_id == Auth::user()->id;
   }
 }

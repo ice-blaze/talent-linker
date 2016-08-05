@@ -6,18 +6,21 @@
       <h1>{{$project->title}}</h1>
     </div>
 
-    <div class="col-md-1">
-      <a class="btn btn-primary" href="/projects/{{ $project->id }}/edit">Edit</a>
-    </div>
+    @if($project->belongsToCurrentAuth())
+      <div class="col-md-1">
+        <a class="btn btn-primary" href="/projects/{{ $project->id }}/edit">Edit</a>
+      </div>
 
-    <div class="col-md-1">
-      <form method="post" action="/projects/{{ $project->id }}">
-        {{ method_field('delete') }}
-        <div class="form-group">
-          <button type="submit" class="btn btn-danger">Delete</button>
-        </div>
-      </form>
-    </div>
+      <div class="col-md-1">
+        <form method="post" action="/projects/{{ $project->id }}">
+          {{ method_field('delete') }}
+          {{ csrf_field() }}
+          <div class="form-group">
+            <button type="submit" class="btn btn-danger">Delete</button>
+          </div>
+        </form>
+      </div>
+    @endif
   </div>
 
   <div class="row">
@@ -67,22 +70,28 @@
   </div>
 
   <div class="row">
-    <li class="list-group">
-      @foreach($project->comments as $comment)
-        <li class="list-group-item">{{ $comment->content}}</li>
-      @endforeach
-    </li>
+    @foreach($project->comments as $comment)
+      <li class="list-group-item">
+        {{ $comment->content}}
+        <div class="comment_user">
+          <a href="{{ $comment->user->path() }}">{{$comment->user->name}}</a> - {{$comment->date}}
+        </div>
+      </li>
+    @endforeach
 
-    <hr>
-    <h3>Add a comment</h3>
-    <form method="post" action="/projects/{{ $project->id }}/comments">
-      <div class="form-group">
-        <textarea name="content" class="form-control"></textarea>
-      </div>
-      <div class="form-group">
-        <button type="submit" class="btn btn-primary">Comment</button>
-      </div>
-    </form>
+    @if(Auth::user())
+      <hr>
+      <h3>Add a comment</h3>
+      <form method="post" action="/projects/{{ $project->id }}/comments">
+        {{ csrf_field() }}
+        <div class="form-group">
+          <textarea name="content" class="form-control"></textarea>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary">Comment</button>
+        </div>
+      </form>
+    @endif
   </div>
 
 

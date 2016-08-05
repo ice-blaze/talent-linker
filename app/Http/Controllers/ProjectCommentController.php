@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\ProjectComment;
 use App\Project;
+use Illuminate\Support\Facades\Auth;
 
 class ProjectCommentController extends Controller
 {
@@ -15,9 +16,9 @@ class ProjectCommentController extends Controller
       //TODO user_id
     ]);
 
-    $project->addComment(
-      new ProjectComment(request()->all())
-    );
+    $comment = new ProjectComment(request()->all());
+    $comment->user_id = Auth::user()->id;
+    $project->addComment($comment);
 
     return back();
   }

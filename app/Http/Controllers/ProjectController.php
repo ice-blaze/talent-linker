@@ -8,6 +8,7 @@ use App\Language;
 use App\GeneralSkill;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class ProjectController extends Controller
 {
@@ -25,22 +26,17 @@ class ProjectController extends Controller
 
   public function create()
   {
-    return view('projects.create');
+    $languages = Language::all();
+    $general_skills = GeneralSkill::all();
+    return view('projects.create', compact('project', 'languages', 'general_skills'));
   }
 
   public function store(Request $request)
   {
-    $this->validate($request, [
-      'title' => 'required',
-      'short_description' => 'required',
-      'long_description' => 'required',
-      //TODO HAVE AT LEAST ONE LANGUAGE
-    ]);
-
-    $project = new Project(request()->all());
+    $project = new Project();
+    $project->user_id = Auth::user()->id;
     $project->save();
-
-    return redirect()->action('ProjectController@show', compact('project'));
+    return $this->update($request, $project);
   }
 
   public function edit(Project $project)
@@ -60,7 +56,12 @@ class ProjectController extends Controller
       //TODO HAVE AT LEAST ONE LANGUAGE
     ]);
 
-    $project->update(request()->all());
+    $project->update([
+      'title' => $request->title,
+      'short_description' => $request->short_description,
+      'long_description' => $request->long_description,
+    ]);
+    // $project->update(request()->all());
 
     // managed the langauges
     $project->languages()->sync((array)request()->languages);
