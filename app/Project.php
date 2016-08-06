@@ -16,7 +16,12 @@ class Project extends Model
 
   public function comments()
   {
-    return $this->hasMany(ProjectComment::class);
+    return $this->hasMany(ProjectComment::class)->where('private', '=',  false);
+  }
+
+  public function private_comments()
+  {
+    return $this->hasMany(ProjectComment::class)->where('private', '=',  true);
   }
 
   public function owner()

@@ -2,13 +2,17 @@
 
 @section('content')
   <div class="row">
-    <div class="col-md-10">
+    <div class="col-md-9">
       <h1>{{$project->title}}</h1>
     </div>
 
-    {{-- @if($project->belongsToCurrentAuth()) --}}
+    @if($project->belongsToCurrentAuth())
       <div class="col-md-1">
         <a class="btn btn-primary" href="/projects/{{ $project->id }}/edit">Edit</a>
+      </div>
+
+      <div class="col-md-1">
+        <a class="btn btn-primary" href="/projects/{{ $project->id }}/private_comments">Private chat</a>
       </div>
 
       <div class="col-md-1">
@@ -20,7 +24,7 @@
           </div>
         </form>
       </div>
-    {{-- @endif --}}
+    @endif
   </div>
 
   <div class="row">
