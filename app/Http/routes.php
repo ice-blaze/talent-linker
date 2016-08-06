@@ -46,6 +46,9 @@ Route::group(['middleware' => 'auth.basic'], function(){
   Route::post('projects/{project}/comments', 'ProjectCommentController@store');
   Route::get('comments/{comment}/edit', 'ProjectCommentController@edit');
   Route::patch('comments/{comment}', 'ProjectCommentController@update');
+
+  Route::get('projects/{project}/private_comments', 'ProjectCommentController@private_index');
+  Route::post('projects/{project}/private_comments', 'ProjectCommentController@private_store');
 });
 // Route::get('admin', ['as' =>'admin', 'uses' => 'UserController@index', 'middleware' => ['auth', 'admin']]);
 // Route::get('protected', ['middleware' => ['auth', 'admin'], function() {
