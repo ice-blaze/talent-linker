@@ -46,9 +46,11 @@
 </head>
 
 <body>
-  <a id="feedback" href="/feedbacks">
-    <div>feedback</div>
-  </a>
+  @if(Auth::user())
+    <a id="feedback" href="/feedbacks">
+      <div>feedback</div>
+    </a>
+  @endif
 
   <div class="container">
     @include('nav_bar')

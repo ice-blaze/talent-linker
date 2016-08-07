@@ -29,7 +29,8 @@ class ProjectController extends Controller
   {
     $languages = Language::all();
     $general_skills = GeneralSkill::all();
-    return view('projects.create', compact('project', 'languages', 'general_skills'));
+    $all_users = User::all();
+    return view('projects.create', compact('project', 'languages', 'general_skills', 'all_users'));
   }
 
   public function store(Request $request)
@@ -71,7 +72,7 @@ class ProjectController extends Controller
     // managed the collaborators
     //TODO maybe there is a better way
     DB::table('project_collaborators')->where('project_id', $project->id)->delete();
-    foreach(request()->collaborators as $id){
+    foreach((array)request()->collaborators as $id){
 
       $collaboration = [
         'project_id' => $project->id,
@@ -84,7 +85,7 @@ class ProjectController extends Controller
 
     //TODO maybe there is a better way
     $project->general_skills()->detach();
-    foreach(request()->general_skills as $id => $count){
+    foreach((array)request()->general_skills as $id => $count){
       // ignore relations with 0 skills
       if($count < 1){ continue; }
 
