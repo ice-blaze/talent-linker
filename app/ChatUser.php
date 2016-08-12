@@ -8,7 +8,7 @@ class ChatUser extends Model
 {
   protected $fillable = ['content'];
 
-  public function belongsToCurrentAuth()
+  public function isCurrentAuthTheOwner()
   {
     return ($this->reciever_id == Auth::user()->id) || ($this->sender_id == Auth::user()->id);
   }

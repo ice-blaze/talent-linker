@@ -41,6 +41,10 @@ class User extends Authenticatable
     return '/talents/' . $this->id;
   }
 
+  public function projectsAsCollaborator(){
+    return $this->belongsToMany('App\Project', 'project_collaborators', 'user_id', 'project_id');
+  }
+
   public function isAdmin()
   {
     return $this->is_admin;
@@ -51,7 +55,7 @@ class User extends Authenticatable
       )->whereIn('reciever_id', [$another_user->id, $this->id]);
   }
 
-  public function belongsToCurrentAuth()
+  public function isCurrentAuthTheOwner()
   {
     if(!Auth::user()){
       return false;

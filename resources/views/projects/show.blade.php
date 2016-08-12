@@ -2,17 +2,22 @@
 
 @section('content')
   <div class="row">
-    <div class="col-md-9">
+    <div class="col-md-8">
       <h1>{{$project->title}}</h1>
     </div>
-
-    @if($project->belongsToCurrentAuth())
+    @if( $project->isCurrentAuthTheOwner() || $project->isCurrentAuthACollaborator())
       <div class="col-md-1">
-        <a class="btn btn-primary" href="/projects/{{ $project->id }}/edit">Edit</a>
+        <a class="btn btn-primary" href="/projects/{{ $project->id }}/invitations">See pendings</a>
       </div>
 
       <div class="col-md-1">
         <a class="btn btn-primary" href="/projects/{{ $project->id }}/private_comments">Private chat</a>
+      </div>
+    @endif
+    @if($project->isCurrentAuthTheOwner())
+
+      <div class="col-md-1">
+        <a class="btn btn-primary" href="/projects/{{ $project->id }}/edit">Edit</a>
       </div>
 
       <div class="col-md-1">
@@ -21,6 +26,16 @@
           {{ csrf_field() }}
           <div class="form-group">
             <button type="submit" class="btn btn-danger">Delete</button>
+          </div>
+        </form>
+      </div>
+    @endif
+    @if( Auth::user() && !($project->isCurrentAuthTheOwner() || $project->isCurrentAuthACollaborator()))
+      <div class="col-md-4">
+        <form method="post" action="/projects/{{ $project->id }}/invitations">
+          {{ csrf_field() }}
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary">Join the project</button>
           </div>
         </form>
       </div>
@@ -60,9 +75,17 @@
   </div>
 
   <div class="row">
+    <label class="col-sm-2 control-label">Owner</label>
+    <div class="col-sm-10">
+      <a href="{{$project->owner->path()}}">{{$project->owner->name}}</a>
+    </div>
+  </div>
+
+  <div class="row">
     <label class="col-sm-2 control-label">Collaborators</label>
     <div class="col-sm-10">
-      @foreach($project->collaborators() as $collaborator)
+      {{$project->collaborators}}
+      @foreach($project->collaborators as $collaborator)
         {{$collaborator->name}},
       @endforeach
     </div>
