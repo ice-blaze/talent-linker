@@ -26,7 +26,7 @@ class Project extends Model
 
   public function owner()
   {
-    return $this->belongsTo(User::class);
+    return $this->belongsTo(User::class, 'user_id');
   }
 
   public function addComment(ProjectComment $comment)
@@ -60,20 +60,29 @@ class Project extends Model
 
   public function collaborators()
   {
-    $proj_collabs = ProjectCollaborator::all()->where('project_id', $this->id);
-    $collab = array();
-    foreach($proj_collabs as $proj_collab){
-      array_push($collab, $proj_collab->user_id);
-    }
-    return User::all()->whereIn('id', $collab);
-    // return $this->belongsToMany('App\ProjectCollaborator', 'project_collaborators', 'user_id', 'project_id');
+    // $proj_collabs = ProjectCollaborator::all()->where('project_id', $this->id);
+    // $collab = array();
+    // foreach($proj_collabs as $proj_collab){
+    //   array_push($collab, $proj_collab->user_id);
+    // }
+    // return User::all()->whereIn('id', $collab);
+    return $this->belongsToMany('App\User', 'project_collaborators', 'project_id', 'user_id');
   }
 
-  public function belongsToCurrentAuth()
+  public function isCurrentAuthTheOwner()
   {
     if(!Auth::user()){
       return false;
     }
     return $this->user_id == Auth::user()->id;
+  }
+
+  public function isCurrentAuthACollaborator()
+  {
+    if(!Auth::user()){
+      return false;
+    }
+    $collaborators = $this->belongsToMany('App\User', 'project_collaborators', 'project_id', 'user_id');
+    return count($collaborators->where('user_id', '=', Auth::user()->id)->get());
   }
 }

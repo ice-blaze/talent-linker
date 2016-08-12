@@ -17,7 +17,7 @@ class ProjectComment extends Model
     return $this->belongsTo(User::class);
   }
 
-  public function belongsToCurrentAuth()
+  public function isCurrentAuthTheOwner()
   {
     if(!Auth::user()){
       return false;

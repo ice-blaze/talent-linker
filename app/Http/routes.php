@@ -46,9 +46,20 @@ Route::group(['middleware' => 'auth.basic'], function(){
   Route::post('projects/{project}/comments', 'ProjectCommentController@store');
   Route::get('comments/{comment}/edit', 'ProjectCommentController@edit');
   Route::patch('comments/{comment}', 'ProjectCommentController@update');
-
+  // Private project comments
   Route::get('projects/{project}/private_comments', 'ProjectCommentController@private_index');
   Route::post('projects/{project}/private_comments', 'ProjectCommentController@private_store');
+
+  // Invitations
+  Route::get('projects/{project}/invitations', 'InvitationController@project_index');
+  Route::post('projects/{project}/invitations', 'InvitationController@project_store');
+  Route::patch('invitations/{project}/{user}/accept', 'InvitationController@accept');
+  Route::delete('invitations/{project}/{user}', 'InvitationController@delete');
+  Route::get('talents/{user}/invitations', 'InvitationController@user_index');
+  Route::get('talents/{user}/recruit', 'InvitationController@recruit');
+  Route::post('talents/{user}/recruit', 'InvitationController@user_store');
+  // Route::post('talents/{user}/invitations', 'InvitationController@store');
+  // Route::post('talents/{user}/invitations', 'InvitationController@talent_index');
 });
 // Route::get('admin', ['as' =>'admin', 'uses' => 'UserController@index', 'middleware' => ['auth', 'admin']]);
 // Route::get('protected', ['middleware' => ['auth', 'admin'], function() {

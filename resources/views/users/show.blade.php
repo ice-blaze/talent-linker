@@ -1,14 +1,20 @@
 @extends('layout')
 
 @section('content')
-  @if($user->belongsToCurrentAuth())
+  @if($user->isCurrentAuthTheOwner())
     <div class="row">
       <a class="btn btn-primary" href="/talents/{{ $user->id }}/edit">Edit Profile</a>
     </div>
+    <div class="row">
+      <a class="btn btn-primary" href="/talents/{{ $user->id }}/invitations">Invitations</a>
+    </div>
   @endif
-  @if(Auth::user() && !$user->belongsToCurrentAuth())
+  @if(Auth::user() && !$user->isCurrentAuthTheOwner())
     <div class="row">
       <a class="btn btn-primary" href="/talents/{{ $user->id }}/chat">Chat with this talent</a>
+    </div>
+    <div class="row">
+      <a class="btn btn-primary" href="/talents/{{ $user->id }}/recruit">Recruit for one project</a>
     </div>
   @endif
 
