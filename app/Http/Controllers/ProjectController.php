@@ -69,18 +69,21 @@ class ProjectController extends Controller
     // managed the langauges
     $project->languages()->sync((array)request()->languages);
 
-    // managed the collaborators
-    //TODO maybe there is a better way
-    DB::table('project_collaborators')->where('project_id', $project->id)->delete();
-    foreach((array)request()->collaborators as $id){
-
-      $collaboration = [
-        'project_id' => $project->id,
-        'user_id' => $id,
-      ];
-
-      DB::table('project_collaborators')->insert($collaboration);
-    }
+    // // managed the collaborators
+    // //TODO maybe there is a better way
+    // DB::table('project_collaborators')->where('project_id', $project->id)->delete();
+    // foreach((array)request()->collaborators as $id){
+    //
+    //   $now = new \DateTime();
+    //   $collaboration = [
+    //     'project_id' => $project->id,
+    //     'user_id' => $id,
+    //     'created_at' => $now,
+    //     'updated_at' => $now,
+    //   ];
+    //
+    //   DB::table('project_collaborators')->insert($collaboration);
+    // }
 
 
     //TODO maybe there is a better way

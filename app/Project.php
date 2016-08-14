@@ -58,6 +58,10 @@ class Project extends Model
     return '/projects/' . $this->id;
   }
 
+  private function collab(){
+    return $this->belongsToMany('App\User', 'project_collaborators', 'project_id', 'user_id');
+  }
+
   public function collaborators()
   {
     // $proj_collabs = ProjectCollaborator::all()->where('project_id', $this->id);
@@ -66,7 +70,7 @@ class Project extends Model
     //   array_push($collab, $proj_collab->user_id);
     // }
     // return User::all()->whereIn('id', $collab);
-    return $this->belongsToMany('App\User', 'project_collaborators', 'project_id', 'user_id');
+    return $this->collab()->where('accepted', '=', true);
   }
 
   public function isCurrentAuthTheOwner()

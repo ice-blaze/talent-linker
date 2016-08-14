@@ -6,23 +6,23 @@
   </div>
 
   <div class="row">
-    @foreach($invitations as $invitation)
+    @foreach($pendings as $collaborator)
       <li class="list-group-item">
-        <a href="{{$invitation->guest->path()}}">{{$invitation->guest->name}}</a>
-        - invited the {{$invitation->created_at}}
-        @if($invitation->accepted)
+        <a href="{{$collaborator->user->path()}}">{{$collaborator->user->name}}</a>
+        - invited the {{$collaborator->created_at}}
+        @if($collaborator->accepted)
           - accepted
         @else
           - pending ...
-          @if($project->owner->id == Auth::user()->id && $invitation->from_guest)
-            <form method="post" action="/invitations/{{ $project->id }}/{{ $invitation->guest->id }}/accept">
+          @if($project->owner->id == Auth::user()->id)
+            <form method="post" action="/invitations/{{ $project->id }}/{{ $collaborator->user->id }}/accept">
               {{ method_field('patch') }}
               {{ csrf_field() }}
               <div class="form-group text-right">
                 <button type="submit" class="btn btn-primary">Accept</button>
               </div>
             </form>
-            <form method="post" action="/invitations/{{ $project->id }}/{{ $invitation->guest->id }}">
+            <form method="post" action="/invitations/{{ $project->id }}/{{ $collaborator->user->id }}">
               {{ method_field('delete') }}
               {{ csrf_field() }}
               <div class="form-group text-right">
