@@ -7,19 +7,21 @@ class AddInvitations extends Migration
 {
   public function up()
   {
-    Schema::create('invitations', function (Blueprint $table) {
-      $table->increments('id');
-      $table->integer('guest_id')->unsigned()->index();
-      $table->integer('project_id')->unsigned()->index();
-      $table->boolean('from_guest');
+    Schema::table('project_collaborators', function (Blueprint $table) {
+      $table->boolean('from_collaborator');
       $table->boolean('accepted');
       $table->text('invite_message');
-      $table->timestamps();
+      $table->timestamp('accepted_date');
     });
   }
 
   public function down()
   {
-    Schema::drop('invitations');
+    Schema::table('project_collaborators', function (Blueprint $table) {
+      $table->dropColumn('from_collaborator');
+      $table->dropColumn('accepted');
+      $table->dropColumn('invite_message');
+      $table->dropColumn('accepted_date');
+    });
   }
 }

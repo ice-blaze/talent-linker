@@ -84,7 +84,6 @@
   <div class="row">
     <label class="col-sm-2 control-label">Collaborators</label>
     <div class="col-sm-10">
-      {{$project->collaborators}}
       @foreach($project->collaborators as $collaborator)
         {{$collaborator->name}},
       @endforeach

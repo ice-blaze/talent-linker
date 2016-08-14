@@ -51,15 +51,13 @@ Route::group(['middleware' => 'auth.basic'], function(){
   Route::post('projects/{project}/private_comments', 'ProjectCommentController@private_store');
 
   // Invitations
-  Route::get('projects/{project}/invitations', 'InvitationController@project_index');
-  Route::post('projects/{project}/invitations', 'InvitationController@project_store');
-  Route::patch('invitations/{project}/{user}/accept', 'InvitationController@accept');
-  Route::delete('invitations/{project}/{user}', 'InvitationController@delete');
-  Route::get('talents/{user}/invitations', 'InvitationController@user_index');
-  Route::get('talents/{user}/recruit', 'InvitationController@recruit');
-  Route::post('talents/{user}/recruit', 'InvitationController@user_store');
-  // Route::post('talents/{user}/invitations', 'InvitationController@store');
-  // Route::post('talents/{user}/invitations', 'InvitationController@talent_index');
+  Route::get('projects/{project}/invitations', 'ProjectCollaboratorController@project_index');
+  Route::post('projects/{project}/invitations', 'ProjectCollaboratorController@project_store');
+  Route::patch('invitations/{project}/{user}/accept', 'ProjectCollaboratorController@accept');
+  Route::delete('invitations/{project}/{user}', 'ProjectCollaboratorController@delete');
+  Route::get('talents/{user}/invitations', 'ProjectCollaboratorController@user_index');
+  Route::get('talents/{user}/recruit', 'ProjectCollaboratorController@recruit');
+  Route::post('talents/{user}/recruit', 'ProjectCollaboratorController@user_store');
 });
 // Route::get('admin', ['as' =>'admin', 'uses' => 'UserController@index', 'middleware' => ['auth', 'admin']]);
 // Route::get('protected', ['middleware' => ['auth', 'admin'], function() {
