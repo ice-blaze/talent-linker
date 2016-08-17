@@ -40,6 +40,21 @@
       background-color:#0056b3;
     }
 
+    .darken {
+      display: block;
+      cursor: pointer;
+
+      -webkit-transition: all 0.2s linear;
+      -moz-transition: all 0.2s linear;
+      -ms-transition: all 0.2s linear;
+      -o-transition: all 0.2s linear;
+      transition: all 0.2s linear;
+    }
+
+    .darken:hover{
+      box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    }
+
     {{-- because of the nav bar that stay at the top of the page. Bootstrap solution for their component... --}}
     body { padding-top: 70px; }
   </style>
@@ -57,6 +72,13 @@
   </div>
 
   <div class="container">
+    @if (count($errors))
+        @foreach ($errors->all() as $error)
+          <div class="alert alert-danger fade in darken" data-dismiss="alert">
+            {{ $error }}
+          </div>
+        @endforeach
+    @endif
     @yield('content')
   </div>
 
