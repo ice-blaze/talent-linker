@@ -49,6 +49,7 @@ class ProjectCollaboratorController extends Controller
     $invitation->user_id = Auth::user()->id;
     $invitation->project_id = $project->id;
     $invitation->from_collaborator = true;
+    $invitation->accepted = false;
     $invitation->save();
 
     return back();

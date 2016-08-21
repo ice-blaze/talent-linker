@@ -30,7 +30,12 @@
         </form>
       </div>
     @endif
-    @if( Auth::user() && !($project->isCurrentAuthTheOwner() || $project->isCurrentAuthACollaborator()))
+    @if($project->isPendingUser(Auth::user()))
+      <div class="btn btn-default disabled">
+        Invitation is pending...
+      </div>
+    @endif
+    @if( Auth::user() && !$project->isPendingUser(Auth::user()) && !($project->isCurrentAuthTheOwner() || $project->isCurrentAuthACollaborator()))
       <div class="col-md-4">
         <form method="post" action="/projects/{{ $project->id }}/invitations">
           {{ csrf_field() }}
