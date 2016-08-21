@@ -17,47 +17,9 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css">
 
   @yield('header')
-  <style media="screen">
-    .control-label {
-      text-align: right;
-    }
+  
+  <link rel="stylesheet" href="{{URL::asset('assets/css/style.css')}}"/>
 
-    #feedback{
-      display:block;
-      position:fixed;
-      top:200px;
-      right:0;
-      background:#007bff;
-      padding:7px 7px;
-      color: white;
-    }
-
-    .comment_user{
-      float: right;
-    }
-
-    #feedback:hover{
-      background-color:#0056b3;
-    }
-
-    .darken {
-      display: block;
-      cursor: pointer;
-
-      -webkit-transition: all 0.2s linear;
-      -moz-transition: all 0.2s linear;
-      -ms-transition: all 0.2s linear;
-      -o-transition: all 0.2s linear;
-      transition: all 0.2s linear;
-    }
-
-    .darken:hover{
-      box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-    }
-
-    {{-- because of the nav bar that stay at the top of the page. Bootstrap solution for their component... --}}
-    body { padding-top: 70px; }
-  </style>
 </head>
 
 <body>
