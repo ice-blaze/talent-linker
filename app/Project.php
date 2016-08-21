@@ -64,13 +64,16 @@ class Project extends Model
 
   public function collaborators()
   {
-    // $proj_collabs = ProjectCollaborator::all()->where('project_id', $this->id);
-    // $collab = array();
-    // foreach($proj_collabs as $proj_collab){
-    //   array_push($collab, $proj_collab->user_id);
-    // }
-    // return User::all()->whereIn('id', $collab);
     return $this->collab()->where('accepted', '=', true);
+  }
+
+  public function isPendingUser(User $user){
+    return $this->pending_collaborators()->get()->contains('id', $user->id);
+  }
+
+  public function pending_collaborators()
+  {
+    return $this->collab()->where('accepted', '=', false);
   }
 
   public function isCurrentAuthTheOwner()
@@ -86,7 +89,6 @@ class Project extends Model
     if(!Auth::user()){
       return false;
     }
-    $collaborators = $this->belongsToMany('App\User', 'project_collaborators', 'project_id', 'user_id');
-    return count($collaborators->where('user_id', '=', Auth::user()->id)->get());
+    return count($this->collaborators()->where('user_id', '=', Auth::user()->id)->get());
   }
 }
