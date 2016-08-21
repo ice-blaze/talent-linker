@@ -3,13 +3,14 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\User;
 
 class ChatUser extends Model
 {
   protected $fillable = ['content'];
 
-  public function isCurrentAuthTheOwner()
+  public function isUserTheOwner(User $user)
   {
-    return ($this->reciever_id == Auth::user()->id) || ($this->sender_id == Auth::user()->id);
+    return ($this->reciever_id == $user->id) || ($this->sender_id == $user->id);
   }
 }

@@ -5,7 +5,8 @@
     <div class="col-md-8">
       <h1>{{$project->title}}</h1>
     </div>
-    @if( $project->isCurrentAuthTheOwner() || $project->isCurrentAuthACollaborator())
+
+    @if( $project->isUserTheOwner(Auth::user()) || $project->isUserACollaborator(Auth::user()))
       <div class="col-md-1">
         <a class="btn btn-primary" href="/projects/{{ $project->id }}/invitations">See pendings</a>
       </div>
@@ -14,7 +15,8 @@
         <a class="btn btn-primary" href="/projects/{{ $project->id }}/private_comments">Private chat</a>
       </div>
     @endif
-    @if($project->isCurrentAuthTheOwner())
+
+    @if($project->isUserTheOwner(Auth::user()))
 
       <div class="col-md-1">
         <a class="btn btn-primary" href="/projects/{{ $project->id }}/edit">Edit</a>
@@ -30,12 +32,14 @@
         </form>
       </div>
     @endif
+
     @if($project->isPendingUser(Auth::user()))
       <div class="btn btn-default disabled">
         Invitation is pending...
       </div>
     @endif
-    @if( Auth::user() && !$project->isPendingUser(Auth::user()) && !($project->isCurrentAuthTheOwner() || $project->isCurrentAuthACollaborator()))
+
+    @if( Auth::user() && !$project->isPendingUser(Auth::user()) && !($project->isUserTheOwner(Auth::user()) || $project->isUserACollaborator(Auth::user())))
       <div class="col-md-4">
         <form method="post" action="/projects/{{ $project->id }}/invitations">
           {{ csrf_field() }}

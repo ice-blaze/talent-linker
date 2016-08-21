@@ -55,13 +55,8 @@ class User extends Authenticatable
       )->whereIn('reciever_id', [$another_user->id, $this->id]);
   }
 
-  public function isCurrentAuthTheOwner()
+  public function isCurrentAuth()
   {
-    if(!Auth::user()){
-      return false;
-    }
     return $this->id == Auth::user()->id;
   }
-
-
 }

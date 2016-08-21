@@ -76,19 +76,15 @@ class Project extends Model
     return $this->collab()->where('accepted', '=', false);
   }
 
-  public function isCurrentAuthTheOwner()
+  // public function isCurrentAuthTheOwner()
+  public function isUserTheOwner(User $user)
   {
-    if(!Auth::user()){
-      return false;
-    }
-    return $this->user_id == Auth::user()->id;
+    return $this->user_id == $user->id;
   }
 
-  public function isCurrentAuthACollaborator()
+
+  public function isUserACollaborator(User $user)
   {
-    if(!Auth::user()){
-      return false;
-    }
-    return count($this->collaborators()->where('user_id', '=', Auth::user()->id)->get());
+    return count($this->collaborators()->where('user_id', '=', $user->id)->get());
   }
 }

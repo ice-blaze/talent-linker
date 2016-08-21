@@ -37,7 +37,7 @@ class ProjectCollaboratorController extends Controller
     $projects = $projects->diff($user->projectsAsCollaborator);
     $projects = $projects->diff($projects_with_pending_invitation);
     if(count($projects)<1){
-      // TODO Message can't recruit, already on all your project
+      $request->session()->flash('error', "Can't recruit, the talent is already on all of your projects!");
       return back();
     }
     return view('invitations.recruit', compact('user', 'projects'));
@@ -79,9 +79,12 @@ class ProjectCollaboratorController extends Controller
     return redirect($user->path())->with('status', $user->name . ' invited to ' . Project::find(request()->project)->title);
   }
 
-  public function delete(Request $request, Project $project, User $user){
-    //TODO add message, don't have permission
-    if(Auth::user()->id != $project->owner->id){ return back();}
+  public function delete(Request $request, Project $project, User $user, ProjectCollaborator $invitation){
+    if(Auth::user()->id != $project->owner->id && Auth::user()->id != $invitation->user_id){
+      $request->session()->flash('error', "Don't have the permission to delete the invitation!");
+      return back();
+    }
+
     ProjectCollaborator::where('project_id', '=', $project->id)->where('user_id', '=', $user->id)->delete();
 
     return back();

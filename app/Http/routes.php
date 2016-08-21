@@ -54,7 +54,7 @@ Route::group(['middleware' => 'auth.basic'], function(){
   Route::get('projects/{project}/invitations', 'ProjectCollaboratorController@project_index');
   Route::post('projects/{project}/invitations', 'ProjectCollaboratorController@project_store');
   Route::patch('invitations/{project}/{user}/accept', 'ProjectCollaboratorController@accept');
-  Route::delete('invitations/{project}/{user}', 'ProjectCollaboratorController@delete');
+  Route::delete('invitations/{project}/{user}/{invitation}', 'ProjectCollaboratorController@delete');
   Route::get('talents/{user}/invitations', 'ProjectCollaboratorController@user_index');
   Route::get('talents/{user}/recruit', 'ProjectCollaboratorController@recruit');
   Route::post('talents/{user}/recruit', 'ProjectCollaboratorController@user_store');
