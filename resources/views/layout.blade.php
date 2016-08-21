@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css">
 
   @yield('header')
-  
+
   <link rel="stylesheet" href="{{URL::asset('assets/css/style.css')}}"/>
 
 </head>
@@ -35,11 +35,16 @@
 
   <div class="container">
     @if (count($errors))
-        @foreach ($errors->all() as $error)
-          <div class="alert alert-danger fade in darken" data-dismiss="alert">
-            {{ $error }}
-          </div>
-        @endforeach
+      @foreach ($errors->all() as $error)
+        <div class="alert alert-danger fade in darken" data-dismiss="alert">
+          {{ $error }}
+        </div>
+      @endforeach
+    @endif
+    @if(Session::has('error'))
+      <div class="alert alert-danger fade in darken" data-dismiss="alert">
+        {{ Session::get('error') }}
+      </div>
     @endif
     @yield('content')
   </div>

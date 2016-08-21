@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('content')
-  @if($user->isCurrentAuthTheOwner())
+  @if($user->isCurrentAuth())
     <div class="row">
       <a class="btn btn-primary" href="/talents/{{ $user->id }}/edit">Edit Profile</a>
     </div>
@@ -9,7 +9,7 @@
       <a class="btn btn-primary" href="/talents/{{ $user->id }}/invitations">Invitations</a>
     </div>
   @endif
-  @if(Auth::user() && !$user->isCurrentAuthTheOwner())
+  @if(Auth::user() && !$user->isCurrentAuth())
     <div class="row">
       <a class="btn btn-primary" href="/talents/{{ $user->id }}/chat">Chat with this talent</a>
     </div>

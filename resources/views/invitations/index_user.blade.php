@@ -27,7 +27,7 @@
           @endif
         @endif
         @if($user->id == Auth::user()->id)
-          <form method="post" action="/invitations/{{ $invitation->project->id }}/{{ $invitation->user->id }}">
+          <form method="post" action="/invitations/{{ $invitation->project->id }}/{{ $invitation->user->id }}/{{$invitation->id}}">
             {{ method_field('delete') }}
             {{ csrf_field() }}
             <div class="form-group text-right">
