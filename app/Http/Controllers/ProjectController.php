@@ -51,40 +51,24 @@ class ProjectController extends Controller
 
   public function update(Request $request, Project $project)
   {
-    // TODO maybe create a function to avoid the duplicate validation
     $this->validate($request, [
       'title' => 'required',
       'short_description' => 'required',
       'long_description' => 'required',
-      //TODO HAVE AT LEAST ONE LANGUAGE
+      'languages' => 'required',
     ]);
 
     $project->update([
       'title' => $request->title,
       'short_description' => $request->short_description,
       'long_description' => $request->long_description,
+      'github_link' => $request->github_link,
+      'website_link' => $request->website_link,
     ]);
     // $project->update(request()->all());
 
     // managed the langauges
     $project->languages()->sync((array)request()->languages);
-
-    // // managed the collaborators
-    // //TODO maybe there is a better way
-    // DB::table('project_collaborators')->where('project_id', $project->id)->delete();
-    // foreach((array)request()->collaborators as $id){
-    //
-    //   $now = new \DateTime();
-    //   $collaboration = [
-    //     'project_id' => $project->id,
-    //     'user_id' => $id,
-    //     'created_at' => $now,
-    //     'updated_at' => $now,
-    //   ];
-    //
-    //   DB::table('project_collaborators')->insert($collaboration);
-    // }
-
 
     //TODO maybe there is a better way
     $project->general_skills()->detach();

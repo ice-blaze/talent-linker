@@ -19,8 +19,8 @@
       </div>
 
       <div class="form-group">
-        <button type="submit" class="btn btn-primary">Invite</button>
-        <a class="btn btn-default" href="{{URL::previous() }}">Cancel</a>
+        <button type="submit" class="btn btn-primary" name="invite">Invite</button>
+        <a class="btn btn-default" href="{{URL::previous() }}"  name="cancel">Cancel</a>
       </div>
     </form>
   </div>

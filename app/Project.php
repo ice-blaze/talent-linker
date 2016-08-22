@@ -12,7 +12,10 @@ use DB;
 class Project extends Model
 {
 
-  protected $fillable = ['title', 'short_description', 'long_description', 'github_link', 'siteweb_link', 'languages'];
+  protected $fillable = [
+    'title', 'short_description', 'long_description', 'github_link', 'siteweb_link', 'languages', 'skills', 'github_link',
+    'stack_overflow_link',
+  ];
 
   public function comments()
   {
@@ -76,12 +79,10 @@ class Project extends Model
     return $this->collab()->where('accepted', '=', false);
   }
 
-  // public function isCurrentAuthTheOwner()
   public function isUserTheOwner(User $user)
   {
     return $this->user_id == $user->id;
   }
-
 
   public function isUserACollaborator(User $user)
   {

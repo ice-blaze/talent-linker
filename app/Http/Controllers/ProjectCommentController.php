@@ -27,6 +27,7 @@ class ProjectCommentController extends Controller
 
     return back();
   }
+  
   public function store(Request $request, Project $project){
     $this->validate($request, [
       'content' => 'required',

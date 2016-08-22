@@ -10,7 +10,7 @@
       <textarea name="content" class="form-control">{{ $comment->content }}</textarea>
     </div>
     <div class="form-group">
-      <button type="submit" class="btn btn-primary">Update comment</button>
+      <button type="submit" class="btn btn-primary"  name="update_comment">Update comment</button>
     </div>
   </form>
 @endsection
