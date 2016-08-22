@@ -19,14 +19,14 @@
               {{ method_field('patch') }}
               {{ csrf_field() }}
               <div class="form-group text-right">
-                <button type="submit" class="btn btn-primary">Accept</button>
+                <button type="submit" class="btn btn-primary" name="accept">Accept</button>
               </div>
             </form>
             <form method="post" action="/invitations/{{ $project->id }}/{{ $collaborator->user->id }}">
               {{ method_field('delete') }}
               {{ csrf_field() }}
               <div class="form-group text-right">
-                <button type="submit" class="btn btn-danger">Delete</button>
+                <button type="submit" class="btn btn-danger" name="delete">Delete</button>
               </div>
             </form>
           @endif

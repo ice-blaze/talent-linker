@@ -1,22 +1,16 @@
 @extends('layout')
 
 @section('content')
-  @if($user->isCurrentAuth())
-    <div class="row">
+  <div class="row">
+    @if($user->isCurrentAuth())
       <a class="btn btn-primary" href="/talents/{{ $user->id }}/edit">Edit Profile</a>
-    </div>
-    <div class="row">
       <a class="btn btn-primary" href="/talents/{{ $user->id }}/invitations">Invitations</a>
-    </div>
-  @endif
-  @if(Auth::user() && !$user->isCurrentAuth())
-    <div class="row">
+    @endif
+    @if(Auth::user() && !$user->isCurrentAuth())
       <a class="btn btn-primary" href="/talents/{{ $user->id }}/chat">Chat with this talent</a>
-    </div>
-    <div class="row">
       <a class="btn btn-primary" href="/talents/{{ $user->id }}/recruit">Recruit for one project</a>
-    </div>
-  @endif
+    @endif
+  </div>
 
 
   <div class="row">

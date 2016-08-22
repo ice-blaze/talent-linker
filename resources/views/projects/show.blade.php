@@ -1,54 +1,44 @@
 @extends('layout')
 
 @section('content')
-  <div class="row">
-    <div class="col-md-8">
-      <h1>{{$project->title}}</h1>
-    </div>
-
-    @if( $project->isUserTheOwner(Auth::user()) || $project->isUserACollaborator(Auth::user()))
-      <div class="col-md-1">
-        <a class="btn btn-primary" href="/projects/{{ $project->id }}/invitations">See pendings</a>
-      </div>
-
-      <div class="col-md-1">
-        <a class="btn btn-primary" href="/projects/{{ $project->id }}/private_comments">Private chat</a>
-      </div>
+  <div class="row text-right">
+    @if( Auth::user() && ($project->isUserTheOwner(Auth::user()) || $project->isUserACollaborator(Auth::user())))
+      <a class="btn btn-primary" href="/projects/{{ $project->id }}/invitations">See pendings</a>
+      <a class="btn btn-primary" href="/projects/{{ $project->id }}/private_comments">Private chat</a>
     @endif
 
-    @if($project->isUserTheOwner(Auth::user()))
+    @if(Auth::user() && $project->isUserTheOwner(Auth::user()))
+      <a class="btn btn-primary" href="/projects/{{ $project->id }}/edit">Edit</a>
 
-      <div class="col-md-1">
-        <a class="btn btn-primary" href="/projects/{{ $project->id }}/edit">Edit</a>
-      </div>
-
-      <div class="col-md-1">
-        <form method="post" action="/projects/{{ $project->id }}">
-          {{ method_field('delete') }}
-          {{ csrf_field() }}
-          <div class="form-group">
-            <button type="submit" class="btn btn-danger">Delete</button>
-          </div>
-        </form>
-      </div>
+      <form id="delete_form" method="post" action="/projects/{{ $project->id }}">
+        {{ method_field('delete') }}
+        {{ csrf_field() }}
+        <div class="form-group">
+          <button type="submit" class="btn btn-danger" name="delete">Delete</button>
+        </div>
+      </form>
     @endif
 
-    @if($project->isPendingUser(Auth::user()))
+    @if( Auth::user() && $project->isPendingUser(Auth::user()))
       <div class="btn btn-default disabled">
         Invitation is pending...
       </div>
     @endif
 
     @if( Auth::user() && !$project->isPendingUser(Auth::user()) && !($project->isUserTheOwner(Auth::user()) || $project->isUserACollaborator(Auth::user())))
-      <div class="col-md-4">
-        <form method="post" action="/projects/{{ $project->id }}/invitations">
-          {{ csrf_field() }}
-          <div class="form-group">
-            <button type="submit" class="btn btn-primary">Join the project</button>
-          </div>
-        </form>
-      </div>
+      <form method="post" action="/projects/{{ $project->id }}/invitations">
+        {{ csrf_field() }}
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary"  name="join_project">Join the project</button>
+        </div>
+      </form>
     @endif
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <h1>{{$project->title}}</h1>
+    </div>
   </div>
 
   <div class="row">
@@ -102,14 +92,14 @@
   <div class="row">
     <label class="col-sm-2 control-label">GitHub</label>
     <div class="col-sm-10">
-      {{$project->github}}
+      {{$project->github_link}}
     </div>
   </div>
 
   <div class="row">
-    <label class="col-sm-2 control-label">Stack Overflow</label>
+    <label class="col-sm-2 control-label">Website</label>
     <div class="col-sm-10">
-      {{$project->stack_overflow}}
+      {{$project->website_link}}
     </div>
   </div>
 
@@ -132,7 +122,7 @@
           <textarea name="content" class="form-control"></textarea>
         </div>
         <div class="form-group">
-          <button type="submit" class="btn btn-primary">Comment</button>
+          <button type="submit" class="btn btn-primary" name="comment">Comment</button>
         </div>
       </form>
     @endif

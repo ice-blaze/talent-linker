@@ -15,47 +15,37 @@
 
     {{ csrf_field() }}
 
+    {{old('languages[]')}}
+
     <div class="form-group">
       <label for="title">Title</label>
       <input name="title" class="form-control" id="title" placeholder="Project Title"
-        value="{{ $project->title or '' }}">
+        value="{{ $project->title or old('title') }}">
     </div>
     <div class="form-group">
       <label for="short_description">Short Description</label>
       <textarea name="short_description" class="form-control" id="short_description"
-        placeholder="Project Short Description">{{ $project->short_description or '' }}</textarea>
+        placeholder="Project Short Description">{{ $project->short_description or old('short_description') }}</textarea>
     </div>
     <div class="form-group">
       <label for="long_description">Long Description</label>
       <textarea name="long_description" class="form-control" id="long_description"
-        placeholder="Project Long Description">{{ $project->long_description or '' }}</textarea>
+        placeholder="Project Long Description">{{ $project->long_description or old('long_description') }}</textarea>
     </div>
 
     <div class="form-group">
-      <label for="github">GithHub</label>
-      <input name="github" type="url" class="form-control" id="github"
-        placeholder="GitHub Project URL" value="{{ $project->github or '' }}">
+      <label for="github_link">GithHub</label>
+      <input name="github_link" type="url" class="form-control" id="github_link"
+        placeholder="GitHub Project URL" value="{{ $project->github_link or old('github_link') }}">
     </div>
 
     <div class="form-group">
-      <label for="stack_overflow">Stack Overflow</label>
-      <input name="stack_overflow" type="url" class="form-control" id="stack_overflow"
-        placeholder="Stack Overflow URL" value="{{ $project->stack_overflow or '' }}">
+      <label for="website_link">Website</label>
+      <input name="website_link" type="url" class="form-control" id="website_link"
+        placeholder="Stack Overflow URL" value="{{ $project->website_link or old('website_link') }}">
     </div>
 
-    <div class="form-group">
-      <label for="collaborators">Collaborators</label>
-      can only delete collaborators
-      {{-- <select name="collaborators[]" class="selectpicker" multiple>
-        @foreach($all_users as $user)
-          <option value="{{$user->id}}"
-            @if(isset($project))
-              {{ $project->collaborators->contains('id', $user->id) ? "selected" : ""}}
-            @endif
-          >{{$user->name}}</option>
-        @endforeach
-      </select> --}}
-    </div>
+    @yield('collaborators')
 
     <div class="form-group">
       <label for="general_skills">Skills</label>
@@ -87,7 +77,7 @@
     </div>
 
     <div class="form-group">
-      <button type="submit" class="btn btn-primary">
+      <button type="submit" class="btn btn-primary" name="submit_project">
         @yield('button_name')
       </button>
     </div>

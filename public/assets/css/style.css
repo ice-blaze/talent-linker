@@ -37,3 +37,7 @@
 
 {{-- because of the nav bar that stay at the top of the page. Bootstrap solution for their component... --}}
 body { padding-top: 70px; }
+
+#delete_form {
+    display: inline-block;
+}

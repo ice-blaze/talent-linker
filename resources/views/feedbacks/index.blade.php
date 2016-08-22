@@ -9,7 +9,7 @@
       <textarea name="content" class="form-control"></textarea>
     </div>
     <div class="form-group">
-      <button type="submit" class="btn btn-primary">Create Feedback</button>
+      <button type="submit" class="btn btn-primary" name="create_feedback">Create Feedback</button>
     </div>
   </form>
 
