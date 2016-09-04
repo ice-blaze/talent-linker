@@ -14,6 +14,7 @@ Route::group(['middleware' => 'web'], function(){
   // Projects
   Route::get('projects/create', 'ProjectController@create');
   Route::get('projects', 'ProjectController@index');
+  Route::post('projects', 'ProjectController@index');
   Route::get('projects/{project}', 'ProjectController@show');
 
   // Users
@@ -37,7 +38,7 @@ Route::group(['middleware' => 'auth.basic'], function(){
   Route::post('talents/{user}/chat', 'ChatUserController@store');
 
   // Project
-  Route::post('projects', 'ProjectController@store');
+  Route::post('projects/create', 'ProjectController@store');
   Route::get('projects/{project}/edit', 'ProjectController@edit');
   Route::patch('projects/{project}', 'ProjectController@update');
   Route::delete('projects/{project}', 'ProjectController@delete');

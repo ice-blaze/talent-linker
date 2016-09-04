@@ -17,6 +17,10 @@ class Project extends Model
     'stack_overflow_link',
   ];
 
+  public  function scopeLike($query, $field, $value){
+    return $query->where($field, 'LIKE', "%$value%");
+  }
+
   public function comments()
   {
     return $this->hasMany(ProjectComment::class)->where('private', '=',  false);

@@ -13,9 +13,13 @@ use Illuminate\Support\Facades\Auth;
 
 class ProjectController extends Controller
 {
-  public function index()
+  public function index(Request $request)
   {
-    $projects = Project::all();
+    if($request->search){
+      $projects = Project::like('title', $request->search)->get();
+    } else {
+      $projects = Project::all();
+    }
     return view('projects.index', compact('projects'));
   }
 
@@ -38,7 +42,8 @@ class ProjectController extends Controller
     $project = new Project();
     $project->user_id = Auth::user()->id;
     $project->save();
-    return $this->update($request, $project);
+    $this->update($request, $project);
+    return redirect($project->path());
   }
 
   public function edit(Project $project)
