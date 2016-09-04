@@ -1,7 +1,7 @@
 @extends('projects/template')
 
 @section('action')
-  {{"/projects/"}}
+  {{"/projects/create"}}
 @endsection
 
 @section('button_name')
