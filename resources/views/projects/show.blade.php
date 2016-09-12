@@ -105,12 +105,9 @@
 
   <div class="row">
     @foreach($project->comments as $comment)
-      <li class="list-group-item">
-        {{ $comment->content}}
-        <div class="comment_user">
-          <a href="{{ $comment->user->path() }}">{{$comment->user->name}}</a> - {{$comment->date}}
-        </div>
-      </li>
+      @include('helpers/user_comment', [
+        'comment' => $comment,
+      ])
     @endforeach
 
     @if(Auth::user())

@@ -6,13 +6,13 @@ class GeneralSkillTableSeeder extends Seeder
 {
   public function run()
   {
-    $prog_id = DB::table('general_skills')->insertGetId(['name' => 'Programming']);
-    $gameengine_id = DB::table('general_skills')->insertGetId(['name' => 'Game Engine']);
-    DB::table('general_skills')->insertGetId(['name' => 'Web']);
-    DB::table('general_skills')->insertGetId(['name' => 'Art 2D']);
-    DB::table('general_skills')->insertGetId(['name' => 'Art 3D']);
-    DB::table('general_skills')->insertGetId(['name' => 'Music']);
-    DB::table('general_skills')->insertGetId(['name' => 'Marketing']);
+    $prog_id = DB::table('general_skills')->insertGetId(['name' => 'Programming', 'technical_name' => 'programming']);
+    $gameengine_id = DB::table('general_skills')->insertGetId(['name' => 'Game Engine', 'technical_name' => 'game_engine']);
+    DB::table('general_skills')->insertGetId(['name' => 'Web', 'technical_name' => 'web']);
+    DB::table('general_skills')->insertGetId(['name' => 'Art 2D', 'technical_name' => 'art_2d']);
+    DB::table('general_skills')->insertGetId(['name' => 'Art 3D', 'technical_name' => 'art_3d']);
+    DB::table('general_skills')->insertGetId(['name' => 'Music', 'technical_name' => 'music']);
+    DB::table('general_skills')->insertGetId(['name' => 'Marketing', 'technical_name' => 'marketing']);
 
     $user_id = DB::table('users')->insertGetId([
       'name' => 'skill_test',

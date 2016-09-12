@@ -12,10 +12,31 @@ use App\Http\Requests;
 
 class UserController extends Controller
 {
-  public function index()
+  public function index(Request $request)
   {
+    $request->flash(); // to have the old functionality (don't understand why it's necessary here)
+
     $users = User::all();
-    return view('users.index', compact('users'));
+    if($request->search){
+      $users = User::like('name', $request->search)->get();
+    } else {
+      $users = User::all();
+    }
+
+    $general_skills = GeneralSkill::all();
+
+    // maybe could be better
+    if($request->skills){
+      foreach ($request->skills as $skill_tech_name => $skill_id) {
+        foreach ($users as $user_key => $user) {
+          if( !$user->general_skills->contains($skill_id) ) {
+            unset($users[$user_key]);
+          }
+        }
+      }
+    }
+
+    return view('users.index', compact('users', 'general_skills'));
   }
 
   public function show(User $user)
@@ -30,11 +51,12 @@ class UserController extends Controller
     return view('users.edit', compact('user', 'languages', 'general_skills'));
   }
 
-  public function update(Rquest $request, User $user)
+  public function update(Request $request, User $user)
   {
     $this->validate($request, [
       //TODO HAVE AT LEAST ONE LANGUAGE
     ]);
+
 
     $user->update(request()->all());
 

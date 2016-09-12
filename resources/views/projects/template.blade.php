@@ -34,6 +34,12 @@
     </div>
 
     <div class="form-group">
+      <label for="image">Image</label>
+      <input name="image" type="url" class="form-control" id="image"
+        placeholder="Image URL" value="{{ $project->image or old('image') }}">
+    </div>
+
+    <div class="form-group">
       <label for="github_link">GithHub</label>
       <input name="github_link" type="url" class="form-control" id="github_link"
         placeholder="GitHub Project URL" value="{{ $project->github_link or old('github_link') }}">

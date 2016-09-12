@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('content')
-  <div class="row">
+  <div class="row col-centered">
     @if($user->isCurrentAuth())
       <a class="btn btn-primary" href="/talents/{{ $user->id }}/edit">Edit Profile</a>
       <a class="btn btn-primary" href="/talents/{{ $user->id }}/invitations">Invitations</a>
@@ -11,7 +11,17 @@
       <a class="btn btn-primary" href="/talents/{{ $user->id }}/recruit">Recruit for one project</a>
     @endif
   </div>
+  <br>
 
+  <div class="row col-centered">
+    <img class="img-circle image-256"
+      @if($user->image)
+        src="{{$user->image}}"
+      @else
+        src="{{asset('assets/images/default_profile.png')}}"
+      @endif
+      alt="User profile">
+  </div>
 
   <div class="row">
     <label class="col-sm-2 control-label">Name</label>

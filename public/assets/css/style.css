@@ -10,6 +10,7 @@
   background:#007bff;
   padding:7px 7px;
   color: white;
+  z-index: 9999;
 }
 
 .comment_user{
@@ -40,4 +41,20 @@ body { padding-top: 70px; }*/
 
 #delete_form {
     display: inline-block;
+}
+
+.image-64{
+  width: 64px;
+  height: 64px;
+}
+.image-256{
+  width: 256px;
+  height: 256px;
+}
+
+.col-centered{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
 }
