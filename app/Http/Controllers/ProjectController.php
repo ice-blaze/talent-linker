@@ -15,12 +15,27 @@ class ProjectController extends Controller
 {
   public function index(Request $request)
   {
+    $request->flash();
+
+    $general_skills = GeneralSkill::all();
+
     if($request->search){
       $projects = Project::like('title', $request->search)->get();
     } else {
       $projects = Project::all();
     }
-    return view('projects.index', compact('projects'));
+
+    if($request->skills){
+      foreach ($request->skills as $skill_tech_name => $skill_id) {
+        // foreach ($users as $user_key => $user) {
+        //   if( !$user->general_skills->contains($skill_id) ) {
+        //     unset($users[$user_key]);
+        //   }
+        // }
+      }
+    }
+
+    return view('projects.index', compact('projects', 'general_skills'));
   }
 
   public function show(Project $project)
@@ -69,6 +84,7 @@ class ProjectController extends Controller
       'long_description' => $request->long_description,
       'github_link' => $request->github_link,
       'website_link' => $request->website_link,
+      'image' => $request->image,
     ]);
     // $project->update(request()->all());
 

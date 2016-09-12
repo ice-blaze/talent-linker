@@ -9,7 +9,7 @@ Route::group(['middleware' => 'web'], function(){
   });
   Route::get('/about', function(){
     return view('about');
-  });
+  }); 
 
   // Projects
   Route::get('projects/create', 'ProjectController@create');
@@ -19,6 +19,7 @@ Route::group(['middleware' => 'web'], function(){
 
   // Users
   Route::get('talents', 'UserController@index');
+  Route::post('talents', 'UserController@index');
   Route::get('talents/{user}', 'UserController@show');
 
 });

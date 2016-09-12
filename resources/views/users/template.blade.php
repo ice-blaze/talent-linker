@@ -18,6 +18,7 @@
         placeholder="User Email" value="{{ $user->email or '' }}">
     </div> --}}
 
+
     <div class="form-group">
       <label for="last_name">Last Name</label>
       <input name="last_name" type="text" class="form-control" id="last_name"
@@ -34,6 +35,12 @@
       <label for="talent_description">Talent Description</label>
       <textarea name="talent_description" type="text" class="form-control" id="talent_description"
         placeholder="User Talent Description">{{ $user->talent_description or old('talent_description') }}</textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="image">Image</label>
+      <input name="image" type="url" class="form-control" id="image"
+        placeholder="Image URL" value="{{ $user->image or old('image') }}">
     </div>
 
     <div class="form-group">

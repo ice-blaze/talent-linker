@@ -31,7 +31,10 @@
   @endif
 
   <div class="container">
-    @include('nav_bar')
+    <div class="row">
+      @include('nav_bar')
+      <br>
+    </div>
   </div>
 
   <div class="container">
