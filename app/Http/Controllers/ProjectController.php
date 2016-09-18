@@ -7,6 +7,7 @@ use App\Project;
 use App\User;
 use App\Language;
 use App\GeneralSkill;
+use App\ProjectCollaborator;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -54,10 +55,22 @@ class ProjectController extends Controller
 
   public function store(Request $request)
   {
+    // project creation
     $project = new Project();
-    $project->user_id = Auth::user()->id;
+    // $project->user_id = Auth::user()->id;
     $project->save();
     $this->update($request, $project);
+
+    // owner collaborator creation
+    $collaborator = new ProjectCollaborator();
+    $collaborator->project_id = $project->id;
+    $collaborator->user_id = Auth::user()->id;
+    $collaborator->is_project_owner = true;
+    $collaborator->from_collaborator = false;
+    $collaborator->accepted = true;
+    $collaborator->skill_id = request()->skill;
+    $collaborator->save();
+
     return redirect($project->path());
   }
 

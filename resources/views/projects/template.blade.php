@@ -17,6 +17,8 @@
 
     {{old('languages[]')}}
 
+    @yield('owner_skill')
+
     <div class="form-group">
       <label for="title">Title</label>
       <input name="title" class="form-control" id="title" placeholder="Project Title"

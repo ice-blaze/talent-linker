@@ -46,6 +46,11 @@ class User extends Authenticatable
     return '/talents/' . $this->id;
   }
 
+  public function projects(){
+    return $this->belongsToMany('App\Project', 'project_collaborators', 'user_id', 'project_id')
+              ->where('is_project_owner', '=', true);
+  }
+
   public function projectsAsCollaborator(){
     return $this->belongsToMany('App\Project', 'project_collaborators', 'user_id', 'project_id');
   }

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Project;
 use App\User;
+use App\GeneralSkill;
 use App\ProjectCollaborator;
 use App\Http\Requests;
 
@@ -27,7 +28,7 @@ class ProjectCollaboratorController extends Controller
 
   public function recruit(Request $request, User $user){
     // $invitations = Invitation::where('project_id', '=', $project->id);
-    $projects = Project::where('user_id', '=', Auth::user()->id)->get();
+    $projects = Auth::user()->projects;
     $projects_with_pending_invitation = ProjectCollaborator::where('accepted', '=', false)
       ->where('user_id', '=', $user->id)->get()
       ->map(function ($invitation) {
@@ -40,7 +41,14 @@ class ProjectCollaboratorController extends Controller
       $request->session()->flash('error', "Can't recruit, the talent is already on all of your projects!");
       return back();
     }
-    return view('invitations.recruit', compact('user', 'projects'));
+
+    $general_skills = GeneralSkill::all();
+    return view('invitations.recruit', compact('user', 'projects', 'general_skills'));
+  }
+
+  public function join(Request $request, Project $project){
+    $general_skills = GeneralSkill::all();
+    return view('invitations.join', compact('user', 'project', 'general_skills'));
   }
 
   public function project_store(Request $request, Project $project){
@@ -50,14 +58,27 @@ class ProjectCollaboratorController extends Controller
     $invitation->project_id = $project->id;
     $invitation->from_collaborator = true;
     $invitation->accepted = false;
+    $invitation->skill_id = request()->skill;
     $invitation->save();
 
-    return back();
+    return redirect($project->path());
+  }
+
+  public function user_store(Request $request, User $user){
+
+    $invitation = new ProjectCollaborator();
+    $invitation->user_id = $user->id;
+    $invitation->project_id = request()->project;
+    $invitation->from_collaborator = false;
+    $invitation->skill_id = request()->skill;
+    $invitation->save();
+
+    return redirect($user->path())->with('status', $user->name . ' invited to ' . Project::find(request()->project)->title);
   }
 
   public function accept(Request $request, Project $project, User $user){
     //TODO add message, don't have permission
-    // if(Auth::user()->id != $project->owner->id){ return back();}
+    // if(Auth::user()->id != $project->owner()->id){ return back();}
 
     $invitation = ProjectCollaborator::where('project_id', '=', $project->id)->where('user_id', '=', $user->id);
     $invitation->update([
@@ -68,19 +89,9 @@ class ProjectCollaboratorController extends Controller
     return back();
   }
 
-  public function user_store(Request $request, User $user){
-
-    $invitation = new ProjectCollaborator();
-    $invitation->user_id = $user->id;
-    $invitation->project_id = request()->project;
-    $invitation->from_collaborator = false;
-    $invitation->save();
-
-    return redirect($user->path())->with('status', $user->name . ' invited to ' . Project::find(request()->project)->title);
-  }
 
   public function delete(Request $request, Project $project, User $user, ProjectCollaborator $invitation){
-    if(Auth::user()->id != $project->owner->id && Auth::user()->id != $invitation->user_id){
+    if(Auth::user()->id != $project->owner()->id && Auth::user()->id != $invitation->user_id){
       $request->session()->flash('error', "Don't have the permission to delete the invitation!");
       return back();
     }

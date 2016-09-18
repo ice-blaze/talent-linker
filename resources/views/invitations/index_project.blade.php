@@ -9,12 +9,13 @@
     @foreach($pendings as $collaborator)
       <li class="list-group-item">
         <a href="{{$collaborator->user->path()}}">{{$collaborator->user->name}}</a>
+        - skill: {{$collaborator->skill->name}}
         - invited the {{$collaborator->created_at}}
         @if($collaborator->accepted)
           - accepted
         @else
           - pending ...
-          @if($project->owner->id == Auth::user()->id)
+          @if($project->owner()->id == Auth::user()->id)
             <form method="post" action="/invitations/{{ $project->id }}/{{ $collaborator->user->id }}/accept">
               {{ method_field('patch') }}
               {{ csrf_field() }}
