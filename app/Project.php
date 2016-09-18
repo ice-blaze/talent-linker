@@ -33,7 +33,10 @@ class Project extends Model
 
   public function owner()
   {
-    return $this->belongsTo(User::class, 'user_id');
+    // TODO maybe it's possible to do a real relation to avoid using () when calling owner
+    return $this->collab()->where('is_project_owner', '=', true)->first();
+    // return User::find(2)->get();
+    // return $this->belongsTo(User::class, 'user_id');
   }
 
   public function addComment(ProjectComment $comment)
@@ -41,9 +44,56 @@ class Project extends Model
     return $this->comments()->save($comment);
   }
 
+  public function current_skills()
+  {
+    $skills = array();
+    $this->collaborators;
+    return $this->belongsToMany('App\GeneralSkill', 'project_collaborators', 'project_id','skill_id');
+    // return $this->belongsToMany('App\GeneralSkill', 'project_collaborators', 'project_id','skill_id')
+    //   ->where('accepted', '=', true);
+  }
+
   public function general_skills()
   {
     return $this->belongsToMany('App\GeneralSkill', 'general_skill_project')->withPivot('count');
+  }
+
+  public function current_skill_and_wanted(){
+    $wanted = $this->skill_have();
+    foreach($this->general_skills as $skill){
+      $wanted[$skill->id]['skill'] = $skill;
+      $wanted[$skill->id]['wanted'] = $skill->pivot->count;
+    }
+
+    foreach($wanted as $skill){
+      if(! array_key_exists('have', $wanted[$skill['skill']->id])){
+        $wanted[$skill['skill']->id]['have'] = 0;
+      }
+      if(! array_key_exists('wanted', $wanted[$skill['skill']->id])){
+        $wanted[$skill['skill']->id]['wanted'] = 0;
+      }
+    }
+    return $wanted;
+  }
+
+  public function skill_have(){
+    $res = array();
+    foreach($this->current_skills->groupBy('id') as $value ){
+      $res[$value[0]->id] = ['skill' => $value[0], 'have' => count($value)];
+    }
+    return $res;
+    // dd($this->collaborators->first()->skill_id);
+    // $skill_extractor = function ($x) {
+    //   return [
+    //     'id' => $x->id,
+    //     'name' => $x->name,
+    //     'current_count' => $this->general_skill_count($x),
+    //     'count' => $this->general_skill_count($x),
+    //   ];
+    // };
+    // $skills = array_map($skill_extractor, $this->general_skills->all());
+    // dd($skills);
+    // return $skills;
   }
 
   public function general_skill_count(GeneralSkill $skill)
@@ -66,7 +116,7 @@ class Project extends Model
   }
 
   private function collab(){
-    return $this->belongsToMany('App\User', 'project_collaborators', 'project_id', 'user_id');
+    return $this->belongsToMany('App\User', 'project_collaborators', 'project_id', 'user_id')->withPivot('skill_id');
   }
 
   public function collaborators()

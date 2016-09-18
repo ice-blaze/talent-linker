@@ -10,6 +10,7 @@
       <li class="list-group-item">
         <a href="{{$invitation->user->path()}}">{{$invitation->user->name}}</a> -
         <a href="{{$invitation->project->path()}}">{{$invitation->project->title}}</a>
+        - skill: {{$invitation->skill->name}}
         - invited the {{$invitation->created_at}}
         {{-- accepted the 11.11.1111 --}}
         @if($invitation->accepted)

@@ -33,7 +33,7 @@
           @foreach($threeUsers as $user)
             <div class="card">
               <a href="{{ $user->path() }}">
-                <img class="card-img-top img-fluid img-circle"
+                <img class="img-fluid img-circle col-centered image-256"
                   @if($user->image)
                     src="{{$user->image}}"
                   @else

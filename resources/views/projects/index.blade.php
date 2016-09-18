@@ -32,12 +32,12 @@
   </div>
 
   <div class="card-deck-wrapper">
-    @foreach(array_chunk($projects->all(), 3) as $threeProjects)
+    @forelse(array_chunk($projects->all(), 3) as $threeProjects)
       <div class="card-deck">
         @foreach($threeProjects as $project)
           <div class="card">
               <a href="{{ $project->path() }}">
-                <img class="card-img-top img-fluid"
+                <img class="card-img-top img-fluid m-x-auto"
                   @if($project->image)
                     src="{{$project->image}}"
                   @else
@@ -49,18 +49,30 @@
               <h4 class="card-title"><a href="{{ $project->path() }}">{{ $project->title }}</a></h4>
             </div>
             {{-- <img class="card-img-top" src="..." alt="Card image cap"> --}}
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">
-                Profile wanted:
-              </li>
-            </ul>
             <div class="card-block">
               <p class="card-text">{{ $project->short_description }}</p>
+              <p>
+                @foreach($project->current_skill_and_wanted() as $skill)
+                  @if($skill['wanted'] > 0 && $skill['have'] >= $skill['wanted'])
+                    <span class="tag tag-primary">
+                  @else
+                    <span class="tag tag-default">
+                  @endif
+                    {{$skill['skill']->name}} {{$skill['have']}} / {{$skill['wanted']}}
+                  </span>
+                @endforeach
+              </p>
               <p class="card-text"><small class="text-muted">Last updated {{$project->updated_at->diffForHumans()}}</small></p>
             </div>
           </div>
         @endforeach
       </div>
-    @endforeach
+    @empty
+      <div class="row">
+        <div class="col-md-12 col-centered">
+          <h2>No projects...</h2>
+        </div>
+      </div>
+    @endforelse
   </div>
 @stop

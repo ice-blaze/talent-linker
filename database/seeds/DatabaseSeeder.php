@@ -6,8 +6,11 @@ class DatabaseSeeder extends Seeder
 {
   public function run()
   {
-    $this->call(UsersTableSeeder::class);
+    // WARNING THOSE SEEDS NEED TO BE DONE ON AN EMPTY BASE
     $this->call(GeneralSkillTableSeeder::class);
-    $this->call(CollaboratorTableSeeder::class); // can-t  be executed without the to above seeder
+    $this->call(LanguagesTableSeeder::class);
+    $this->call(UsersTableSeeder::class);
+    $this->call(ProjectsTableSeeder::class);
+    $this->call(CollaboratorTableSeeder::class);
   }
 }

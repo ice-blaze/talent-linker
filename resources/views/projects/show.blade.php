@@ -1,6 +1,7 @@
 @extends('layout')
 
 @section('content')
+
   <div class="row text-right">
     @if( Auth::user() && ($project->isUserTheOwner(Auth::user()) || $project->isUserACollaborator(Auth::user())))
       <a class="btn btn-primary" href="/projects/{{ $project->id }}/invitations">See pendings</a>
@@ -26,7 +27,7 @@
     @endif
 
     @if( Auth::user() && !$project->isPendingUser(Auth::user()) && !($project->isUserTheOwner(Auth::user()) || $project->isUserACollaborator(Auth::user())))
-      <form method="post" action="/projects/{{ $project->id }}/invitations">
+      <form method="get" action="/projects/{{ $project->id }}/join">
         {{ csrf_field() }}
         <div class="form-group">
           <button type="submit" class="btn btn-primary"  name="join_project">Join the project</button>
@@ -76,7 +77,7 @@
   <div class="row">
     <label class="col-sm-2 control-label">Owner</label>
     <div class="col-sm-10">
-      <a href="{{$project->owner->path()}}">{{$project->owner->name}}</a>
+      <a href="{{$project->owner()->path()}}">{{$project->owner()->name}}</a>
     </div>
   </div>
 

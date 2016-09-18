@@ -9,7 +9,7 @@ Route::group(['middleware' => 'web'], function(){
   });
   Route::get('/about', function(){
     return view('about');
-  }); 
+  });
 
   // Projects
   Route::get('projects/create', 'ProjectController@create');
@@ -55,6 +55,7 @@ Route::group(['middleware' => 'auth.basic'], function(){
   // Invitations
   Route::get('projects/{project}/invitations', 'ProjectCollaboratorController@project_index');
   Route::post('projects/{project}/invitations', 'ProjectCollaboratorController@project_store');
+  Route::get('projects/{project}/join', 'ProjectCollaboratorController@join');
   Route::patch('invitations/{project}/{user}/accept', 'ProjectCollaboratorController@accept');
   Route::delete('invitations/{project}/{user}/{invitation}', 'ProjectCollaboratorController@delete');
   Route::get('talents/{user}/invitations', 'ProjectCollaboratorController@user_index');
