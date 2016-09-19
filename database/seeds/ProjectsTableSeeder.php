@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use App\User;
 use App\ProjectCollaborator;
 use App\GeneralSkill;
+use App\Language;
 
 class ProjectsTableSeeder extends Seeder
 {
@@ -15,6 +16,8 @@ class ProjectsTableSeeder extends Seeder
       $user_james = User::find(1);
       $user_nico = User::find(2);
       $user_richard = User::find(3);
+      $language_english = Language::find(1);
+      $language_french = Language::find(2);
 
       $long_description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
 
@@ -23,6 +26,8 @@ class ProjectsTableSeeder extends Seeder
         'short_description' => 'Cool all those cats!',
         'long_description' => $long_description,
         'image' => 'http://i.imgur.com/CQbO0cc.jpg',
+        'github_link' => 'http://example.com/my_github',
+        'siteweb_link' => 'http://example.com/my_project',
       ]);
 
       ProjectCollaborator::create([
@@ -36,12 +41,20 @@ class ProjectsTableSeeder extends Seeder
         'accepted_date' => Carbon::now(),
       ]);
 
+      DB::table('language_project')->insert([
+        'language_id' => $language_english->id,
+        'project_id' => $project->id,
+      ]);
+      DB::table('language_project')->insert([
+        'language_id' => $language_french->id,
+        'project_id' => $project->id,
+      ]);
+
       DB::table('general_skill_project')->insert([
         'general_skill_id' => $skill_gameengine->id,
         'project_id' => $project->id,
         'count' => 1,
       ]);
-
       DB::table('general_skill_project')->insert([
         'general_skill_id' => $skill_prog->id,
         'project_id' => $project->id,
@@ -53,6 +66,7 @@ class ProjectsTableSeeder extends Seeder
         'short_description' => 'Cat bulenderu!',
         'long_description' => $long_description,
         'image' => 'https://cuteoverload.files.wordpress.com/2009/09/kitten_in_blender.jpg',
+        'github_link' => 'http://example.com/my_github',
       ]);
 
       ProjectCollaborator::create([
@@ -66,12 +80,16 @@ class ProjectsTableSeeder extends Seeder
         'accepted_date' => Carbon::now(),
       ]);
 
+      DB::table('language_project')->insert([
+        'language_id' => $language_french->id,
+        'project_id' => $project->id,
+      ]);
+
       DB::table('general_skill_project')->insert([
         'general_skill_id' => $skill_gameengine->id,
         'project_id' => $project->id,
         'count' => 1,
       ]);
-
       DB::table('general_skill_project')->insert([
         'general_skill_id' => $skill_prog->id,
         'project_id' => $project->id,
@@ -96,12 +114,16 @@ class ProjectsTableSeeder extends Seeder
         'accepted_date' => Carbon::now(),
       ]);
 
+      DB::table('language_project')->insert([
+        'language_id' => $language_english->id,
+        'project_id' => $project->id,
+      ]);
+
       DB::table('general_skill_project')->insert([
         'general_skill_id' => $skill_gameengine->id,
         'project_id' => $project->id,
         'count' => 1,
       ]);
-
       DB::table('general_skill_project')->insert([
         'general_skill_id' => $skill_prog->id,
         'project_id' => $project->id,

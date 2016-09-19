@@ -6,7 +6,7 @@
   </div>
 
   <div class="row">
-    @foreach($pendings as $collaborator)
+    @forelse($pendings as $collaborator)
       <li class="list-group-item">
         <a href="{{$collaborator->user->path()}}">{{$collaborator->user->name}}</a>
         - skill: {{$collaborator->skill->name}}
@@ -15,7 +15,7 @@
           - accepted
         @else
           - pending ...
-          @if($project->owner()->id == Auth::user()->id)
+          @if($project->owner->user->id == Auth::user()->id)
             <form method="post" action="/invitations/{{ $project->id }}/{{ $collaborator->user->id }}/accept">
               {{ method_field('patch') }}
               {{ csrf_field() }}
@@ -34,6 +34,9 @@
         @endif
 
       </li>
-    @endforeach
+    @empty
+      <br>
+      <span class="lead col-centered">No invitations...</span>
+    @endforelse
   </div>
 @endsection

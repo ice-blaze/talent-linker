@@ -33,10 +33,7 @@ class Project extends Model
 
   public function owner()
   {
-    // TODO maybe it's possible to do a real relation to avoid using () when calling owner
-    return $this->collab()->where('is_project_owner', '=', true)->first();
-    // return User::find(2)->get();
-    // return $this->belongsTo(User::class, 'user_id');
+    return $this->hasOne('App\ProjectCollaborator')->where('is_project_owner', '=', true);
   }
 
   public function addComment(ProjectComment $comment)
@@ -46,11 +43,7 @@ class Project extends Model
 
   public function current_skills()
   {
-    $skills = array();
-    $this->collaborators;
     return $this->belongsToMany('App\GeneralSkill', 'project_collaborators', 'project_id','skill_id');
-    // return $this->belongsToMany('App\GeneralSkill', 'project_collaborators', 'project_id','skill_id')
-    //   ->where('accepted', '=', true);
   }
 
   public function general_skills()
@@ -115,31 +108,30 @@ class Project extends Model
     return '/projects/' . $this->id;
   }
 
-  private function collab(){
-    return $this->belongsToMany('App\User', 'project_collaborators', 'project_id', 'user_id')->withPivot('skill_id');
+  public function all_collaborators(){
+    return $this->hasMany('App\ProjectCollaborator');
   }
 
-  public function collaborators()
-  {
-    return $this->collab()->where('accepted', '=', true);
+  public function collaborators(){
+    return $this->all_collaborators()->where('accepted', '=', true);
   }
 
   public function isPendingUser(User $user){
-    return $this->pending_collaborators()->get()->contains('id', $user->id);
+    return $this->pending_collaborators->contains('user.id', $user->id);
   }
 
   public function pending_collaborators()
   {
-    return $this->collab()->where('accepted', '=', false);
+    return $this->all_collaborators()->where('accepted', '=', false);
   }
 
   public function isUserTheOwner(User $user)
   {
-    return $this->user_id == $user->id;
+    return $this->owner->user->id == $user->id;
   }
 
   public function isUserACollaborator(User $user)
   {
-    return count($this->collaborators()->where('user_id', '=', $user->id)->get());
+    return $this->all_collaborators->contains('user.id', '=', $user->id);
   }
 }

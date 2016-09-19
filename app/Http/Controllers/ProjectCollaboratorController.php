@@ -78,7 +78,7 @@ class ProjectCollaboratorController extends Controller
 
   public function accept(Request $request, Project $project, User $user){
     //TODO add message, don't have permission
-    // if(Auth::user()->id != $project->owner()->id){ return back();}
+    // if(Auth::user()->id != $project->owner->user->id){ return back();}
 
     $invitation = ProjectCollaborator::where('project_id', '=', $project->id)->where('user_id', '=', $user->id);
     $invitation->update([
@@ -91,7 +91,7 @@ class ProjectCollaboratorController extends Controller
 
 
   public function delete(Request $request, Project $project, User $user, ProjectCollaborator $invitation){
-    if(Auth::user()->id != $project->owner()->id && Auth::user()->id != $invitation->user_id){
+    if(Auth::user()->id != $project->owner->user->id && Auth::user()->id != $invitation->user_id){
       $request->session()->flash('error', "Don't have the permission to delete the invitation!");
       return back();
     }
