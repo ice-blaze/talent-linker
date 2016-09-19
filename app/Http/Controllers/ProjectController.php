@@ -28,11 +28,11 @@ class ProjectController extends Controller
 
     if($request->skills){
       foreach ($request->skills as $skill_tech_name => $skill_id) {
-        // foreach ($users as $user_key => $user) {
-        //   if( !$user->general_skills->contains($skill_id) ) {
-        //     unset($users[$user_key]);
-        //   }
-        // }
+        foreach ($projects as $project_key => $project) {
+          if( !$project->general_skills->contains($skill_id) ) {
+            unset($projects[$project_key]);
+          }
+        }
       }
     }
 
