@@ -90,7 +90,7 @@
               <a href="{{$collaborator->user->path()}}"><h4 class="media-heading">{{$collaborator->user->name}}</h4></a>
               <span class="tag tag-primary">{{$collaborator->skill->name}}</span>
               @if($collaborator->is_project_owner)
-                <span class="tag tag-pill tag-default">Owner</span>
+                <span class="tag tag-pill tag-danger">Owner</span>
               @endif
             </div>
           </div>
@@ -115,13 +115,13 @@
     @if($project->github_link)
       <label class="col-sm-2"><strong>GitHub</strong></label>
       <div class="col-sm-10 col-md-4">
-        {{$project->github_link}}
+        <a href="{{$project->github_link}}">{{$project->github_link}}</a>
       </div>
     @endif
     @if($project->siteweb_link)
       <label class="col-sm-2"><strong>Website</strong></label>
       <div class="col-sm-10 col-md-4">
-        {{$project->siteweb_link}}
+        <a href="{{$project->siteweb_link}}">{{$project->siteweb_link}}</a>
       </div>
     @endif
   </div>

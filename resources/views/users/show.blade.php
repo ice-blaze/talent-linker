@@ -23,78 +23,100 @@
       alt="User profile">
   </div>
 
-  <div class="row">
-    <label class="col-sm-2 control-label">Name</label>
-    <div class="col-sm-10">
-      {{$user->name}}
+  <div class="row col-centered">
+    <div class="col-sm-12">
+      <h1>{{$user->name}}</h1>
     </div>
   </div>
 
-  <div class="row">
-    <label class="col-sm-2 control-label">Email</label>
-    <div class="col-sm-10">
-      {{$user->email}}
+  <div class="row col-centered">
+    <div class="col-sm-12">
+      <a href="mailto:{{$user->email}}">{{$user->email}}</a>
     </div>
   </div>
 
-  <div class="row">
-    <label class="col-sm-2 control-label">Last Name</label>
-    <div class="col-sm-10">
-      {{$user->last_name}}
-    </div>
-  </div>
-
-  <div class="row">
-    <label class="col-sm-2 control-label">First Name</label>
-    <div class="col-sm-10">
-      {{$user->first_name}}
-    </div>
-  </div>
-
-  <div class="row">
-    <label class="col-sm-2 control-label">Talent Description</label>
-    <div class="col-sm-10">
+  <br>
+  <div class="row col-centered lead">
+    <div class="col-sm-12">
       {{$user->talent_description}}
     </div>
   </div>
 
+  <br>
   <div class="row">
-    <label class="col-sm-2 control-label">Languages</label>
+    <label class="col-sm-2"><strong>Skills</strong></label>
+    <div class="col-sm-10">
+      @forelse($user->general_skills as $skill)
+        <span class="tag tag-primary">{{$skill->name}}</span>
+      @empty
+        No Skills
+      @endforelse
+    </div>
+  </div>
+
+  <br>
+  <div class="row">
+    <label class="col-sm-2"><strong>Languages</strong></label>
     <div class="col-sm-10">
       @foreach($user->languages as $language)
-        {{$language->name}},
+        <span class="tag tag-pill tag-primary">
+          {{$language->name}}
+        </span>
       @endforeach
     </div>
   </div>
 
-  <div class="row">
-    <label class="col-sm-2 control-label">Skills</label>
-    <div class="col-sm-10">
-      @foreach($user->general_skills as $skill)
-        {{$skill->name}},
-      @endforeach
+  <br>
+  @if($user->github)
+    <div class="row">
+        <label class="col-sm-3 col-lg-2"><strong>GitHub</strong></label>
+        <div class="col-sm-9 col-md-3">
+          <a href="{{$user->github}}">{{$user->github}}</a>
+        </div>
     </div>
-  </div>
-
-  <div class="row">
-    <label class="col-sm-2 control-label">Website</label>
-    <div class="col-sm-10">
-      <a href="{{$user->website}}">{{$user->website}}</a>
+  @endif
+  @if($user->website)
+    <div class="row">
+        <label class="col-sm-3 col-lg-2"><strong>Website</strong></label>
+        <div class="col-sm-9 col-md-3">
+          <a href="{{$user->website}}">{{$user->website}}</a>
+        </div>
     </div>
-  </div>
-
-  <div class="row">
-    <label class="col-sm-2 control-label">GitHub</label>
-    <div class="col-sm-10">
-      <a href="{{$user->github}}">{{$user->github}}</a>
+  @endif
+  @if($user->stack_overflow)
+    <div class="row">
+        <label class="col-sm-3 col-lg-2"><strong>Stack Overflow</strong></label>
+        <div class="col-sm-9 col-md-4">
+          <a href="{{$user->stack_overflow}}">{{$user->stack_overflow}}</a>
+        </div>
     </div>
-  </div>
-
-  <div class="row">
-    <label class="col-sm-2 control-label">Stack Overflow</label>
-    <div class="col-sm-10">
-      <a href="{{$user->stack_overflow}}">{{$user->stack_overflow}}</a>
+  @endif
+  @if($user->collaborations)
+    <br>
+    <div class="row">
+      <label for="col-md-12"><strong>Projects</strong></label>
+      <div class="col-md-12">
+        @foreach ($user->collaborations as $collaboration)
+          <div class="col-xl-3 col-lg-4 col-md-6 col-xs-12">
+            <div class="media card card-outline-primary ">
+              <a class="media-left" href="{{$collaboration->project->path()}}">
+                <img class="media-object image-64" src="{{$collaboration->project->image}}"
+                  alt="Project Image {{$collaboration->project->title}}">
+              </a>
+              <div class="media-body">
+                <a href="{{$collaboration->project->path()}}">
+                  <h4 class="media-heading">{{$collaboration->project->title}}</h4>
+                </a>
+                <span class="tag tag-primary">{{$collaboration->skill->name}}</span>
+                @if($collaboration->is_project_owner)
+                  <span class="tag tag-pill tag-danger">Owner</span>
+                @endif
+              </div>
+            </div>
+          </div>
+        @endforeach
+      </div>
     </div>
-  </div>
+  @endif
 
 @endsection

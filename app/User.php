@@ -55,6 +55,11 @@ class User extends Authenticatable
     return $this->belongsToMany('App\Project', 'project_collaborators', 'user_id', 'project_id');
   }
 
+  public function collaborations(){
+    return $this->hasMany('App\ProjectCollaborator')->where('accepted', '=', true);
+  }
+
+
   public function isAdmin()
   {
     return $this->is_admin;
