@@ -31,8 +31,11 @@
     </div>
     <div class="form-group">
       <label for="long_description">Long Description</label>
-      <textarea name="long_description" class="form-control" id="long_description"
-        placeholder="Project Long Description">{{ $project->long_description or old('long_description') }}</textarea>
+      @include('helpers/ckeditor', [
+        'name' => "long_description",
+        'content' => $project->long_description,
+        'placeholder' => "Project Long Description",
+      ])
     </div>
 
     <div class="form-group">

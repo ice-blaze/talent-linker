@@ -73,7 +73,7 @@
 
   <div class="row">
     <div class="col-sm-12">
-      {{$project->long_description}}
+      {!! $project->long_description !!}
     </div>
   </div>
 

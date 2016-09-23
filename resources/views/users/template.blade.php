@@ -33,8 +33,12 @@
 
     <div class="form-group">
       <label for="talent_description">Talent Description</label>
-      <textarea name="talent_description" type="text" class="form-control" id="talent_description"
-        placeholder="User Talent Description">{{ $user->talent_description or old('talent_description') }}</textarea>
+      @include('helpers/ckeditor', [
+        'name' => "talent_description",
+        'content' => $user->talent_description,
+        'placeholder' => "User Talent Description",
+      ])
+      {{-- <textarea name="talent_description" type="text" class="form-control" id="talent_description" --}}
     </div>
 
     <div class="form-group">
