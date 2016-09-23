@@ -15,7 +15,7 @@ class UsersTableSeeder extends Seeder
     $lang_french_id = 2;
     $lang_german_id = 2;
 
-    $talent_description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi non quis exercitationem culpa nesciunt nihil aut nostrum explicabo reprehenderit optio amet ab temporibus asperiores quasi cupiditate. Voluptatum ducimus voluptates voluptas?";
+    $talent_description = '<p style="text-align: center;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi non quis exercitationem culpa nesciunt nihil aut nostrum explicabo reprehenderit optio amet ab temporibus asperiores quasi cupiditate. Voluptatum ducimus voluptates voluptas?</p>';
 
     $user = User::create([
       'name' => 'James Test',

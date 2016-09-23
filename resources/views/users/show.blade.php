@@ -36,9 +36,10 @@
   </div>
 
   <br>
-  <div class="row col-centered lead">
+  <div class="row lead">
     <div class="col-sm-12">
-      {{$user->talent_description}}
+      {{-- {{$user->talent_description}} --}}
+      {!! $user->talent_description !!}
     </div>
   </div>
 
