@@ -16,6 +16,7 @@ class ProjectsTableSeeder extends Seeder
       $user_james = User::find(1);
       $user_nico = User::find(2);
       $user_richard = User::find(3);
+
       $language_english = Language::find(1);
       $language_french = Language::find(2);
 
@@ -129,5 +130,71 @@ class ProjectsTableSeeder extends Seeder
         'project_id' => $project->id,
         'count' => 3,
       ]);
+
+      $project = Project::create([
+        'title' => 'Cat of Hell',
+        'short_description' => 'Devil cat is here!',
+        'long_description' => $long_description,
+        'image' => "http://i.imgur.com/QUTsudb.jpg",
+      ]);
+      ProjectCollaborator::create([
+        'skill_id' => $skill_prog->id,
+        'project_id' => $project->id,
+        'is_project_owner' => true,
+        'user_id' => $user_richard->id,
+        'accepted' => true,
+        'from_collaborator' => false,
+        'invite_message' => 'initial seed',
+        'accepted_date' => Carbon::now(),
+      ]);
+      $project = Project::create([
+        'title' => 'Trumpo Cat',
+        'short_description' => 'Make Amurica great again !',
+        'long_description' => $long_description,
+        'image' => "http://i.imgur.com/7NPGotE.jpg",
+      ]);
+      ProjectCollaborator::create([
+        'skill_id' => $skill_prog->id,
+        'project_id' => $project->id,
+        'is_project_owner' => true,
+        'user_id' => $user_richard->id,
+        'accepted' => true,
+        'from_collaborator' => false,
+        'invite_message' => 'initial seed',
+        'accepted_date' => Carbon::now(),
+      ]);
+      $project = Project::create([
+        'title' => 'Cat Box',
+        'short_description' => 'A place to stow your cat!',
+        'long_description' => $long_description,
+        'image' => "http://i.imgur.com/MpE7Aop.jpg",
+      ]);
+      ProjectCollaborator::create([
+        'skill_id' => $skill_prog->id,
+        'project_id' => $project->id,
+        'is_project_owner' => true,
+        'user_id' => $user_richard->id,
+        'accepted' => true,
+        'from_collaborator' => false,
+        'invite_message' => 'initial seed',
+        'accepted_date' => Carbon::now(),
+      ]);
+
+      $project = Project::create([
+        'title' => 'Empty',
+        'short_description' => 'Empty',
+        'long_description' => 'Empty',
+      ]);
+      ProjectCollaborator::create([
+        'skill_id' => $skill_prog->id,
+        'project_id' => $project->id,
+        'is_project_owner' => true,
+        'user_id' => $user_richard->id,
+        'accepted' => true,
+        'from_collaborator' => false,
+        'invite_message' => 'initial seed',
+        'accepted_date' => Carbon::now(),
+      ]);
+
     }
 }
