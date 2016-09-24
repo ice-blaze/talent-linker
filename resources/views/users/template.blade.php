@@ -87,6 +87,26 @@
       </select>
     </div>
 
+    <div class="row">
+      <label class="col-sm-12"><strong>Your Location</strong> (with the search area)</label>
+      <div class="col-sm-12">
+        @include('helpers.gmap', [
+          "class" => "gm-show",
+          "lat" => $user->lat,
+          "lng" => $user->lng,
+          "find_distance" => $user->find_distance,
+          'edit' => 1,
+        ])
+      </div>
+      <div class="col-sm-12">
+        <input type="text" hidden="true" id="lat" value="{{$user->lat}}" name="lat">
+        <input type="text" hidden="true" id="lng" value="{{$user->lng}}" name="lng">
+        Distance :
+        <input type="number" class="form-control" id="find_distance" value="{{$user->find_distance}}"
+          name="find_distance" min="1" step="1" max="200"><br><br>
+      </div>
+    </div>
+
     <div class="form-group">
       <button type="submit" class="btn btn-primary"  name="submit_user">
         @yield('button_name')

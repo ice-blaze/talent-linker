@@ -17,6 +17,7 @@ class UsersTableSeeder extends Seeder
     $lang_english_id = 1;
     $lang_french_id = 2;
     $lang_german_id = 2;
+    $pos_neuchatel = ['lat' => 46.991363, 'lng' => 6.929970];
 
     $talent_description = '<p style="text-align: center;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi non quis exercitationem culpa nesciunt nihil aut nostrum explicabo reprehenderit optio amet ab temporibus asperiores quasi cupiditate. Voluptatum ducimus voluptates voluptas?</p>';
 
@@ -31,6 +32,9 @@ class UsersTableSeeder extends Seeder
       'stack_overflow' => 'http://example.com/stack_overflow',
       'password' => bcrypt('test'),
       'image' => 'http://www.top13.net/wp-content/uploads/2015/10/perfectly-timed-funny-cat-pictures-5.jpg',
+      'lat' => $pos_neuchatel['lat'],
+      'lng' => $pos_neuchatel['lng'],
+      'find_distance' => 20,
     ]);
 
     DB::table('language_user')->insert([

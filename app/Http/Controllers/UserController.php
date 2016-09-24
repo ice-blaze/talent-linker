@@ -67,7 +67,7 @@ class UserController extends Controller
     $general_skills = GeneralSkill::find(request()->general_skills);
     if($general_skills){
       foreach((array)$general_skills as $skill){
-        $user->general_skills()->save($skill);
+        // $user->general_skills()->save($skill);
       }
     }
 
