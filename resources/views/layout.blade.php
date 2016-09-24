@@ -22,6 +22,7 @@
   @yield('header')
 
   <link rel="stylesheet" href="{{URL::asset('assets/css/style.css')}}"/>
+  <link rel="stylesheet" href="{{URL::asset('assets/css/googlemaps.css')}}"/>
 
 </head>
 

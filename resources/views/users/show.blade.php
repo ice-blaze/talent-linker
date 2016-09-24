@@ -67,6 +67,19 @@
     </div>
   </div>
 
+  <div class="row">
+    <label class="col-sm-12"><strong>Place</strong></label>
+    <div class="col-sm-12">
+      @include('helpers.gmap', [
+        "class" => "gm-show",
+        "lat" => $user->lat,
+        "lng" => $user->lng,
+        "find_distance" => $user->find_distance,
+        'edit' => 0,
+      ])
+    </div>
+  </div>
+
   <br>
   @if($user->github)
     <div class="row">
