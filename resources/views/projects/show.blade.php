@@ -44,7 +44,13 @@
 
   <div class="row col-centered">
     <div class="col-md-12">
-      <img class="image-256 img-rounded" src="{{$project->image}}" alt="Project Image" />
+      <img class="image-256 img-rounded"
+      @if($project->image)
+        src="{{$project->image}}"
+      @else
+        src="{{asset('assets/images/default_project.png')}}"
+      @endif
+      alt="Project {{$project->title}} Image" />
     </div>
   </div>
 
@@ -81,10 +87,12 @@
   <div class="row">
     <label class="col-sm-12"><strong>Collaborators</strong></label>
       @foreach($project->collaborators as $collaborator)
-        <div class="col-xl-3 col-lg-4 col-md-6 col-xs-12">
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-xs-12">
           <div class="media card card-outline-primary ">
             <a class="media-left" href="{{$collaborator->user->path()}}">
-              <img class="media-object img-circle image-64" src="{{$collaborator->user->image}}" alt="Generic placeholder image">
+              <img class="media-object img-circle image-64"
+                src="{{$collaborator->user->image}}"
+                alt="{{$collaborator->user->name}} profile image">
             </a>
             <div class="media-body">
               <a href="{{$collaborator->user->path()}}"><h4 class="media-heading">{{$collaborator->user->name}}</h4></a>

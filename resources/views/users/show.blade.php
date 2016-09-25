@@ -101,7 +101,12 @@
           <div class="col-xl-3 col-lg-4 col-md-6 col-xs-12">
             <div class="media card card-outline-primary ">
               <a class="media-left" href="{{$collaboration->project->path()}}">
-                <img class="media-object image-64" src="{{$collaboration->project->image}}"
+                <img class="media-object image-64"
+                  @if($collaboration->project->image)
+                    src="{{$collaboration->project->image}}"
+                  @else
+                    src="{{asset('assets/images/default_project.png')}}"
+                  @endif
                   alt="Project Image {{$collaboration->project->title}}">
               </a>
               <div class="media-body">
