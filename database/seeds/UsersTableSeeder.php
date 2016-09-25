@@ -18,6 +18,10 @@ class UsersTableSeeder extends Seeder
     $lang_french_id = 2;
     $lang_german_id = 2;
     $pos_neuchatel = ['lat' => 46.991363, 'lng' => 6.929970];
+    $pos_paris = ['lat' => 48.802793, 'lng' => 2.427979];
+    $pos_lausanne = ['lat' => 46.534067, 'lng' => 6.619263];
+    $pos_berne = ['lat' => 46.918145, 'lng' => 7.443237];
+    $pos_geneve = ['lat' => 46.192903, 'lng' => 6.157837];
 
     $talent_description = '<p style="text-align: center;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi non quis exercitationem culpa nesciunt nihil aut nostrum explicabo reprehenderit optio amet ab temporibus asperiores quasi cupiditate. Voluptatum ducimus voluptates voluptas?</p>';
 
@@ -77,6 +81,9 @@ class UsersTableSeeder extends Seeder
       'website' => 'http://example.com/my_project',
       'password' => bcrypt('test'),
       'image' => 'http://static.fjcdn.com/pictures/Nicholas+cage+as+a+cat+point+made+yup_b675de_3836732.jpeg',
+      'lat' => $pos_lausanne['lat'],
+      'lng' => $pos_lausanne['lng'],
+      'find_distance' => 10,
     ]);
 
     DB::table('language_user')->insert([
@@ -105,6 +112,9 @@ class UsersTableSeeder extends Seeder
       'talent_description' => $talent_description,
       'password' => bcrypt('test'),
       'image' => 'https://s-media-cache-ak0.pinimg.com/236x/bf/f5/d0/bff5d074d399bdfec6071e9168398406.jpg',
+      'lat' => $pos_paris['lat'],
+      'lng' => $pos_paris['lng'],
+      'find_distance' => 30,
     ]);
 
     DB::table('general_skill_user')->insert([
@@ -128,6 +138,9 @@ class UsersTableSeeder extends Seeder
       'website' => 'http://example.com/my_project',
       'stack_overflow' => 'http://example.com/stack_overflow',
       'image' => 'http://i.imgur.com/Tjkm1C0.jpg',
+      'lat' => $pos_paris['lat'],
+      'lng' => $pos_paris['lng'],
+      'find_distance' => 50,
     ]);
 
     DB::table('general_skill_user')->insert([
@@ -151,6 +164,9 @@ class UsersTableSeeder extends Seeder
       'website' => 'http://example.com/my_project',
       'stack_overflow' => 'http://example.com/stack_overflow',
       'image' => 'http://i.imgur.com/Pdfl0cO.png',
+      'lat' => $pos_neuchatel['lat'],
+      'lng' => $pos_neuchatel['lng'],
+      'find_distance' => 5,
     ]);
 
     DB::table('general_skill_user')->insert([
@@ -174,6 +190,9 @@ class UsersTableSeeder extends Seeder
       'website' => 'http://example.com/my_project',
       'stack_overflow' => 'http://example.com/stack_overflow',
       'image' => 'http://i.imgur.com/dyBJMyY.jpg',
+      'lat' => $pos_berne['lat'],
+      'lng' => $pos_berne['lng'],
+      'find_distance' => 20,
     ]);
 
     DB::table('general_skill_user')->insert([
@@ -197,6 +216,9 @@ class UsersTableSeeder extends Seeder
       'website' => 'http://example.com/my_project',
       'stack_overflow' => 'http://example.com/stack_overflow',
       'image' => 'http://i.imgur.com/IPtPvxU.jpg?1',
+      'lat' => $pos_neuchatel['lat'],
+      'lng' => $pos_neuchatel['lng'],
+      'find_distance' => 20,
     ]);
 
     DB::table('general_skill_user')->insert([
@@ -224,6 +246,9 @@ class UsersTableSeeder extends Seeder
       'website' => 'http://example.com/my_project',
       'stack_overflow' => 'http://example.com/stack_overflow',
       'image' => 'http://i.imgur.com/eFhCMYv.jpg',
+      'lat' => $pos_neuchatel['lat'],
+      'lng' => $pos_neuchatel['lng'],
+      'find_distance' => 20,
     ]);
 
     DB::table('general_skill_user')->insert([
@@ -247,6 +272,9 @@ class UsersTableSeeder extends Seeder
       'website' => 'http://example.com/my_project',
       'stack_overflow' => 'http://example.com/stack_overflow',
       'image' => 'http://i.imgur.com/wDSw3m5.jpg',
+      'lat' => $pos_neuchatel['lat'],
+      'lng' => $pos_neuchatel['lng'],
+      'find_distance' => 20,
     ]);
 
     DB::table('general_skill_user')->insert([

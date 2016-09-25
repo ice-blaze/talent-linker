@@ -5,7 +5,7 @@
   @if(Auth::user())
     <div class="row">
       <div class="col-md-12 col-centered">
-        <a class="btn btn-primary" href="projects/create">Create project</a>
+        <a class="btn btn-primary" href="projects/create">Create Project</a>
       </div>
     </div>
     <br>
@@ -15,15 +15,25 @@
     <div class="col-md-8 offset-md-2 col-sm-12">
       <form method="post" action="/projects">
         {{ csrf_field() }}
-        <div class="form-group">
+        <div class="form-group input-group">
+          <a onclick="$(this).closest('form').submit()" class="search-button input-group-addon">
+            <i class="fa fa-search" aria-hidden="true"></i>
+          </a>
           <input name="search" placeholder="Search Project" class="form-control" value="{{ old('search') }}"/>
         </div>
         <div class="form-group">
+          @include('helpers/form_checkbox', [
+            'name' => "near_by",
+            'display' => '<i class="fa fa-map-marker" aria-hidden="true"></i> Near By',
+            'id' => "near_by",
+            'skill' => false,
+          ])
           @foreach($general_skills as $skill)
             @include('helpers/form_checkbox', [
               'name' => $skill->technical_name,
               'display' => $skill->name,
               'id' => $skill->id,
+              'skill' => true,
             ])
           @endforeach
         </div>
@@ -47,6 +57,13 @@
               </a>
             <div class="card-block">
               <h4 class="card-title"><a href="{{ $project->path() }}">{{ $project->title }}</a></h4>
+              @if (Auth::user())
+                @if($project->is_in_search_distance(Auth::user()))
+                  <span class="tag tag-pill tag-primary"><i class="fa fa-map-marker" aria-hidden="true"></i> Near You</span>
+                @else
+                  <span class="tag tag-pill tag-danger"><i class="fa fa-map-marker" aria-hidden="true"></i> Not Near</span>
+                @endif
+              @endif
             </div>
             {{-- <img class="card-img-top" src="..." alt="Card image cap"> --}}
             <div class="card-block">
@@ -61,6 +78,7 @@
                     {{$skill['skill']->name}} {{$skill['have']}} / {{$skill['wanted']}}
                   </span>
                 @endforeach
+                <br>
               </p>
               <p class="card-text"><small class="text-muted">Last updated {{$project->updated_at->diffForHumans()}}</small></p>
             </div>

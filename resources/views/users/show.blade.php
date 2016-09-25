@@ -25,6 +25,13 @@
 
   <div class="row col-centered">
     <div class="col-sm-12">
+      @if (Auth::user())
+        @if ($user->is_in_search_distance(Auth::user()))
+          <span class="tag tag-pill tag-primary"><i class="fa fa-map-marker" aria-hidden="true"></i> Near You</span>
+        @else
+          <span class="tag tag-pill tag-danger"><i class="fa fa-map-marker" aria-hidden="true"></i> Not Near</span>
+        @endif
+      @endif
       <h1>{{$user->name}}</h1>
     </div>
   </div>

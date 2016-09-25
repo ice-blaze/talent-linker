@@ -16,6 +16,7 @@
 
   {{-- bootstrap select --}}
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css">
+  <link rel="stylesheet" href="{{URL::asset('vendor/font-awesome-4.6.3/css/font-awesome.min.css')}}">
   <script src="{{URL::asset('vendor/ckeditor/ckeditor.js')}}"></script>
   {{-- <script src="https://cdn.ckeditor.com/4.5.11/full/ckeditor.js"></script> --}}
 

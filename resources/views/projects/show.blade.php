@@ -39,9 +39,17 @@
   <div class="row col-centered">
     <div class="col-md-12">
       <h1>{{$project->title}}</h1>
+      @if (Auth::user())
+        @if ($project->is_in_search_distance(Auth::user()))
+          <span class="tag tag-pill tag-primary"><i class="fa fa-map-marker" aria-hidden="true"></i> Near You</span>
+        @else
+          <span class="tag tag-pill tag-danger"><i class="fa fa-map-marker" aria-hidden="true"></i> Not Near</span>
+        @endif
+      @endif
     </div>
   </div>
 
+  <br>
   <div class="row col-centered">
     <div class="col-md-12">
       <img class="image-256 img-rounded"
@@ -115,6 +123,19 @@
           {{$language->name}}
         </span>
       @endforeach
+    </div>
+  </div>
+
+  <div class="row">
+    <label class="col-sm-12"><strong>Place</strong></label>
+    <div class="col-sm-12">
+      @include('helpers.gmap', [
+        "class" => "gm-show",
+        "lat" => $project->owner->user->lat,
+        "lng" => $project->owner->user->lng,
+        "find_distance" => $project->owner->user->find_distance,
+        'edit' => 0,
+      ])
     </div>
   </div>
 

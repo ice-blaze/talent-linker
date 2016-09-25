@@ -51,6 +51,23 @@ class Project extends Model
     return $this->belongsToMany('App\GeneralSkill', 'general_skill_project')->withPivot('count');
   }
 
+  // TODO same function in user, maybe could generalize the code
+  public function is_in_search_distance(User $user){
+    $lat1 = $this->owner->user->lat;
+    $lng1 = $this->owner->user->lng;
+    $lat2 = $user->lat;
+    $lng2 = $user->lng;
+    $p = 0.017453292519943295;    // Math.PI / 180
+    $a = 0.5 - cos(($lat2 - $lat1) * $p)/2.0 +
+              cos($lat1 * $p) * cos($lat2 * $p) *
+              (1.0 - cos(($lng2 - $lng1) * $p))/2.0;
+    $result = 12742.0 * asin(sqrt($a)); // 2 * R; R = 6371 km
+
+
+    return $result < $user->find_distance;
+    // return false;
+  }
+
   public function current_skill_and_wanted(){
     $wanted = $this->skill_have();
     foreach($this->general_skills as $skill){
