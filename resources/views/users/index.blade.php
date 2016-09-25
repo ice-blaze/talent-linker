@@ -8,16 +8,26 @@
           {{ csrf_field() }}
           <div class="form-group">
             <div class="input-group">
+              <a onclick="$(this).closest('form').submit()" class="search-button input-group-addon">
+                <i class="fa fa-search" aria-hidden="true"></i>
+              </a>
               <input name="search" placeholder="Search Talent" class="form-control"
               value="{{ old('search') }}"/>
             </div>
           </div>
           <div class="form-group">
+            @include('helpers/form_checkbox', [
+              'name' => "near_by",
+              'display' => '<i class="fa fa-map-marker" aria-hidden="true"></i> Near By',
+              'id' => "near_by",
+              'skill' => false,
+            ])
             @foreach($general_skills as $skill)
               @include('helpers/form_checkbox', [
                 'name' => $skill->technical_name,
                 'display' => $skill->name,
                 'id' => $skill->id,
+                'skill' => true,
               ])
             @endforeach
           </div>
@@ -25,10 +35,8 @@
       </div>
     </div>
 
-    <br>
-
     <div class="card-deck-wrapper">
-      @foreach(array_chunk($users->all(), 3) as $threeUsers)
+      @forelse(array_chunk($users->all(), 3) as $threeUsers)
         <div class="card-deck">
           @foreach($threeUsers as $user)
             <div class="card">
@@ -43,16 +51,30 @@
               </a>
               <div class="card-block">
                 <h4 class="card-title"><a href="{{ $user->path() }}">{{ $user->name }}</a></h4>
+                @if (Auth::user())
+                  @if($user->is_in_search_distance(Auth::user()))
+                    <span class="tag tag-pill tag-primary"><i class="fa fa-map-marker" aria-hidden="true"></i> Near You</span>
+                  @else
+                    <span class="tag tag-pill tag-danger"><i class="fa fa-map-marker" aria-hidden="true"></i> Not Near</span>
+                  @endif
+                @endif
+                <br>
                 @forelse($user->general_skills as $skill)
                   <span class="tag tag-primary">{{$skill->name}}</span>
                 @empty
-                  No Skills
+                  No Skills...
                 @endforelse
               </div>
             </div>
           @endforeach
         </div>
-      @endforeach
+      @empty
+        <div class="row">
+          <div class="col-md-12 col-centered">
+            <h2>No users...</h2>
+          </div>
+        </div>
+      @endforelse
     </div>
 
 @endsection

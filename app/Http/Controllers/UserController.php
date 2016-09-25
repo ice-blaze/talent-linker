@@ -9,6 +9,7 @@ use App\Language;
 use App\GeneralSkill;
 use App\Form;
 use App\Http\Requests;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -32,6 +33,14 @@ class UserController extends Controller
           if( !$user->general_skills->contains($skill_id) ) {
             unset($users[$user_key]);
           }
+        }
+      }
+    }
+
+    if($request->near_by){
+      foreach ($users as $user_key => $user) {
+        if( !$user->is_in_search_distance(Auth::user()) ) {
+          unset($users[$user_key]);
         }
       }
     }

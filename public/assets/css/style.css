@@ -58,3 +58,7 @@ body { padding-top: 70px; }*/
   margin-right: auto;
   text-align: center;
 }
+
+.search-button{
+  cursor: pointer;
+}

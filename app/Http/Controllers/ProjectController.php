@@ -36,6 +36,14 @@ class ProjectController extends Controller
       }
     }
 
+    if($request->near_by){
+      foreach ($projects as $project_key => $project) {
+        if( !$project->is_in_search_distance(Auth::user()) ) {
+          unset($projects[$project_key]);
+        }
+      }
+    }
+
     return view('projects.index', compact('projects', 'general_skills'));
   }
 
