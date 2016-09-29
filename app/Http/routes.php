@@ -35,6 +35,7 @@ Route::group(['middleware' => 'auth.basic'], function(){
   Route::patch('talents/{user}', 'UserController@update');
   Route::get('talents/{user}/chat', 'ChatUserController@index');
   Route::post('talents/{user}/chat', 'ChatUserController@store');
+  Route::get('talents/{user}/projects', 'UserController@projects');
 
   // Project
   Route::post('projects/create', 'ProjectController@store');
