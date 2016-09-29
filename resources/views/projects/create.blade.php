@@ -10,7 +10,7 @@
 
 @section('owner_skill')
   <div class="form-group">
-    <label for="project">Skill</label>
+    <label for="project">Your skill as project owner</label>
     <select name="skill" class="custom-select">
       @foreach($general_skills as $skill)
         <option value="{{$skill->id}}">{{$skill->name}}</option>

@@ -22,12 +22,14 @@
           <input name="search" placeholder="Search Project" class="form-control" value="{{ old('search') }}"/>
         </div>
         <div class="form-group">
-          @include('helpers/form_checkbox', [
-            'name' => "near_by",
-            'display' => '<i class="fa fa-map-marker" aria-hidden="true"></i> Near By',
-            'id' => "near_by",
-            'skill' => false,
-          ])
+          @if (Auth::user())
+            @include('helpers/form_checkbox', [
+              'name' => "near_by",
+              'display' => '<i class="fa fa-map-marker" aria-hidden="true"></i> Near By',
+              'id' => "near_by",
+              'skill' => false,
+            ])
+          @endif
           @foreach($general_skills as $skill)
             @include('helpers/form_checkbox', [
               'name' => $skill->technical_name,
