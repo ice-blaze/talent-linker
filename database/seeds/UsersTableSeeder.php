@@ -16,7 +16,7 @@ class UsersTableSeeder extends Seeder
     $skill_marketing_id = 7;
     $lang_english_id = 1;
     $lang_french_id = 2;
-    $lang_german_id = 2;
+    $lang_german_id = 3;
     $pos_neuchatel = ['lat' => 46.991363, 'lng' => 6.929970];
     $pos_paris = ['lat' => 48.802793, 'lng' => 2.427979];
     $pos_lausanne = ['lat' => 46.534067, 'lng' => 6.619263];
