@@ -38,7 +38,11 @@ class ProjectCollaboratorController extends Controller
     $projects = $projects->diff($user->projectsAsCollaborator);
     $projects = $projects->diff($projects_with_pending_invitation);
     if(count($projects)<1){
-      $request->session()->flash('error', "Can't recruit, the talent is already on all of your projects!");
+      if(count(Auth::user()->projects)==0){
+        $request->session()->flash('error', "Can't recruit, you have no projects!");
+      } else {
+        $request->session()->flash('error', "Can't recruit, the talent is already on all of your projects!");
+      }
       return back();
     }
 
