@@ -32,7 +32,7 @@
     <div class="form-group">
       <label for="long_description">Long Description</label>
       {{-- could be simplified I guess --}}
-      {{ $description = "" }}
+      {{ $description = old('long_description') }}
       @if (isset($project)) {{$description = $project->long_description}} @endif
       @include('helpers/ckeditor', [
         'name' => "long_description",
