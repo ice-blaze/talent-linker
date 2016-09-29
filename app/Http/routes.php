@@ -1,28 +1,26 @@
 <?php
 
-Route::group(['middleware' => 'web'], function(){
-  Route::auth();
-  // Global
+Route::auth();
+// Global
 
-  Route::get('/', function(){
+Route::get('/', function(){
     return view('welcome');
-  });
-  Route::get('/about', function(){
+});
+Route::get('/about', function(){
     return view('about');
-  });
+});
 
   // Projects
-  Route::get('projects/create', 'ProjectController@create');
-  Route::get('projects', 'ProjectController@index');
-  Route::post('projects', 'ProjectController@index');
-  Route::get('projects/{project}', 'ProjectController@show');
+Route::get('projects/create', 'ProjectController@create');
+Route::get('projects', 'ProjectController@index');
+Route::post('projects', 'ProjectController@index');
+Route::get('projects/{project}', 'ProjectController@show');
 
   // Users
-  Route::get('talents', 'UserController@index');
-  Route::post('talents', 'UserController@index');
-  Route::get('talents/{user}', 'UserController@show');
+Route::get('talents', 'UserController@index');
+Route::post('talents', 'UserController@index');
+Route::get('talents/{user}', 'UserController@show');
 
-});
 
 Route::group(['middleware' => 'auth'], function(){
 });
