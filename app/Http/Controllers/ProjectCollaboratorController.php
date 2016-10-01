@@ -15,7 +15,8 @@ class ProjectCollaboratorController extends Controller
 {
   // pendings
   public function project_index(Request $request, Project $project){
-    $pendings = ProjectCollaborator::where('project_id', '=', $project->id)->where('accepted', '=', false)->get();
+    $pendings = ProjectCollaborator::where('project_id', '=', $project->id)
+      ->where('is_project_owner', '=', false)->get();
 
     return view('invitations.index_project', compact('project', 'pendings'));
   }

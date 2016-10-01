@@ -32,7 +32,13 @@
             {{ method_field('delete') }}
             {{ csrf_field() }}
             <div class="form-group text-right">
-              <button type="submit" class="btn btn-danger" name="delete">Delete</button>
+              <button type="submit" class="btn btn-danger" name="delete">
+                @if($invitation->accepted)
+                  Quit Project
+                @else
+                  Delete Reqest
+                @endif
+              </button>
             </div>
           </form>
         @endif
