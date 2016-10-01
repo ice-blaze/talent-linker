@@ -99,7 +99,11 @@
           <div class="media card card-outline-primary ">
             <a class="media-left" href="{{$collaborator->user->path()}}">
               <img class="media-object img-circle image-64"
-                src="{{$collaborator->user->image}}"
+                @if($collaborator->user->image)
+                  src="{{$collaborator->user->image}}"
+                @else
+                  src="{{asset('assets/images/default_profile.png')}}"
+                @endif
                 alt="{{$collaborator->user->name}} profile image">
             </a>
             <div class="media-body">
