@@ -63,6 +63,13 @@ class ProjectController extends Controller
 
   public function store(Request $request)
   {
+    $this->validate($request, [
+    'title' => 'required',
+    'short_description' => 'required',
+    'long_description' => 'required',
+    'languages' => 'required',
+    ]);
+
     // project creation
     $project = new Project();
     // $project->user_id = Auth::user()->id;
@@ -92,12 +99,6 @@ class ProjectController extends Controller
 
   public function update(Request $request, Project $project)
   {
-    $this->validate($request, [
-      'title' => 'required',
-      'short_description' => 'required',
-      'long_description' => 'required',
-      'languages' => 'required',
-    ]);
 
     $project->update([
       'title' => $request->title,
