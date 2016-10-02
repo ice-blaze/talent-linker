@@ -6,7 +6,7 @@
 
     {{ csrf_field() }}
 
-    {{-- <div class="form-group">
+    <div class="form-group">
       <label for="name">Name</label>
       <input name="name" type="text" class="form-control" id="name" placeholder="User Name"
         value="{{ $user->name or '' }}">
@@ -16,7 +16,7 @@
       <label for="email">Email</label>
       <input name="email" type="email" class="form-control" id="email"
         placeholder="User Email" value="{{ $user->email or '' }}">
-    </div> --}}
+    </div>
 
 
     <div class="form-group">

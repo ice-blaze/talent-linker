@@ -68,9 +68,9 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $this->validate($request, [
-            //TODO HAVE AT LEAST ONE LANGUAGE
-            ]);
-
+          'languages' => 'required',
+          'general_skills' => 'required',
+        ]);
 
         $user->update(request()->all());
 
@@ -80,9 +80,8 @@ class UserController extends Controller
         $user->general_skills()->detach();
         $general_skills = GeneralSkill::find(request()->general_skills);
         if($general_skills){
-            foreach((array)$general_skills as $skill){
-            //TODO WARNING THIS WAS COMMENTED BUT IT CREATE BUGS !!
-            // $user->general_skills()->save($skill);
+            foreach($general_skills as $skill){
+              $user->general_skills()->save($skill);
             }
         }
 
