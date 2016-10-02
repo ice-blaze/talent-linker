@@ -20,7 +20,6 @@ class FeedbackController extends Controller
 
   public function store(Request $request){
     $user = Auth::user();
-    // TODO ERROR MESSAGE NOT LOGGED OR REMOVE THIS PAGE IF NOT LOGGED
     if($user == null){
       return $this->index();
     }
