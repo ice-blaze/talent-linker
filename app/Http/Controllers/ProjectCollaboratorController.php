@@ -82,8 +82,10 @@ class ProjectCollaboratorController extends Controller
   }
 
   public function accept(Request $request, Project $project, User $user){
-    //TODO add message, don't have permission
-    // if(Auth::user()->id != $project->owner->user->id){ return back();}
+    if(Auth::user()->id != $project->owner->user->id){
+      $request->session()->flash('error', "You don't have the permission");
+      return back();
+    }
 
     $invitation = ProjectCollaborator::where('project_id', '=', $project->id)->where('user_id', '=', $user->id);
     $invitation->update([
