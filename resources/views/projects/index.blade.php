@@ -58,7 +58,7 @@
                   alt="Project image">
               </a>
             <div class="card-block">
-              <h4 class="card-title"><a href="{{ $project->path() }}">{{ $project->title }}</a></h4>
+              <h4 class="card-title"><a href="{{ $project->path() }}">{{ $project->name }}</a></h4>
               @if (Auth::user())
                 @if($project->is_in_search_distance(Auth::user()))
                   <span class="tag tag-pill tag-primary"><i class="fa fa-map-marker" aria-hidden="true"></i> Near You</span>

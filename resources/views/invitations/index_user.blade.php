@@ -9,7 +9,7 @@
     @foreach($invitations as $invitation)
       <li class="list-group-item">
         <a href="{{$invitation->user->path()}}">{{$invitation->user->name}}</a> -
-        <a href="{{$invitation->project->path()}}">{{$invitation->project->title}}</a>
+        <a href="{{$invitation->project->path()}}">{{$invitation->project->name}}</a>
         - skill: {{$invitation->skill->name}}
         - invited the {{$invitation->created_at}}
         {{-- accepted the 11.11.1111 --}}

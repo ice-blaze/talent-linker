@@ -13,7 +13,7 @@
         <label for="project">Project</label>
         <select name="project" class="custom-select">
           @foreach($projects as $project)
-            <option value="{{$project->id}}">{{$project->title}}</option>
+            <option value="{{$project->id}}">{{$project->name}}</option>
           @endforeach
         </select>
       </div>

@@ -23,7 +23,7 @@ class ProjectsTableSeeder extends Seeder
       $long_description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
 
       $project = Project::create([
-        'title' => 'Cool Cats',
+        'name' => 'Cool Cats',
         'short_description' => 'Cool all those cats!',
         'long_description' => $long_description,
         'image' => 'http://i.imgur.com/CQbO0cc.jpg',
@@ -63,7 +63,7 @@ class ProjectsTableSeeder extends Seeder
       ]);
 
       $project = Project::create([
-        'title' => 'Cat Blender',
+        'name' => 'Cat Blender',
         'short_description' => 'Cat bulenderu!',
         'long_description' => $long_description,
         'image' => 'https://cuteoverload.files.wordpress.com/2009/09/kitten_in_blender.jpg',
@@ -98,7 +98,7 @@ class ProjectsTableSeeder extends Seeder
       ]);
 
       $project = Project::create([
-        'title' => 'Burrito Cat',
+        'name' => 'Burrito Cat',
         'short_description' => 'Amazing BURRITO CAT !!',
         'long_description' => $long_description,
         'image' => 'https://c1.staticflickr.com/3/2389/2073509907_345ad52bc1.jpg'
@@ -132,7 +132,7 @@ class ProjectsTableSeeder extends Seeder
       ]);
 
       $project = Project::create([
-        'title' => 'Cat of Hell',
+        'name' => 'Cat of Hell',
         'short_description' => 'Devil cat is here!',
         'long_description' => $long_description,
         'image' => "http://i.imgur.com/QUTsudb.jpg",
@@ -148,7 +148,7 @@ class ProjectsTableSeeder extends Seeder
         'accepted_date' => Carbon::now(),
       ]);
       $project = Project::create([
-        'title' => 'Trumpo Cat',
+        'name' => 'Trumpo Cat',
         'short_description' => 'Make Amurica great again !',
         'long_description' => $long_description,
         'image' => "http://i.imgur.com/7NPGotE.jpg",
@@ -164,7 +164,7 @@ class ProjectsTableSeeder extends Seeder
         'accepted_date' => Carbon::now(),
       ]);
       $project = Project::create([
-        'title' => 'Cat Box',
+        'name' => 'Cat Box',
         'short_description' => 'A place to stow your cat!',
         'long_description' => $long_description,
         'image' => "http://i.imgur.com/MpE7Aop.jpg",
@@ -181,7 +181,7 @@ class ProjectsTableSeeder extends Seeder
       ]);
 
       $project = Project::create([
-        'title' => 'Empty',
+        'name' => 'Empty',
         'short_description' => 'Empty',
         'long_description' => 'Empty',
       ]);

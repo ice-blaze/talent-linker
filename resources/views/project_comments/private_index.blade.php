@@ -2,7 +2,7 @@
 
 @section('content')
   <div class="row">
-    <h1>Private chat of project: <a href="{{$project->path()}}">{{$project->title}}</a></h1>
+    <h1>Private chat of project: <a href="{{$project->path()}}">{{$project->name}}</a></h1>
   </div>
   <div class="row">
 

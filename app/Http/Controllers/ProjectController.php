@@ -21,7 +21,7 @@ class ProjectController extends Controller
     $general_skills = GeneralSkill::all();
 
     if($request->search){
-      $projects = Project::like('title', $request->search)->get();
+      $projects = Project::like('name', $request->search)->get();
     } else {
       $projects = Project::all();
     }
@@ -64,7 +64,7 @@ class ProjectController extends Controller
   public function store(Request $request)
   {
     $this->validate($request, [
-    'title' => 'required',
+    'name' => 'required',
     'short_description' => 'required',
     'long_description' => 'required',
     'languages' => 'required',
@@ -101,7 +101,7 @@ class ProjectController extends Controller
   {
 
     $project->update([
-      'title' => $request->title,
+      'name' => $request->name,
       'short_description' => $request->short_description,
       'long_description' => $request->long_description,
       'github_link' => $request->github_link,

@@ -78,7 +78,7 @@ class ProjectCollaboratorController extends Controller
     $invitation->skill_id = request()->skill;
     $invitation->save();
 
-    return redirect($user->path())->with('status', $user->name . ' invited to ' . Project::find(request()->project)->title);
+    return redirect($user->path())->with('status', $user->name . ' invited to ' . Project::find(request()->project)->name);
   }
 
   public function accept(Request $request, Project $project, User $user){

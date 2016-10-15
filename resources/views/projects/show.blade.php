@@ -38,7 +38,7 @@
 
   <div class="row col-centered">
     <div class="col-md-12">
-      <h1>{{$project->title}}</h1>
+      <h1>{{$project->name}}</h1>
       @if (Auth::user())
         @if ($project->is_in_search_distance(Auth::user()))
           <span class="tag tag-pill tag-primary"><i class="fa fa-map-marker" aria-hidden="true"></i> Near You</span>
@@ -58,7 +58,7 @@
       @else
         src="{{asset('assets/images/default_project.png')}}"
       @endif
-      alt="Project {{$project->title}} Image" />
+      alt="Project {{$project->name}} Image" />
     </div>
   </div>
 
