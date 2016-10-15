@@ -20,9 +20,9 @@
     @yield('owner_skill')
 
     <div class="form-group">
-      <label for="title">Title</label>
-      <input name="title" class="form-control" id="title" placeholder="Project Title"
-        value="{{ $project->title or old('title') }}">
+      <label for="name">Title</label>
+      <input name="name" class="form-control" id="name" placeholder="Project Title"
+        value="{{ $project->name or old('name') }}">
     </div>
     <div class="form-group">
       <label for="short_description">Short Description</label>

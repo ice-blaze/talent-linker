@@ -17,11 +17,11 @@
                   @else
                     src="{{asset('assets/images/default_project.png')}}"
                   @endif
-                  alt="Project Image {{$collaboration->project->title}}">
+                  alt="Project Image {{$collaboration->project->name}}">
               </a>
               <div class="media-body">
                 <a href="{{$collaboration->project->path()}}">
-                  <h4 class="media-heading">{{$collaboration->project->title}}</h4>
+                  <h4 class="media-heading">{{$collaboration->project->name}}</h4>
                 </a>
                 <span class="tag tag-primary">{{$collaboration->skill->name}}</span>
                 @if($collaboration->is_project_owner)

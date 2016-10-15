@@ -2,7 +2,7 @@
 
 @section('content')
   <div class="row">
-    <h1>Invitation on project: <a href="{{$project->path()}}">{{$project->title}}</a></h1>
+    <h1>Invitation on project: <a href="{{$project->path()}}">{{$project->name}}</a></h1>
   </div>
 
   <div class="row">

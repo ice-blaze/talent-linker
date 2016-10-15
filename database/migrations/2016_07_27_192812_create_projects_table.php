@@ -9,7 +9,7 @@ class CreateProjectsTable extends Migration
   {
     Schema::create('projects', function (Blueprint $table) {
       $table->increments('id');
-      $table->string('title');
+      $table->string('name');
       $table->text('short_description');
       $table->text('long_description');
       $table->text('github_link');
