@@ -9,7 +9,7 @@ class AddFeedbacks extends Migration
     {
         Schema::create('feedbacks', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->unsigned()->index();;
+            $table->integer('user_id')->unsigned()->index();
             $table->text('content');
             $table->timestamps();
         });

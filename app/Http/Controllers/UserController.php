@@ -3,12 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use App\User;
 use App\Language;
 use App\GeneralSkill;
-use App\Form;
-use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
@@ -19,7 +16,7 @@ class UserController extends Controller
 
         $users = User::all();
 
-        if($request->search){
+        if ($request->search) {
             $users = User::like('name', $request->search)->get();
         } else {
             $users = User::all();
@@ -28,19 +25,19 @@ class UserController extends Controller
         $general_skills = GeneralSkill::all();
 
         // maybe could be better
-        if($request->skills){
+        if ($request->skills) {
             foreach ($request->skills as $skill_tech_name => $skill_id) {
                 foreach ($users as $user_key => $user) {
-                    if( !$user->general_skills->contains($skill_id) ) {
+                    if (!$user->general_skills->contains($skill_id)) {
                         unset($users[$user_key]);
                     }
                 }
             }
         }
 
-        if($request->near_by){
+        if ($request->near_by) {
             foreach ($users as $user_key => $user) {
-                if( !$user->is_in_search_distance(Auth::user()) ) {
+                if (!$user->is_in_search_distance(Auth::user())) {
                     unset($users[$user_key]);
                 }
             }
@@ -49,7 +46,8 @@ class UserController extends Controller
         return view('users.index', compact('users', 'general_skills'));
     }
 
-    public function projects(User $user){
+    public function projects(User $user)
+    {
         return view('users.project', compact('user'));
     }
 
@@ -62,6 +60,7 @@ class UserController extends Controller
     {
         $languages = Language::all();
         $general_skills = GeneralSkill::all();
+
         return view('users.edit', compact('user', 'languages', 'general_skills'));
     }
 
@@ -75,13 +74,13 @@ class UserController extends Controller
         $user->update(request()->all());
 
         // managed the langauges
-        $user->languages()->sync((array)request()->languages);
+        $user->languages()->sync((array) request()->languages);
 
         $user->general_skills()->detach();
         $general_skills = GeneralSkill::find(request()->general_skills);
-        if($general_skills){
-            foreach($general_skills as $skill){
-              $user->general_skills()->save($skill);
+        if ($general_skills) {
+            foreach ($general_skills as $skill) {
+                $user->general_skills()->save($skill);
             }
         }
 
