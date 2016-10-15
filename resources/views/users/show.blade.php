@@ -88,11 +88,11 @@
   </div>
 
   <br>
-  @if($user->github)
+  @if($user->github_link)
     <div class="row">
         <label class="col-sm-3 col-lg-2"><strong>GitHub</strong></label>
         <div class="col-sm-9 col-md-3">
-          <a href="{{$user->github}}">{{$user->github}}</a>
+          <a href="{{$user->github_link}}">{{$user->github_link}}</a>
         </div>
     </div>
   @endif

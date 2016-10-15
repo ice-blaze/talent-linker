@@ -54,9 +54,9 @@
     </div>
 
     <div class="form-group">
-      <label for="github">GitHub</label>
-      <input name="github" type="url" class="form-control" id="github"
-        placeholder="User GitHub Profile" value="{{ $user->github or old('github') }}">
+      <label for="github_link">GitHub</label>
+      <input name="github_link" type="url" class="form-control" id="github_link"
+        placeholder="User GitHub Profile" value="{{ $user->github_link or old('github_link') }}">
     </div>
 
     <div class="form-group">
