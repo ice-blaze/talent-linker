@@ -6,17 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Language extends Model
 {
-  protected $fillable = [
+    protected $fillable = [
       'name',
   ];
 
-  public function users()
-  {
-      return $this->belongsToMany('App\User');
-  }
+    public function users()
+    {
+        return $this->belongsToMany('App\User');
+    }
 
-  public function projects()
-  {
-      return $this->belongsToMany('App\Project');
-  }
+    public function projects()
+    {
+        return $this->belongsToMany('App\Project');
+    }
 }
