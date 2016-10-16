@@ -7,9 +7,9 @@ before_script:
   - cp .env.travis .env
   - mkdir /home/travis/build/ice-blaze/talent-linker/bootstrap/cache
   - mysql -e 'create database homestead;'
-  - php artisan migrate:refresh --seed
   - composer self-update
   - composer install --no-interaction
+  - php artisan migrate:refresh --seed
 
 script:
   - vendor/bin/phpunit
