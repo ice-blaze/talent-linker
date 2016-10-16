@@ -2,8 +2,6 @@
 
 class visitor_test extends TestCase
 {
-    use DatabaseMigrations;
-
     public function testHomePage()
     {
         $this->visit('/')
