@@ -41,12 +41,12 @@
         "post-install-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postInstall",
             "php artisan optimize",
-            "yes | php artisan migrate:refresh --seed -n"
+            "php artisan migrate --seed"
         ],
         "post-update-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postUpdate",
             "php artisan optimize",
-            "yes | php artisan migrate:refresh --seed -n"
+            "php artisan migrate:refresh --seed"
         ]
     },
     "config": {
