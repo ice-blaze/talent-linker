@@ -10,10 +10,10 @@ class AddUserMissingFieldsExceptCity extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->char('last_name');
             $table->char('first_name');
-            $table->char('talent_description');
-            $table->char('website');
-            $table->char('github');
-            $table->char('stack_overflow');
+            $table->text('talent_description');
+            $table->text('website')->nullable();
+            $table->text('github')->nullable();
+            $table->text('stack_overflow')->nullable();
         });
     }
 
