@@ -11,7 +11,7 @@ class AddInvitations extends Migration
             $table->boolean('from_collaborator');
             $table->boolean('accepted');
             $table->text('invite_message');
-            $table->timestamp('accepted_date');
+            $table->timestamp('accepted_date')->nullable();
         });
     }
 
@@ -21,7 +21,7 @@ class AddInvitations extends Migration
             $table->dropColumn('from_collaborator');
             $table->dropColumn('accepted');
             $table->dropColumn('invite_message');
-            $table->dropColumn('accepted_date');
+            $table->dropColumn('accepted_date')->nullable();
         });
     }
 }

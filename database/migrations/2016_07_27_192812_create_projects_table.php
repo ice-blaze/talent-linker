@@ -11,9 +11,9 @@ class CreateProjectsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->text('short_description');
-            $table->text('long_description');
-            $table->text('github_link');
-            $table->text('siteweb_link');
+            $table->text('long_description')->nullable();
+            $table->text('github_link')->nullable();
+            $table->text('siteweb_link')->nullable();
             $table->timestamps();
         });
     }
