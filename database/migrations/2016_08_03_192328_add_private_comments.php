@@ -25,20 +25,12 @@ class AddPrivateComments extends Migration
         Schema::table('project_comments', function (Blueprint $table) {
             $table->boolean('private');
         });
-
-        Schema::table('projects', function (Blueprint $table) {
-            $table->integer('user_id')->unsigned()->index();
-        });
     }
 
     public function down()
     {
         Schema::table('project_comments', function (Blueprint $table) {
             $table->dropColumn('private');
-        });
-
-        Schema::table('projects', function (Blueprint $table) {
-            $table->dropColumn('user_id');
         });
 
         Schema::drop('collaborator_project');
