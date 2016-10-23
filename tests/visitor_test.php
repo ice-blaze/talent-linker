@@ -47,11 +47,30 @@ class visitor_test extends TestCase
 
     public function testProjectPage()
     {
-        //TODO
+        $this->visit('/projects/1')
+            ->see('Cool Cats')
+            ->see('Programming 2 / 3')
+            ->see('Game Engine 0 / 1')
+            ->see('James Test')
+            ->see('English')
+            ->see('French')
+            ;
     }
 
     public function testTalentPage()
     {
-        //TODO
+        $this->visit('/talents/1')
+            ->see('James Test')
+            ->see('test@test.com')
+            ->see('Programming')
+            ->see('Game Engine')
+            ->see('Art 2D')
+            ->see('Art 3D')
+            ->see('English')
+            ->see('French')
+            ->see('German')
+            ->see('Cool Cats')
+            ->see('Cat Blender')
+            ;
     }
 }
