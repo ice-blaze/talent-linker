@@ -1,7 +1,14 @@
 <?php
 
+use Illuminate\Foundation\Testing\WithoutMiddleware;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
+
 class visitor_test extends TestCase
 {
+
+    use DatabaseMigrations;
+
     public function testHomePage()
     {
         $this->visit('/')
