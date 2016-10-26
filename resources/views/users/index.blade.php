@@ -73,7 +73,7 @@
       @empty
         <div class="row">
           <div class="col-md-12 col-centered">
-            <h2>No users...</h2>
+            <h2>No Talents...</h2>
           </div>
         </div>
       @endforelse

@@ -1,13 +1,12 @@
 <?php
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class visitor_test extends TestCase
 {
-
-    use DatabaseMigrations;
+    use DatabaseTransactions;
+    //  use DatabaseMigrations;
 
     public function testHomePage()
     {
@@ -22,6 +21,22 @@ class visitor_test extends TestCase
             ->see('Find talents')
             ;
     }
+
+    // public function testEmptyProjects()
+    // {
+    //     $this->visit('/projects')
+    //         ->see('No Projects...')
+    //         ->see('Search Project')
+    //         ;
+    // }
+
+    // public function testEmptyTalents()
+    // {
+    //     $this->visit('/talents')
+    //         ->see('No Talents...')
+    //         ->see('Search Talent')
+    //         ;
+    // }
 
     public function testProjectsPage()
     {
@@ -56,8 +71,10 @@ class visitor_test extends TestCase
     {
         $this->visit('/projects/1')
             ->see('Cool Cats')
-            ->see('Programming 2 / 3')
-            ->see('Game Engine 0 / 1')
+            ->see('Programming')
+            ->see('2 / 3')
+            ->see('Game Engine')
+            ->see('0 / 1')
             ->see('James Test')
             ->see('English')
             ->see('French')
