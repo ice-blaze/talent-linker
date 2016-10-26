@@ -4,6 +4,7 @@ php:
   - 5.6
 
 before_script:
+  - psql -c 'create database travis_ci_test;' -U postgres
   - cp .env.travis .env
   - mysql -e 'create database homestead;'
   - composer self-update
