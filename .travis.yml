@@ -3,6 +3,9 @@ language: php
 php:
   - 5.6
 
+install:
+  - sudo pip install codecov
+
 before_script:
   - psql -c 'create database travis_ci_test;' -U postgres
   - cp .env.travis .env
@@ -13,7 +16,10 @@ before_script:
   - php artisan migrate:refresh --seed
 
 script:
-  - vendor/bin/phpunit
+  - vendor/bin/phpunit --coverage-clover=coverage.xml
 
 services:
   - postgresql
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
