@@ -81,13 +81,13 @@ return [
         'testing' => [
             'driver' => 'pgsql',
             'host' => env('DB_TEST_HOST', 'localhost'),
+            'port' => env('DB_PORT', '5432'),
             'database' => env('DB_TEST_DATABASE', 'homestead'),
             'username' => env('DB_TEST_USERNAME', 'homestead'),
             'password' => env('DB_TEST_PASSWORD', 'secret'),
             'charset' => 'utf8',
-            'collation' => 'utf8_unicode_ci',
             'prefix' => '',
-            'strict' => false,
+            'schema' => 'public'
         ],
 
     ],
