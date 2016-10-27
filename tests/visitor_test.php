@@ -5,13 +5,13 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class visitor_test extends TestCase
 {
-    // use DatabaseTransactions;
+    use DatabaseTransactions;
     use DatabaseMigrations;
 
     public function testHomePage()
     {
-        // $this->visit('/')
-        //      ->see('Laravel 5');
+        $language = factory(App\Language::class)->make();
+        dd($language);
         $this->visit('/')
             ->see('Projects')
             ->see('Talents')
