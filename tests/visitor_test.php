@@ -10,8 +10,6 @@ class visitor_test extends TestCase
 
     public function testHomePage()
     {
-        $language = factory(App\Language::class)->make();
-        dd($language);
         $this->visit('/')
             ->see('Projects')
             ->see('Talents')
@@ -40,15 +38,29 @@ class visitor_test extends TestCase
             ;
     }
 
-    // public function testProjectsPage()
-    // {
-    //     $this->visit('/projects')
-    //         ->see('Search Project')
-    //         ->see('Cool Cats')
-    //         ->see('Programming')
-    //         ->see('Marketing')
-    //         ;
-    // }
+    public function initializeData(){
+        // $project = factory(App\Project::class)->create();
+        // $general_skill = factory(App\GeneralSkill::class)->create();
+        $user1 = factory(App\User::class)->create();
+        $user2 = factory(App\User::class)->create();
+        $chatuser = factory(App\ChatUser::class)->make();
+        $chatuser->sender_id = $user1->id;
+        $chatuser->reciever_id = $user2->id;
+        $chatuser->save();
+        // dd(App\User::all());
+    }
+
+    public function testProjectsPage()
+    {
+        $this->initializeData();
+        // dd(App\User::all()->count());
+        $this->visit('/projects')
+            ->see('Search Project')
+            // ->see('Cool Cats')
+            // ->see('Programming')
+            // ->see('Marketing')
+            ;
+    }
 
     // public function testTalentsPage()
     // {
