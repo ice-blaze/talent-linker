@@ -3,5 +3,5 @@
 
 |  **`Master`**   |  **`Develop`** |
 |-------------------|----------------------|
-| [![Build Status](https://travis-ci.org/ice-blaze/talent-linker.svg?branch=master)](https://travis-ci.org/ice-blaze/talent-linker) |[![Build Status](https://travis-ci.org/ice-blaze/talent-linker.svg?branch=develop)](https://travis-ci.org/ice-blaze/talent-linker) |
+| [![Build Status](https://travis-ci.org/ice-blaze/talent-linker.svg?branch=master)](https://travis-ci.org/ice-blaze/talent-linker) <br> ![Coverage](https://codecov.io/github/ice-blaze/talent-linker/coverage.svg?branch=master)|[![Build Status](https://travis-ci.org/ice-blaze/talent-linker.svg?branch=develop)](https://travis-ci.org/ice-blaze/talent-linker) <br> ![Coverage](https://codecov.io/github/ice-blaze/talent-linker/coverage.svg?branch=develop)|
 Web platform to create connection between different talent, art/dev
