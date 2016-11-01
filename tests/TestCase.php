@@ -1,5 +1,8 @@
 <?php
 
+use App\Traits\DatabaseRefreshMigrations;
+use App\Traits\DatabaseRefreshSeedMigrations;
+
 class TestCase extends Illuminate\Foundation\Testing\TestCase
 {
     /**
@@ -21,5 +24,37 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
         $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
 
         return $app;
+    }
+
+    // Override this function to add new traits for the testing phase
+    protected function setUpTraits()
+    {
+        $uses = array_flip(class_uses_recursive(static::class));
+
+        // Traits who migrate with a refresh + seed before and after tests
+        if (isset($uses[DatabaseRefreshSeedMigrations::class])) {
+            $this->runDatabaseRefreshSeedMigrations();
+        }
+
+        // Traits who migrate with a refresh before and after tests
+        if (isset($uses[DatabaseRefreshMigrations::class])) {
+            $this->runDatabaseRefreshMigrations();
+        }
+
+        if (isset($uses[DatabaseMigrations::class])) {
+            $this->runDatabaseMigrations();
+        }
+
+        if (isset($uses[DatabaseTransactions::class])) {
+            $this->beginDatabaseTransaction();
+        }
+
+        if (isset($uses[WithoutMiddleware::class])) {
+            $this->disableMiddlewareForAllTests();
+        }
+
+        if (isset($uses[WithoutEvents::class])) {
+            $this->disableEventsForAllTests();
+        }
     }
 }
