@@ -1,10 +1,12 @@
 <?php
 
-class ExampleTest extends TestCase
+class FF_example_test extends TestCase
 {
     // TODO would be better in another file but the phpunit test didn't work
     public function testBasicExample()
     {
+        $this->assertTrue(true);
+
         // $user_name = 'toto';
         // $user_email = 'toto@toto.com';
         // $user_pass = 'totototo';
