@@ -35,8 +35,6 @@ class visitor_test extends TestCase
     public function testWhenNoProjects()
     {
         $this->truncDatabase();
-        $this->seedDatabase();
-        $this->truncDatabase();
         $this->visit('/projects')
             ->see('No Projects...')
             ->see('Search Project')
