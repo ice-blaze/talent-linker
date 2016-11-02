@@ -4,7 +4,7 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use App\Traits\DatabaseRefreshMigrations;
 use App\Traits\DatabaseRefreshSeedMigrations;
 
-class AA_visitor_test extends TestCase
+class visitor_test extends TestCase
 {
     // use DatabaseMigrations;
     // use DatabaseRefreshMigrations;

@@ -1,6 +1,6 @@
 <?php
 
-class AB_create_user_test extends TestCase
+class create_user_test extends TestCase
 {
     public function testDoesLoginPagesExist()
     {

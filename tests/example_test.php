@@ -1,8 +1,7 @@
 <?php
 
-class FF_example_test extends TestCase
+class example_test extends TestCase
 {
-    // TODO would be better in another file but the phpunit test didn't work
     public function testBasicExample()
     {
         $this->assertTrue(true);
