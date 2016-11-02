@@ -26,6 +26,15 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
         return $app;
     }
 
+    public function truncDatabase(){
+        // $this->artisan('migrate:refresh'); // learning purpose: second way to do the same call
+        Artisan::call('migrate:refresh');
+    }
+
+    public function seedDatabase(){
+        Artisan::call('db:seed');
+    }
+
     // Override this function to add new traits for the testing phase
     protected function setUpTraits()
     {

@@ -7,8 +7,8 @@ use App\Traits\DatabaseRefreshSeedMigrations;
 class visitor_test extends TestCase
 {
     // use DatabaseMigrations;
-    use DatabaseRefreshMigrations;
-    // use DatabaseRefreshSeedMigrations;
+    // use DatabaseRefreshMigrations;
+    use DatabaseRefreshSeedMigrations;
 
     public function testHomePage()
     {
@@ -24,8 +24,19 @@ class visitor_test extends TestCase
             ;
     }
 
+    public function testAboutPage()
+    {
+        $this->visit('/about')
+            ->see('Etienne Frank')
+            ->see('Michael Caraccio')
+            ;
+    }
+
     public function testWhenNoProjects()
     {
+        $this->truncDatabase();
+        $this->seedDatabase();
+        $this->truncDatabase();
         $this->visit('/projects')
             ->see('No Projects...')
             ->see('Search Project')
@@ -34,27 +45,15 @@ class visitor_test extends TestCase
 
     public function testWhenNoTalents()
     {
+        $this->truncDatabase();
         $this->visit('/talents')
             ->see('No Talents...')
             ->see('Search Talent')
             ;
     }
 
-    // public function initializeData(){
-        // $project = factory(App\Project::class)->create(); #TODO not working, missing short description
-        // $general_skill = factory(App\GeneralSkill::class)->create();
-        // $user1 = factory(App\User::class)->create();
-        // $user2 = factory(App\User::class)->create();
-        // $chatuser = factory(App\ChatUser::class)->make();
-        // $chatuser->sender_id = $user1->id;
-        // $chatuser->reciever_id = $user2->id;
-        // $chatuser->save();
-    // }
-
     public function testProjectsPage()
     {
-        // Trait with seed no used, therefore need to seed
-        Artisan::call('db:seed');
         $this->visit('/projects')
             ->see('Search Project')
             ->see('Cool Cats')
@@ -65,7 +64,6 @@ class visitor_test extends TestCase
 
     public function testTalentsPage()
     {
-        Artisan::call('db:seed');
         $this->visit('/talents')
             ->see('Search Talent')
             ->see('James Test')
@@ -75,17 +73,8 @@ class visitor_test extends TestCase
             ;
     }
 
-    public function testAboutPage()
-    {
-        $this->visit('/about')
-            ->see('Etienne Frank')
-            ->see('Michael Caraccio')
-            ;
-    }
-
     public function testProjectPage()
     {
-        Artisan::call('db:seed');
         $this->visit('/projects/1')
             ->see('Cool Cats')
             ->see('Programming')
@@ -100,7 +89,6 @@ class visitor_test extends TestCase
 
     public function testTalentPage()
     {
-        Artisan::call('db:seed');
         $this->visit('/talents/1')
             ->see('James Test')
             ->see('test@test.com')
@@ -115,4 +103,16 @@ class visitor_test extends TestCase
             ->see('Cat Blender')
             ;
     }
+
+    // learning purpose:
+    // public function initializeData(){
+    // $project = factory(App\Project::class)->create(); #TODO not working, missing short description
+    // $general_skill = factory(App\GeneralSkill::class)->create();
+    // $user1 = factory(App\User::class)->create();
+    // $user2 = factory(App\User::class)->create();
+    // $chatuser = factory(App\ChatUser::class)->make();
+    // $chatuser->sender_id = $user1->id;
+    // $chatuser->reciever_id = $user2->id;
+    // $chatuser->save();
+    // }
 }
