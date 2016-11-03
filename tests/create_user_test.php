@@ -81,4 +81,62 @@ class create_user_test extends TestCase
     //         ->type('testtest', 'password_confirmation')
     //         ;
     // }
+
+    public function testLoginShouldShowUsername(){
+        $this->visit('/login')
+            ->type('test@test.com', 'email')
+            ->type('test', 'password')
+            ->press('Login')
+            ->see('James Test')
+            ;
+    }
+
+    public function testLogoutShouldNoMoreShowUsername(){
+        $this->visit('/login')
+            ->type('test@test.com', 'email')
+            ->type('test', 'password')
+            ->press('Login')
+            ->click('James Test')
+            ->click('Logout')
+            ->dontSee('James Test')
+            ;
+    }
+
+    // THOUGHTS: Really seed related
+    public function testMyProfileShouldDisplayUserInformations(){
+        $this->visit('/login')
+            ->type('test@test.com', 'email')
+            ->type('test', 'password')
+            ->press('Login')
+            ->click('James Test')
+            ->click('My profile')
+            ->see('James Test')
+            ->see('test@test.com')
+            ->see('Programming')
+            ->see('Game Engine')
+            ->see('Art 2D')
+            ->see('Art 3D')
+            ->see('English')
+            ->see('French')
+            ->see('German')
+            ->see('Cool Cats')
+            ->see('Cat Blender')
+            ;
+    }
+
+    public function testMyProjectsShouldDisplayUserProjects(){
+        $this->visit('/login')
+            ->type('test@test.com', 'email')
+            ->type('test', 'password')
+            ->press('Login')
+            ->click('James Test')
+            ->click('My projects')
+            ->see('Cool Cats')
+            ->see('Programming')
+            ->see('Owner')
+            ->see('Cat Blender')
+            ->see('Art 2D')
+            ;
+    }
+
 }
