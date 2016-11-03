@@ -1,1 +1,0 @@
-{"virtualbox":{"/home/vagrant/talent-linker":{"type":null,"mount_options":[],"guestpath":"/home/vagrant/talent-linker","hostpath":"/home/etienne/code/talent-linker","disabled":false,"__vagrantfile":true},"/vagrant":{"guestpath":"/vagrant","hostpath":"/home/etienne/code/talent-linker","disabled":false,"__vagrantfile":true}}}
