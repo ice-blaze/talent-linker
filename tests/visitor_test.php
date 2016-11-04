@@ -112,5 +112,12 @@ class visitor_test extends TestCase
     // $chatuser->sender_id = $user1->id;
     // $chatuser->reciever_id = $user2->id;
     // $chatuser->save();
+    // $feedback = factory(App\Feedback::class, 'no_user')
+    //     ->make()
+    //     ->each(function ($f) {
+    //         $f->user(factory(App\User::class)->create());
+    //     });
+    // $feedback = factory(App\Feedback::class)
+    //     ->create();
     // }
 }
