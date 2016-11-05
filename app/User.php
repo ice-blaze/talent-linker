@@ -2,24 +2,27 @@
 
 namespace App;
 
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable
 {
+    use Notifiable;
+
     protected $casts = [
-    'is_admin' => 'boolean',
-  ];
+        'is_admin' => 'boolean',
+    ];
 
     protected $fillable = [
-    'name', 'email', 'password', 'last_name', 'first_name',
-    'talent_description', 'website', 'github_link', 'stack_overflow',
-    'image', 'lat', 'lng', 'find_distance',
-  ];
+        'name', 'email', 'password', 'last_name', 'first_name',
+        'talent_description', 'website', 'github_link', 'stack_overflow',
+        'image', 'lat', 'lng', 'find_distance',
+    ];
 
     protected $hidden = [
-      'password', 'remember_token',
-  ];
+        'password', 'remember_token',
+    ];
 
     public function is_in_search_distance(User $user)
     {
@@ -33,8 +36,8 @@ class User extends Authenticatable
             (1.0 - cos(($lng2 - $lng1) * $p)) / 2.0;
         $result = 12742.0 * asin(sqrt($a)); // 2 * R; R = 6371 km
 
-    return $result < $user->find_distance;
-    // return false;
+        return $result < $user->find_distance;
+        // return false;
     }
 
     public function scopeLike($query, $field, $value)
