@@ -123,5 +123,5 @@ class visitor_test extends TestCase
     // $chat = factory(App\ChatUser::class, 'no_users')->make();
     // $chat->sender()->associate($user1);
     // $chat->reciever()->associate($user2);
-    // $chat->create();
+    // $chat->save();
 }
