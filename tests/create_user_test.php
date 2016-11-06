@@ -1,9 +1,9 @@
 <?php
-use App\Traits\DatabaseRefreshSeedMigrations;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class create_user_test extends TestCase
 {
-    use DatabaseRefreshSeedMigrations;
+    use DatabaseTransactions;
 
     public function testLoginPageShouldBeAccessibleFromHomePage()
     {
@@ -113,7 +113,11 @@ class create_user_test extends TestCase
         $user = factory(App\User::class)->create();
         $user->languages()->attach($languages);
         $user->general_skills()->attach($general_skills);
-        // TODO: create projects for the user(factory)
+
+        $collab_owner = factory(App\ProjectCollaborator::class)->states('with_skill', 'with_project', 'owner')->make();
+        $collab_owner->user()->associate($user);
+        $collab_owner->save();
+        $project = $collab_owner->project;
 
         $this->visit('/login')
             ->type($user->email, 'email')
@@ -123,9 +127,7 @@ class create_user_test extends TestCase
             ->click('My profile')
             ->see($user->name)
             ->see($user->email)
-            ->see($languages[0]->name)
-            // ->see('Cool Cats')
-            // ->see('Cat Blender')
+            ->see($project->name)
             ;
 
         $that = $this;
@@ -143,20 +145,20 @@ class create_user_test extends TestCase
         });
     }
 
-    // THOUGHTS: Really seed related
     public function testMyProjectsShouldDisplayUserProjects(){
+        $collab_owner = factory(App\ProjectCollaborator::class)->states('with_user', 'with_skill', 'with_project', 'owner')->create();
+        $project = $collab_owner->project;
+        $user = $collab_owner->user;
+
         $this->visit('/login')
-            ->type('test@test.com', 'email')
+            ->type($user->email, 'email')
             ->type('test', 'password')
             ->press('Login')
-            ->click('James Test')
+            ->click($user->name)
             ->click('My projects')
-            ->see('Cool Cats')
-            ->see('Programming')
+            ->see($project->name)
+            ->see($collab_owner->skill->name)
             ->see('Owner')
-            ->see('Cat Blender')
-            ->see('Art 2D')
             ;
     }
-
 }
