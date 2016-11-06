@@ -120,7 +120,7 @@ class visitor_test extends TestCase
     // $feedback = factory(App\Feedback::class)
     //     ->create();
     // }
-    // $chat = factory(App\ChatUser::class, 'no_users')->make();
+    // $chat = factory(App\ChatUser::class, 'no_users')->states('seen')->make();
     // $chat->sender()->associate($user1);
     // $chat->reciever()->associate($user2);
     // $chat->save();

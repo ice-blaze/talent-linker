@@ -20,15 +20,14 @@ $factory->defineAs(App\ChatUser::class, 'no_users', function (Faker\Generator $f
     ];
 });
 
-// Only for laravel 5.3
-// $factory->state(App\ChatUser::class, 'seen', function ($faker) {
-//     return [
-//         'seen' => true,
-//     ];
-// });
+$factory->state(App\ChatUser::class, 'seen', function ($faker) {
+    return [
+        'seen' => true,
+    ];
+});
 
-// $factory->state(App\ChatUser::class, 'unseen', function ($faker) {
-//     return [
-//         'seen' => false,
-//     ];
-// });
+$factory->state(App\ChatUser::class, 'unseen', function ($faker) {
+    return [
+        'seen' => false,
+    ];
+});
