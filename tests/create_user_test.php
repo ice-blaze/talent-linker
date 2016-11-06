@@ -1,9 +1,9 @@
 <?php
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use App\Traits\DatabaseRefreshMigrations;
 
 class create_user_test extends TestCase
 {
-    use DatabaseTransactions;
+    use DatabaseRefreshMigrations;
 
     public function testLoginPageShouldBeAccessibleFromHomePage()
     {
@@ -94,13 +94,14 @@ class create_user_test extends TestCase
     }
 
     public function testLogoutShouldNoMoreShowUsername(){
+        $user = factory(App\User::class)->create();
         $this->visit('/login')
-            ->type('test@test.com', 'email')
+            ->type($user->email, 'email')
             ->type('test', 'password')
             ->press('Login')
-            ->click('James Test')
+            ->see($user->name)
             ->click('Logout')
-            ->dontSee('James Test')
+            ->dontSee($user->name)
             ;
     }
 
