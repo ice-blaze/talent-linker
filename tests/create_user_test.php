@@ -72,22 +72,24 @@ class create_user_test extends TestCase
             ;
     }
 
-    // TODO continue when hotfix created
-    // public function testRegistrationShouldShowNewTalent(){
-    //     $this->visit('/register')
-    //         ->type('Testi Testo', 'name')
-    //         ->type('testitesto@test.com', 'email')
-    //         ->type('testtest', 'password')
-    //         ->type('testtest', 'password_confirmation')
-    //         ;
-    // }
+    public function testRegistrationShouldShowNewTalent(){
+        $this->visit('/register')
+            ->type('Testi Testo', 'name')
+            ->type('testitesto@test.com', 'email')
+            ->type('testtest', 'password')
+            ->type('testtest', 'password_confirmation')
+            ->press('Register')
+            ->see('Testi Testo')
+            ;
+    }
 
     public function testLoginShouldShowUsername(){
+        $user = factory(App\User::class)->create();
         $this->visit('/login')
-            ->type('test@test.com', 'email')
+            ->type($user->email, 'email')
             ->type('test', 'password')
             ->press('Login')
-            ->see('James Test')
+            ->see($user->name)
             ;
     }
 
@@ -102,28 +104,46 @@ class create_user_test extends TestCase
             ;
     }
 
-    // THOUGHTS: Really seed related
     public function testMyProfileShouldDisplayUserInformations(){
+        $general_skills = factory(App\GeneralSkill::class, 3)->create();
+        $general_skills_not_used = factory(App\GeneralSkill::class, 3)->create();
+        $languages = factory(App\Language::class, 3)->create();
+        $languages_not_used = factory(App\Language::class, 3)->create();
+
+        $user = factory(App\User::class)->create();
+        $user->languages()->attach($languages);
+        $user->general_skills()->attach($general_skills);
+        // TODO: create projects for the user(factory)
+
         $this->visit('/login')
-            ->type('test@test.com', 'email')
+            ->type($user->email, 'email')
             ->type('test', 'password')
             ->press('Login')
-            ->click('James Test')
+            ->click($user->name)
             ->click('My profile')
-            ->see('James Test')
-            ->see('test@test.com')
-            ->see('Programming')
-            ->see('Game Engine')
-            ->see('Art 2D')
-            ->see('Art 3D')
-            ->see('English')
-            ->see('French')
-            ->see('German')
-            ->see('Cool Cats')
-            ->see('Cat Blender')
+            ->see($user->name)
+            ->see($user->email)
+            ->see($languages[0]->name)
+            // ->see('Cool Cats')
+            // ->see('Cat Blender')
             ;
+
+        $that = $this;
+        $languages->each(function ($language) use ($that) {
+            $that->see($language->name);
+        });
+        $languages_not_used->each(function ($language) use ($that) {
+            $that->dontSee($language->name);
+        });
+        $general_skills->each(function ($skill) use ($that) {
+            $that->see($skill->name);
+        });
+        $general_skills_not_used->each(function ($skill) use ($that) {
+            $that->dontSee($skill->name);
+        });
     }
 
+    // THOUGHTS: Really seed related
     public function testMyProjectsShouldDisplayUserProjects(){
         $this->visit('/login')
             ->type('test@test.com', 'email')
