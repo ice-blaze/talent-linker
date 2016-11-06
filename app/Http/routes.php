@@ -1,6 +1,7 @@
 <?php
 
-Route::auth();
+Auth::routes();
+Route::get('/logout', 'Auth\LoginController@logout');
 // Global
 
 Route::get('/', function(){
