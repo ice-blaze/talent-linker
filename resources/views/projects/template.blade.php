@@ -91,44 +91,39 @@
 
     <div class="form-group{{ $errors->has('general_skills') ? ' has-danger' : '' }}">
         <label for="general_skills">Skills</label>
-        <ul name="general_skills[]">
-            @foreach($general_skills as $skill)
-            <li>
-                {{$skill->name}}
-                <input type="number" name="general_skills[{{$skill->id}}]"
-                @if(isset($project))
-                value="{{ $project->general_skill_count($skill)  }}"
-                @endif
-                placeholder="0">
-            </li>
-            @endforeach
-        </ul>
-    </div>
+        <ul name="general_skills[]" id="general_skills" >
 
-    <div class="form-group{{ $errors->has('languages') ? ' has-danger' : '' }}">
-        <label for="languages">Languages</label>
-        <select name="languages[]" class="selectpicker {{ $errors->has('name') ? ' form-control-danger' : '' }}" multiple>
+        @foreach($general_skills as $option)
+           <li>
+            {{$option->name}}
+            <input type="number" name="general_skills[{{ $option->id }}]" value="{{ (collect(old('general_skills'))->count() > 0) ? intval(collect(old('general_skills'))->toArray()[$option->id]):0}}" placeholder="0" min="0" step="1">
+        </li>
+        @endforeach
 
-            @foreach($languages as $language)
-            <option value="{{$language->id}}"
-                @if(isset($project))
-                {{ $project->languages->contains($language->id) ? "selected" : ""}}
-                @endif
-                >{{$language->name}}</option>
-                @endforeach
-            </select>
-            @if ($errors->has('languages'))
-            <br>
-            <span class="help-block form-control-feedback">
-                <strong>{{ $errors->first('languages') }}</strong>
-            </span>
-            @endif
-        </div>
+    </ul>
+</div>
 
-        <div class="form-group">
-          <button type="submit" class="btn btn-primary" name="submit_project">
-            @yield('button_name')
-        </button>
-    </div>
+<div class="form-group{{ $errors->has('languages') ? ' has-danger' : '' }}">
+    <label for="languages">Languages</label>
+    <select name="languages[]" id="languages" class="selectpicker {{ $errors->has('name') ? ' form-control-danger' : '' }}" multiple>
+        @foreach($languages as $option)
+        <option value="{{ $option->id }}" {{ (collect(old('languages'))->contains($option->id)) ? 'selected':'' }}>{{ $option->name }}</option>
+        @endforeach
+
+    </select>
+    @if ($errors->has('languages'))
+    <br>
+    <span class="help-block form-control-feedback">
+        <strong>{{ $errors->first('languages') }}</strong>
+    </span>
+    @endif
+</div>
+
+<div class="form-group">
+  <button type="submit" class="btn btn-primary" name="submit_project">
+    @yield('button_name')
+</button>
+
+</div>
 </form>
 @stop
