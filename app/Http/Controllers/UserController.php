@@ -7,6 +7,7 @@ use App\User;
 use App\Language;
 use App\GeneralSkill;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\RedirectResponse;
 
 class UserController extends Controller
 {
@@ -58,10 +59,16 @@ class UserController extends Controller
 
     public function edit(User $user)
     {
-        $languages = Language::all();
-        $general_skills = GeneralSkill::all();
+        if (Auth::check() && Auth::id() == $user->id)
+        {
+            $languages = Language::all();
+            $general_skills = GeneralSkill::all();
 
-        return view('users.edit', compact('user', 'languages', 'general_skills'));
+            return view('users.edit', compact('user', 'languages', 'general_skills'));
+        }else{
+            session()->flash('error', "That was not your profile");
+            return redirect()->back();
+        }
     }
 
     public function update(Request $request, User $user)
