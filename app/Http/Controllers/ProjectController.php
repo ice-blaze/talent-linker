@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use DB;
-use App\Project;
-use App\User;
-use App\Language;
 use App\GeneralSkill;
+use App\Language;
+use App\Project;
 use App\ProjectCollaborator;
+use App\User;
+use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -65,10 +65,10 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required',
+            'name'              => 'required',
             'short_description' => 'required',
-            'long_description' => 'required',
-            'languages' => 'required',
+            'long_description'  => 'required',
+            'languages'         => 'required',
         ]);
 
         // project creation
@@ -102,12 +102,12 @@ class ProjectController extends Controller
     public function update(Request $request, Project $project)
     {
         $project->update([
-            'name' => $request->name,
+            'name'              => $request->name,
             'short_description' => $request->short_description,
-            'long_description' => $request->long_description,
-            'github_link' => $request->github_link,
-            'website_link' => $request->website_link,
-            'image' => $request->image,
+            'long_description'  => $request->long_description,
+            'github_link'       => $request->github_link,
+            'website_link'      => $request->website_link,
+            'image'             => $request->image,
         ]);
         // $project->update(request()->all());
 
@@ -124,8 +124,8 @@ class ProjectController extends Controller
 
             $skill = [
                 'general_skill_id' => $id,
-                'project_id' => $project->id,
-                'count' => $count,
+                'project_id'       => $project->id,
+                'count'            => $count,
             ];
 
             DB::table('general_skill_project')->insert($skill);

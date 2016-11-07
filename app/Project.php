@@ -18,12 +18,12 @@ class Project extends Model
 
     public function comments()
     {
-        return $this->hasMany(ProjectComment::class)->where('private', '=',  false);
+        return $this->hasMany(ProjectComment::class)->where('private', '=', false);
     }
 
     public function private_comments()
     {
-        return $this->hasMany(ProjectComment::class)->where('private', '=',  true);
+        return $this->hasMany(ProjectComment::class)->where('private', '=', true);
     }
 
     public function owner()
@@ -85,7 +85,7 @@ class Project extends Model
 
     public function skill_have()
     {
-        $res = array();
+        $res = [];
         foreach ($this->current_skills->groupBy('id') as $value) {
             $res[$value[0]->id] = ['skill' => $value[0], 'have' => count($value)];
         }
@@ -111,8 +111,6 @@ class Project extends Model
         if ($skill) {
             return $skill->pivot->count;
         }
-
-        return null;
     }
 
     public function languages()

@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\GeneralSkill;
+use App\Project;
+use App\ProjectCollaborator;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Project;
-use App\User;
-use App\GeneralSkill;
-use App\ProjectCollaborator;
 
 class ProjectCollaboratorController extends Controller
 {
@@ -96,7 +96,7 @@ class ProjectCollaboratorController extends Controller
 
         $invitation = ProjectCollaborator::where('project_id', '=', $project->id)->where('user_id', '=', $user->id);
         $invitation->update([
-            'accepted' => true,
+            'accepted'      => true,
             'accepted_date' => new \DateTime(),
         ]);
 

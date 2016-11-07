@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use App\Traits\DatabaseRefreshMigrations;
 use App\Traits\DatabaseRefreshSeedMigrations;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class visitor_test extends TestCase
 {
@@ -20,16 +20,14 @@ class visitor_test extends TestCase
             ->see('Register')
             ->see('Talent Linker')
             ->see('Find projects')
-            ->see('Find talents')
-            ;
+            ->see('Find talents');
     }
 
     public function testAboutPage()
     {
         $this->visit('/about')
             ->see('Etienne Frank')
-            ->see('Michael Caraccio')
-            ;
+            ->see('Michael Caraccio');
     }
 
     public function testWhenNoProjects()
@@ -37,8 +35,7 @@ class visitor_test extends TestCase
         $this->truncDatabase();
         $this->visit('/projects')
             ->see('No Projects...')
-            ->see('Search Project')
-            ;
+            ->see('Search Project');
     }
 
     public function testWhenNoTalents()
@@ -46,8 +43,7 @@ class visitor_test extends TestCase
         $this->truncDatabase();
         $this->visit('/talents')
             ->see('No Talents...')
-            ->see('Search Talent')
-            ;
+            ->see('Search Talent');
     }
 
     public function testProjectsPage()
@@ -56,8 +52,7 @@ class visitor_test extends TestCase
             ->see('Search Project')
             ->see('Cool Cats')
             ->see('Programming')
-            ->see('Marketing')
-            ;
+            ->see('Marketing');
     }
 
     public function testTalentsPage()
@@ -67,8 +62,7 @@ class visitor_test extends TestCase
             ->see('James Test')
             ->see('Programming')
             ->see('Game Engine')
-            ->see('Marketing')
-            ;
+            ->see('Marketing');
     }
 
     public function testProjectPage()
@@ -81,8 +75,7 @@ class visitor_test extends TestCase
             ->see('0 / 1')
             ->see('James Test')
             ->see('English')
-            ->see('French')
-            ;
+            ->see('French');
     }
 
     public function testTalentPage()
@@ -98,8 +91,7 @@ class visitor_test extends TestCase
             ->see('French')
             ->see('German')
             ->see('Cool Cats')
-            ->see('Cat Blender')
-            ;
+            ->see('Cat Blender');
     }
 
     // learning purpose:
