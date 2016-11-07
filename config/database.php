@@ -47,48 +47,48 @@ return [
     'connections' => [
 
         'sqlite' => [
-            'driver' => env('DB_CONNECTION','sqlite'),
+            'driver'   => env('DB_CONNECTION', 'sqlite'),
             'database' => env('DB_DATABASE', database_path('database.sqlite')),
-            'prefix' => env('DB_PREFIX',''),
+            'prefix'   => env('DB_PREFIX', ''),
         ],
 
         'mysql' => [
-            'driver' => env('DB_CONNECTION','mysql'),
-            'host' => env('DB_HOST', 'localhost'),
-            'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'homestead'),
-            'username' => env('DB_USERNAME', 'homestead'),
-            'password' => env('DB_PASSWORD', 'secret'),
-            'charset' => env('DB_CHARSET','utf8'),
-            'collation' => env('DB_COLLATION','utf8_unicode_ci'),
-            'prefix' => env('DB_PREFIX',''),
-            'strict' => env('DB_STRICT',false),
-            'engine' => env('DB_ENGINE',null),
+            'driver'    => env('DB_CONNECTION', 'mysql'),
+            'host'      => env('DB_HOST', 'localhost'),
+            'port'      => env('DB_PORT', '3306'),
+            'database'  => env('DB_DATABASE', 'homestead'),
+            'username'  => env('DB_USERNAME', 'homestead'),
+            'password'  => env('DB_PASSWORD', 'secret'),
+            'charset'   => env('DB_CHARSET', 'utf8'),
+            'collation' => env('DB_COLLATION', 'utf8_unicode_ci'),
+            'prefix'    => env('DB_PREFIX', ''),
+            'strict'    => env('DB_STRICT', false),
+            'engine'    => env('DB_ENGINE', null),
         ],
 
         'pgsql' => [
-            'driver' => env('DB_CONNECTION','pgsql'),
-            'host' => env('DB_HOST', '127.0.0.1'),
-            'port' => env('DB_PORT', '5432'),
+            'driver'   => env('DB_CONNECTION', 'pgsql'),
+            'host'     => env('DB_HOST', '127.0.0.1'),
+            'port'     => env('DB_PORT', '5432'),
             'database' => env('DB_DATABASE', 'forge'),
             'username' => env('DB_USERNAME', 'forge'),
             'password' => env('DB_PASSWORD', ''),
-            'charset' => env('DB_CHARSET','utf8'),
-            'prefix' => env('DB_PREFIX',''),
-            'schema' => env('DB_SCHEMA','public'),
+            'charset'  => env('DB_CHARSET', 'utf8'),
+            'prefix'   => env('DB_PREFIX', ''),
+            'schema'   => env('DB_SCHEMA', 'public'),
         ],
 
         'testing' => [
-            'driver' => env('DB_TEST_CONNECTION','pgsql'),
-            'host' => env('DB_TEST_HOST', 'localhost'),
-            'port' => env('DB_TEST_PORT', '5432'),
-            'collation' => env('DB_COLLATION','utf8_unicode_ci'),
-            'database' => env('DB_TEST_DATABASE', 'homestead'),
-            'username' => env('DB_TEST_USERNAME', 'homestead'),
-            'password' => env('DB_TEST_PASSWORD', 'secret'),
-            'charset' => env('DB_TEST_CHARSET','utf8'),
-            'prefix' => env('DB_TEST_PREFIX',''),
-            'schema' => env('DB_TEST_SCHEMA','public')
+            'driver'    => env('DB_TEST_CONNECTION', 'pgsql'),
+            'host'      => env('DB_TEST_HOST', 'localhost'),
+            'port'      => env('DB_TEST_PORT', '5432'),
+            'collation' => env('DB_COLLATION', 'utf8_unicode_ci'),
+            'database'  => env('DB_TEST_DATABASE', 'homestead'),
+            'username'  => env('DB_TEST_USERNAME', 'homestead'),
+            'password'  => env('DB_TEST_PASSWORD', 'secret'),
+            'charset'   => env('DB_TEST_CHARSET', 'utf8'),
+            'prefix'    => env('DB_TEST_PREFIX', ''),
+            'schema'    => env('DB_TEST_SCHEMA', 'public'),
         ],
 
     ],
@@ -119,13 +119,13 @@ return [
 
     'redis' => [
 
-        'cluster' => env('REDIS_CLUSTER',false),
+        'cluster' => env('REDIS_CLUSTER', false),
 
         'default' => [
-            'host' => env('REDIS_HOST', 'localhost'),
+            'host'     => env('REDIS_HOST', 'localhost'),
             'password' => env('REDIS_PASSWORD', null),
-            'port' => env('REDIS_PORT', 6379),
-            'database' => env('REDIS_DATABASE',0),
+            'port'     => env('REDIS_PORT', 6379),
+            'database' => env('REDIS_DATABASE', 0),
         ],
 
     ],

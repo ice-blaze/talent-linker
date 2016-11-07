@@ -9,7 +9,7 @@ $factory->define(App\ProjectComment::class, function (Faker\Generator $faker) {
 
 $factory->state(App\ProjectComment::class, 'with_user', function ($faker) {
     return [
-        'user_id' => function(){
+        'user_id' => function () {
             return factory(App\User::class)->create()->id;
         },
     ];
@@ -17,7 +17,7 @@ $factory->state(App\ProjectComment::class, 'with_user', function ($faker) {
 
 $factory->state(App\ProjectComment::class, 'with_project', function ($faker) {
     return [
-        'project_id' => function(){
+        'project_id' => function () {
             return factory(App\Project::class)->create()->id;
         },
     ];
@@ -34,4 +34,3 @@ $factory->state(App\ProjectComment::class, 'public', function ($faker) {
         'private' => false,
     ];
 });
-

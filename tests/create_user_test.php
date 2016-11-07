@@ -11,38 +11,37 @@ class create_user_test extends TestCase
         $this->visit('/')
             ->click('Login')
             ->see('Email')
-            ->see('Remember Me')
-            ;
+            ->see('Remember Me');
     }
 
-    public function testMessageErrorsWhenLoginWithoutCredentials(){
+    public function testMessageErrorsWhenLoginWithoutCredentials()
+    {
         $this->visit('/login')
             ->press('Login')
             ->see('The email field is required.')
-            ->see('The password field is required.')
-            ;
+            ->see('The password field is required.');
     }
 
-    public function testPasswordResetingPageShouldExist(){
+    public function testPasswordResetingPageShouldExist()
+    {
         $this->visit('/')
             ->click('Login')
-            ->click('Forgot Your Password?')
-            ;
+            ->click('Forgot Your Password?');
     }
 
-    public function testMessageErrorsWhenResetPasswordHasNoEmail(){
+    public function testMessageErrorsWhenResetPasswordHasNoEmail()
+    {
         $this->visit('/password/reset')
             ->press('Send Password')
-            ->see('The email field is required.')
-            ;
+            ->see('The email field is required.');
     }
 
-    public function testSendResetEmailToWrongAdressShouldShowErrors(){
+    public function testSendResetEmailToWrongAdressShouldShowErrors()
+    {
         $this->visit('/password/reset')
             ->type('1@1.com', 'email')
             ->press('Send Password')
-            ->see("We can't find a user with that e-mail address.")
-            ;
+            ->see("We can't find a user with that e-mail address.");
     }
 
     // TODO no mailer setup
@@ -53,58 +52,59 @@ class create_user_test extends TestCase
     //         ;
     // }
 
-    public function testRegisterPageShouldBeAccessibleFromHomePage(){
+    public function testRegisterPageShouldBeAccessibleFromHomePage()
+    {
         $this->visit('/')
             ->click('Register')
             ->see('Name')
             ->see('E-Mail Address')
             ->see('Password')
             ->see('Confirm Password')
-            ->see('Register')
-            ;
+            ->see('Register');
     }
 
-    public function testEmptyRegistrationShouldShowErrorMessages(){
+    public function testEmptyRegistrationShouldShowErrorMessages()
+    {
         $this->visit('/register')
             ->press('Register')
             ->see('The name field is required.')
             ->see('The email field is required.')
-            ->see('The password field is required.')
-            ;
+            ->see('The password field is required.');
     }
 
-    public function testRegistrationShouldShowNewTalent(){
+    public function testRegistrationShouldShowNewTalent()
+    {
         $this->visit('/register')
             ->type('Testi Testo', 'name')
             ->type('testitesto@test.com', 'email')
             ->type('testtest', 'password')
             ->type('testtest', 'password_confirmation')
             ->press('Register')
-            ->see('Testi Testo')
-            ;
+            ->see('Testi Testo');
     }
 
-    public function testLoginShouldShowUsername(){
+    public function testLoginShouldShowUsername()
+    {
         $user = factory(App\User::class)->create();
         $this->visit('/login')
             ->type($user->email, 'email')
             ->type('test', 'password')
             ->press('Login')
-            ->see($user->name)
-            ;
+            ->see($user->name);
     }
 
-    public function testLogoutShouldNoMoreShowUsername(){
+    public function testLogoutShouldNoMoreShowUsername()
+    {
         $user = factory(App\User::class)->create();
         $this->actingAs($user)
             ->visit('/')
             ->see($user->name)
             ->click('Logout')
-            ->dontSee($user->name)
-            ;
+            ->dontSee($user->name);
     }
 
-    public function testMyProfileShouldDisplayUserInformations(){
+    public function testMyProfileShouldDisplayUserInformations()
+    {
         $general_skills = factory(App\GeneralSkill::class, 3)->create();
         $general_skills_not_used = factory(App\GeneralSkill::class, 3)->create();
         $languages = factory(App\Language::class, 3)->create();
@@ -125,8 +125,7 @@ class create_user_test extends TestCase
             ->click('My profile')
             ->see($user->name)
             ->see($user->email)
-            ->see($project->name)
-            ;
+            ->see($project->name);
 
         $that = $this;
         $languages->each(function ($language) use ($that) {
@@ -143,7 +142,8 @@ class create_user_test extends TestCase
         });
     }
 
-    public function testMyProjectsShouldDisplayUserProjects(){
+    public function testMyProjectsShouldDisplayUserProjects()
+    {
         $collab_owner = factory(App\ProjectCollaborator::class)->states('with_user', 'with_skill', 'with_project', 'owner')->create();
         $project = $collab_owner->project;
         $user = $collab_owner->user;
@@ -154,7 +154,6 @@ class create_user_test extends TestCase
             ->click('My projects')
             ->see($project->name)
             ->see($collab_owner->skill->name)
-            ->see('Owner')
-            ;
+            ->see('Owner');
     }
 }

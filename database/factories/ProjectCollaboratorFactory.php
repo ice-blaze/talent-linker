@@ -2,10 +2,10 @@
 
 $factory->define(App\ProjectCollaborator::class, function (Faker\Generator $faker) {
     return [
-        'is_project_owner' => false,
+        'is_project_owner'  => false,
         'from_collaborator' => false,
-        'accepted' => false,
-        'invite_message' => $faker->sentence,
+        'accepted'          => false,
+        'invite_message'    => $faker->sentence,
     ];
 });
 
@@ -41,7 +41,7 @@ $factory->state(App\ProjectCollaborator::class, 'from_collaborator', function ($
 
 $factory->state(App\ProjectCollaborator::class, 'accepted', function ($faker) {
     return [
-        'accepted' => true,
+        'accepted'      => true,
         'accepted_date' => $faker->dateTime,
     ];
 });
@@ -49,7 +49,7 @@ $factory->state(App\ProjectCollaborator::class, 'accepted', function ($faker) {
 $factory->state(App\ProjectCollaborator::class, 'owner', function ($faker) {
     return [
         'is_project_owner' => true,
-        'accepted' => true,
-        'accepted_date' => $faker->dateTime,
+        'accepted'         => true,
+        'accepted_date'    => $faker->dateTime,
     ];
 });

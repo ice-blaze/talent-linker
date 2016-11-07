@@ -2,7 +2,7 @@
 
 $factory->define(App\ChatUser::class, function (Faker\Generator $faker) {
     return [
-        'content' => $faker->text,
+        'content'     => $faker->text,
         'reciever_id' => function () {
             return factory(App\User::class)->create()->id;
         },
@@ -16,7 +16,7 @@ $factory->define(App\ChatUser::class, function (Faker\Generator $faker) {
 $factory->defineAs(App\ChatUser::class, 'no_users', function (Faker\Generator $faker) {
     return [
         'content' => $faker->text,
-        'seen' => false,
+        'seen'    => false,
     ];
 });
 
