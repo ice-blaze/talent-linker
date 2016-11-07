@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Feedback extends Model
 {
     protected $fillable = ['content'];
+    protected $table = 'feedbacks';
 
     public function user()
     {
