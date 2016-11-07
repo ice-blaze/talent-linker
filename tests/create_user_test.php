@@ -1,4 +1,5 @@
 <?php
+
 use App\Traits\DatabaseRefreshMigrations;
 
 class create_user_test extends TestCase
@@ -95,10 +96,8 @@ class create_user_test extends TestCase
 
     public function testLogoutShouldNoMoreShowUsername(){
         $user = factory(App\User::class)->create();
-        $this->visit('/login')
-            ->type($user->email, 'email')
-            ->type('test', 'password')
-            ->press('Login')
+        $this->actingAs($user)
+            ->visit('/')
             ->see($user->name)
             ->click('Logout')
             ->dontSee($user->name)
@@ -120,10 +119,8 @@ class create_user_test extends TestCase
         $collab_owner->save();
         $project = $collab_owner->project;
 
-        $this->visit('/login')
-            ->type($user->email, 'email')
-            ->type('test', 'password')
-            ->press('Login')
+        $this->actingAs($user)
+            ->visit('/')
             ->click($user->name)
             ->click('My profile')
             ->see($user->name)
@@ -151,10 +148,8 @@ class create_user_test extends TestCase
         $project = $collab_owner->project;
         $user = $collab_owner->user;
 
-        $this->visit('/login')
-            ->type($user->email, 'email')
-            ->type('test', 'password')
-            ->press('Login')
+        $this->actingAs($user)
+            ->visit('/')
             ->click($user->name)
             ->click('My projects')
             ->see($project->name)
