@@ -11,7 +11,7 @@ class FeedbackController extends Controller
 {
     public function index()
     {
-        $user = User::find(Auth::user()->id);
+        $user = Auth::user();
         $feedbacks = $user->feedbacks;
 
         return view('feedbacks.index', compact('feedbacks'));
