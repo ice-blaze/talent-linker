@@ -1,4 +1,4 @@
-@extends('layouts.layout-error')
+@extends('layouts.layout-noflash')
 
 @section('content')
 <div class="container">
