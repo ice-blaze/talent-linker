@@ -2,12 +2,12 @@
 
 $factory->define(App\Project::class, function (Faker\Generator $faker) {
     return [
-        'name' => $faker->word,
+        'name'              => $faker->word,
         'short_description' => $faker->sentence,
-        'long_description' => $faker->paragraph,
-        'github_link' => $faker->url,
-        'siteweb_link' => $faker->url,
-        'image' => $faker->imageUrl,
+        'long_description'  => $faker->paragraph,
+        'github_link'       => $faker->url,
+        'siteweb_link'      => $faker->url,
+        'image'             => $faker->imageUrl,
     ];
 });
 
@@ -27,4 +27,3 @@ $factory->define(App\Project::class, function (Faker\Generator $faker) {
 // $collab_scrub->project()->associate($project);
 // $collab_scrub->save();
 // $project->general_skills()->attach($skill_scrub, ['count' => 20]);
-

@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\User;
-use App\Language;
 use App\GeneralSkill;
+use App\Language;
+use App\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\RedirectResponse;
 
 class UserController extends Controller
 {
@@ -59,14 +58,14 @@ class UserController extends Controller
 
     public function edit(User $user)
     {
-        if (Auth::check() && Auth::id() == $user->id)
-        {
+        if (Auth::check() && Auth::id() == $user->id) {
             $languages = Language::all();
             $general_skills = GeneralSkill::all();
 
             return view('users.edit', compact('user', 'languages', 'general_skills'));
-        }else{
-            session()->flash('error', "That was not your profile");
+        } else {
+            session()->flash('error', 'That was not your profile');
+
             return redirect()->back();
         }
     }
@@ -74,7 +73,7 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $this->validate($request, [
-          'languages' => 'required',
+          'languages'      => 'required',
           'general_skills' => 'required',
         ]);
 

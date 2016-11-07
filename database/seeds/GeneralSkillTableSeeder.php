@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Seeder;
 use App\GeneralSkill;
+use Illuminate\Database\Seeder;
 
 class GeneralSkillTableSeeder extends Seeder
 {

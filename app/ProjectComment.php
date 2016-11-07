@@ -2,8 +2,8 @@
 
 namespace App;
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class ProjectComment extends Model
 {

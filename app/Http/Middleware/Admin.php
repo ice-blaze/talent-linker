@@ -7,15 +7,12 @@ use Illuminate\Support\Facades\Auth;
 
 class Admin
 {
-  public function handle($request, Closure $next)
-  {
-
-    if ( Auth::check() && Auth::user()->isAdmin() )
+    public function handle($request, Closure $next)
     {
-      return $next($request);
+        if (Auth::check() && Auth::user()->isAdmin()) {
+            return $next($request);
+        }
+
+        return redirect('/');
     }
-
-    return redirect('/');
-
-  }
 }

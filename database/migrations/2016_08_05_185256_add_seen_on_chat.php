@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class AddSeenOnChat extends Migration
 {
@@ -11,6 +11,7 @@ class AddSeenOnChat extends Migration
             $table->boolean('seen');
         });
     }
+
     public function down()
     {
         Schema::table('chat_user', function (Blueprint $table) {

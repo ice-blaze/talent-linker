@@ -1,10 +1,10 @@
 <?php
 
-use Illuminate\Database\Seeder;
+use App\GeneralSkill;
+use App\Project;
 use App\ProjectCollaborator;
 use App\User;
-use App\Project;
-use App\GeneralSkill;
+use Illuminate\Database\Seeder;
 
 class CollaboratorTableSeeder extends Seeder
 {
@@ -34,106 +34,106 @@ class CollaboratorTableSeeder extends Seeder
         $skill_marketing = GeneralSkill::find(7);
 
         ProjectCollaborator::create([
-            'skill_id' => $skill_prog->id,
-            'project_id' => $project_james->id,
-            'is_project_owner' => false,
-            'user_id' => $user_nico->id,
-            'accepted' => false,
+            'skill_id'          => $skill_prog->id,
+            'project_id'        => $project_james->id,
+            'is_project_owner'  => false,
+            'user_id'           => $user_nico->id,
+            'accepted'          => false,
             'from_collaborator' => false,
-            'invite_message' => 'initial seed',
+            'invite_message'    => 'initial seed',
         ]);
 
         ProjectCollaborator::create([
-            'skill_id' => $skill_art_2d->id,
-            'project_id' => $project_nico->id,
-            'is_project_owner' => false,
-            'user_id' => $user_james->id,
-            'accepted' => true,
+            'skill_id'          => $skill_art_2d->id,
+            'project_id'        => $project_nico->id,
+            'is_project_owner'  => false,
+            'user_id'           => $user_james->id,
+            'accepted'          => true,
             'from_collaborator' => true,
-            'invite_message' => 'initial seed',
+            'invite_message'    => 'initial seed',
         ]);
         ProjectCollaborator::create([
-            'skill_id' => $skill_prog->id,
-            'project_id' => $project_nico->id,
-            'is_project_owner' => false,
-            'user_id' => $user_richard->id,
-            'accepted' => true,
+            'skill_id'          => $skill_prog->id,
+            'project_id'        => $project_nico->id,
+            'is_project_owner'  => false,
+            'user_id'           => $user_richard->id,
+            'accepted'          => true,
             'from_collaborator' => true,
-            'invite_message' => 'initial seed',
+            'invite_message'    => 'initial seed',
         ]);
         ProjectCollaborator::create([
-            'skill_id' => $skill_gameengine->id,
-            'project_id' => $project_nico->id,
-            'is_project_owner' => false,
-            'user_id' => $user_larry->id,
-            'accepted' => true,
+            'skill_id'          => $skill_gameengine->id,
+            'project_id'        => $project_nico->id,
+            'is_project_owner'  => false,
+            'user_id'           => $user_larry->id,
+            'accepted'          => true,
             'from_collaborator' => true,
-            'invite_message' => 'initial seed',
+            'invite_message'    => 'initial seed',
         ]);
         ProjectCollaborator::create([
-            'skill_id' => $skill_web->id,
-            'project_id' => $project_nico->id,
-            'is_project_owner' => false,
-            'user_id' => $user_franz->id,
-            'accepted' => true,
+            'skill_id'          => $skill_web->id,
+            'project_id'        => $project_nico->id,
+            'is_project_owner'  => false,
+            'user_id'           => $user_franz->id,
+            'accepted'          => true,
             'from_collaborator' => true,
-            'invite_message' => 'initial seed',
+            'invite_message'    => 'initial seed',
         ]);
         ProjectCollaborator::create([
-            'skill_id' => $skill_art_2d->id,
-            'project_id' => $project_nico->id,
-            'is_project_owner' => false,
-            'user_id' => $user_logan->id,
-            'accepted' => true,
+            'skill_id'          => $skill_art_2d->id,
+            'project_id'        => $project_nico->id,
+            'is_project_owner'  => false,
+            'user_id'           => $user_logan->id,
+            'accepted'          => true,
             'from_collaborator' => true,
-            'invite_message' => 'initial seed',
+            'invite_message'    => 'initial seed',
         ]);
         ProjectCollaborator::create([
-            'skill_id' => $skill_art_3d->id,
-            'project_id' => $project_nico->id,
-            'is_project_owner' => false,
-            'user_id' => $user_steve->id,
-            'accepted' => true,
+            'skill_id'          => $skill_art_3d->id,
+            'project_id'        => $project_nico->id,
+            'is_project_owner'  => false,
+            'user_id'           => $user_steve->id,
+            'accepted'          => true,
             'from_collaborator' => true,
-            'invite_message' => 'initial seed',
+            'invite_message'    => 'initial seed',
         ]);
         ProjectCollaborator::create([
-            'skill_id' => $skill_marketing->id,
-            'project_id' => $project_nico->id,
-            'is_project_owner' => false,
-            'user_id' => $user_bill->id,
-            'accepted' => true,
+            'skill_id'          => $skill_marketing->id,
+            'project_id'        => $project_nico->id,
+            'is_project_owner'  => false,
+            'user_id'           => $user_bill->id,
+            'accepted'          => true,
             'from_collaborator' => true,
-            'invite_message' => 'initial seed',
+            'invite_message'    => 'initial seed',
         ]);
         ProjectCollaborator::create([
-            'skill_id' => $skill_music->id,
-            'project_id' => $project_nico->id,
-            'is_project_owner' => false,
-            'user_id' => $user_mike->id,
-            'accepted' => true,
+            'skill_id'          => $skill_music->id,
+            'project_id'        => $project_nico->id,
+            'is_project_owner'  => false,
+            'user_id'           => $user_mike->id,
+            'accepted'          => true,
             'from_collaborator' => true,
-            'invite_message' => 'initial seed',
+            'invite_message'    => 'initial seed',
         ]);
 
         ProjectCollaborator::create([
-            'skill_id' => $skill_art_2d->id,
-            'project_id' => $project_nico->id,
-            'is_project_owner' => false,
-            'user_id' => $user_james->id,
-            'accepted' => false,
+            'skill_id'          => $skill_art_2d->id,
+            'project_id'        => $project_nico->id,
+            'is_project_owner'  => false,
+            'user_id'           => $user_james->id,
+            'accepted'          => false,
             'from_collaborator' => false,
-            'invite_message' => 'initial seed',
+            'invite_message'    => 'initial seed',
         ]);
 
         ProjectCollaborator::create([
-            'skill_id' => $skill_prog->id,
-            'project_id' => $project_nico->id,
-            'is_project_owner' => false,
-            'user_id' => $user_richard->id,
-            'accepted' => true,
+            'skill_id'          => $skill_prog->id,
+            'project_id'        => $project_nico->id,
+            'is_project_owner'  => false,
+            'user_id'           => $user_richard->id,
+            'accepted'          => true,
             'from_collaborator' => true,
-            'invite_message' => 'initial seed',
+            'invite_message'    => 'initial seed',
         ]);
     }
 }
