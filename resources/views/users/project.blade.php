@@ -4,11 +4,16 @@
 
 
   @if($user->collaborations)
-    <div class="row">
-      <div class="col-md-12">
-
+    <div class="col-md-12">
+      
+      @if (count($user->collaborations) > 0)
+        <div class="row">
+          <label><strong>{{(count($user->collaborations) > 1)?"Projects":"Project"}}</strong></label>
+        </div>
+      @endif
+     
+      <div class="row">
         @forelse ($user->collaborations as $collaboration)
-          <label for="col-md-12"><strong>Projects</strong></label>
           <div class="col-xl-3 col-lg-4 col-md-6 col-xs-12">
             <div class="media card card-outline-primary ">
               <a class="media-left" href="{{$collaboration->project->path()}}">
