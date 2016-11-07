@@ -5,9 +5,10 @@
 
   @if($user->collaborations)
     <div class="row">
-      <label for="col-md-12"><strong>Projects</strong></label>
       <div class="col-md-12">
-        @foreach ($user->collaborations as $collaboration)
+
+        @forelse ($user->collaborations as $collaboration)
+          <label for="col-md-12"><strong>Projects</strong></label>
           <div class="col-xl-3 col-lg-4 col-md-6 col-xs-12">
             <div class="media card card-outline-primary ">
               <a class="media-left" href="{{$collaboration->project->path()}}">
@@ -30,7 +31,16 @@
               </div>
             </div>
           </div>
-        @endforeach
+        @empty
+          <div class="row">
+            <div class="col-md-12 col-centered">
+              <h2>No Projects...</h2>
+            </div>
+          </div>
+          <div class="row">
+            <p class="col-centered">Do you want to <a href="{{"/projects/create"}}">create a project</a> or <a href="{{"/projects"}}">join a project</a> ?</p>
+          </div>
+        @endforelse
       </div>
     </div>
   @endif
