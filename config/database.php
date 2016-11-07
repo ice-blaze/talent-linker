@@ -47,13 +47,13 @@ return [
     'connections' => [
 
         'sqlite' => [
-            'driver' => env('DB_DRIVER','sqlite'),
+            'driver' => env('DB_CONNECTION','sqlite'),
             'database' => env('DB_DATABASE', database_path('database.sqlite')),
             'prefix' => env('DB_PREFIX',''),
         ],
 
         'mysql' => [
-            'driver' => env('DB_DRIVER','mysql'),
+            'driver' => env('DB_CONNECTION','mysql'),
             'host' => env('DB_HOST', 'localhost'),
             'port' => env('DB_PORT', '3306'),
             'database' => env('DB_DATABASE', 'homestead'),
@@ -67,7 +67,7 @@ return [
         ],
 
         'pgsql' => [
-            'driver' => env('DB_DRIVER','pgsql'),
+            'driver' => env('DB_CONNECTION','pgsql'),
             'host' => env('DB_HOST', '127.0.0.1'),
             'port' => env('DB_PORT', '5432'),
             'database' => env('DB_DATABASE', 'forge'),
@@ -79,7 +79,7 @@ return [
         ],
 
         'testing' => [
-            'driver' => env('DB_TEST_DRIVER','pgsql'),
+            'driver' => env('DB_TEST_CONNECTION','pgsql'),
             'host' => env('DB_TEST_HOST', 'localhost'),
             'port' => env('DB_TEST_PORT', '5432'),
             'collation' => env('DB_COLLATION','utf8_unicode_ci'),
