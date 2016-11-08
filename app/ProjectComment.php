@@ -21,7 +21,7 @@ class ProjectComment extends Model
 
     public function isCurrentAuthTheOwner()
     {
-        if (!Auth::user()) {
+        if (! Auth::user()) {
             return false;
         }
 
