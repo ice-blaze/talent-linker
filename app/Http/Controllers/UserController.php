@@ -28,7 +28,7 @@ class UserController extends Controller
         if ($request->skills) {
             foreach ($request->skills as $skill_tech_name => $skill_id) {
                 foreach ($users as $user_key => $user) {
-                    if (!$user->general_skills->contains($skill_id)) {
+                    if (! $user->general_skills->contains($skill_id)) {
                         unset($users[$user_key]);
                     }
                 }
@@ -37,7 +37,7 @@ class UserController extends Controller
 
         if ($request->near_by) {
             foreach ($users as $user_key => $user) {
-                if (!$user->is_in_search_distance(Auth::user())) {
+                if (! $user->is_in_search_distance(Auth::user())) {
                     unset($users[$user_key]);
                 }
             }
