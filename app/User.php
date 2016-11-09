@@ -94,7 +94,7 @@ class User extends Authenticatable
 
     public function isCurrentAuth()
     {
-        if (!Auth::user()) {
+        if (! Auth::user()) {
             return false;
         }
 
