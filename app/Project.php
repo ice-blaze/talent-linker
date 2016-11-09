@@ -72,10 +72,10 @@ class Project extends Model
         }
 
         foreach ($wanted as $skill) {
-            if (!array_key_exists('have', $wanted[$skill['skill']->id])) {
+            if (! array_key_exists('have', $wanted[$skill['skill']->id])) {
                 $wanted[$skill['skill']->id]['have'] = 0;
             }
-            if (!array_key_exists('wanted', $wanted[$skill['skill']->id])) {
+            if (! array_key_exists('wanted', $wanted[$skill['skill']->id])) {
                 $wanted[$skill['skill']->id]['wanted'] = 0;
             }
         }
