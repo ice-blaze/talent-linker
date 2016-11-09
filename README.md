@@ -9,7 +9,7 @@
 ![Issues](https://img.shields.io/github/issues/ice-blaze/talent-linker.svg?style=flat-square)
 ![Fork](https://img.shields.io/github/forks/ice-blaze/talent-linker.svg?style=flat-square)
 ![Stars](https://img.shields.io/github/stars/ice-blaze/talent-linker.svg?style=flat-square)
-[![License: GPL v3](https://img.shields.io/badge/license-AGPL%20v3-blue.svg?style=flat-square)](http://www.gnu.org/licenses/gpl-3.0)
+[![License: GPL v3](https://img.shields.io/badge/license-GPL%20v3-blue.svg?style=flat-square)](http://www.gnu.org/licenses/gpl-3.0)
 
 Web platform to create connection between different talent, art/dev
 
