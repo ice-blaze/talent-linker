@@ -11,11 +11,7 @@ class create_project_test extends TestCase
 	 */
 	public function login(){
 		$user = factory(App\User::class)->create();
-		$this->visit('/login')
-		->type($user->email, 'email')
-		->type('test', 'password')
-		->press('Login')
-		->see($user->name);
+		$this->actingAs($user);
 	}
 
 	/**
