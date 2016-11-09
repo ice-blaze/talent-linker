@@ -106,7 +106,7 @@ class ProjectController extends Controller
             'short_description' => $request->short_description,
             'long_description'  => $request->long_description,
             'github_link'       => $request->github_link,
-            'website_link'      => $request->website_link,
+            'siteweb_link'      => $request->siteweb_link,
             'image'             => $request->image,
         ]);
         // $project->update(request()->all());
