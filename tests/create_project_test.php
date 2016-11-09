@@ -223,16 +223,15 @@ class create_project_test extends TestCase
 		$this->see($project->name);
 		$this->visit('/projects/'.$project->id);
 		$this->press('delete');
-        $this->seePageIs('/projects');
+		$this->seePageIs('/projects');
 
-        // Check if deleted in database too
+		// Check if deleted in database too
 		$response = $this->call('DELETE', '/projects/'.$project->id, ['_token' => csrf_token()]);
 		$this->assertEquals(404, $response->getStatusCode());
-        $this->notSeeInDatabase('projects', ['id' => $project->id]);
+		$this->notSeeInDatabase('projects', ['id' => $project->id]);
 
-        // Check if also deleted in project_collaborators table
-        $this->notSeeInDatabase('project_collaborators', ['project_id' => $project->id]);
-
+		// Check if also deleted in project_collaborators table
+		$this->notSeeInDatabase('project_collaborators', ['project_id' => $project->id]);
 	}
 }
 ?>
