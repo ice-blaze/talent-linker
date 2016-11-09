@@ -98,21 +98,21 @@ class create_project_test extends TestCase
 	public function testCreateProjectAndCheckCreatedProject()
 	{
 
-		# Create a new project
+		// Create a new project
 		$collab_owner = factory(App\ProjectCollaborator::class)->states('with_skill', 'with_project', 'with_user', 'owner')->create();
 		$user = $collab_owner->user;
 		$project = $collab_owner->project;
 
-		# Find the project that the user created
+		// Find the project that the user created
 		$url = '/talents/'.$user->id.'/projects';
 
 		$this->actingAs($user);
 
-		# Visit users project and check if it exists
+		// Visit users project and check if it exists
 		$this->visit($url);
 		$this->see($project->name);
 
-		# Check in database
+		// Check in database
 		$this->seeInDatabase('projects', ['id' => $project->id, 
 			'short_description' => $project->short_description,
 			'long_description' => $project->long_description,
@@ -121,7 +121,7 @@ class create_project_test extends TestCase
 			'github_link' => $project->github_link,
 			'image' => $project->image]);
 
-		# See project details
+		// See project details
 		$this->visit('/projects/'.$project->id);
 		$this->see($project->name);
 		$this->see($project->short_description);
@@ -135,13 +135,13 @@ class create_project_test extends TestCase
 	 */
 	public function testEditProjectAndCheckEditedProject()
 	{
-		# Create a new project
+		// Create a new project
 		$collab_owner = factory(App\ProjectCollaborator::class)->states('with_skill', 'with_project', 'with_user', 'owner')->create();
 		$user = $collab_owner->user;
 		$project = $collab_owner->project;
 		$this->actingAs($user);
 
-		# Check in database
+		// Check in database
 		$this->seeInDatabase('projects', ['id' => $project->id, 
 			'short_description' => $project->short_description,
 			'long_description' => $project->long_description,
@@ -150,13 +150,13 @@ class create_project_test extends TestCase
 			'github_link' => $project->github_link,
 			'image' => $project->image]);
 
-		# Edit the project
+		// Edit the project
 		$url = '/talents/'.$user->id.'/projects';
 		$this->visit($url);
 		$this->see($project->name);
 		$this->visit('/projects/'.$project->id.'/edit');
 
-		# Set new values
+		// Set new values
 		$skills_1 = '3';
 		$skills_2 = '5';
 		$language_1 = '1';
@@ -188,7 +188,7 @@ class create_project_test extends TestCase
 		$this->see($siteweb_link);
 		$this->see($image);
 
-		# Check if correclty updated in database
+		// Check if correclty updated in database
 		$this->seeInDatabase('projects', ['id' => $project->id, 
 			'short_description' => 'New short description',
 			'long_description' => 'New long description',
@@ -202,13 +202,13 @@ class create_project_test extends TestCase
 	 */
 	public function testDeleteProjectAndCheckEditedProject()
 	{
-		# Create a new project
+		// Create a new project
 		$collab_owner = factory(App\ProjectCollaborator::class)->states('with_skill', 'with_project', 'with_user', 'owner')->create();
 		$user = $collab_owner->user;
 		$project = $collab_owner->project;
 		$this->actingAs($user);
 
-		# Check in database
+		// Check in database
 		$this->seeInDatabase('projects', ['id' => $project->id, 
 			'short_description' => $project->short_description,
 			'long_description' => $project->long_description,
@@ -217,7 +217,7 @@ class create_project_test extends TestCase
 			'github_link' => $project->github_link,
 			'image' => $project->image]);
 
-		# Delete the project
+		// Delete the project
 		$url = '/talents/'.$user->id.'/projects';
 		$this->visit($url);
 		$this->see($project->name);
@@ -225,12 +225,12 @@ class create_project_test extends TestCase
 		$this->press('delete');
         $this->seePageIs('/projects');
 
-        # Check if deleted in database too
+        // Check if deleted in database too
 		$response = $this->call('DELETE', '/projects/'.$project->id, ['_token' => csrf_token()]);
 		$this->assertEquals(404, $response->getStatusCode());
         $this->notSeeInDatabase('projects', ['id' => $project->id]);
 
-        # Check if also deleted in project_collaborators table
+        // Check if also deleted in project_collaborators table
         $this->notSeeInDatabase('project_collaborators', ['project_id' => $project->id]);
 
 	}
