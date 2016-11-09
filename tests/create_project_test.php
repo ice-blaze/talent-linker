@@ -170,7 +170,7 @@ class create_project_test extends TestCase
 		$short_description = 'New short description';
 		$long_description = 'New long description';		
 		$name = 'New title';
-		$website_link = 'http://www.google.fr';
+		$siteweb_link = 'http://www.google.fr';
 
 		$this->type($skills_1, 'general_skills[1]');
 		$this->type($skills_2, 'general_skills[5]');
@@ -181,7 +181,7 @@ class create_project_test extends TestCase
 		$this->type($short_description, 'short_description');
 		$this->type($long_description, 'long_description');
 		$this->type($name, 'name');
-		//$this->type($website_link, 'website_link');
+		$this->type($siteweb_link, 'siteweb_link');
 		$this->press('submit_project');
 		$this->seePageIs('/projects/'.$project->id);
 
@@ -189,7 +189,7 @@ class create_project_test extends TestCase
 		$this->see($name);
 		$this->see($short_description);
 		$this->see($long_description);
-		//$this->see($website_link);
+		$this->see($siteweb_link);
 		$this->see($image);
 
 		# Check if correclty updated in database
@@ -197,7 +197,7 @@ class create_project_test extends TestCase
 			'short_description' => 'New short description',
 			'long_description' => 'New long description',
 			'github_link' => 'http://www.google.com',
-			//'siteweb_link' => 'http://www.google.fr',
+			'siteweb_link' => 'http://www.google.fr',
 			'image' => 'http://images.com/image.jpg']);
 
 
