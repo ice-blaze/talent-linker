@@ -1,10 +1,10 @@
 <?php
 
-use App\Traits\DatabaseRefreshMigrations;
+use App\Traits\DatabaseRefreshSeedMigrations;
 
 class create_project_test extends TestCase
 {
-	use DatabaseRefreshMigrations;
+	use DatabaseRefreshSeedMigrations;
 
 	/**
 	 * Login method
@@ -96,6 +96,113 @@ class create_project_test extends TestCase
 		$this->see('The languages field is required.');
 	}
 
+	/**
+	 * Create a project and check if it is correctly added in database and display
+	 */
+	public function testCreateProjectAndCheckCreatedProject()
+	{
+
+		# Create a new project
+		$collab_owner = factory(App\ProjectCollaborator::class)->states('with_skill', 'with_project', 'with_user', 'owner')->create();
+		$user = $collab_owner->user;
+		$project = $collab_owner->project;
+
+		# Find the project that the user created
+		$url = '/talents/'.$user->id.'/projects';
+
+		$this->actingAs($user);
+
+		# Visit users project and check if it exists
+		$this->visit($url);
+		$this->see($project->name);
+
+		# Check in database
+		$this->seeInDatabase('projects', ['id' => $project->id, 
+			'short_description' => $project->short_description,
+			'long_description' => $project->long_description,
+			'github_link' => $project->github_link,
+			'siteweb_link' => $project->siteweb_link,
+			'github_link' => $project->github_link,
+			'image' => $project->image]);
+
+		# See project details
+		$this->visit('/projects/'.$project->id);
+		$this->see($project->name);
+		$this->see($project->short_description);
+		$this->see($project->long_description);
+		$this->see($project->siteweb_link);
+		$this->see($project->image);
+	}
+
+	/**
+	 * Edit a project and check if it is correctly edited in database and display
+	 */
+	public function testEditProjectAndCheckEditedProject()
+	{
+		# Create a new project
+		$collab_owner = factory(App\ProjectCollaborator::class)->states('with_skill', 'with_project', 'with_user', 'owner')->create();
+		$user = $collab_owner->user;
+		$project = $collab_owner->project;
+		$this->actingAs($user);
+
+		# Check in database
+		$this->seeInDatabase('projects', ['id' => $project->id, 
+			'short_description' => $project->short_description,
+			'long_description' => $project->long_description,
+			'github_link' => $project->github_link,
+			'siteweb_link' => $project->siteweb_link,
+			'github_link' => $project->github_link,
+			'image' => $project->image]);
+
+		# Edit the project
+		$url = '/talents/'.$user->id.'/projects';
+		$this->visit($url);
+		$this->see($project->name);
+		$this->visit('/projects/'.$project->id.'/edit');
+
+		# Set new values
+		$skills_1 = '3';
+		$skills_2 = '5';
+		$language_1 = '1';
+		$language_2 = '2';
+		$github_link = 'http://www.google.com';
+		$image = 'http://images.com/image.jpg';
+		$short_description = 'New short description';
+		$long_description = 'New long description';		
+		$name = 'New title';
+		$website_link = 'http://www.google.fr';
+
+		$this->type($skills_1, 'general_skills[1]');
+		$this->type($skills_2, 'general_skills[5]');
+		$this->select($language_1, 'languages[]');
+		$this->select($language_2, 'languages[]');
+		$this->type($github_link, 'github_link');
+		$this->type($image, 'image');
+		$this->type($short_description, 'short_description');
+		$this->type($long_description, 'long_description');
+		$this->type($name, 'name');
+		//$this->type($website_link, 'website_link');
+		$this->press('submit_project');
+		$this->seePageIs('/projects/'.$project->id);
+
+		$this->visit('/projects/'.$project->id.'/edit');
+		$this->see($name);
+		$this->see($short_description);
+		$this->see($long_description);
+		//$this->see($website_link);
+		$this->see($image);
+
+		# Check if correclty updated in database
+		$this->seeInDatabase('projects', ['id' => $project->id, 
+			'short_description' => 'New short description',
+			'long_description' => 'New long description',
+			'github_link' => 'http://www.google.com',
+			//'siteweb_link' => 'http://www.google.fr',
+			'image' => 'http://images.com/image.jpg']);
+
+
+
+	}
 
 }
 ?>
