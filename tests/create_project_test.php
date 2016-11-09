@@ -235,7 +235,7 @@ class create_project_test extends TestCase
         $this->notSeeInDatabase('projects', ['id' => $project->id]);
 
         # Check if also deleted in project_collaborators table
-        //$this->notSeeInDatabase('project_collaborators', ['project_id' => $project->id]);
+        $this->notSeeInDatabase('project_collaborators', ['project_id' => $project->id]);
 
 	}
 }
