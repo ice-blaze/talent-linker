@@ -199,10 +199,44 @@ class create_project_test extends TestCase
 			'github_link' => 'http://www.google.com',
 			'siteweb_link' => 'http://www.google.fr',
 			'image' => 'http://images.com/image.jpg']);
-
-
-
 	}
 
+	/**
+	 * Delete a project and check if it is correctly deleted in database and display
+	 */
+	public function testDeleteProjectAndCheckEditedProject()
+	{
+		# Create a new project
+		$collab_owner = factory(App\ProjectCollaborator::class)->states('with_skill', 'with_project', 'with_user', 'owner')->create();
+		$user = $collab_owner->user;
+		$project = $collab_owner->project;
+		$this->actingAs($user);
+
+		# Check in database
+		$this->seeInDatabase('projects', ['id' => $project->id, 
+			'short_description' => $project->short_description,
+			'long_description' => $project->long_description,
+			'github_link' => $project->github_link,
+			'siteweb_link' => $project->siteweb_link,
+			'github_link' => $project->github_link,
+			'image' => $project->image]);
+
+		# Delete the project
+		$url = '/talents/'.$user->id.'/projects';
+		$this->visit($url);
+		$this->see($project->name);
+		$this->visit('/projects/'.$project->id);
+		$this->press('delete');
+        $this->seePageIs('/projects');
+
+        # Check if deleted in database too
+		$response = $this->call('DELETE', '/projects/'.$project->id, ['_token' => csrf_token()]);
+		$this->assertEquals(404, $response->getStatusCode());
+        $this->notSeeInDatabase('projects', ['id' => $project->id]);
+
+        # Check if also deleted in project_collaborators table
+        //$this->notSeeInDatabase('project_collaborators', ['project_id' => $project->id]);
+
+	}
 }
 ?>
