@@ -49,7 +49,7 @@ Route::group(['middleware' => 'auth.basic'], function () {
     Route::post('projects/{project}/comments', 'ProjectCommentController@store');
     Route::get('comments/{comment}/edit', 'ProjectCommentController@edit');
     Route::patch('comments/{comment}', 'ProjectCommentController@update');
-    
+
     // Private project comments
     Route::get('projects/{project}/private_comments', 'ProjectCommentController@private_index');
     Route::post('projects/{project}/private_comments', 'ProjectCommentController@private_store');
