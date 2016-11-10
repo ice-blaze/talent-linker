@@ -53,14 +53,14 @@ Route::group(['middleware' => 'auth.basic'], function () {
     Route::post('projects/{project}/private_comments', 'ProjectCommentController@private_store');
 
   // Invitations
-  Route::get('projects/{project}/invitations', 'ProjectCollaboratorController@project_index');
-    Route::post('projects/{project}/invitations', 'ProjectCollaboratorController@project_store');
+  Route::get('projects/{project}/invitations', 'ProjectCollaboratorController@projectIndex');
+    Route::post('projects/{project}/invitations', 'ProjectCollaboratorController@projectStore');
     Route::get('projects/{project}/join', 'ProjectCollaboratorController@join');
     Route::patch('invitations/{project}/{user}/accept', 'ProjectCollaboratorController@accept');
     Route::delete('invitations/{project}/{user}/{invitation}', 'ProjectCollaboratorController@delete');
-    Route::get('talents/{user}/invitations', 'ProjectCollaboratorController@user_index');
+    Route::get('talents/{user}/invitations', 'ProjectCollaboratorController@userIndex');
     Route::get('talents/{user}/recruit', 'ProjectCollaboratorController@recruit');
-    Route::post('talents/{user}/recruit', 'ProjectCollaboratorController@user_store');
+    Route::post('talents/{user}/recruit', 'ProjectCollaboratorController@userStore');
 });
 // Route::get('admin', ['as' =>'admin', 'uses' => 'UserController@index', 'middleware' => ['auth', 'admin']]);
 // Route::get('protected', ['middleware' => ['auth', 'admin'], function() {
