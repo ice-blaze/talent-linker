@@ -151,10 +151,10 @@
         <a href="{{$project->github_link}}">{{$project->github_link}}</a>
       </div>
     @endif
-    @if($project->siteweb_link)
+    @if($project->website_link)
       <label class="col-sm-2"><strong>Website</strong></label>
       <div class="col-sm-10 col-md-4">
-        <a href="{{$project->siteweb_link}}">{{$project->siteweb_link}}</a>
+        <a href="{{$project->website_link}}">{{$project->website_link}}</a>
       </div>
     @endif
   </div>
