@@ -90,8 +90,7 @@ class visitor_test extends TestCase
             ->see('English')
             ->see('French')
             ->see('German')
-            ->see('Cool Cats')
-            ->see('Cat Blender');
+            ->see('Cool Cats');
     }
 
     // learning purpose:

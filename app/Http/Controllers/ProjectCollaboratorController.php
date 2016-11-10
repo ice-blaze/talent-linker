@@ -15,7 +15,7 @@ class ProjectCollaboratorController extends Controller
     public function project_index(Request $request, Project $project)
     {
         $pendings = ProjectCollaborator::where('project_id', '=', $project->id)
-                                        ->where('is_project_owner', '=', false)->get();
+        ->where('is_project_owner', '=', false)->get();
 
         return view('invitations.index_project', compact('project', 'pendings'));
     }
@@ -32,10 +32,10 @@ class ProjectCollaboratorController extends Controller
         // $invitations = Invitation::where('project_id', '=', $project->id);
         $projects = Auth::user()->projects;
         $projects_with_pending_invitation = ProjectCollaborator::where('accepted', '=', false)
-            ->where('user_id', '=', $user->id)->get()
-            ->map(function ($invitation) {
-                return $invitation->project;
-            }
+        ->where('user_id', '=', $user->id)->get()
+        ->map(function ($invitation) {
+            return $invitation->project;
+        }
         );
         $projects = $projects->diff($user->projectsAsCollaborator);
         $projects = $projects->diff($projects_with_pending_invitation);
@@ -88,17 +88,18 @@ class ProjectCollaboratorController extends Controller
 
     public function accept(Request $request, Project $project, User $user)
     {
-        if (Auth::user()->id != $project->owner->user->id) {
-            $request->session()->flash('error', "You don't have the permission");
-
-            return back();
-        }
-
+        // Get user invitation in DB
         $invitation = ProjectCollaborator::where('project_id', '=', $project->id)->where('user_id', '=', $user->id);
-        $invitation->update([
-            'accepted'      => true,
-            'accepted_date' => new \DateTime(),
-        ]);
+
+        // User is not project admin or did not received an invitation
+        if (Auth::user()->id != $project->owner->user->id && count($invitation) == 0) {
+            $request->session()->flash('error', "You don't have the permission");
+        } else {
+            $invitation->update([
+                'accepted' => true,
+                'accepted_date' => new \DateTime(),
+                ]);
+        }
 
         return back();
     }
