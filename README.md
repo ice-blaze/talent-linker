@@ -2,7 +2,7 @@
 
 [![Travis branch](https://img.shields.io/travis/ice-blaze/talent-linker/develop.svg?style=flat-square)](https://travis-ci.org/ice-blaze/talent-linker)
 [![Coverage](https://img.shields.io/codecov/c/github/ice-blaze/talent-linker/develop.svg?style=flat-square)](https://codecov.io/gh/ice-blaze/talent-linker/branches)
-[![StyleCI](https://styleci.io/repos/64129260/shield?branch=develop)](https://styleci.io/repos/64129260)
+[![StyleCI](https://styleci.io/repos/64129260/shield?branch=develop)](https://codecov.io/gh/ice-blaze/talent-linker/branch/develop)
 [![Heroku](http://heroku-badge.herokuapp.com/?app=talent-linker&style=flat)](http://talent-linker.herokuapp.com/) 
 [![Stories in Ready](https://img.shields.io/waffle/label/ice-blaze/talent-linker/in%20progress.svg?style=flat-square)](https://waffle.io/ice-blaze/talent-linker)
 
