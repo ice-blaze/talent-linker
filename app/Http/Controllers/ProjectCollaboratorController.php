@@ -14,17 +14,29 @@ class ProjectCollaboratorController extends Controller
     // pendings
     public function projectIndex(Request $request, Project $project)
     {
-        $pendings = ProjectCollaborator::where('project_id', '=', $project->id)
-        ->where('is_project_owner', '=', false)->get();
+        if (Auth::check() && Auth::id() == $user->id) {
+            $pendings = ProjectCollaborator::where('project_id', '=', $project->id)
+            ->where('is_project_owner', '=', false)->get();
 
-        return view('invitations.index_project', compact('project', 'pendings'));
+            return view('invitations.index_project', compact('project', 'pendings'));
+        } else {
+            session()->flash('error', 'That was not your project');
+
+            return redirect()->back();
+        }
     }
 
     public function userIndex(Request $request, User $user)
     {
-        $invitations = ProjectCollaborator::where('user_id', '=', $user->id)->get();
+        if (Auth::check() && Auth::id() == $user->id) {
+            $invitations = ProjectCollaborator::where('user_id', '=', $user->id)->get();
 
-        return view('invitations.index_user', compact('user', 'invitations'));
+            return view('invitations.index_user', compact('user', 'invitations'));
+        } else {
+            session()->flash('error', 'That was not your project');
+
+            return redirect()->back();
+        }
     }
 
     public function recruit(Request $request, User $user)
@@ -37,6 +49,7 @@ class ProjectCollaboratorController extends Controller
 
         $projects = $projects->diff($user->projectsAsCollaborator);
         $projects = $projects->diff($projects_with_pending_invitation);
+
         if (count($projects) < 1) {
             if (count(Auth::user()->projects) == 0) {
                 $request->session()->flash('error', "Can't recruit, you have no projects!");
