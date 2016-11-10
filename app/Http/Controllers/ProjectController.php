@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace app\Http\Controllers;
 
 use App\GeneralSkill;
 use App\Language;
@@ -28,7 +28,7 @@ class ProjectController extends Controller
         if ($request->skills) {
             foreach ($request->skills as $skill_tech_name => $skill_id) {
                 foreach ($projects as $project_key => $project) {
-                    if (! $project->general_skills->contains($skill_id)) {
+                    if (!$project->general_skills->contains($skill_id)) {
                         unset($projects[$project_key]);
                     }
                 }
@@ -37,7 +37,7 @@ class ProjectController extends Controller
 
         if ($request->near_by) {
             foreach ($projects as $project_key => $project) {
-                if (! $project->is_in_search_distance(Auth::user())) {
+                if (!$project->is_in_search_distance(Auth::user())) {
                     unset($projects[$project_key]);
                 }
             }

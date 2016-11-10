@@ -12,14 +12,15 @@ use Illuminate\Support\Facades\Auth;
 class ProjectCollaboratorController extends Controller
 {
     // pendings
-    public function project_index(Request $request, Project $project)
+    public function projectIndex(Request $request, Project $project)
     {
-        $pendings = ProjectCollaborator::where('project_id', '=', $project->id)->where('is_project_owner', '=', false)->get();
+        $pendings = ProjectCollaborator::where('project_id', '=', $project->id)
+        ->where('is_project_owner', '=', false)->get();
 
         return view('invitations.index_project', compact('project', 'pendings'));
     }
 
-    public function user_index(Request $request, User $user)
+    public function userIndex(Request $request, User $user)
     {
         $invitations = ProjectCollaborator::where('user_id', '=', $user->id)->get();
 
@@ -29,7 +30,8 @@ class ProjectCollaboratorController extends Controller
     public function recruit(Request $request, User $user)
     {
         $projects = Auth::user()->projects;
-        $projects_with_pending_invitation = ProjectCollaborator::where('accepted', '=', false)->where('user_id', '=', $user->id)->get()->map(function ($invitation) {
+        $projects_with_pending_invitation = ProjectCollaborator::where('accepted', '=', false)
+        ->where('user_id', '=', $user->id)->get()->map(function ($invitation) {
             return $invitation->project;
         });
 
@@ -57,7 +59,7 @@ class ProjectCollaboratorController extends Controller
         return view('invitations.join', compact('user', 'project', 'general_skills'));
     }
 
-    public function project_store(Request $request, Project $project)
+    public function projectStore(Request $request, Project $project)
     {
         $invitation = new ProjectCollaborator();
         $invitation->user_id = Auth::user()->id;
@@ -70,7 +72,7 @@ class ProjectCollaboratorController extends Controller
         return redirect($project->path());
     }
 
-    public function user_store(Request $request, User $user)
+    public function userStore(Request $request, User $user)
     {
         $invitation = new ProjectCollaborator();
         $invitation->user_id = $user->id;
@@ -79,7 +81,8 @@ class ProjectCollaboratorController extends Controller
         $invitation->skill_id = request()->skill;
         $invitation->save();
 
-        return redirect($user->path())->with('status', $user->name.' invited to '.Project::find(request()->project)->name);
+        return redirect($user->path())
+        ->with('status', $user->name.' invited to '.Project::find(request()->project)->name);
     }
 
     public function accept(Request $request, Project $project, User $user)
