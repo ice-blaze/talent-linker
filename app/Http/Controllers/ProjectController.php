@@ -28,7 +28,7 @@ class ProjectController extends Controller
         if ($request->skills) {
             foreach ($request->skills as $skill_tech_name => $skill_id) {
                 foreach ($projects as $project_key => $project) {
-                    if (! $project->general_skills->contains($skill_id)) {
+                    if (!$project->general_skills->contains($skill_id)) {
                         unset($projects[$project_key]);
                     }
                 }
@@ -37,7 +37,7 @@ class ProjectController extends Controller
 
         if ($request->near_by) {
             foreach ($projects as $project_key => $project) {
-                if (! $project->is_in_search_distance(Auth::user())) {
+                if (!$project->is_in_search_distance(Auth::user())) {
                     unset($projects[$project_key]);
                 }
             }
@@ -65,10 +65,10 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name'              => 'required',
+            'name' => 'required',
             'short_description' => 'required',
-            'long_description'  => 'required',
-            'languages'         => 'required',
+            'long_description' => 'required',
+            'languages' => 'required',
         ]);
 
         // project creation
@@ -102,12 +102,12 @@ class ProjectController extends Controller
     public function update(Request $request, Project $project)
     {
         $project->update([
-            'name'              => $request->name,
+            'name' => $request->name,
             'short_description' => $request->short_description,
-            'long_description'  => $request->long_description,
-            'github_link'       => $request->github_link,
-            'website_link'      => $request->website_link,
-            'image'             => $request->image,
+            'long_description' => $request->long_description,
+            'github_link' => $request->github_link,
+            'website_link' => $request->website_link,
+            'image' => $request->image,
         ]);
         // $project->update(request()->all());
 
@@ -124,8 +124,8 @@ class ProjectController extends Controller
 
             $skill = [
                 'general_skill_id' => $id,
-                'project_id'       => $project->id,
-                'count'            => $count,
+                'project_id' => $project->id,
+                'count' => $count,
             ];
 
             DB::table('general_skill_project')->insert($skill);
