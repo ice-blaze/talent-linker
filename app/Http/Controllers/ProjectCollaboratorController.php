@@ -14,9 +14,8 @@ class ProjectCollaboratorController extends Controller
     // pendings
     public function project_index(Request $request, Project $project)
     {
-        $pendings = ProjectCollaborator::where('project_id', '=', $project->id)
-        ->where('is_project_owner', '=', false)->get();
-
+        $pendings = ProjectCollaborator::where('project_id', '=', $project->id)->where('is_project_owner', '=', false)->get();
+        
         return view('invitations.index_project', compact('project', 'pendings'));
     }
 
@@ -29,14 +28,11 @@ class ProjectCollaboratorController extends Controller
 
     public function recruit(Request $request, User $user)
     {
-        // $invitations = Invitation::where('project_id', '=', $project->id);
         $projects = Auth::user()->projects;
-        $projects_with_pending_invitation = ProjectCollaborator::where('accepted', '=', false)
-        ->where('user_id', '=', $user->id)->get()
-        ->map(function ($invitation) {
+        $projects_with_pending_invitation = ProjectCollaborator::where('accepted', '=', false)->where('user_id', '=', $user->id)->get()->map(function ($invitation) {
             return $invitation->project;
-        }
-        );
+        });
+
         $projects = $projects->diff($user->projectsAsCollaborator);
         $projects = $projects->diff($projects_with_pending_invitation);
         if (count($projects) < 1) {
@@ -95,10 +91,7 @@ class ProjectCollaboratorController extends Controller
         if (Auth::user()->id != $project->owner->user->id && count($invitation) == 0) {
             $request->session()->flash('error', "You don't have the permission");
         } else {
-            $invitation->update([
-                'accepted' => true,
-                'accepted_date' => new \DateTime(),
-                ]);
+            $invitation->update(['accepted' => true, 'accepted_date' => new \DateTime()]);
         }
 
         return back();
