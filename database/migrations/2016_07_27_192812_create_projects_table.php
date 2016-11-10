@@ -13,7 +13,7 @@ class CreateProjectsTable extends Migration
             $table->text('short_description');
             $table->text('long_description')->nullable();
             $table->text('github_link')->nullable();
-            $table->text('siteweb_link')->nullable();
+            $table->text('website_link')->nullable();
             $table->timestamps();
         });
     }
