@@ -14,17 +14,29 @@ class ProjectCollaboratorController extends Controller
     // pendings
     public function project_index(Request $request, Project $project)
     {
-        $pendings = ProjectCollaborator::where('project_id', '=', $project->id)
-                                        ->where('is_project_owner', '=', false)->get();
+        if (Auth::check() && Auth::id() == $user->id) {
+            $pendings = ProjectCollaborator::where('project_id', '=', $project->id)
+            ->where('is_project_owner', '=', false)->get();
 
-        return view('invitations.index_project', compact('project', 'pendings'));
+            return view('invitations.index_project', compact('project', 'pendings'));
+        } else {
+            session()->flash('error', 'That was not your profile');
+
+            return redirect()->back();
+        }
     }
 
     public function user_index(Request $request, User $user)
     {
-        $invitations = ProjectCollaborator::where('user_id', '=', $user->id)->get();
+        if (Auth::check() && Auth::id() == $user->id) {
+            $invitations = ProjectCollaborator::where('user_id', '=', $user->id)->get();
 
-        return view('invitations.index_user', compact('user', 'invitations'));
+            return view('invitations.index_user', compact('user', 'invitations'));
+        } else {
+            session()->flash('error', 'That was not your profile');
+
+            return redirect()->back();
+        }
     }
 
     public function recruit(Request $request, User $user)
@@ -32,10 +44,10 @@ class ProjectCollaboratorController extends Controller
         // $invitations = Invitation::where('project_id', '=', $project->id);
         $projects = Auth::user()->projects;
         $projects_with_pending_invitation = ProjectCollaborator::where('accepted', '=', false)
-            ->where('user_id', '=', $user->id)->get()
-            ->map(function ($invitation) {
-                return $invitation->project;
-            }
+        ->where('user_id', '=', $user->id)->get()
+        ->map(function ($invitation) {
+            return $invitation->project;
+        }
         );
         $projects = $projects->diff($user->projectsAsCollaborator);
         $projects = $projects->diff($projects_with_pending_invitation);
@@ -96,9 +108,9 @@ class ProjectCollaboratorController extends Controller
 
         $invitation = ProjectCollaborator::where('project_id', '=', $project->id)->where('user_id', '=', $user->id);
         $invitation->update([
-            'accepted'      => true,
+            'accepted' => true,
             'accepted_date' => new \DateTime(),
-        ]);
+            ]);
 
         return back();
     }
