@@ -44,15 +44,6 @@ class CollaboratorTableSeeder extends Seeder
         ]);
 
         ProjectCollaborator::create([
-            'skill_id'          => $skill_art_2d->id,
-            'project_id'        => $project_nico->id,
-            'is_project_owner'  => false,
-            'user_id'           => $user_james->id,
-            'accepted'          => true,
-            'from_collaborator' => true,
-            'invite_message'    => 'initial seed',
-        ]);
-        ProjectCollaborator::create([
             'skill_id'          => $skill_prog->id,
             'project_id'        => $project_nico->id,
             'is_project_owner'  => false,
