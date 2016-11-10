@@ -6,7 +6,7 @@ $factory->define(App\Project::class, function (Faker\Generator $faker) {
         'short_description' => $faker->sentence,
         'long_description'  => $faker->paragraph,
         'github_link'       => $faker->url,
-        'siteweb_link'      => $faker->url,
+        'website_link'      => $faker->url,
         'image'             => $faker->imageUrl,
     ];
 });
