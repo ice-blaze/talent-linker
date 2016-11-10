@@ -20,9 +20,9 @@ class create_project_test extends TestCase
      */
     public function testGuestShouldNotHaveAccessToCreateProjectPage()
     {
-        /*$this->visit('/');
+        $this->visit('/');
         $this->visit('/projects/create');
-        $this->seePageIs('/projects/create');*/
+        $this->seePageIs('/');
     }
 
     /**
