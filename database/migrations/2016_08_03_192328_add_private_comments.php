@@ -14,6 +14,10 @@ class AddPrivateComments extends Migration
             $table->timestamps();
         });
 
+        Schema::table('collaborator_project', function ($table) {
+            $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
+        });
+
         Schema::create('chat_user', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('sender_id')->unsigned()->index();
