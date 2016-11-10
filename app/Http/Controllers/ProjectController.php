@@ -53,13 +53,21 @@ class ProjectController extends Controller
         return view('projects.show', compact('project'));
     }
 
+    /*
+     *  Display Create Project form if user is logged
+     */
     public function create()
     {
-        $languages = Language::all();
-        $general_skills = GeneralSkill::all();
-        $all_users = User::all();
+        if (Auth::check()){
+            $languages = Language::all();
+            $general_skills = GeneralSkill::all();
+            $all_users = User::all();
 
-        return view('projects.create', compact('project', 'languages', 'general_skills', 'all_users'));
+            return view('projects.create', compact('project', 'languages', 'general_skills', 'all_users'));
+        }else{
+            return redirect('/');
+        }
+
     }
 
     public function store(Request $request)
@@ -69,7 +77,7 @@ class ProjectController extends Controller
             'short_description' => 'required',
             'long_description'  => 'required',
             'languages'         => 'required',
-        ]);
+            ]);
 
         // project creation
         $project = new Project();
@@ -108,7 +116,7 @@ class ProjectController extends Controller
             'github_link'       => $request->github_link,
             'website_link'      => $request->website_link,
             'image'             => $request->image,
-        ]);
+            ]);
         // $project->update(request()->all());
 
         // managed the langauges
@@ -123,9 +131,9 @@ class ProjectController extends Controller
             }
 
             $skill = [
-                'general_skill_id' => $id,
-                'project_id'       => $project->id,
-                'count'            => $count,
+            'general_skill_id' => $id,
+            'project_id'       => $project->id,
+            'count'            => $count,
             ];
 
             DB::table('general_skill_project')->insert($skill);
