@@ -75,14 +75,14 @@
         @endif
     </div>
 
-    <div class="form-group{{ $errors->has('siteweb_link') ? ' has-danger' : '' }}">
-        <label for="siteweb_link">Website</label>
-        <input name="siteweb_link" type="url" class="form-control{{ $errors->has('siteweb_link') ? ' form-control-danger' : '' }}" id="siteweb_link"
-        placeholder="Stack Overflow URL" value="{{ $project->siteweb_link or old('siteweb_link') }}">
+    <div class="form-group{{ $errors->has('website_link') ? ' has-danger' : '' }}">
+        <label for="website_link">Website</label>
+        <input name="website_link" type="url" class="form-control{{ $errors->has('website_link') ? ' form-control-danger' : '' }}" id="website_link"
+        placeholder="Stack Overflow URL" value="{{ $project->website_link or old('website_link') }}">
 
-        @if ($errors->has('siteweb_link'))
+        @if ($errors->has('website_link'))
         <span class="help-block form-control-feedback">
-            <strong>{{ $errors->first('siteweb_link') }}</strong>
+            <strong>{{ $errors->first('website_link') }}</strong>
         </span>
         @endif
     </div>

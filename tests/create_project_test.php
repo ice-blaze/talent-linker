@@ -118,7 +118,7 @@ class create_project_test extends TestCase
             'short_description' => $project->short_description,
             'long_description' => $project->long_description,
             'github_link' => $project->github_link,
-            'siteweb_link' => $project->siteweb_link,
+            'website_link' => $project->website_link,
             'github_link' => $project->github_link,
             'image' => $project->image, ]);
 
@@ -127,7 +127,7 @@ class create_project_test extends TestCase
         $this->see($project->name);
         $this->see($project->short_description);
         $this->see($project->long_description);
-        $this->see($project->siteweb_link);
+        $this->see($project->website_link);
         $this->see($project->image);
     }
 
@@ -147,7 +147,7 @@ class create_project_test extends TestCase
             'short_description' => $project->short_description,
             'long_description' => $project->long_description,
             'github_link' => $project->github_link,
-            'siteweb_link' => $project->siteweb_link,
+            'website_link' => $project->website_link,
             'github_link' => $project->github_link,
             'image' => $project->image, ]);
 
@@ -167,7 +167,7 @@ class create_project_test extends TestCase
         $short_description = 'New short description';
         $long_description = 'New long description';
         $name = 'New title';
-        $siteweb_link = 'http://www.google.fr';
+        $website_link = 'http://www.google.fr';
 
         $this->type($skills_1, 'general_skills[1]');
         $this->type($skills_2, 'general_skills[5]');
@@ -178,7 +178,7 @@ class create_project_test extends TestCase
         $this->type($short_description, 'short_description');
         $this->type($long_description, 'long_description');
         $this->type($name, 'name');
-        $this->type($siteweb_link, 'siteweb_link');
+        $this->type($website_link, 'website_link');
         $this->press('submit_project');
         $this->seePageIs('/projects/'.$project->id);
 
@@ -186,7 +186,7 @@ class create_project_test extends TestCase
         $this->see($name);
         $this->see($short_description);
         $this->see($long_description);
-        $this->see($siteweb_link);
+        $this->see($website_link);
         $this->see($image);
 
         // Check if correclty updated in database
@@ -194,14 +194,14 @@ class create_project_test extends TestCase
             'short_description' => 'New short description',
             'long_description' => 'New long description',
             'github_link' => 'http://www.google.com',
-            'siteweb_link' => 'http://www.google.fr',
+            'website_link' => 'http://www.google.fr',
             'image' => 'http://images.com/image.jpg', ]);
     }
 
     /**
      * Delete a project and check if it is correctly deleted in database and display.
      */
-    public function testDeleteProjectAndCheckEditedProject()
+    public function testDeleteProjectAndCheckDeletedProject()
     {
         // Create a new project
         $collab_owner = factory(App\ProjectCollaborator::class)->states('with_skill', 'with_project', 'with_user', 'owner')->create();
@@ -214,7 +214,7 @@ class create_project_test extends TestCase
             'short_description' => $project->short_description,
             'long_description' => $project->long_description,
             'github_link' => $project->github_link,
-            'siteweb_link' => $project->siteweb_link,
+            'website_link' => $project->website_link,
             'github_link' => $project->github_link,
             'image' => $project->image, ]);
 

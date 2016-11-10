@@ -29,7 +29,7 @@ class ProjectsTableSeeder extends Seeder
             'long_description'  => $long_description,
             'image'             => 'http://i.imgur.com/CQbO0cc.jpg',
             'github_link'       => 'http://example.com/my_github',
-            'siteweb_link'      => 'http://example.com/my_project',
+            'website_link'      => 'http://example.com/my_project',
         ]);
 
         ProjectCollaborator::create([
