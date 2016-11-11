@@ -77,9 +77,12 @@ class ProjectCollaboratorController extends Controller
         $invitation = new ProjectCollaborator();
         $invitation->user_id = Auth::user()->id;
         $invitation->project_id = $project->id;
+        $invitation->is_project_owner = false;
         $invitation->from_collaborator = true;
         $invitation->accepted = false;
         $invitation->skill_id = request()->skill;
+        //TODO add comment
+        // $invitation->invitation_message = request()->;
         $invitation->save();
 
         return redirect($project->path());
@@ -90,8 +93,11 @@ class ProjectCollaboratorController extends Controller
         $invitation = new ProjectCollaborator();
         $invitation->user_id = $user->id;
         $invitation->project_id = request()->project;
+        $invitation->is_project_owner = false;
         $invitation->from_collaborator = false;
         $invitation->skill_id = request()->skill;
+        //TODO add comment
+        // $invitation->invitation_message = request()->;
         $invitation->save();
 
         return redirect($user->path())
