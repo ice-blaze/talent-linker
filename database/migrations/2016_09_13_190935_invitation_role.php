@@ -9,7 +9,7 @@ class InvitationRole extends Migration
     {
         Schema::table('project_collaborators', function (Blueprint $table) {
             $table->integer('skill_id')->unsigned()->index();
-            $table->boolean('is_project_owner')->default(false);
+            $table->boolean('is_project_owner');
         });
     }
 
