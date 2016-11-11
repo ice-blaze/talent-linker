@@ -73,13 +73,17 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $this->validate($request, [
-          'languages'      => 'required',
-          'general_skills' => 'required',
-        ]);
+            'name' => 'required|max:255',
+            'email' => 'required|unique:users,email,'.$user->id,
+            'last_name' => 'required|max:255',
+            'first_name' => 'required|max:255',
+            'languages' => 'required',
+            'general_skills' => 'required',
+            ]);
 
         $user->update(request()->all());
 
-        // managed the langauges
+        // managed the languages
         $user->languages()->sync((array) request()->languages);
 
         $user->general_skills()->detach();
