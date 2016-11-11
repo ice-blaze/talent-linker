@@ -12,33 +12,44 @@ use Illuminate\Support\Facades\Auth;
 class ProjectCollaboratorController extends Controller
 {
     // pendings
-    public function project_index(Request $request, Project $project)
+    public function projectIndex(Request $request, Project $project)
     {
-        $pendings = ProjectCollaborator::where('project_id', '=', $project->id)
-                                        ->where('is_project_owner', '=', false)->get();
+        if (Auth::check() && Auth::id() == $user->id) {
+            $pendings = ProjectCollaborator::where('project_id', '=', $project->id)
+            ->where('is_project_owner', '=', false)->get();
 
-        return view('invitations.index_project', compact('project', 'pendings'));
+            return view('invitations.index_project', compact('project', 'pendings'));
+        } else {
+            session()->flash('error', 'That was not your project');
+
+            return redirect()->back();
+        }
     }
 
-    public function user_index(Request $request, User $user)
+    public function userIndex(Request $request, User $user)
     {
-        $invitations = ProjectCollaborator::where('user_id', '=', $user->id)->get();
+        if (Auth::check() && Auth::id() == $user->id) {
+            $invitations = ProjectCollaborator::where('user_id', '=', $user->id)->get();
 
-        return view('invitations.index_user', compact('user', 'invitations'));
+            return view('invitations.index_user', compact('user', 'invitations'));
+        } else {
+            session()->flash('error', 'That was not your project');
+
+            return redirect()->back();
+        }
     }
 
     public function recruit(Request $request, User $user)
     {
-        // $invitations = Invitation::where('project_id', '=', $project->id);
         $projects = Auth::user()->projects;
         $projects_with_pending_invitation = ProjectCollaborator::where('accepted', '=', false)
-            ->where('user_id', '=', $user->id)->get()
-            ->map(function ($invitation) {
-                return $invitation->project;
-            }
-        );
+        ->where('user_id', '=', $user->id)->get()->map(function ($invitation) {
+            return $invitation->project;
+        });
+
         $projects = $projects->diff($user->projectsAsCollaborator);
         $projects = $projects->diff($projects_with_pending_invitation);
+
         if (count($projects) < 1) {
             if (count(Auth::user()->projects) == 0) {
                 $request->session()->flash('error', "Can't recruit, you have no projects!");
@@ -61,7 +72,7 @@ class ProjectCollaboratorController extends Controller
         return view('invitations.join', compact('user', 'project', 'general_skills'));
     }
 
-    public function project_store(Request $request, Project $project)
+    public function projectStore(Request $request, Project $project)
     {
         $invitation = new ProjectCollaborator();
         $invitation->user_id = Auth::user()->id;
@@ -77,7 +88,7 @@ class ProjectCollaboratorController extends Controller
         return redirect($project->path());
     }
 
-    public function user_store(Request $request, User $user)
+    public function userStore(Request $request, User $user)
     {
         $invitation = new ProjectCollaborator();
         $invitation->user_id = $user->id;
@@ -89,22 +100,21 @@ class ProjectCollaboratorController extends Controller
         // $invitation->invitation_message = request()->;
         $invitation->save();
 
-        return redirect($user->path())->with('status', $user->name.' invited to '.Project::find(request()->project)->name);
+        return redirect($user->path())
+        ->with('status', $user->name.' invited to '.Project::find(request()->project)->name);
     }
 
     public function accept(Request $request, Project $project, User $user)
     {
-        if (Auth::user()->id != $project->owner->user->id) {
-            $request->session()->flash('error', "You don't have the permission");
-
-            return back();
-        }
-
+        // Get user invitation in DB
         $invitation = ProjectCollaborator::where('project_id', '=', $project->id)->where('user_id', '=', $user->id);
-        $invitation->update([
-            'accepted'      => true,
-            'accepted_date' => new \DateTime(),
-        ]);
+
+        // User is not project admin or did not received an invitation
+        if (Auth::user()->id != $project->owner->user->id && count($invitation) == 0) {
+            $request->session()->flash('error', "You don't have the permission");
+        } else {
+            $invitation->update(['accepted' => true, 'accepted_date' => new \DateTime()]);
+        }
 
         return back();
     }
