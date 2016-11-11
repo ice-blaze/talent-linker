@@ -10,7 +10,7 @@ class AddInvitations extends Migration
         Schema::table('project_collaborators', function (Blueprint $table) {
             $table->boolean('from_collaborator');
             $table->boolean('accepted');
-            $table->text('invite_message');
+            $table->text('invite_message')->nullable();
             $table->timestamp('accepted_date')->nullable();
         });
     }
