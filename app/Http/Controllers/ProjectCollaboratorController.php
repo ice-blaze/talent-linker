@@ -85,6 +85,8 @@ class ProjectCollaboratorController extends Controller
         $invitation->is_project_owner = false;
         $invitation->from_collaborator = false;
         $invitation->skill_id = request()->skill;
+        //TODO add comment
+        // $invitation->invitation_message = request()->;
         $invitation->save();
 
         return redirect($user->path())->with('status', $user->name.' invited to '.Project::find(request()->project)->name);
