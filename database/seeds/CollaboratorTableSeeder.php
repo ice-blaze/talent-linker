@@ -119,10 +119,10 @@ class CollaboratorTableSeeder extends Seeder
 
         ProjectCollaborator::create([
             'skill_id'          => $skill_prog->id,
-            'project_id'        => $project_nico->id,
+            'project_id'        => $project_richard->id,
             'is_project_owner'  => false,
-            'user_id'           => $user_richard->id,
-            'accepted'          => true,
+            'user_id'           => $user_james->id,
+            'accepted'          => false,
             'from_collaborator' => true,
             'invite_message'    => 'initial seed',
         ]);
