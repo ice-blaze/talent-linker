@@ -24,6 +24,7 @@ class CollaboratorTableSeeder extends Seeder
         $project_james = Project::find(1);
         $project_nico = Project::find(2);
         $project_richard = Project::find(3);
+        $project_richard_2nd = Project::find(4);
 
         $skill_prog = GeneralSkill::find(1);
         $skill_gameengine = GeneralSkill::find(2);
@@ -123,6 +124,16 @@ class CollaboratorTableSeeder extends Seeder
             'is_project_owner'  => false,
             'user_id'           => $user_james->id,
             'accepted'          => false,
+            'from_collaborator' => true,
+            'invite_message'    => 'initial seed',
+        ]);
+
+        ProjectCollaborator::create([
+            'skill_id'          => $skill_prog->id,
+            'project_id'        => $project_richard_2nd->id,
+            'is_project_owner'  => false,
+            'user_id'           => $user_james->id,
+            'accepted'          => true,
             'from_collaborator' => true,
             'invite_message'    => 'initial seed',
         ]);
