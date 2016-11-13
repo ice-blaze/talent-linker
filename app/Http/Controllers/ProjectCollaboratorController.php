@@ -15,7 +15,7 @@ class ProjectCollaboratorController extends Controller
     public function projectIndex(Request $request, Project $project)
     {
         $collabs_id = array_map( function($c) {
-            return $c['id'];
+            return $c['user_id'];
         }, $project->collaborators->toArray());
 
         if (Auth::check() && in_array(Auth::id(), $collabs_id)) {
