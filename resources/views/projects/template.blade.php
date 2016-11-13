@@ -93,21 +93,37 @@
         <label for="general_skills">Skills</label>
         <ul name="general_skills[]" id="general_skills" >
 
-        @foreach($general_skills as $option)
-           <li>
-            {{$option->name}}
-            <input type="number" name="general_skills[{{ $option->id }}]" value="{{ (collect(old('general_skills'))->count() > 0) ? intval(collect(old('general_skills'))->toArray()[$option->id]):0}}" placeholder="0" min="0" step="1">
-        </li>
+        <?php
+            $skills_array = collect(array_pluck($general_skills->toArray(), 'pivot.count', 'id'));
+        ?>
+
+        @foreach(App\GeneralSkill::all() as $option)
+            @if (count(collect(old('general_skills'))) > 0)
+                <li>
+                    {{$option->name}}
+                    <input type="number" name="general_skills[{{ $option->id }}]" value="{{ (collect(old('general_skills'))->count() > 0) ? intval(collect(old('general_skills'))->toArray()[$option->id]):0}}" placeholder="0" min="0" step="1">
+                </li>
+            @else
+                <li>
+                
+                    {{$option->name}}
+                    <input type="number" name="general_skills[{{ $option->id }}]" value="{{ ($skills_array->keys()->contains($option->id)) ? intval($skills_array[$option->id]):0}}" placeholder="0" min="0" step="1">
+                </li>
+            @endif
         @endforeach
 
     </ul>
 </div>
-
 <div class="form-group{{ $errors->has('languages') ? ' has-danger' : '' }}">
     <label for="languages">Languages</label>
     <select name="languages[]" id="languages" class="selectpicker {{ $errors->has('name') ? ' form-control-danger' : '' }}" multiple>
-        @foreach($languages as $option)
-        <option value="{{ $option->id }}" {{ (collect(old('languages'))->contains($option->id)) ? 'selected':'' }}>{{ $option->name }}</option>
+
+        @foreach(App\Language::all() as $option)
+            @if (count(collect(old('languages'))) > 0)
+                <option value="{{ $option->id }}" {{ (collect(old('languages'))->contains($option->id)) ? 'selected':'' }}>{{ $option->name }}</option>
+            @else
+                <option value="{{ $option->id }}" {{ ($languages->contains($option->id)) ? 'selected':'' }}>{{ $option->name }}</option>
+            @endif
         @endforeach
 
     </select>

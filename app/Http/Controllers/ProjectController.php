@@ -105,15 +105,15 @@ class ProjectController extends Controller
 
     public function edit(Project $project)
     {
-        $languages = Language::all();
-        $general_skills = GeneralSkill::all();
-        $all_users = User::all();
-
-        return view('projects.edit', compact('project', 'languages', 'general_skills', 'all_users'));
+        $languages = $project->languages;
+        
+        $general_skills = $project->general_skills;
+        return view('projects.edit', compact('project', 'languages', 'general_skills'));
     }
 
     public function updateGeneralSkills($request, $project)
     {
+
         //TODO maybe there is a better way
         $project->general_skills()->detach();
         foreach ($request->general_skills as $id => $count) {
@@ -128,6 +128,13 @@ class ProjectController extends Controller
 
     public function update(Request $request, Project $project)
     {
+        $this->validate($request, [
+            'name' => 'required',
+            'short_description' => 'required',
+            'long_description' => 'required',
+            'languages' => 'required',
+            ]);
+
         $project->update([
             'name' => $request->name,
             'short_description' => $request->short_description,
