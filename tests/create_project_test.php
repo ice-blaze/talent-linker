@@ -1,10 +1,10 @@
 <?php
 
-use App\Traits\DatabaseRefreshSeedMigrations;
+use App\Traits\DatabaseRefreshMigrations;
 
 class create_project_test extends TestCase
 {
-    use DatabaseRefreshSeedMigrations;
+    use DatabaseRefreshMigrations;
 
     /**
      * Login method.
@@ -31,8 +31,6 @@ class create_project_test extends TestCase
     public function testProjectShouldAccessToCreateProjectPage()
     {
         $this->login();
-        $this->visit('/');
-        $this->visit('/talents/1/projects');
         $this->visit('/projects/create');
         $this->seePageIs('/projects/create');
     }
@@ -43,8 +41,6 @@ class create_project_test extends TestCase
     public function testCreateProjectDisplayErrorWhenTitleIsMissing()
     {
         $this->login();
-        $this->visit('/');
-        $this->visit('/talents/1/projects');
         $this->visit('/projects/create');
         $this->press('submit_project');
         $this->seePageIs('/projects/create');
@@ -57,8 +53,6 @@ class create_project_test extends TestCase
     public function testCreateProjectDisplayErrorWhenShortDescriptionIsMissing()
     {
         $this->login();
-        $this->visit('/');
-        $this->visit('/talents/1/projects');
         $this->visit('/projects/create');
         $this->press('submit_project');
         $this->seePageIs('/projects/create');
@@ -71,8 +65,6 @@ class create_project_test extends TestCase
     public function testCreateProjectDisplayErrorWhenLongDescriptionIsMissing()
     {
         $this->login();
-        $this->visit('/');
-        $this->visit('/talents/1/projects');
         $this->visit('/projects/create');
         $this->press('submit_project');
         $this->seePageIs('/projects/create');
@@ -85,8 +77,6 @@ class create_project_test extends TestCase
     public function testCreateProjectDisplayErrorWhenLanguageIsMissing()
     {
         $this->login();
-        $this->visit('/');
-        $this->visit('/talents/1/projects');
         $this->visit('/projects/create');
         $this->press('submit_project');
         $this->seePageIs('/projects/create');
@@ -98,37 +88,64 @@ class create_project_test extends TestCase
      */
     public function testCreateProjectAndCheckCreatedProject()
     {
+        // Prepare values
+        $user = factory(App\User::class)->create();
+        $project_skill_1 = factory(App\GeneralSkill::class)->create();
+        $project_skill_1_count = '3';
+        $project_skill_2 = factory(App\GeneralSkill::class)->create();
+        $project_skill_2_count = '5';
+        $project_language_1 = factory(App\Language::class)->create();
+        $project_language_2 = factory(App\Language::class)->create();
+        $project_github_link = 'http://www.google.com';
+        $project_image = 'http://images.com/image.jpg';
+        $project_short_description = 'New short description';
+        $project_long_description = 'New long description';
+        $project_name = 'New title';
+        $project_website_link = 'http://www.google.fr';
 
-        // Create a new project
-        $collab_owner = factory(App\ProjectCollaborator::class)->states('with_skill', 'with_project', 'with_user', 'owner')->create();
-        $user = $collab_owner->user;
-        $project = $collab_owner->project;
-
-        // Find the project that the user created
-        $url = '/talents/'.$user->id.'/projects';
-
+        // Create project trough the interface
         $this->actingAs($user);
+        $this->visit('/projects');
+        $this->click('Create Project');
+        $this->type($project_github_link, 'github_link');
+        $this->type($project_image, 'image');
+        $this->type($project_skill_1_count, 'general_skills['.$project_skill_1->id.']');
+        $this->type($project_skill_2_count, 'general_skills['.$project_skill_2->id.']');
+        $this->select([$project_language_1->id, $project_language_2->id], 'languages[]');
+        $this->type($project_short_description, 'short_description');
+        $this->type($project_long_description, 'long_description');
+        $this->type($project_name, 'name');
+        $this->type($project_website_link, 'website_link');
+        $this->press('submit_project');
 
-        // Visit users project and check if it exists
-        $this->visit($url);
+        // Get the last project created (it means our project)
+        $project = App\Project::orderBy('id', 'desc')->first();
+
+        // Check if our project display all the values
+        $this->seePageIs($project->path());
         $this->see($project->name);
+        $this->see($project->short_description);
+        $this->see($project->long_description);
+        $this->see($project->website_link);
+        $this->see($project->github_link);
+        $this->see($project->image);
+        $this->see($project_language_1->name);
+        $this->see($project_language_2->name);
+        $this->see($project_skill_1->name);
+        $this->see($project_skill_2->name);
+        $this->see('/ '.$project_skill_1_count);
+        $this->see('/ '.$project_skill_2_count);
 
         // Check in database
-        $this->seeInDatabase('projects', ['id' => $project->id,
+        $this->seeInDatabase('projects', [
+            'id' => $project->id,
             'short_description' => $project->short_description,
             'long_description' => $project->long_description,
             'github_link' => $project->github_link,
             'website_link' => $project->website_link,
             'github_link' => $project->github_link,
-            'image' => $project->image, ]);
-
-        // See project details
-        $this->visit('/projects/'.$project->id);
-        $this->see($project->name);
-        $this->see($project->short_description);
-        $this->see($project->long_description);
-        $this->see($project->website_link);
-        $this->see($project->image);
+            'image' => $project->image,
+        ]);
     }
 
     /**
@@ -151,17 +168,13 @@ class create_project_test extends TestCase
             'github_link' => $project->github_link,
             'image' => $project->image, ]);
 
-        // Edit the project
-        $url = '/talents/'.$user->id.'/projects';
-        $this->visit($url);
-        $this->see($project->name);
-        $this->visit('/projects/'.$project->id.'/edit');
-
         // Set new values
-        $skills_1 = '3';
-        $skills_2 = '5';
-        $language_1 = '1';
-        $language_2 = '2';
+        $project_skill_1 = factory(App\GeneralSkill::class)->create();
+        $project_skill_1_count = '3';
+        $project_skill_2 = factory(App\GeneralSkill::class)->create();
+        $project_skill_2_count = '5';
+        $project_language_1 = factory(App\Language::class)->create();
+        $project_language_2 = factory(App\Language::class)->create();
         $github_link = 'http://www.google.com';
         $image = 'http://images.com/image.jpg';
         $short_description = 'New short description';
@@ -169,33 +182,59 @@ class create_project_test extends TestCase
         $name = 'New title';
         $website_link = 'http://www.google.fr';
 
-        $this->type($skills_1, 'general_skills[1]');
-        $this->type($skills_2, 'general_skills[5]');
-        $this->select($language_1, 'languages[]');
-        $this->select($language_2, 'languages[]');
+        // Edit the project
+        $this->visit($user->path().'/projects');
+        $this->see($project->name);
+        $this->visit($project->path().'/edit');
         $this->type($github_link, 'github_link');
         $this->type($image, 'image');
         $this->type($short_description, 'short_description');
         $this->type($long_description, 'long_description');
         $this->type($name, 'name');
         $this->type($website_link, 'website_link');
+        $this->type($project_skill_1_count, 'general_skills['.$project_skill_1->id.']');
+        $this->type($project_skill_2_count, 'general_skills['.$project_skill_2->id.']');
+        $this->select([$project_language_1->id, $project_language_2->id], 'languages[]');
         $this->press('submit_project');
-        $this->seePageIs('/projects/'.$project->id);
 
-        $this->visit('/projects/'.$project->id.'/edit');
+        // Check if the edition worked
+        $this->seePageIs($project->path());
         $this->see($name);
         $this->see($short_description);
         $this->see($long_description);
         $this->see($website_link);
         $this->see($image);
+        $this->see($project_language_1->name);
+        $this->see($project_language_2->name);
+        $this->see($project_skill_1->name);
+        $this->see($project_skill_2->name);
+        $this->see('/ '.$project_skill_1_count);
+        $this->see('/ '.$project_skill_2_count);
+
+        //TODO tests for the issue#106
+        // Check if edit mode keep default values
+        // $this->visit($project->path().'/edit');
+        // $this->see($name);
+        // $this->see($short_description);
+        // $this->see($long_description);
+        // $this->see($website_link);
+        // $this->see($image);
+        // $this->see($project_language_1->name);
+        // $this->see($project_language_2->name);
+        // $this->see($project_skill_1->name);
+        // $this->see($project_skill_2->name);
+        // $this->see('/ '.$project_skill_1_count);
+        // $this->see('/ '.$project_skill_2_count);
 
         // Check if correclty updated in database
-        $this->seeInDatabase('projects', ['id' => $project->id,
+        $this->seeInDatabase('projects', [
+            'id' => $project->id,
             'short_description' => 'New short description',
             'long_description' => 'New long description',
             'github_link' => 'http://www.google.com',
             'website_link' => 'http://www.google.fr',
-            'image' => 'http://images.com/image.jpg', ]);
+            'image' => 'http://images.com/image.jpg',
+        ]);
     }
 
     /**
@@ -204,19 +243,23 @@ class create_project_test extends TestCase
     public function testDeleteProjectAndCheckDeletedProject()
     {
         // Create a new project
-        $collab_owner = factory(App\ProjectCollaborator::class)->states('with_skill', 'with_project', 'with_user', 'owner')->create();
+        $collab_owner = factory(App\ProjectCollaborator::class)
+            ->states('with_skill', 'with_project', 'with_user', 'owner')
+            ->create();
         $user = $collab_owner->user;
         $project = $collab_owner->project;
         $this->actingAs($user);
 
         // Check in database
-        $this->seeInDatabase('projects', ['id' => $project->id,
+        $this->seeInDatabase('projects', [
+            'id' => $project->id,
             'short_description' => $project->short_description,
             'long_description' => $project->long_description,
             'github_link' => $project->github_link,
             'website_link' => $project->website_link,
             'github_link' => $project->github_link,
-            'image' => $project->image, ]);
+            'image' => $project->image,
+        ]);
 
         // Delete the project
         $url = '/talents/'.$user->id.'/projects';
