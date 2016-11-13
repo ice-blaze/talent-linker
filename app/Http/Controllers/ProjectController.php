@@ -7,7 +7,6 @@ use App\Language;
 use App\Project;
 use App\ProjectCollaborator;
 use App\User;
-use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
