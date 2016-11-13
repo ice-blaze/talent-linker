@@ -14,7 +14,7 @@ class invitation_test extends TestCase
         $skill = $collab_recruiter->skill;
         $new_user = factory(App\User::class)->create();
 
-        return array($collab_recruiter, $recruiter, $project, $skill, $new_user);
+        return [$collab_recruiter, $recruiter, $project, $skill, $new_user];
     }
 
     public function testRecruiterShoulInviteUserAndCancelRequest()
