@@ -22,7 +22,7 @@
               {{ method_field('patch') }}
               {{ csrf_field() }}
               <div class="form-group text-right">
-                <button type="submit" class="btn btn-primary" name="accept">Accept</button>
+                <button type="submit" class="btn btn-primary" name="accept{{ $invitation->id }}">Accept</button>
               </div>
             </form>
           @endif
@@ -32,7 +32,7 @@
             {{ method_field('delete') }}
             {{ csrf_field() }}
             <div class="form-group text-right">
-              <button type="submit" class="btn btn-danger" name="delete">
+              <button type="submit" class="btn btn-danger" name="delete{{ $invitation->id }}">
                 @if($invitation->accepted)
                   Quit Project
                 @else

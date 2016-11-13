@@ -12,7 +12,7 @@
         - skill: {{$collaborator->skill->name}}
         - invited the {{$collaborator->created_at}}
         @if($collaborator->accepted)
-          - accepted
+          - accepted {{$collaborator->accepted_date}}
         @else
           - pending ...
         @endif
@@ -22,7 +22,7 @@
               {{ method_field('patch') }}
               {{ csrf_field() }}
               <div class="form-group text-right">
-                <button type="submit" class="btn btn-primary" name="accept">Accept</button>
+                <button type="submit" class="btn btn-primary" name="accept{{ $collaborator->id }}">Accept</button>
               </div>
             </form>
           @endif
@@ -30,7 +30,7 @@
             {{ method_field('delete') }}
             {{ csrf_field() }}
             <div class="form-group text-right">
-              <button type="submit" class="btn btn-danger" name="delete">
+              <button type="submit" class="btn btn-danger" name="delete{{ $collaborator->id }}">
                 @if($collaborator->accepted)
                   Kick from project
                 @else
