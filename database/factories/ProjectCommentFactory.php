@@ -34,3 +34,6 @@ $factory->state(App\ProjectComment::class, 'public', function ($faker) {
         'private' => false,
     ];
 });
+
+// How to use
+// $comment = factory(App\ProjectComment::class)->states('with_user', 'with_project', 'public')->create();
