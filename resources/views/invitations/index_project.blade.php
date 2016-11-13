@@ -26,7 +26,7 @@
               </div>
             </form>
           @endif
-          <form method="post" action="/invitations/{{ $project->id }}/{{ $collaborator->user->id }}">
+          <form method="post" action="/invitations/{{ $project->id }}/{{ $collaborator->user_id }}/{{ $collaborator->id }}">
             {{ method_field('delete') }}
             {{ csrf_field() }}
             <div class="form-group text-right">
