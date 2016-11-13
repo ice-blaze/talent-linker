@@ -79,10 +79,17 @@ class ProjectController extends Controller
             ]);
 
         // project creation
-        $project = new Project();
-        // $project->user_id = Auth::user()->id;
+        $project = new Project;
+        $project->name = $request->name;
+        $project->short_description = $request->short_description;
+        $project->long_description = $request->long_description;
+        $project->image = $request->image;
+        $project->github_link = $request->github_link;
+        $project->website_link = $request->website_link;
         $project->save();
-        $this->update($request, $project);
+
+        $project->languages()->sync($request->languages);
+        $this->updateGeneralSkills($request, $project);
 
         // owner collaborator creation
         $collaborator = new ProjectCollaborator();
@@ -91,7 +98,7 @@ class ProjectController extends Controller
         $collaborator->is_project_owner = true;
         $collaborator->from_collaborator = false;
         $collaborator->accepted = true;
-        $collaborator->skill_id = request()->skill;
+        $collaborator->skill_id = $request->skill;
         $collaborator->save();
 
         return redirect($project->path());
@@ -106,6 +113,20 @@ class ProjectController extends Controller
         return view('projects.edit', compact('project', 'languages', 'general_skills', 'all_users'));
     }
 
+    public function updateGeneralSkills($request, $project)
+    {
+        //TODO maybe there is a better way
+        $project->general_skills()->detach();
+        foreach ($request->general_skills as $id => $count) {
+            // ignore relations with 0 skills
+            if ($count < 1) {
+                continue;
+            }
+
+            $project->general_skills()->attach(GeneralSkill::find($id), ['count' => $count]);
+        }
+    }
+
     public function update(Request $request, Project $project)
     {
         $project->update([
@@ -115,29 +136,13 @@ class ProjectController extends Controller
             'github_link' => $request->github_link,
             'website_link' => $request->website_link,
             'image' => $request->image,
-
-            ]);
-        // $project->update(request()->all());
+        ]);
 
         // managed the langauges
-        $project->languages()->sync((array) request()->languages);
+        $project->languages()->sync($request->languages);
 
-        //TODO maybe there is a better way
-        $project->general_skills()->detach();
-        foreach ((array) request()->general_skills as $id => $count) {
-            // ignore relations with 0 skills
-            if ($count < 1) {
-                continue;
-            }
-
-            $skill = [
-            'general_skill_id' => $id,
-            'project_id' => $project->id,
-            'count' => $count,
-            ];
-
-            DB::table('general_skill_project')->insert($skill);
-        }
+        // managed the skills
+        $this->updateGeneralSkills($request, $project);
 
         return view('projects.show', compact('project'));
     }
