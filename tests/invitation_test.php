@@ -22,28 +22,26 @@ class invitation_test extends TestCase
         list($collab_recruiter, $recruiter, $project, $skill, $new_user) = $this->initValues();
 
         // add user
-        $this->actingAs($recruiter)
-            ->visit($new_user->path())
-            ->click('Recruit for one project')
-            ->click('Cancel')
-            ->seePageIs($new_user->path())
-            ->click('Recruit for one project')
-            ->select($project->id, 'project')
-            ->select($skill->id, 'skill')
-            ->press('Invite')
-            ->seePageIs($new_user->path())
-            ;
+        $this->actingAs($recruiter);
+        $this->visit($new_user->path());
+        $this->click('Recruit for one project');
+        $this->click('Cancel');
+        $this->seePageIs($new_user->path());
+        $this->click('Recruit for one project');
+        $this->select($project->id, 'project');
+        $this->select($skill->id, 'skill');
+        $this->press('Invite');
+        $this->seePageIs($new_user->path());
 
         $collaboration = App\ProjectCollaborator::orderBy('id', 'desc')->first();
 
         // check invitation is there and then delete it
-        $this->visit($project->path())
-            ->click('See pendings')
-            ->see($new_user->name)
-            ->press('delete'.$collaboration->id)
-            ->seePageIs($project->path().'/invitations')
-            ->dontSee($new_user->name)
-            ;
+        $this->visit($project->path());
+        $this->click('See pendings');
+        $this->see($new_user->name);
+        $this->press('delete'.$collaboration->id);
+        $this->seePageIs($project->path().'/invitations');
+        $this->dontSee($new_user->name);
     }
 
     public function testRecruiterShoulInviteUserWhoWantToAccept()
@@ -51,29 +49,27 @@ class invitation_test extends TestCase
         list($collab_recruiter, $recruiter, $project, $skill, $new_user) = $this->initValues();
 
         // add user
-        $this->actingAs($recruiter)
-            ->visit($new_user->path())
-            ->click('Recruit for one project')
-            ->click('Cancel')
-            ->seePageIs($new_user->path())
-            ->click('Recruit for one project')
-            ->select($project->id, 'project')
-            ->select($skill->id, 'skill')
-            ->press('Invite')
-            ->seePageIs($new_user->path())
-            ;
+        $this->actingAs($recruiter);
+        $this->visit($new_user->path());
+        $this->click('Recruit for one project');
+        $this->click('Cancel');
+        $this->seePageIs($new_user->path());
+        $this->click('Recruit for one project');
+        $this->select($project->id, 'project');
+        $this->select($skill->id, 'skill');
+        $this->press('Invite');
+        $this->seePageIs($new_user->path());
 
         $collaboration = App\ProjectCollaborator::orderBy('id', 'desc')->first();
 
         // check invitation is there and then delete it
-        $this->actingAs($new_user)
-            ->visit($new_user->path())
-            ->click('Invitations')
-            ->see($project->name)
-            ->press('accept'.$collaboration->id)
-            ->seePageIs($new_user->path().'/invitations')
-            ->see('accepted '.$collaboration->accepted_date)
-            ;
+        $this->actingAs($new_user);
+        $this->visit($new_user->path());
+        $this->click('Invitations');
+        $this->see($project->name);
+        $this->press('accept'.$collaboration->id);
+        $this->seePageIs($new_user->path().'/invitations');
+        $this->see('accepted '.$collaboration->accepted_date);
     }
 
     public function testRecruiterShoulInviteUserWhoDontWantToAccept()
@@ -81,29 +77,27 @@ class invitation_test extends TestCase
         list($collab_recruiter, $recruiter, $project, $skill, $new_user) = $this->initValues();
 
         // add user
-        $this->actingAs($recruiter)
-            ->visit($new_user->path())
-            ->click('Recruit for one project')
-            ->click('Cancel')
-            ->seePageIs($new_user->path())
-            ->click('Recruit for one project')
-            ->select($project->id, 'project')
-            ->select($skill->id, 'skill')
-            ->press('Invite')
-            ->seePageIs($new_user->path())
-            ;
+        $this->actingAs($recruiter);
+        $this->visit($new_user->path());
+        $this->click('Recruit for one project');
+        $this->click('Cancel');
+        $this->seePageIs($new_user->path());
+        $this->click('Recruit for one project');
+        $this->select($project->id, 'project');
+        $this->select($skill->id, 'skill');
+        $this->press('Invite');
+        $this->seePageIs($new_user->path());
 
         $collaboration = App\ProjectCollaborator::orderBy('id', 'desc')->first();
 
         // check invitation is there and then delete it
-        $this->actingAs($new_user)
-            ->visit($new_user->path())
-            ->click('Invitations')
-            ->see($project->name)
-            ->press('delete'.$collaboration->id)
-            ->seePageIs($new_user->path().'/invitations')
-            ->dontSee($project->name)
-            ;
+        $this->actingAs($new_user);
+        $this->visit($new_user->path());
+        $this->click('Invitations');
+        $this->see($project->name);
+        $this->press('delete'.$collaboration->id);
+        $this->seePageIs($new_user->path().'/invitations');
+        $this->dontSee($project->name);
     }
 
     public function testUserShouldAskAnInvitationThatHeCancel()
@@ -111,28 +105,26 @@ class invitation_test extends TestCase
         list($collab_recruiter, $recruiter, $project, $skill, $new_user) = $this->initValues();
 
         // add user
-        $this->actingAs($new_user)
-            ->visit($project->path())
-            ->press('Join the project')
-            ->click('Cancel')
-            ->seePageIs($project->path())
-            ->press('Join the project')
-            ->select($skill->id, 'skill')
-            ->press('Join')
-            ->seePageIs($project->path())
-            ->see('Invitation is pending...')
-            ;
+        $this->actingAs($new_user);
+        $this->visit($project->path());
+        $this->press('Join the project');
+        $this->click('Cancel');
+        $this->seePageIs($project->path());
+        $this->press('Join the project');
+        $this->select($skill->id, 'skill');
+        $this->press('Join');
+        $this->seePageIs($project->path());
+        $this->see('Invitation is pending...');
 
         $collaboration = App\ProjectCollaborator::orderBy('id', 'desc')->first();
 
         // check invitation is there and then delete it
-        $this->visit($new_user->path())
-            ->click('Invitations')
-            ->see($project->name)
-            ->press('delete'.$collaboration->id)
-            ->seePageIs($new_user->path().'/invitations')
-            ->dontSee($project->name)
-            ;
+        $this->visit($new_user->path());
+        $this->click('Invitations');
+        $this->see($project->name);
+        $this->press('delete'.$collaboration->id);
+        $this->seePageIs($new_user->path().'/invitations');
+        $this->dontSee($project->name);
     }
 
     public function testUserShouldAskAnInvitationThatTheRecruiterAccept()
@@ -140,23 +132,21 @@ class invitation_test extends TestCase
         list($collab_recruiter, $recruiter, $project, $skill, $new_user) = $this->initValues();
 
         // add user
-        $this->actingAs($new_user)
-            ->visit($project->path())
-            ->press('Join the project')
-            ->select($skill->id, 'skill')
-            ->press('Join')
-            ;
+        $this->actingAs($new_user);
+        $this->visit($project->path());
+        $this->press('Join the project');
+        $this->select($skill->id, 'skill');
+        $this->press('Join');
 
         $collaboration = App\ProjectCollaborator::orderBy('id', 'desc')->first();
 
         // check invitation is there and then delete it
-        $this->actingAs($recruiter)
-            ->visit($project->path().'/invitations')
-            ->see($new_user->name)
-            ->press('accept'.$collaboration->id)
-            ->seePageIs($project->path().'/invitations')
-            ->see('accepted '.$collaboration->accepted_date)
-            ;
+        $this->actingAs($recruiter);
+        $this->visit($project->path().'/invitations');
+        $this->see($new_user->name);
+        $this->press('accept'.$collaboration->id);
+        $this->seePageIs($project->path().'/invitations');
+        $this->see('accepted '.$collaboration->accepted_date);
     }
 
     public function testUserShouldAskAnInvitationThatTheRecruiterDenied()
@@ -164,23 +154,21 @@ class invitation_test extends TestCase
         list($collab_recruiter, $recruiter, $project, $skill, $new_user) = $this->initValues();
 
         // add user
-        $this->actingAs($new_user)
-            ->visit($project->path())
-            ->press('Join the project')
-            ->select($skill->id, 'skill')
-            ->press('Join')
-            ;
+        $this->actingAs($new_user);
+        $this->visit($project->path());
+        $this->press('Join the project');
+        $this->select($skill->id, 'skill');
+        $this->press('Join');
 
         $collaboration = App\ProjectCollaborator::orderBy('id', 'desc')->first();
 
         // check invitation is there and then delete it
-        $this->actingAs($recruiter)
-            ->visit($project->path().'/invitations')
-            ->see($new_user->name)
-            ->press('delete'.$collaboration->id)
-            ->seePageIs($project->path().'/invitations')
-            ->dontSee($new_user->name)
-            ;
+        $this->actingAs($recruiter);
+        $this->visit($project->path().'/invitations');
+        $this->see($new_user->name);
+        $this->press('delete'.$collaboration->id);
+        $this->seePageIs($project->path().'/invitations');
+        $this->dontSee($new_user->name);
     }
 
     // public function testVisitorShouldNotJoinProject()
