@@ -7,8 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 class Project extends Model
 {
     protected $fillable = [
-    'name', 'short_description', 'long_description', 'github_link', 'website_link',
-    'languages', 'skills', 'github_link', 'image',
+        'name',
+        'short_description',
+        'long_description',
+        'github_link',
+        'website_link',
+        'languages',
+        'skills',
+        'github_link',
+        'image',
     ];
 
     public function scopeLike($query, $field, $value)
@@ -46,7 +53,7 @@ class Project extends Model
         return $this->belongsToMany('App\GeneralSkill', 'general_skill_project')->withPivot('count')->withTimestamps();
     }
 
-  // TODO same function in user, maybe could generalize the code
+    // TODO same function in user, maybe could generalize the code
     public function isInSearchDistance(User $user)
     {
         $lat1 = $this->owner->user->lat;
@@ -90,18 +97,6 @@ class Project extends Model
         }
 
         return $res;
-    // dd($this->collaborators->first()->skill_id);
-    // $skill_extractor = function ($x) {
-    //   return [
-    //     'id' => $x->id,
-    //     'name' => $x->name,
-    //     'current_count' => $this->generalSkillCount($x),
-    //     'count' => $this->generalSkillCount($x),
-    //   ];
-    // };
-    // $skills = array_map($skill_extractor, $this->general_skills->all());
-    // dd($skills);
-    // return $skills;
     }
 
     public function generalSkillCount(GeneralSkill $skill)

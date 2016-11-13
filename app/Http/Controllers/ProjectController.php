@@ -75,7 +75,7 @@ class ProjectController extends Controller
             'short_description' => 'required',
             'long_description' => 'required',
             'languages' => 'required',
-            ]);
+        ]);
 
         // project creation
         $project = new Project;
@@ -114,7 +114,6 @@ class ProjectController extends Controller
 
     public function updategeneralSkills($request, $project)
     {
-
         //TODO maybe there is a better way
         $project->generalSkills()->detach();
         foreach ($request->general_skills as $id => $count) {
@@ -134,7 +133,7 @@ class ProjectController extends Controller
             'short_description' => 'required',
             'long_description' => 'required',
             'languages' => 'required',
-            ]);
+        ]);
 
         $project->update([
             'name' => $request->name,
