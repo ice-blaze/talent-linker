@@ -109,8 +109,8 @@ class create_project_test extends TestCase
         $this->click('Create Project');
         $this->type($project_github_link, 'github_link');
         $this->type($project_image, 'image');
-        $this->type($project_skill_1_count, 'general_skills[' . $project_skill_1->id . ']');
-        $this->type($project_skill_2_count, 'general_skills[' . $project_skill_2->id . ']');
+        $this->type($project_skill_1_count, 'general_skills['.$project_skill_1->id.']');
+        $this->type($project_skill_2_count, 'general_skills['.$project_skill_2->id.']');
         $this->select([$project_language_1->id, $project_language_2->id], 'languages[]');
         $this->type($project_short_description, 'short_description');
         $this->type($project_long_description, 'long_description');
@@ -133,8 +133,8 @@ class create_project_test extends TestCase
         $this->see($project_language_2->name);
         $this->see($project_skill_1->name);
         $this->see($project_skill_2->name);
-        $this->see('/ ' . $project_skill_1_count);
-        $this->see('/ ' . $project_skill_2_count);
+        $this->see('/ '.$project_skill_1_count);
+        $this->see('/ '.$project_skill_2_count);
 
         // Check in database
         $this->seeInDatabase('projects', [
@@ -183,17 +183,17 @@ class create_project_test extends TestCase
         $website_link = 'http://www.google.fr';
 
         // Edit the project
-        $this->visit($user->path() . '/projects');
+        $this->visit($user->path().'/projects');
         $this->see($project->name);
-        $this->visit($project->path() . '/edit');
+        $this->visit($project->path().'/edit');
         $this->type($github_link, 'github_link');
         $this->type($image, 'image');
         $this->type($short_description, 'short_description');
         $this->type($long_description, 'long_description');
         $this->type($name, 'name');
         $this->type($website_link, 'website_link');
-        $this->type($project_skill_1_count, 'general_skills[' . $project_skill_1->id . ']');
-        $this->type($project_skill_2_count, 'general_skills[' . $project_skill_2->id . ']');
+        $this->type($project_skill_1_count, 'general_skills['.$project_skill_1->id.']');
+        $this->type($project_skill_2_count, 'general_skills['.$project_skill_2->id.']');
         $this->select([$project_language_1->id, $project_language_2->id], 'languages[]');
         $this->press('submit_project');
 
@@ -208,12 +208,12 @@ class create_project_test extends TestCase
         $this->see($project_language_2->name);
         $this->see($project_skill_1->name);
         $this->see($project_skill_2->name);
-        $this->see('/ ' . $project_skill_1_count);
-        $this->see('/ ' . $project_skill_2_count);
+        $this->see('/ '.$project_skill_1_count);
+        $this->see('/ '.$project_skill_2_count);
 
         //TODO tests for the issue#106
         // Check if edit mode keep default values
-        // $this->visit($project->path() . '/edit');
+        // $this->visit($project->path().'/edit');
         // $this->see($name);
         // $this->see($short_description);
         // $this->see($long_description);
@@ -223,8 +223,8 @@ class create_project_test extends TestCase
         // $this->see($project_language_2->name);
         // $this->see($project_skill_1->name);
         // $this->see($project_skill_2->name);
-        // $this->see('/ ' . $project_skill_1_count);
-        // $this->see('/ ' . $project_skill_2_count);
+        // $this->see('/ '.$project_skill_1_count);
+        // $this->see('/ '.$project_skill_2_count);
 
         // Check if correclty updated in database
         $this->seeInDatabase('projects', [
