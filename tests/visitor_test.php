@@ -92,28 +92,4 @@ class visitor_test extends TestCase
             ->see('German')
             ->see('Cool Cats');
     }
-
-    // learning purpose:
-    // public function initializeData(){
-    // $project = factory(App\Project::class)->create(); #TODO not working, missing short description
-    // $general_skill = factory(App\GeneralSkill::class)->create();
-    // $user1 = factory(App\User::class)->create();
-    // $user2 = factory(App\User::class)->create();
-    // $chatuser = factory(App\ChatUser::class)->make();
-    // $chatuser->sender_id = $user1->id;
-    // $chatuser->reciever_id = $user2->id;
-    // $chatuser->save();
-    // $feedback = factory(App\Feedback::class, 'no_user')
-    //     ->make()
-    //     ->each(function ($f) {
-    //         $f->user(factory(App\User::class)->create());
-    //     });
-    // $feedback = factory(App\Feedback::class)
-    //     ->create();
-    // }
-    //
-    // $chat = factory(App\ChatUser::class, 'no_users')->states('seen')->make();
-    // $chat->sender()->associate($user1);
-    // $chat->reciever()->associate($user2);
-    // $chat->save();
 }
