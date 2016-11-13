@@ -70,7 +70,7 @@
       <select name="general_skills[]" class="selectpicker" multiple>
         @foreach($general_skills as $skill)
           <option value="{{$skill->id}}"
-            {{ $user->general_skills->contains($skill->id) ? "selected" : ""}}
+            {{ $user->generalSkills->contains($skill->id) ? "selected" : ""}}
           >{{$skill->name}}</option>
         @endforeach
       </select>

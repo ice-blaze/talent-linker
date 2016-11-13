@@ -24,7 +24,7 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function is_in_search_distance(User $user)
+    public function isInSearchDistance(User $user)
     {
         $lat1 = $this->lat;
         $lng1 = $this->lng;
@@ -55,7 +55,7 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Language')->withTimestamps();
     }
 
-    public function general_skills()
+    public function generalSkills()
     {
         return $this->belongsToMany('App\GeneralSkill');
     }
