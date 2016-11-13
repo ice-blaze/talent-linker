@@ -52,7 +52,7 @@ class User extends Authenticatable
 
     public function languages()
     {
-        return $this->belongsToMany('App\Language');
+        return $this->belongsToMany('App\Language')->withTimestamps();
     }
 
     public function general_skills()
