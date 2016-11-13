@@ -42,7 +42,7 @@
                     'name' => "long_description",
                     'content' => $description,
                     'placeholder' => "Project Long Description",
-                    ])
+                ])
         </div>
         @if ($errors->has('long_description'))
             <span class="help-block form-control-feedback">
