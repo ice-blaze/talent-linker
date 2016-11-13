@@ -14,7 +14,7 @@ class ProjectCollaboratorController extends Controller
     // pendings
     public function projectIndex(Request $request, Project $project)
     {
-        $collabs_id = array_map(function($c) {
+        $collabs_id = array_map(function ($c) {
             return $c['user_id'];
         }, $project->collaborators->toArray());
 
