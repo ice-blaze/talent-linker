@@ -14,3 +14,13 @@ $factory->defineAs(App\Feedback::class, 'no_user', function (Faker\Generator $fa
         'content' => $faker->text,
     ];
 });
+
+// How to use
+// $feedback = factory(App\Feedback::class, 'no_user')
+//     ->make()
+//     ->each(function ($f) {
+//         $f->user(factory(App\User::class)->create());
+//     });
+// $feedback = factory(App\Feedback::class)
+//     ->create();
+// }
