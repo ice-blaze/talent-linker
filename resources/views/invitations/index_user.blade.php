@@ -36,7 +36,7 @@
                                 @if($invitation->accepted)
                                     Quit Project (Delete)
                                 @else
-                                    Delete Reqest
+                                    Delete Request
                                 @endif
                             </button>
                         </div>
