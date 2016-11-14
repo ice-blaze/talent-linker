@@ -28,7 +28,7 @@ class UserController extends Controller
         if ($request->skills) {
             foreach ($request->skills as $skill_tech_name => $skill_id) {
                 foreach ($users as $user_key => $user) {
-                    if (! $user->general_skills->contains($skill_id)) {
+                    if (! $user->generalSkills->contains($skill_id)) {
                         unset($users[$user_key]);
                     }
                 }
@@ -37,7 +37,7 @@ class UserController extends Controller
 
         if ($request->near_by) {
             foreach ($users as $user_key => $user) {
-                if (! $user->is_in_search_distance(Auth::user())) {
+                if (! $user->isInSearchDistance(Auth::user())) {
                     unset($users[$user_key]);
                 }
             }
@@ -86,11 +86,11 @@ class UserController extends Controller
         // managed the languages
         $user->languages()->sync((array) request()->languages);
 
-        $user->general_skills()->detach();
+        $user->generalSkills()->detach();
         $general_skills = GeneralSkill::find(request()->general_skills);
         if ($general_skills) {
             foreach ($general_skills as $skill) {
-                $user->general_skills()->save($skill);
+                $user->generalSkills()->save($skill);
             }
         }
 
