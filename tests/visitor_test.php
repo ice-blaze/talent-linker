@@ -70,7 +70,7 @@ class visitor_test extends TestCase
         $this->visit('/projects/1')
             ->see('Cool Cats')
             ->see('Programming')
-            ->see('2 / 3')
+            ->see('3 / 3')
             ->see('Game Engine')
             ->see('0 / 1')
             ->see('James Test')
