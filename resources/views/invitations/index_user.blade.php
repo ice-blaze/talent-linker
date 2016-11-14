@@ -34,9 +34,9 @@
                         <div class="form-group text-right">
                             <button type="submit" class="btn btn-danger" name="delete{{ $invitation->id }}">
                                 @if($invitation->accepted)
-                                    Quit Project
+                                    Quit Project (Delete)
                                 @else
-                                    Delete Reqest
+                                    Delete Request
                                 @endif
                             </button>
                         </div>
