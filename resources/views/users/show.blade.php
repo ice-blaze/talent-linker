@@ -26,7 +26,7 @@
   <div class="row col-centered">
     <div class="col-sm-12">
       @if (Auth::user())
-        @if ($user->is_in_search_distance(Auth::user()))
+        @if ($user->isInSearchDistance(Auth::user()))
           <span class="tag tag-pill tag-primary"><i class="fa fa-map-marker" aria-hidden="true"></i> Near You</span>
         @else
           <span class="tag tag-pill tag-danger"><i class="fa fa-map-marker" aria-hidden="true"></i> Not Near</span>
@@ -54,7 +54,7 @@
   <div class="row">
     <label class="col-sm-2"><strong>Skills</strong></label>
     <div class="col-sm-10">
-      @forelse($user->general_skills as $skill)
+      @forelse($user->generalSkills as $skill)
         <span class="tag tag-primary">{{$skill->name}}</span>
       @empty
         No Skills

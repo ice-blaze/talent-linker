@@ -7,7 +7,7 @@
   <div class="row">
 
     {{-- use template ? --}}
-    @foreach($project->private_comments as $comment)
+    @foreach($project->privateComments as $comment)
       <li class="list-group-item">
         {{ $comment->content}}
         <div class="comment_user">
@@ -18,7 +18,7 @@
 
     <hr>
     <h3>Add a comment</h3>
-    <form method="post" action="/projects/{{ $project->id }}/private_comments">
+    <form method="post" action="/projects/{{ $project->id }}/privateComments">
       {{ csrf_field() }}
       <div class="form-group">
         <textarea name="content" class="form-control"></textarea>
