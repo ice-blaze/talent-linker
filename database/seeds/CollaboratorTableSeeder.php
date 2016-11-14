@@ -137,5 +137,15 @@ class CollaboratorTableSeeder extends Seeder
             'from_collaborator' => true,
             'invite_message'    => 'initial seed',
         ]);
+
+        ProjectCollaborator::create([
+            'skill_id'          => $skill_prog->id,
+            'project_id'        => $project_james->id,
+            'is_project_owner'  => false,
+            'user_id'           => $user_richard->id,
+            'accepted'          => false,
+            'from_collaborator' => true,
+            'invite_message'    => 'initial seed',
+        ]);
     }
 }
