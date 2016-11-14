@@ -7,89 +7,107 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 class VisitorTest extends TestCase
 {
     // use DatabaseMigrations;
-    // use DatabaseRefreshMigrations;
-    use DatabaseRefreshSeedMigrations;
+    use DatabaseRefreshMigrations;
+    // use DatabaseRefreshSeedMigrations;
 
-    public function testHomePage()
+    private function initProjects()
     {
-        $this->visit('/')
-            ->see('Projects')
-            ->see('Talents')
-            ->see('About')
-            ->see('Login')
-            ->see('Register')
-            ->see('Talent Linker')
-            ->see('Find projects')
-            ->see('Find talents');
+        $collab = factory(App\ProjectCollaborator::class)->states('with_skill', 'with_project', 'with_user', 'owner')->create();
+        $project = $collab->project;
+        $user = $collab->user;
+        $skill = $collab->skill;
+
+        return [$collab, $user, $project, $skill];
     }
 
-    public function testAboutPage()
+    public function testVisitorShouldSeeHomePage()
     {
-        $this->visit('/about')
-            ->see('Etienne Frank')
-            ->see('Michael Caraccio');
+        $this->visit('/');
+        $this->see('Projects');
+        $this->see('Talents');
+        $this->see('About');
+        $this->see('Login');
+        $this->see('Register');
+        $this->see('Talent Linker');
+        $this->see('Find projects');
+        $this->see('Find talents');
     }
 
-    public function testWhenNoProjects()
+    public function testVisitorShouldSeeAboutPage()
     {
-        $this->truncDatabase();
-        $this->visit('/projects')
-            ->see('No Projects...')
-            ->see('Search Project');
+        $this->visit('/');
+        $this->click('About');
+        $this->seePageIs('/about');
+        $this->see('Etienne Frank');
+        $this->see('Michael Caraccio');
     }
 
-    public function testWhenNoTalents()
+    public function testVisitorShouldSeeWhenNoProjects()
     {
-        $this->truncDatabase();
-        $this->visit('/talents')
-            ->see('No Talents...')
-            ->see('Search Talent');
+        $this->visit('/');
+        $this->click('Projects');
+        $this->seePageIs('/projects');
+        $this->see('No Projects...');
+        $this->see('Search Project');
     }
 
-    public function testProjectsPage()
+    public function testVisitorShouldSeeWhenNoTalents()
     {
-        $this->visit('/projects')
-            ->see('Search Project')
-            ->see('Cool Cats')
-            ->see('Programming')
-            ->see('Marketing');
+        $this->visit('/');
+        $this->click('Talents');
+        $this->seePageIs('/talents');
+        $this->see('No Talents...');
+        $this->see('Search Talent');
     }
 
-    public function testTalentsPage()
+    public function testVisitorShouldSeeProjectsPage()
     {
-        $this->visit('/talents')
-            ->see('Search Talent')
-            ->see('James Test')
-            ->see('Programming')
-            ->see('Game Engine')
-            ->see('Marketing');
+        list($collab, $user, $project, $skill) = $this->initProjects();
+
+        $this->visit('/projects');
+        $this->see('Search Project');
+        $this->see($project->name);
+        $this->see($skill->name);
     }
 
-    public function testProjectPage()
+    public function testVisitorShouldSeeTalentsPage()
     {
-        $this->visit('/projects/1')
-            ->see('Cool Cats')
-            ->see('Programming')
-            ->see('3 / 3')
-            ->see('Game Engine')
-            ->see('0 / 1')
-            ->see('James Test')
-            ->see('English')
-            ->see('French');
+        list($collab, $user, $project, $skill) = $this->initProjects();
+
+        $this->visit('/talents');
+        $this->see('Search Talent');
+        $this->see($user->name);
+        $this->see($skill->name);
     }
 
-    public function testTalentPage()
+    public function testVisitorShouldSeeProjectPage()
     {
-        $this->visit('/talents/1')
-            ->see('James Test')
-            ->see('test@test.com')
-            ->see('Programming')
-            ->see('Game Engine')
-            ->see('Art 2D')
-            ->see('Art 3D')
-            ->see('English')
-            ->see('French')
-            ->see('German')
-            ->see('Cool Cats');
+        list($collab, $user, $project, $skill) = $this->initProjects();
+        $language = factory(App\Language::class)->create();
+        $project->languages()->attach($language);
+
+        $skills_count = 20;
+        $project->generalSkills()->attach($skill, ['count' => $skills_count]);
+
+        $this->visit($project->path());
+        $this->see($project->name);
+        $this->see($skill->name);
+        $this->see($language->name);
+        $this->see($user->name);
+        $this->see('1 / '.$skills_count);
+    }
+
+    public function testVisitorShouldSeeTalentPage()
+    {
+        list($collab, $user, $project, $skill) = $this->initProjects();
+        $language = factory(App\Language::class)->create();
+        $user->languages()->attach($language);
+
+        $this->visit($user->path());
+        $this->see($user->name);
+        $this->see($user->email);
+        $this->see($skill->name);
+        $this->see($language->name);
+        $this->see($project->name);
     }
 }
