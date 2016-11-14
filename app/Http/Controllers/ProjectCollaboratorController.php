@@ -132,7 +132,14 @@ class ProjectCollaboratorController extends Controller
             return back();
         }
 
-        ProjectCollaborator::where('project_id', '=', $project->id)->where('user_id', '=', $user->id)->delete();
+        // If owner leave, then delete every thing related to the project
+        if ($project->owner->user_id == $user->id) {
+            ProjectCollaborator::where('project_id', '=', $project->id)->delete();
+            $project->delete();
+        // Elsewhere if it's only a collaborator, remove the link
+        } else {
+            ProjectCollaborator::where('project_id', '=', $project->id)->where('user_id', '=', $user->id)->delete();
+        }
 
         return back();
     }
