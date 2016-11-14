@@ -42,10 +42,10 @@ class ProjectCommentTest extends TestCase
         $this->actingAs($owner);
         $this->visit($project->path());
         $this->click('Private chat');
-        $this->seePageIs($project->path().'/private_comments');
+        $this->seePageIs($project->path().'/privateComments');
         $this->type($comment_message, 'content');
         $this->press('comment');
-        $this->seePageIs($project->path().'/private_comments');
+        $this->seePageIs($project->path().'/privateComments');
         $this->see($comment_message);
     }
 
@@ -76,7 +76,7 @@ class ProjectCommentTest extends TestCase
         $collab->save();
 
         $this->actingAs($user);
-        $this->visit($project->path().'/private_comments');
+        $this->visit($project->path().'/privateComments');
         $this->see($comment_private->content);
     }
 
