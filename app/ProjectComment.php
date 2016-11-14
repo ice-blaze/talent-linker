@@ -18,13 +18,4 @@ class ProjectComment extends Model
     {
         return $this->belongsTo(User::class);
     }
-
-    public function isCurrentAuthTheOwner()
-    {
-        if (! Auth::user()) {
-            return false;
-        }
-
-        return $this->user_id == Auth::user()->id;
-    }
 }
