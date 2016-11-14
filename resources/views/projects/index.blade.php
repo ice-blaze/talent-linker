@@ -60,7 +60,7 @@
             <div class="card-block">
               <h4 class="card-title"><a href="{{ $project->path() }}">{{ $project->name }}</a></h4>
               @if (Auth::user())
-                @if($project->is_in_search_distance(Auth::user()))
+                @if($project->isInSearchDistance(Auth::user()))
                   <span class="tag tag-pill tag-primary"><i class="fa fa-map-marker" aria-hidden="true"></i> Near You</span>
                 @else
                   <span class="tag tag-pill tag-danger"><i class="fa fa-map-marker" aria-hidden="true"></i> Not Near</span>
@@ -71,7 +71,7 @@
             <div class="card-block">
               <p class="card-text">{{ $project->short_description }}</p>
               <p>
-                @foreach($project->current_skill_and_wanted() as $skill)
+                @foreach($project->currentSkillAndWanted() as $skill)
                   @if($skill['wanted'] > 0 && $skill['have'] >= $skill['wanted'])
                     <span class="tag tag-primary">
                   @else

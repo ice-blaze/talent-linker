@@ -5,7 +5,7 @@
   <div class="row text-right col-centered">
     @if( Auth::user() && ($project->isUserTheOwner(Auth::user()) || $project->isUserACollaborator(Auth::user())))
       <a class="btn btn-primary" href="/projects/{{ $project->id }}/invitations">See pendings</a>
-      <a class="btn btn-primary" href="/projects/{{ $project->id }}/private_comments">Private chat</a>
+      <a class="btn btn-primary" href="/projects/{{ $project->id }}/privateComments">Private chat</a>
     @endif
 
     @if(Auth::user() && $project->isUserTheOwner(Auth::user()))
@@ -40,7 +40,7 @@
     <div class="col-md-12">
       <h1>{{$project->name}}</h1>
       @if (Auth::user())
-        @if ($project->is_in_search_distance(Auth::user()))
+        @if ($project->isInSearchDistance(Auth::user()))
           <span class="tag tag-pill tag-primary"><i class="fa fa-map-marker" aria-hidden="true"></i> Near You</span>
         @else
           <span class="tag tag-pill tag-danger"><i class="fa fa-map-marker" aria-hidden="true"></i> Not Near</span>
@@ -72,7 +72,7 @@
   <br>
   <div class="row">
     <div class="col-sm-12 lead col-centered">
-      @foreach($project->current_skill_and_wanted() as $skill)
+      @foreach($project->currentSkillAndWanted() as $skill)
         @if($skill['wanted'] > 0 && $skill['have'] >= $skill['wanted'])
           <span class="tag tag-primary">
         @else

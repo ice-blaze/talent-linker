@@ -27,7 +27,7 @@ class ProjectController extends Controller
         if ($request->skills) {
             foreach ($request->skills as $skill_tech_name => $skill_id) {
                 foreach ($projects as $project_key => $project) {
-                    if (! $project->general_skills->contains($skill_id)) {
+                    if (! $project->generalSkills->contains($skill_id)) {
                         unset($projects[$project_key]);
                     }
                 }
@@ -36,7 +36,7 @@ class ProjectController extends Controller
 
         if ($request->near_by) {
             foreach ($projects as $project_key => $project) {
-                if (! $project->is_in_search_distance(Auth::user())) {
+                if (! $project->isInSearchDistance(Auth::user())) {
                     unset($projects[$project_key]);
                 }
             }
@@ -47,7 +47,7 @@ class ProjectController extends Controller
 
     public function show(Project $project)
     {
-        $general_skills = $project->general_skills;
+        $general_skills = $project->generalSkills;
 
         return view('projects.show', compact('project'));
     }
@@ -75,7 +75,7 @@ class ProjectController extends Controller
             'short_description' => 'required',
             'long_description' => 'required',
             'languages' => 'required',
-            ]);
+        ]);
 
         // project creation
         $project = new Project;
@@ -88,7 +88,7 @@ class ProjectController extends Controller
         $project->save();
 
         $project->languages()->sync($request->languages);
-        $this->updateGeneralSkills($request, $project);
+        $this->updategeneralSkills($request, $project);
 
         // owner collaborator creation
         $collaborator = new ProjectCollaborator();
@@ -105,29 +105,36 @@ class ProjectController extends Controller
 
     public function edit(Project $project)
     {
-        $languages = Language::all();
-        $general_skills = GeneralSkill::all();
-        $all_users = User::all();
+        $languages = $project->languages;
 
-        return view('projects.edit', compact('project', 'languages', 'general_skills', 'all_users'));
+        $general_skills = $project->generalSkills;
+
+        return view('projects.edit', compact('project', 'languages', 'general_skills'));
     }
 
-    public function updateGeneralSkills($request, $project)
+    public function updategeneralSkills($request, $project)
     {
         //TODO maybe there is a better way
-        $project->general_skills()->detach();
+        $project->generalSkills()->detach();
         foreach ($request->general_skills as $id => $count) {
             // ignore relations with 0 skills
             if ($count < 1) {
                 continue;
             }
 
-            $project->general_skills()->attach(GeneralSkill::find($id), ['count' => $count]);
+            $project->generalSkills()->attach(GeneralSkill::find($id), ['count' => $count]);
         }
     }
 
     public function update(Request $request, Project $project)
     {
+        $this->validate($request, [
+            'name' => 'required',
+            'short_description' => 'required',
+            'long_description' => 'required',
+            'languages' => 'required',
+        ]);
+
         $project->update([
             'name' => $request->name,
             'short_description' => $request->short_description,
@@ -141,7 +148,7 @@ class ProjectController extends Controller
         $project->languages()->sync($request->languages);
 
         // managed the skills
-        $this->updateGeneralSkills($request, $project);
+        $this->updategeneralSkills($request, $project);
 
         return view('projects.show', compact('project'));
     }

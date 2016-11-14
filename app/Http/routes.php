@@ -51,8 +51,8 @@ Route::group(['middleware' => 'auth.basic'], function () {
     Route::patch('comments/{comment}', 'ProjectCommentController@update');
 
     // Private project comments
-    Route::get('projects/{project}/private_comments', 'ProjectCommentController@private_index');
-    Route::post('projects/{project}/private_comments', 'ProjectCommentController@private_store');
+    Route::get('projects/{project}/privateComments', 'ProjectCommentController@private_index');
+    Route::post('projects/{project}/privateComments', 'ProjectCommentController@private_store');
 
     // Invitations
     Route::get('projects/{project}/invitations', 'ProjectCollaboratorController@projectIndex');
