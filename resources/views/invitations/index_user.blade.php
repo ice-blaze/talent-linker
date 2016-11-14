@@ -6,7 +6,7 @@
   </div>
 
   <div class="row">
-    @foreach($invitations as $invitation)
+    @forelse($invitations as $invitation)
       <li class="list-group-item">
         <a href="{{$invitation->user->path()}}">{{$invitation->user->name}}</a> -
         <a href="{{$invitation->project->path()}}">{{$invitation->project->name}}</a>
@@ -44,6 +44,9 @@
         @endif
 
       </li>
-    @endforeach
+    @empty
+      <br>
+      <span class="lead col-centered">No invitations...</span>
+    @endforelse
   </div>
 @endsection
