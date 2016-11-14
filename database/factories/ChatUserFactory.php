@@ -31,3 +31,9 @@ $factory->state(App\ChatUser::class, 'unseen', function ($faker) {
         'seen' => false,
     ];
 });
+
+// How to use
+// $chat = factory(App\ChatUser::class, 'no_users')->states('seen')->make();
+// $chat->sender()->associate($user1);
+// $chat->reciever()->associate($user2);
+// $chat->save();
