@@ -1,6 +1,6 @@
 <?php
 
-class example_test extends TestCase
+class ExampleTest extends TestCase
 {
     public function testBasicExample()
     {
