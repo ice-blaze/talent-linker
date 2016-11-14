@@ -2,7 +2,7 @@
 
 $factory->define(App\Project::class, function (Faker\Generator $faker) {
     return [
-        'name'              => $faker->word,
+        'name'              => $faker->numerify('Project #######'),
         'short_description' => $faker->sentence,
         'long_description'  => $faker->paragraph,
         'github_link'       => $faker->url,
