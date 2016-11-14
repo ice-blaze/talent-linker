@@ -112,7 +112,7 @@ class create_user_test extends TestCase
 
         $user = factory(App\User::class)->create();
         $user->languages()->attach($languages);
-        $user->general_skills()->attach($general_skills);
+        $user->generalSkills()->attach($general_skills);
 
         $collab_owner = factory(App\ProjectCollaborator::class)->states('with_skill', 'with_project', 'owner')->make();
         $collab_owner->user()->associate($user);

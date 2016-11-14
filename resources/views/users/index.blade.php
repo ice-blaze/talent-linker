@@ -54,14 +54,14 @@
               <div class="card-block">
                 <h4 class="card-title"><a href="{{ $user->path() }}">{{ $user->name }}</a></h4>
                 @if (Auth::user())
-                  @if($user->is_in_search_distance(Auth::user()))
+                  @if($user->isInSearchDistance(Auth::user()))
                     <span class="tag tag-pill tag-primary"><i class="fa fa-map-marker" aria-hidden="true"></i> Near You</span>
                   @else
                     <span class="tag tag-pill tag-danger"><i class="fa fa-map-marker" aria-hidden="true"></i> Not Near</span>
                   @endif
                 @endif
                 <br>
-                @forelse($user->general_skills as $skill)
+                @forelse($user->generalSkills as $skill)
                   <span class="tag tag-primary">{{$skill->name}}</span>
                 @empty
                   No Skills...
