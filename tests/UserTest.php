@@ -2,7 +2,7 @@
 
 use App\Traits\DatabaseRefreshMigrations;
 
-class create_user_test extends TestCase
+class UserTest extends TestCase
 {
     use DatabaseRefreshMigrations;
 
