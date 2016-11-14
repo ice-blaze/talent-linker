@@ -20,7 +20,6 @@ class ProjectCommentTest extends TestCase
         return [$collab_owner, $owner, $project, $skill, $user];
     }
 
-
     public function testCollaboratorShouldCommentOnProject()
     {
         list($collab_owner, $owner, $project, $skill, $user) = $this->initValues();
