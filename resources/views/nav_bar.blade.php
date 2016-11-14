@@ -2,7 +2,7 @@
     <a class="navbar-brand" href="/">Talent Linker</a>
     <ul class="nav navbar-nav">
         <li class="nav-item {{Request::is('projects*') ? 'active':''}}">
-            a class="nav-link" href="/projects">Projects</a>
+            <a class="nav-link" href="/projects">Projects</a>
         </li>
         <li class="nav-item {{Request::is('talents*') ? 'active':''}}">
             <a class="nav-link" href="/talents">Talents</a>
