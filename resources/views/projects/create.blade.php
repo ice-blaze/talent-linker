@@ -1,7 +1,7 @@
 @extends('projects/template')
 
 @section('action')
-  {{"/projects/create"}}
+    {{"/projects/create"}}
 @endsection
 
 @section('button_name')
@@ -9,12 +9,12 @@
 @endsection
 
 @section('owner_skill')
-  <div class="form-group">
-    <label for="project">Your skill as project owner</label>
-    <select name="skill" class="custom-select">
-      @foreach($general_skills as $skill)
-        <option value="{{$skill->id}}">{{$skill->name}}</option>
-      @endforeach
-    </select>
-  </div>
+    <div class="form-group">
+        <label for="project">Your skill as project owner</label>
+        <select name="skill" class="custom-select">
+            @foreach($general_skills as $skill)
+                <option value="{{$skill->id}}">{{$skill->name}}</option>
+            @endforeach
+        </select>
+    </div>
 @endsection

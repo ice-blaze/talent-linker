@@ -2,7 +2,7 @@
 
 use App\Traits\DatabaseRefreshMigrations;
 
-class invitation_test extends TestCase
+class InvitationTest extends TestCase
 {
     use DatabaseRefreshMigrations;
 
