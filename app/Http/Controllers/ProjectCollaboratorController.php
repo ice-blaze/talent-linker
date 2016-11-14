@@ -14,7 +14,11 @@ class ProjectCollaboratorController extends Controller
     // pendings
     public function projectIndex(Request $request, Project $project)
     {
-        if (Auth::check() && Auth::id() == $user->id) {
+        $collabs_id = array_map(function ($c) {
+            return $c['user_id'];
+        }, $project->collaborators->toArray());
+
+        if (Auth::check() && in_array(Auth::id(), $collabs_id)) {
             $pendings = ProjectCollaborator::where('project_id', '=', $project->id)
             ->where('is_project_owner', '=', false)->get();
 
@@ -95,6 +99,7 @@ class ProjectCollaboratorController extends Controller
         $invitation->project_id = request()->project;
         $invitation->is_project_owner = false;
         $invitation->from_collaborator = false;
+        $invitation->accepted = false;
         $invitation->skill_id = request()->skill;
         //TODO add comment
         // $invitation->invitation_message = request()->;
