@@ -92,7 +92,7 @@
                 <label for="general_skills">Skills</label>
                 <ul name="general_skills[]" id="general_skills" >
 
-                    {{$skills_array = collect(array_pluck($general_skills->toArray(), 'pivot.count', 'id'))}}
+                    @php ($skills_array = collect(array_pluck($general_skills->toArray(), 'pivot.count', 'id')))
 
                     @foreach(App\GeneralSkill::all() as $option)
                     @if (count(collect(old('general_skills'))) > 0)
