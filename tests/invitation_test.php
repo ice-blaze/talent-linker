@@ -171,6 +171,28 @@ class invitation_test extends TestCase
         $this->dontSee($new_user->name);
     }
 
+    public function testUserShouldQuitProject()
+    {
+        list($collab_recruiter, $user, $project, $skill, $new_user) = $this->initValues();
+
+        $project_name = $project->name;
+
+        $this->actingAs($user);
+
+        // Check project exist on the main page
+        $this->visit('/projects');
+        $this->see($project_name);
+
+        // Quite project
+        $this->visit($user->path().'/invitations');
+        $this->press('Quit Project');
+        $this->seePageIs($user->path().'/invitations');
+
+        // Check project don't exist anymore
+        $this->visit('/projects');
+        $this->dontSee($project_name);
+    }
+
     // public function testVisitorShouldNotJoinProject()
     // {
     //     $this->assertTrue(true);
