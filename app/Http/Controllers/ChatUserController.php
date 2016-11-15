@@ -18,6 +18,7 @@ class ChatUserController extends Controller
         $chats->each(function ($chat) use ($user) {
             if ($chat->reciever == $user) {
                 $chat->seen = true;
+                $chat->save();
             }
         });
 

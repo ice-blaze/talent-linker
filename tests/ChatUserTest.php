@@ -25,6 +25,7 @@ class ChatUserTest extends TestCase
         $message = 'Hey Alice Cooper !';
         $alice = factory(App\User::class)->create();
         $bob = factory(App\User::class)->create();
+
         $this->actingAs($alice);
         $this->visit($bob->path().'/chat');
         $this->type($message, 'content');
@@ -33,6 +34,7 @@ class ChatUserTest extends TestCase
 
         $this->actingAs($bob);
         $this->visit($alice->path().'/chat');
+        $this->see(' seen'); // space is important otherwise 'seen' fit with 'seen' and 'unseen'
 
         $this->actingAs($alice);
         $this->visit($bob->path().'/chat');
