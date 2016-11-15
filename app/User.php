@@ -81,11 +81,6 @@ class User extends Authenticatable
         return $this->hasMany('App\ProjectCollaborator')->where('accepted', '=', true);
     }
 
-    public function isAdmin()
-    {
-        return $this->is_admin;
-    }
-
     public function chats_with($another_user)
     {
         return ChatUser::all()->whereIn('sender_id', [$another_user->id, $this->id])
