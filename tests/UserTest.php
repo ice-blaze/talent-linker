@@ -248,7 +248,7 @@ class UserTest extends TestCase
             ->press('submit_user');
         $this->seePageIs('/talents/'.$user1->id);
 
-        # Check if save correctly
+        // Check if save correctly
         $this->actingAs($user1)
             ->visit('/talents/'.$user1->id.'/edit')
             ->see($user2->name)
@@ -306,16 +306,16 @@ class UserTest extends TestCase
         // Edit empty fields
         $this->actingAs($user1)
             ->visit('/talents/'.$user1->id.'/edit')
-            ->type("", 'name')
-            ->type("", 'last_name')
-            ->type("", 'first_name')
-            ->type("", 'email')
-            ->type("", 'general_skills[1]')
-            ->type("", 'general_skills[2]')
-            ->type("", 'general_skills[3]')
-            ->type("", 'general_skills[4]')
-            ->type("", 'general_skills[5]')
-            ->type("", 'general_skills[6]')
+            ->type('', 'name')
+            ->type('', 'last_name')
+            ->type('', 'first_name')
+            ->type('', 'email')
+            ->type('', 'general_skills[1]')
+            ->type('', 'general_skills[2]')
+            ->type('', 'general_skills[3]')
+            ->type('', 'general_skills[4]')
+            ->type('', 'general_skills[5]')
+            ->type('', 'general_skills[6]')
             ->select([], 'languages[]')
             ->press('submit_user');
         $this->seePageIs('/talents/'.$user1->id.'/edit')
