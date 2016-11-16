@@ -24,9 +24,6 @@ Route::get('talents/{user}', 'UserController@show');
 
 
 Route::group(['middleware' => 'auth'], function () {
-});
-
-Route::group(['middleware' => 'auth.basic'], function () {
 
     // Feedbacks
     Route::get('feedbacks', 'FeedbackController@index');
@@ -68,6 +65,9 @@ Route::group(['middleware' => 'auth.basic'], function () {
     Route::get('talents/{user}/invitations', 'ProjectCollaboratorController@userIndex');
     Route::get('talents/{user}/recruit', 'ProjectCollaboratorController@recruit');
     Route::post('talents/{user}/recruit', 'ProjectCollaboratorController@userStore');
+});
+
+Route::group(['middleware' => 'auth.basic'], function () {
 });
 // Route::get('admin', ['as' =>'admin', 'uses' => 'UserController@index', 'middleware' => ['auth', 'admin']]);
 // Route::get('protected', ['middleware' => ['auth', 'admin'], function() {
