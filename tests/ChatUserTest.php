@@ -56,4 +56,43 @@ class ChatUserTest extends TestCase
         // $this->assertTrue($chat->isUserTheOwner($user1));
         // $this->assertTrue($chat->isUserTheOwner($user2));
     }
+
+    public function testChatCreateAndEditAMessage()
+    {
+        $message = 'Hey sponge Bob !';
+        $messageEdited = $message . ' Edited';
+        $alice = factory(App\User::class)->create();
+        $bob = factory(App\User::class)->create();
+        $this->actingAs($alice);
+        $this->visit($bob->path());
+        $this->click('Chat with this talent');
+        $this->type($message, 'content');
+        $this->press('send');
+        $this->seePageIs($bob->path().'/chat');
+        $this->see($message);
+
+        $this->click('Edit');
+        $this->type($messageEdited, 'content');
+        $this->press('update_message');
+        $this->seePageIs($bob->path().'/chat');
+        $this->see($messageEdited);
+    }
+
+    public function testChatCreateAndDeleteAMessage()
+    {
+        $message = 'Hey pirate Bob !';
+        $alice = factory(App\User::class)->create();
+        $bob = factory(App\User::class)->create();
+        $this->actingAs($alice);
+        $this->visit($bob->path());
+        $this->click('Chat with this talent');
+        $this->type($message, 'content');
+        $this->press('send');
+        $this->seePageIs($bob->path().'/chat');
+        $this->see($message);
+
+        $this->click('delete_message');
+        $this->visit($bob->path());
+        $this->dontSee($message);
+    }
 }

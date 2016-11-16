@@ -10,7 +10,7 @@
             <textarea name="content" class="form-control">{{ $chat->content }} </textarea>
         </div>
         <div class="form-group">
-            <button type="submit" class="btn btn-primary"  name="update_comment">Update message</button>
+            <button type="submit" class="btn btn-primary"  name="update_message">Update message</button>
         </div>
     </form>
 @endsection
