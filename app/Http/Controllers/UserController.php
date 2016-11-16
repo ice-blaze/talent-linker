@@ -79,6 +79,7 @@ class UserController extends Controller
             'first_name' => 'required|max:255',
             'languages' => 'required',
             'general_skills' => 'required',
+            'find_distance' => 'required|numeric'
             ]);
 
         $user->update(request()->all());
