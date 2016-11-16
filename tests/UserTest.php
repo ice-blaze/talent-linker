@@ -192,4 +192,137 @@ class UserTest extends TestCase
         $this->see($user1->name);
         $this->dontSee($user2->name);
     }
+
+    public function testGuestWantToEditTalentProfile()
+    {
+        $user1 = factory(App\User::class)->create();
+        $this->visit('/talents');
+        $this->see($user1->name);
+        $response = $this->call('GET', '/talents/'.$user1->id.'/edit');
+        $this->assertEquals(401, $response->status());
+    }
+
+    public function testTalentWantToEditandUpdateProfile()
+    {
+        $general_skills = factory(App\GeneralSkill::class, 3)->create();
+        $general_skills_not_used = factory(App\GeneralSkill::class, 3)->create();
+        $languages = factory(App\Language::class, 3)->create();
+        $languages_not_used = factory(App\Language::class, 3)->create();
+
+        $user1 = factory(App\User::class)->create();
+        $user1->languages()->attach($languages);
+        $user1->generalSkills()->attach($general_skills);
+
+        $general_skills = factory(App\GeneralSkill::class, 3)->create();
+        $general_skills_not_used = factory(App\GeneralSkill::class, 3)->create();
+        $languages = factory(App\Language::class, 3)->create();
+        $languages_not_used = factory(App\Language::class, 3)->create();
+
+        $user2 = factory(App\User::class)->create();
+        $user2->languages()->attach($languages);
+        $user2->generalSkills()->attach($general_skills);
+
+
+        $this->actingAs($user1)
+            ->visit('/talents/'.$user1->id.'/edit')
+            ->see($user1->name)
+            ->see($user1->last_name)
+            ->see($user1->first_name)
+            ->see($user1->talent_description)
+            ->see($user1->website)
+            ->see($user1->github_link)
+            ->see($user1->stack_overflow)
+            ->see($user1->image);
+
+        // Edit profile and set user 2 values for user 1
+        $this->actingAs($user1)
+            ->visit('/talents/'.$user1->id.'/edit')
+            ->type($user2->name, 'name')
+            ->type($user2->last_name, 'last_name')
+            ->type($user2->first_name, 'first_name')
+            ->type($user2->image, 'image')
+            ->type($user2->website, 'website')
+            ->type($user2->github_link, 'github_link')
+            ->type($user2->stack_overflow, 'stack_overflow')
+            ->type($user2->talent_description, 'talent_description')
+            ->press('submit_user');
+        $this->seePageIs('/talents/'.$user1->id);
+
+        // Check if save correctly
+        $this->actingAs($user1)
+            ->visit('/talents/'.$user1->id.'/edit')
+            ->see($user2->name)
+            ->see($user2->last_name)
+            ->see($user2->first_name)
+            ->see($user2->talent_description)
+            ->see($user2->website)
+            ->see($user2->github_link)
+            ->see($user2->stack_overflow)
+            ->see($user2->image);
+    }
+
+    public function testTalentChangeEmailWithAlreadyRegisteredEmail()
+    {
+        $general_skills = factory(App\GeneralSkill::class, 3)->create();
+        $general_skills_not_used = factory(App\GeneralSkill::class, 3)->create();
+        $languages = factory(App\Language::class, 3)->create();
+        $languages_not_used = factory(App\Language::class, 3)->create();
+
+        $user1 = factory(App\User::class)->create();
+        $user1->languages()->attach($languages);
+        $user1->generalSkills()->attach($general_skills);
+
+        $user2 = factory(App\User::class)->create();
+
+        $this->actingAs($user1)
+            ->visit('/talents/'.$user1->id.'/edit')
+            ->see($user1->name)
+            ->see($user1->email);
+
+        // Set email from user2 for user1
+        $this->actingAs($user1)
+            ->visit('/talents/'.$user1->id.'/edit')
+            ->type($user2->email, 'email')
+            ->press('submit_user');
+
+        // Check if email did not changed
+        $this->actingAs($user1)
+            ->visit('/talents/'.$user1->id.'/edit')
+            ->see($user1->name)
+            ->see($user1->email);
+    }
+
+    public function testTalentUpdateProfileWithEmptyFields()
+    {
+        $general_skills = factory(App\GeneralSkill::class, 3)->create();
+        $general_skills_not_used = factory(App\GeneralSkill::class, 3)->create();
+        $languages = factory(App\Language::class, 3)->create();
+        $languages_not_used = factory(App\Language::class, 3)->create();
+
+        $user1 = factory(App\User::class)->create();
+        $user1->languages()->attach($languages);
+        $user1->generalSkills()->attach($general_skills);
+
+        // Edit empty fields
+        $this->actingAs($user1)
+            ->visit('/talents/'.$user1->id.'/edit')
+            ->type('', 'name')
+            ->type('', 'last_name')
+            ->type('', 'first_name')
+            ->type('', 'email')
+            ->type('', 'general_skills[1]')
+            ->type('', 'general_skills[2]')
+            ->type('', 'general_skills[3]')
+            ->type('', 'general_skills[4]')
+            ->type('', 'general_skills[5]')
+            ->type('', 'general_skills[6]')
+            ->select([], 'languages[]')
+            ->press('submit_user');
+        $this->seePageIs('/talents/'.$user1->id.'/edit')
+            ->see('The name field is required.')
+            ->see('The last name field is required.')
+            ->see('The first name field is required.')
+            ->see('The email field is required.')
+            ->see('The languages field is required.');
+    }
 }
