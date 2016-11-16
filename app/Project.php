@@ -99,14 +99,6 @@ class Project extends Model
         return $res;
     }
 
-    public function generalSkillCount(GeneralSkill $skill)
-    {
-        $skill = $this->generalSkills()->find($skill->id);
-        if ($skill) {
-            return $skill->pivot->count;
-        }
-    }
-
     public function languages()
     {
         return $this->belongsToMany('App\Language')->withTimestamps();
