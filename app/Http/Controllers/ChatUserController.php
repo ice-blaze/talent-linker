@@ -43,8 +43,7 @@ class ChatUserController extends Controller
 
     public function edit(ChatUser $chat)
     {
-        if(Auth::User()->id != $chat->sender_id)
-        {
+        if (Auth::User()->id != $chat->sender_id) {
             return redirect('/404');
         }
 
