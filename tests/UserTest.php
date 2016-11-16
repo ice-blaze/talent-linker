@@ -198,8 +198,8 @@ class UserTest extends TestCase
         $user1 = factory(App\User::class)->create();
         $this->visit('/talents');
         $this->see($user1->name);
-        $response = $this->call('GET', '/talents/'.$user1->id.'/edit');
-        $this->assertEquals(401, $response->status());
+        $this->visit($user1->path().'/edit');
+        $this->seePageIs('/login');
     }
 
     public function testTalentWantToEditandUpdateProfile()
