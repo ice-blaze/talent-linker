@@ -156,4 +156,40 @@ class UserTest extends TestCase
             ->see($collab_owner->skill->name)
             ->see('Owner');
     }
+
+    public function testTalentSearch()
+    {
+        $user1 = factory(App\User::class)->create();
+        $user2 = factory(App\User::class)->create();
+
+        $this->visit('/talents');
+        $this->see($user1->name);
+        $this->see($user2->name);
+        $this->type($user1->name, 'search');
+        $this->press('search_button');
+        $this->seePageIs('/talents');
+        $this->see($user1->name);
+        $this->dontSee($user2->name);
+    }
+
+    public function testTalentSkillSearch()
+    {
+        $collab1 = factory(App\ProjectCollaborator::class)->states('with_user', 'with_skill', 'with_project', 'owner')->create();
+        $user1 = $collab1->user;
+        $skill1 = $collab1->skill;
+        $user1->generalSkills()->attach($skill1);
+        $collab2 = factory(App\ProjectCollaborator::class)->states('with_user', 'with_skill', 'with_project', 'owner')->create();
+        $user2 = $collab2->user;
+        $skill2 = $collab2->skill;
+        $user2->generalSkills()->attach($skill2);
+
+        $this->visit('/talents');
+        $this->see($user1->name);
+        $this->see($user2->name);
+        $this->check('skills['.$skill1->technical_name.']');
+        $this->press('search_button');
+        $this->seePageIs('/talents');
+        $this->see($user1->name);
+        $this->dontSee($user2->name);
+    }
 }

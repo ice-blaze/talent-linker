@@ -14,7 +14,7 @@ class ChatUserController extends Controller
   {
       $user = User::find(Auth::user()->id);
       $reciever = User::find($reciever_id);
-      $chats = $user->chats_with($reciever);
+      $chats = $user->chatsWith($reciever);
 
       return view('chats.index', compact('user', 'reciever', 'chats'));
   }
