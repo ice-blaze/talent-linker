@@ -60,7 +60,7 @@ class ChatUserTest extends TestCase
     public function testChatCreateAndEditAMessage()
     {
         $message = 'Hey sponge Bob !';
-        $messageEdited = $message . ' Edited';
+        $messageEdited = $message.' Edited';
         $alice = factory(App\User::class)->create();
         $bob = factory(App\User::class)->create();
         $this->actingAs($alice);
