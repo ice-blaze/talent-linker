@@ -33,6 +33,7 @@
                         ])
                     @endforeach
                 </div>
+                <button type="submit" class="hidden" name="search_button"/> {{-- tests can activate this form --}}
             </form>
         </div>
     </div>

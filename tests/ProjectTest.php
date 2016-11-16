@@ -303,4 +303,42 @@ class ProjectTest extends TestCase
         $this->assertTrue($language->users->contains($user));
         $this->assertTrue($language->projects->contains($project));
     }
+
+    public function testProjectSearch()
+    {
+        $collab = factory(App\ProjectCollaborator::class, 2)->states('with_skill', 'with_project', 'with_user', 'owner')->create();
+        $project1 = $collab[0]->project;
+        $project2 = $collab[1]->project;
+
+        $this->visit('/projects');
+        $this->see($project1->name);
+        $this->see($project2->name);
+        $this->type($project1->name, 'search');
+        $this->press('search_button');
+        $this->seePageIs('/projects');
+        $this->see($project1->name);
+        $this->dontSee($project2->name);
+    }
+
+    public function testProjectSkillSearch()
+    {
+        $collab1 = factory(App\ProjectCollaborator::class)->states('with_user', 'with_skill', 'with_project', 'owner')->create();
+        $project1 = $collab1->project;
+        $skill1 = $collab1->skill;
+        $project1->generalSkills()->attach($skill1, ['count' => 2]);
+        $collab2 = factory(App\ProjectCollaborator::class)->states('with_user', 'with_skill', 'with_project', 'owner')->create();
+        $project2 = $collab2->project;
+        $user2 = $collab2->user;
+        $skill2 = $collab2->skill;
+        $project2->generalSkills()->attach($skill2, ['count' => 2]);
+
+        $this->visit('/projects');
+        $this->see($project1->name);
+        $this->see($project2->name);
+        $this->check('skills['.$skill1->technical_name.']');
+        $this->press('search_button');
+        $this->seePageIs('/projects');
+        $this->see($project1->name);
+        $this->dontSee($project2->name);
+    }
 }
