@@ -13,7 +13,7 @@ class ChatUserController extends Controller
     {
         $user = User::find(Auth::user()->id);
         $reciever = User::find($reciever_id);
-        $chats = $user->chats_with($reciever);
+        $chats = $user->chatsWith($reciever);
 
         $chats->each(function ($chat) use ($user) {
             if ($chat->reciever == $user) {
