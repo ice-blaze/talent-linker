@@ -2,7 +2,7 @@
 
 use App\Traits\DatabaseRefreshSeedMigrations;
 
-class feedbacks_test extends TestCase
+class FeedbacksTest extends TestCase
 {
     use DatabaseRefreshSeedMigrations;
 
