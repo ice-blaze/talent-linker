@@ -33,7 +33,7 @@
 
         <div class="form-group{{ $errors->has('long_description') ? ' has-danger' : '' }}">
             <label for="long_description">Long Description</label>
-            <div class="form-control{{ $errors->has('short_description') ? ' form-control-danger' : '' }}">
+            <div class="form-control{{ $errors->has('long_description') ? ' form-control-danger' : '' }}">
                 {{-- could be simplified I guess --}}
                 {{ $description = old('long_description') }}
                 @if (isset($project)) {{$description = $project->long_description}} @endif
