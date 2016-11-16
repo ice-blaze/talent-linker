@@ -20,9 +20,6 @@ class FeedbackController extends Controller
     public function store(Request $request)
     {
         $user = Auth::user();
-        if ($user == null) {
-            return $this->index();
-        }
         $this->validate($request, [
             'content' => 'required',
         ]);
