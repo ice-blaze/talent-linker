@@ -69,3 +69,15 @@ body { padding-top: 70px; }*/
 .search-button{
   cursor: pointer;
 }
+
+.delete-message a{
+  cursor: pointer;
+
+}
+
+.delete-message{
+  float: right;
+  padding: 5px;
+  margin-right: -20px;
+  margin-top: -15px;
+}
