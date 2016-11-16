@@ -58,17 +58,17 @@
         <div class="form-group{{ $errors->has('talent_description') ? ' has-danger' : '' }}">
             <label for="talent_description">Talent Description</label>
             <div class="form-control{{ $errors->has('talent_description') ? ' form-control-danger' : '' }}">
-            @include('helpers/ckeditor', [
-                'name' => "talent_description",
-                'content' => $user->talent_description,
-                'placeholder' => "User Talent Description",
-            ])
+                @include('helpers/ckeditor', [
+                    'name' => "talent_description",
+                    'content' => $user->talent_description,
+                    'placeholder' => "User Talent Description",
+                ])
             </div>
-                @if ($errors->has('talent_description'))
-                    <span class="help-block form-control-feedback">
-                        <strong>{{ $errors->first('talent_description') }}</strong>
-                    </span>
-                @endif
+            @if ($errors->has('talent_description'))
+                <span class="help-block form-control-feedback">
+                    <strong>{{ $errors->first('talent_description') }}</strong>
+                </span>
+            @endif
         </div>
 
         <div class="form-group{{ $errors->has('image') ? ' has-danger' : '' }}">
@@ -77,10 +77,10 @@
             placeholder="Image URL" value="{{ $user->image or old('image') }}">
 
             @if ($errors->has('image'))
-                    <span class="help-block form-control-feedback">
-                        <strong>{{ $errors->first('image') }}</strong>
-                    </span>
-                @endif
+                <span class="help-block form-control-feedback">
+                    <strong>{{ $errors->first('image') }}</strong>
+                </span>
+            @endif
         </div>
 
         <div class="form-group{{ $errors->has('website') ? ' has-danger' : '' }}">
@@ -89,10 +89,10 @@
             placeholder="User Website" value="{{ $user->website or old('website') }}">
 
             @if ($errors->has('website'))
-                    <span class="help-block form-control-feedback">
-                        <strong>{{ $errors->first('website') }}</strong>
-                    </span>
-                @endif
+                <span class="help-block form-control-feedback">
+                    <strong>{{ $errors->first('website') }}</strong>
+                </span>
+            @endif
         </div>
 
         <div class="form-group{{ $errors->has('github_link') ? ' has-danger' : '' }}">
@@ -101,10 +101,10 @@
             placeholder="User GitHub Profile" value="{{ $user->github_link or old('github_link') }}">
 
             @if ($errors->has('github_link'))
-                    <span class="help-block form-control-feedback">
-                        <strong>{{ $errors->first('github_link') }}</strong>
-                    </span>
-                @endif
+                <span class="help-block form-control-feedback">
+                    <strong>{{ $errors->first('github_link') }}</strong>
+                </span>
+            @endif
         </div>
 
         <div class="form-group{{ $errors->has('stack_overflow') ? ' has-danger' : '' }}">
@@ -113,10 +113,10 @@
             placeholder="User Stack Overflow Profile" value="{{ $user->stack_overflow or old('stack_overflow') }}">
 
             @if ($errors->has('stack_overflow'))
-                    <span class="help-block form-control-feedback">
-                        <strong>{{ $errors->first('stack_overflow') }}</strong>
-                    </span>
-                @endif
+                <span class="help-block form-control-feedback">
+                    <strong>{{ $errors->first('stack_overflow') }}</strong>
+                </span>
+            @endif
         </div>
 
         <div class="form-group{{ $errors->has('general_skills') ? ' has-danger' : '' }}">
@@ -126,18 +126,18 @@
                     @php ($skills_array = collect(array_pluck($general_skills->toArray(), 'pivot.count', 'id')))
 
                     @foreach(App\GeneralSkill::all() as $option)
-                    @if (count(collect(old('general_skills'))) > 0)
-                        <li>
-                            {{$option->name}}
-                            <input type="number" name="general_skills[{{ $option->id }}]" value="{{ (collect(old('general_skills'))->count() > 0) ? intval(collect(old('general_skills'))->toArray()[$option->id]):0}}" placeholder="0" min="0" step="1">
-                        </li>
-                    @else
-                        <li>
+                        @if (count(collect(old('general_skills'))) > 0)
+                            <li>
+                                {{$option->name}}
+                                <input type="number" name="general_skills[{{ $option->id }}]" value="{{ (collect(old('general_skills'))->count() > 0) ? intval(collect(old('general_skills'))->toArray()[$option->id]):0}}" placeholder="0" min="0" step="1">
+                            </li>
+                        @else
+                            <li>
 
-                            {{$option->name}}
-                            <input type="number" name="general_skills[{{ $option->id }}]" value="{{ ($skills_array->keys()->contains($option->id)) ? intval($skills_array[$option->id]):0}}" placeholder="0" min="0" step="1">
-                        </li>
-                    @endif
+                                {{$option->name}}
+                                <input type="number" name="general_skills[{{ $option->id }}]" value="{{ ($skills_array->keys()->contains($option->id)) ? intval($skills_array[$option->id]):0}}" placeholder="0" min="0" step="1">
+                            </li>
+                        @endif
                     @endforeach
 
                 </ul>
