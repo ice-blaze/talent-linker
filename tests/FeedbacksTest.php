@@ -14,9 +14,8 @@ class FeedbacksTest extends TestCase
 
     public function testVisitorShouldNotAccessFeedbacks()
     {
-        $response = $this->call('GET', '/feedbacks');
-
-        $this->assertEquals(401, $response->status());
+        $this->visit('/feedbacks')
+            ->seePageIs('/login');
     }
 
     public function testUserShouldSeeFeedbackButton()
