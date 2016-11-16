@@ -278,6 +278,32 @@ class ProjectTest extends TestCase
         $this->notSeeInDatabase('project_collaborators', ['project_id' => $project->id]);
     }
 
+    public function testGeneralSkillMethodes()
+    {
+        $collab_owner = factory(App\ProjectCollaborator::class)->states('with_skill', 'with_project', 'with_user', 'owner')->create();
+        $general_skill = $collab_owner->skill;
+        $user = $collab_owner->user;
+        $project = $collab_owner->project;
+        $user->generalSkills()->attach($general_skill);
+        $project->generalSkills()->attach($general_skill, ['count' => 2]);
+
+        $this->assertTrue($general_skill->users->contains($user));
+        $this->assertTrue($general_skill->projects->contains($project));
+    }
+
+    public function testLanguageMethodes()
+    {
+        $collab_owner = factory(App\ProjectCollaborator::class)->states('with_skill', 'with_project', 'with_user', 'owner')->create();
+        $language = factory(App\Language::class)->create();
+        $user = $collab_owner->user;
+        $project = $collab_owner->project;
+        $user->languages()->attach($language);
+        $project->languages()->attach($language);
+
+        $this->assertTrue($language->users->contains($user));
+        $this->assertTrue($language->projects->contains($project));
+    }
+
     public function testProjectSearch()
     {
         $collab = factory(App\ProjectCollaborator::class, 2)->states('with_skill', 'with_project', 'with_user', 'owner')->create();
