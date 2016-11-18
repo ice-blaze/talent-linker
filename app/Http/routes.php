@@ -36,6 +36,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('talents/{user}/chat', 'ChatUserController@store');
     Route::get('talents/{user}/projects', 'UserController@projects');
 
+    // Chat
+    Route::get('chat/{chat}/edit', 'ChatUserController@edit');
+    Route::delete('chat/{chat}/delete', 'ChatUserController@delete');
+    Route::patch('chat/{chat}', 'ChatUserController@update');
+
     // Project
     Route::post('projects/create', 'ProjectController@store');
     Route::get('projects/{project}/edit', 'ProjectController@edit');
