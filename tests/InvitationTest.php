@@ -198,7 +198,9 @@ class InvitationTest extends TestCase
         list($collab_recruiter, $recruiter, $project, $skill, $stranger) = $this->initValues();
 
         $this->actingAs($stranger)
+            ->visit('/')
             ->visit($project->path().'/invitations')
+            ->seePageIs('/')
             ->see('That was not your project');
     }
 
