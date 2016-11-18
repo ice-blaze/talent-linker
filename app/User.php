@@ -37,7 +37,6 @@ class User extends Authenticatable
         $result = 12742.0 * asin(sqrt($a)); // 2 * R; R = 6371 km
 
         return $result < $user->find_distance;
-        // return false;
     }
 
     public function scopeLike($query, $field, $value)
