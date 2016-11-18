@@ -119,7 +119,7 @@
                         @if (count(collect(old('languages'))) > 0)
                             <option value="{{ $option->id }}" {{ (collect(old('languages'))->contains($option->id)) ? 'selected':'' }}>{{ $option->name }}</option>
                         @else
-                            <option value="{{ $option->id }}" {{ ($languages->contains($option->id)) ? 'selected':'' }}>{{ $option->name }}</option>
+                            <option value="{{ $option->id }}">{{ $option->name }}</option>
                         @endif
                     @endforeach
 
