@@ -1,10 +1,10 @@
 <?php
 
-use App\Traits\DatabaseRefreshMigrations;
+use App\Traits\DatabaseTransactionWorking;
 
 class ChatUserTest extends TestCase
 {
-    use DatabaseRefreshMigrations;
+    use DatabaseTransactionWorking;
 
     public function testAliceShouldChatWithBob()
     {
