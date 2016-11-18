@@ -202,6 +202,17 @@ class InvitationTest extends TestCase
             ->see('That was not your project');
     }
 
+    public function testStrangerShouldNotAccesToInvitationIndexOfOtherUsers()
+    {
+        list($collab_recruiter, $recruiter, $project, $skill, $stranger) = $this->initValues();
+
+        $this->actingAs($stranger)
+            ->visit('/')
+            ->visit($recruiter->path().'/invitations')
+            ->seePageIs('/')
+            ->see("You can't access to other users invitation page");
+    }
+
     // public function testVisitorShouldNotJoinProject()
     // {
     //     $this->assertTrue(true);
