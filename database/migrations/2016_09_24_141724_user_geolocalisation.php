@@ -10,7 +10,7 @@ class UserGeolocalisation extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->double('lat')->default(0);
             $table->double('lng')->default(0);
-            $table->float('find_distance')->default(1);
+            $table->float('find_distance')->default(1); // default value didn't seems to work
         });
     }
 
