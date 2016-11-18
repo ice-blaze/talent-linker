@@ -172,6 +172,30 @@ class UserTest extends TestCase
         $this->dontSee($user2->name);
     }
 
+    public function testTalentNearbySearch()
+    {
+        $heidi = factory(App\User::class)->states('geo_neuchatel')->create();
+        $motoko = factory(App\User::class)->states('geo_osaka')->create();
+        $batoo = factory(App\User::class)->states('geo_osaka')->create();
+
+        $this->visit('/talents')
+            ->dontSee('Near By')
+            ->actingAs($motoko)
+            ->visit('/talents')
+            ->see('Near By')
+            ->see('Near You')
+            ->see('Not Near')
+            ->see($heidi->name)
+            ->see($batoo->name)
+            ->check('near_by')
+            ->press('search_button')
+            ->seePageIs('/talents')
+            ->see('Near You')
+            ->dontSee('Not Near')
+            ->dontSee($heidi->name)
+            ->see($batoo->name);
+    }
+
     public function testTalentSkillSearch()
     {
         $collab1 = factory(App\ProjectCollaborator::class)->states('with_user', 'with_skill', 'with_project', 'owner')->create();
