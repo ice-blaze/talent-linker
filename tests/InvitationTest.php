@@ -193,13 +193,13 @@ class InvitationTest extends TestCase
         $this->dontSee($project_name);
     }
 
-    public function testStrangerShouldNotAccesToInvitationIndexOfPorjectsHeDontParticipate(){
+    public function testStrangerShouldNotAccesToInvitationIndexOfPorjectsHeDontParticipate()
+    {
         list($collab_recruiter, $recruiter, $project, $skill, $stranger) = $this->initValues();
 
         $this->actingAs($stranger)
             ->visit($project->path().'/invitations')
-            ->see('That was not your project')
-            ;
+            ->see('That was not your project');
     }
 
     // public function testVisitorShouldNotJoinProject()
