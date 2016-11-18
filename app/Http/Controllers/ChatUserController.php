@@ -44,7 +44,7 @@ class ChatUserController extends Controller
     public function edit(ChatUser $chat)
     {
         if (Auth::User()->id != $chat->sender_id) {
-            return redirect('/404');
+            return redirect('/')->withErrors('You\'re not authorized to access this page!');
         }
 
         return view('chats.edit', compact('chat'));

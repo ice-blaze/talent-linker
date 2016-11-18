@@ -10,14 +10,14 @@
         @forelse($chats as $chat)
             <li class="list-group-item">
                 @if($chat->isEditable($chat->sender_id))
-                <div class="delete-message">
-                    <form name="delete_message" id="form-delete-{{$chat->id}}" method="post" action="/chat/{{$chat->id}}/delete">
-                        {{ method_field('delete') }}
-                        {{ csrf_field() }}
+                    <div class="delete-message">
+                        <form name="delete_message_form" id="form-delete-{{$chat->id}}" method="post" action="/chat/{{$chat->id}}/delete">
+                            {{ method_field('delete') }}
+                            {{ csrf_field() }}
 
-                        <a onclick="document.getElementById('form-delete-{{$chat->id}}').submit();" name="delete_message" id="delete_message">x</a>
-                    </form>
-                </div>
+                            <button type="submit" name="delete_message" id="delete_message">x</button>
+                        </form>
+                    </div>
                 @endif
                 {{ $chat->content}}
                 <div class="comment_user text-muted">
