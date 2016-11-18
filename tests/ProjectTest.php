@@ -341,4 +341,44 @@ class ProjectTest extends TestCase
         $this->see($project1->name);
         $this->dontSee($project2->name);
     }
+
+    public function testProjectNearbySearch()
+    {
+        // create users
+        $heidi = factory(App\User::class)->states('geo_neuchatel')->create();
+        $motoko = factory(App\User::class)->states('geo_osaka')->create();
+        $bato = factory(App\User::class)->states('geo_osaka')->create();
+
+        // link users to projects as owners
+        $collab_heidi = factory(App\ProjectCollaborator::class)->states('with_skill', 'with_project', 'owner')->make();
+        $collab_heidi->user()->associate($heidi);
+        $collab_heidi->save();
+        $heidi_project = $collab_heidi->project;
+        $collab_motoko = factory(App\ProjectCollaborator::class)->states('with_skill', 'with_project', 'owner')->make();
+        $collab_motoko->user()->associate($motoko);
+        $collab_motoko->save();
+        $motoko_project = $collab_motoko->project;
+        $collab_bato = factory(App\ProjectCollaborator::class)->states('with_skill', 'with_project', 'owner')->make();
+        $collab_bato->user()->associate($bato);
+        $collab_bato->save();
+        $bato_project = $collab_bato->project;
+
+        // Test the nearby feature
+        $this->visit('/projects')
+            ->dontSee('Near By')
+            ->actingAs($motoko)
+            ->visit('/projects')
+            ->see('Near By')
+            ->see('Near You')
+            ->see('Not Near')
+            ->see($heidi_project->name)
+            ->see($bato_project->name)
+            ->check('near_by')
+            ->press('search_button')
+            ->seePageIs('/projects')
+            ->see('Near You')
+            ->dontSee('Not Near')
+            ->dontSee($heidi_project->name)
+            ->see($bato_project->name);
+    }
 }
