@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class ChatUser extends Model
 {
@@ -16,5 +17,10 @@ class ChatUser extends Model
     public function sender()
     {
         return $this->belongsTo(User::class, 'sender_id');
+    }
+
+    public function isEditable($id)
+    {
+        return $id == Auth::User()->id;
     }
 }
