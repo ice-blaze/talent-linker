@@ -1,13 +1,14 @@
 <?php
 
-use App\Traits\DatabaseRefreshMigrations;
+use App\Traits\DatabaseTransactionWorking;
+
 use App\User;
 use App\ProjectComment;
 use App\ProjectCollaborator;
 
 class ProjectCommentTest extends TestCase
 {
-    use DatabaseRefreshMigrations;
+    use DatabaseTransactionWorking;
 
     private function initValues()
     {

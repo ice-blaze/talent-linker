@@ -1,10 +1,10 @@
 <?php
 
-use App\Traits\DatabaseRefreshMigrations;
+use App\Traits\DatabaseTransactionWorking;
 
 class InvitationTest extends TestCase
 {
-    use DatabaseRefreshMigrations;
+    use DatabaseTransactionWorking;
 
     private function initValues()
     {

@@ -2,6 +2,7 @@
 
 use App\Traits\DatabaseRefreshMigrations;
 use App\Traits\DatabaseRefreshSeedMigrations;
+use App\Traits\DatabaseTransactionWorking;
 
 class TestCase extends Illuminate\Foundation\Testing\TestCase
 {
@@ -26,7 +27,7 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
         return $app;
     }
 
-    public function truncDatabase()
+    public function truncateDatabase()
     {
         // $this->artisan('migrate:refresh'); // learning purpose: second way to do the same call
         Artisan::call('migrate:refresh');
@@ -50,6 +51,10 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
         // Traits who migrate with a refresh before and after tests
         if (isset($uses[DatabaseRefreshMigrations::class])) {
             $this->runDatabaseRefreshMigrations();
+        }
+
+        if (isset($uses[DatabaseTransactionWorking::class])) {
+            $this->runDatabaseTransactionWorking();
         }
 
         if (isset($uses[DatabaseMigrations::class])) {
