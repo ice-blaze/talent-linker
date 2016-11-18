@@ -1,7 +1,6 @@
 <?php
 
 use App\Traits\DatabaseTransactionWorking;
-
 use App\User;
 use App\ProjectComment;
 use App\ProjectCollaborator;
