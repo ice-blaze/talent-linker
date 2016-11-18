@@ -37,7 +37,7 @@ class ProjectCollaboratorController extends Controller
 
             return view('invitations.index_user', compact('user', 'invitations'));
         } else {
-            session()->flash('error', 'That was not your project');
+            session()->flash('error', "You can't access to other users invitation page");
 
             return redirect()->back();
         }
