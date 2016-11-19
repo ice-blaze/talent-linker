@@ -55,7 +55,7 @@ return [
     |
     */
 
-    'from' => ['address' => null, 'name' => null],
+    'from' => ['address' => 'notification@talent-linker.com', 'name' => 'talent-linker'],
 
     /*
     |--------------------------------------------------------------------------
