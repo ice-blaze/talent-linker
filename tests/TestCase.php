@@ -1,7 +1,5 @@
 <?php
 
-use App\Traits\DatabaseRefreshMigrations;
-use App\Traits\DatabaseRefreshSeedMigrations;
 use App\Traits\DatabaseTransactionWorking;
 
 class TestCase extends Illuminate\Foundation\Testing\TestCase
@@ -42,16 +40,6 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
     protected function setUpTraits()
     {
         $uses = array_flip(class_uses_recursive(static::class));
-
-        // Traits who migrate with a refresh + seed before and after tests
-        if (isset($uses[DatabaseRefreshSeedMigrations::class])) {
-            $this->runDatabaseRefreshSeedMigrations();
-        }
-
-        // Traits who migrate with a refresh before and after tests
-        if (isset($uses[DatabaseRefreshMigrations::class])) {
-            $this->runDatabaseRefreshMigrations();
-        }
 
         if (isset($uses[DatabaseTransactionWorking::class])) {
             $this->runDatabaseTransactionWorking();
