@@ -267,18 +267,19 @@ class InvitationTest extends TestCase
             ->see("Can't recruit, you have no projects!");
     }
 
-    // public function testUserShouldNotQuiteProjectsWhereHeDidntBelongs()
-    // {
-    //     $this->assertTrue(true);
-    // }
+    public function testRecruiterCantRecruitSomeoneThatIsCollaboratorOnAllTheRecruitersProjects()
+    {
+        list($collab_recruiter, $recruiter, $project, $skill, $stranger) = $this->initValues();
 
-    // public function testUserShouldNotDeleteInvitationOfOtherUsers()
-    // {
-    //     $this->assertTrue(true);
-    // }
+        $new_user_collab = factory(App\ProjectCollaborator::class)->states('with_skill', 'with_user')->make();
+        $new_user_collab->project()->associate($project);
+        $new_user_collab->save();
+        $new_user = $new_user_collab->user;
 
-    // public function testUserShouldNotAcceptInvitationsOfOtherUsers()
-    // {
-    //     $this->assertTrue(true);
-    // }
+        $this->actingAs($recruiter)
+            ->visit($new_user->path())
+            ->click('Recruit for one project')
+            ->seePageIs($new_user->path())
+            ->see("Can't recruit, the talent is already on all of your projects!");
+    }
 }
