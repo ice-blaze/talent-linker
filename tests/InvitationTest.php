@@ -235,6 +235,26 @@ class InvitationTest extends TestCase
         $this->seePageIs('/');
     }
 
+    public function testStrangerShouldNotAcceptOthersInvitations()
+    {
+        list($collab_recruiter, $recruiter, $project, $skill, $stranger) = $this->initValues();
+
+        $new_user_collab = factory(App\ProjectCollaborator::class)->states('with_skill', 'with_user')->make();
+        $new_user_collab->project()->associate($project);
+        $new_user_collab->save();
+        $project = $collab_recruiter->project;
+        $new_user = $new_user_collab->user;
+
+        $this->actingAs($stranger);
+        $this->visit('/');
+
+        $response = $this->call('PATCH', 'invitations/'.$project->id.'/'.$new_user->id.'/accept');
+        $this->followRedirects();
+
+        $this->see("You don't have the permission");
+        $this->seePageIs('/');
+    }
+
     // public function testVisitorShouldNotJoinProject()
     // {
     //     $this->assertTrue(true);
