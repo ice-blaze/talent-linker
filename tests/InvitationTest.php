@@ -255,10 +255,17 @@ class InvitationTest extends TestCase
         $this->seePageIs('/');
     }
 
-    // public function testVisitorShouldNotJoinProject()
-    // {
-    //     $this->assertTrue(true);
-    // }
+    public function testRecruiterWithoutProjectsCantRecruitSomeone()
+    {
+        $jean_marc = factory(App\User::class)->create();
+        $jean_philippe = factory(App\User::class)->create();
+
+        $this->actingAs($jean_marc)
+            ->visit($jean_philippe->path())
+            ->click('Recruit for one project')
+            ->seePageIs($jean_philippe->path())
+            ->see("Can't recruit, you have no projects!");
+    }
 
     // public function testUserShouldNotQuiteProjectsWhereHeDidntBelongs()
     // {
