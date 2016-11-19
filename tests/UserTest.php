@@ -45,7 +45,8 @@ class UserTest extends TestCase
     }
 
     // TODO catch email
-    public function testSendResetPassword(){
+    public function testSendResetPassword()
+    {
         $user = factory(App\User::class)->create();
 
         $this->visit('/password/reset')
