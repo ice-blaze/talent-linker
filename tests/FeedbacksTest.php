@@ -1,10 +1,10 @@
 <?php
 
-use App\Traits\DatabaseRefreshSeedMigrations;
+use App\Traits\DatabaseTransactionWorking;
 
 class FeedbacksTest extends TestCase
 {
-    use DatabaseRefreshSeedMigrations;
+    use DatabaseTransactionWorking;
 
     public function testVisitorShouldNotSeeFeedbacksButton()
     {
