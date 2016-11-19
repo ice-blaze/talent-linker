@@ -1,10 +1,10 @@
 <?php
 
-use App\Traits\DatabaseRefreshMigrations;
+use App\Traits\DatabaseTransactionWorking;
 
 class UserTest extends TestCase
 {
-    use DatabaseRefreshMigrations;
+    use DatabaseTransactionWorking;
 
     public function testLoginPageShouldBeAccessibleFromHomePage()
     {
@@ -318,6 +318,8 @@ class UserTest extends TestCase
 
     public function testTalentUpdateProfileWithEmptyFields()
     {
+        $this->truncateDatabase();
+
         $general_skills = factory(App\GeneralSkill::class, 3)->create();
         $general_skills_not_used = factory(App\GeneralSkill::class, 3)->create();
         $languages = factory(App\Language::class, 3)->create();
