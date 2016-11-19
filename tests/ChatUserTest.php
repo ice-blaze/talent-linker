@@ -1,10 +1,10 @@
 <?php
 
-use App\Traits\DatabaseRefreshMigrations;
+use App\Traits\DatabaseTransactionWorking;
 
 class ChatUserTest extends TestCase
 {
-    use DatabaseRefreshMigrations;
+    use DatabaseTransactionWorking;
 
     public function testAliceShouldChatWithBob()
     {
@@ -109,9 +109,11 @@ class ChatUserTest extends TestCase
         $this->seePageIs($bob->path().'/chat');
         $this->see($message);
 
+        $chat_message = App\ChatUser::orderBy('id', 'desc')->first();
+
         $robert = factory(App\User::class)->create();
         $this->actingAs($robert);
-        $this->visit('/chat/1/edit');
-        $this->see('You\'re not authorized to access this page!');
+        $this->visit('/chat/'.$chat_message->id.'/edit');
+        $this->see("You're not authorized to access this page!");
     }
 }

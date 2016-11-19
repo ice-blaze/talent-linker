@@ -16,6 +16,7 @@ before_script:
   - php artisan migrate:rollback
 
 script:
+  - php artisan migrate:refresh
   - vendor/bin/phpunit --coverage-clover=coverage.xml
   - php artisan migrate:refresh --seed
 
