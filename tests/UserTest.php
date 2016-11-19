@@ -44,13 +44,19 @@ class UserTest extends TestCase
             ->see("We can't find a user with that e-mail address.");
     }
 
-    // TODO no mailer setup
-    // public function sendResetEmailToCorrectAdressShould(){
-    //     $this->visit('/password/reset')
-    //         ->type('', 'email')
-    //         ->press('Send Password')
-    //         ;
-    // }
+    // TODO catch email
+    public function testSendResetPassword(){
+        $user = factory(App\User::class)->create();
+
+        $this->visit('/password/reset')
+            ->type('', 'email')
+            ->press('Send Password')
+            ->see('The email field is required.')
+            ->seePageIs('/password/reset')
+            ->type($user->email, 'email')
+            ->press('Send Password')
+            ->see('We have e-mailed your password reset link!');
+    }
 
     public function testRegisterPageShouldBeAccessibleFromHomePage()
     {
