@@ -193,23 +193,93 @@ class InvitationTest extends TestCase
         $this->dontSee($project_name);
     }
 
-    // public function testVisitorShouldNotJoinProject()
-    // {
-    //     $this->assertTrue(true);
-    // }
+    public function testStrangerShouldNotAccesToInvitationIndexOfPorjectsHeDontParticipate()
+    {
+        list($collab_recruiter, $recruiter, $project, $skill, $stranger) = $this->initValues();
 
-    // public function testUserShouldNotQuiteProjectsWhereHeDidntBelongs()
-    // {
-    //     $this->assertTrue(true);
-    // }
+        $this->actingAs($stranger)
+            ->visit('/')
+            ->visit($project->path().'/invitations')
+            ->seePageIs('/')
+            ->see('That was not your project');
+    }
 
-    // public function testUserShouldNotDeleteInvitationOfOtherUsers()
-    // {
-    //     $this->assertTrue(true);
-    // }
+    public function testStrangerShouldNotAccesToInvitationIndexOfOtherUsers()
+    {
+        list($collab_recruiter, $recruiter, $project, $skill, $stranger) = $this->initValues();
 
-    // public function testUserShouldNotAcceptInvitationsOfOtherUsers()
-    // {
-    //     $this->assertTrue(true);
-    // }
+        $this->actingAs($stranger)
+            ->visit('/')
+            ->visit($recruiter->path().'/invitations')
+            ->seePageIs('/')
+            ->see("You can't access to other users invitation page");
+    }
+
+    public function testStrangerShouldNotDeleteOthersInvitations()
+    {
+        list($collab_recruiter, $recruiter, $project, $skill, $stranger) = $this->initValues();
+
+        $new_user_collab = factory(App\ProjectCollaborator::class)->states('with_skill', 'with_user')->make();
+        $new_user_collab->project()->associate($project);
+        $new_user_collab->save();
+        $project = $collab_recruiter->project;
+        $new_user = $new_user_collab->user;
+
+        $this->actingAs($stranger);
+        $this->visit('/');
+
+        $this->call('DELETE', 'invitations/'.$project->id.'/'.$new_user->id.'/'.$new_user_collab->id);
+
+        $this->followRedirects();
+        $this->see("Don't have the permission to delete the invitation!");
+        $this->seePageIs('/');
+    }
+
+    public function testStrangerShouldNotAcceptOthersInvitations()
+    {
+        list($collab_recruiter, $recruiter, $project, $skill, $stranger) = $this->initValues();
+
+        $new_user_collab = factory(App\ProjectCollaborator::class)->states('with_skill', 'with_user')->make();
+        $new_user_collab->project()->associate($project);
+        $new_user_collab->save();
+        $project = $collab_recruiter->project;
+        $new_user = $new_user_collab->user;
+
+        $this->actingAs($stranger);
+        $this->visit('/');
+
+        $response = $this->call('PATCH', 'invitations/'.$project->id.'/'.$new_user->id.'/accept');
+        $this->followRedirects();
+
+        $this->see("You don't have the permission");
+        $this->seePageIs('/');
+    }
+
+    public function testRecruiterWithoutProjectsCantRecruitSomeone()
+    {
+        $jean_marc = factory(App\User::class)->create();
+        $jean_philippe = factory(App\User::class)->create();
+
+        $this->actingAs($jean_marc)
+            ->visit($jean_philippe->path())
+            ->click('Recruit for one project')
+            ->seePageIs($jean_philippe->path())
+            ->see("Can't recruit, you have no projects!");
+    }
+
+    public function testRecruiterCantRecruitSomeoneThatIsCollaboratorOnAllTheRecruitersProjects()
+    {
+        list($collab_recruiter, $recruiter, $project, $skill, $stranger) = $this->initValues();
+
+        $new_user_collab = factory(App\ProjectCollaborator::class)->states('with_skill', 'with_user')->make();
+        $new_user_collab->project()->associate($project);
+        $new_user_collab->save();
+        $new_user = $new_user_collab->user;
+
+        $this->actingAs($recruiter)
+            ->visit($new_user->path())
+            ->click('Recruit for one project')
+            ->seePageIs($new_user->path())
+            ->see("Can't recruit, the talent is already on all of your projects!");
+    }
 }
