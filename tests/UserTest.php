@@ -44,13 +44,40 @@ class UserTest extends TestCase
             ->see("We can't find a user with that e-mail address.");
     }
 
-    // TODO no mailer setup
-    // public function sendResetEmailToCorrectAdressShould(){
-    //     $this->visit('/password/reset')
-    //         ->type('', 'email')
-    //         ->press('Send Password')
-    //         ;
-    // }
+    public function testSendResetPassword()
+    {
+        $user = factory(App\User::class)->create();
+
+        $this->visit('/password/reset')
+            ->type('', 'email')
+            ->press('Send Password')
+            ->see('The email field is required.')
+            ->seePageIs('/password/reset')
+            ->type($user->email, 'email')
+            ->press('Send Password')
+            ->see('We have e-mailed your password reset link!');
+
+        $password_reset = DB::table('password_resets')->where('email', '=', $user->email)->first();
+
+        $new_password = 'iLikeTotoroAndAllHisFriends';
+        $token_url = '/password/reset/'.$password_reset->token;
+        $this->visit($token_url)
+            ->press('Reset Password')
+            ->seePageIs($token_url)
+            ->see('The email field is required.')
+            ->see('The password field is required.')
+            ->type($user->email, 'email')
+            ->type($new_password, 'password')
+            ->type($new_password, 'password_confirmation')
+            ->press('Reset Password')
+            ->seePageIs('/')
+            ->visit('/logout')
+            ->visit('/login')
+            ->type($user->email, 'email')
+            ->type($new_password, 'password')
+            ->press('login')
+            ->see($user->name);
+    }
 
     public function testRegisterPageShouldBeAccessibleFromHomePage()
     {
