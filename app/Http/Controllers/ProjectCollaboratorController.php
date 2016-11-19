@@ -114,7 +114,7 @@ class ProjectCollaboratorController extends Controller
         // Get user invitation in DB
         $invitation = ProjectCollaborator::where('project_id', '=', $project->id)->where('user_id', '=', $user->id);
 
-        // User is not project admin or did not received an invitation
+        // User is not project owner or did not received an invitation
         if (Auth::user()->id != $project->owner->user->id && count($invitation) == 0) {
             $request->session()->flash('error', "You don't have the permission");
         } else {
