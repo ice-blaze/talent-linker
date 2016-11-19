@@ -215,6 +215,26 @@ class InvitationTest extends TestCase
             ->see("You can't access to other users invitation page");
     }
 
+    public function testStrangerShouldNotDeleteOthersInvitations()
+    {
+        list($collab_recruiter, $recruiter, $project, $skill, $stranger) = $this->initValues();
+
+        $new_user_collab = factory(App\ProjectCollaborator::class)->states('with_skill', 'with_user')->make();
+        $new_user_collab->project()->associate($project);
+        $new_user_collab->save();
+        $project = $collab_recruiter->project;
+        $new_user = $new_user_collab->user;
+
+        $this->actingAs($stranger);
+        $this->visit('/');
+
+        $this->call('DELETE', 'invitations/'.$project->id.'/'.$new_user->id.'/'.$new_user_collab->id);
+
+        $this->followRedirects();
+        $this->see("Don't have the permission to delete the invitation!");
+        $this->seePageIs('/');
+    }
+
     // public function testVisitorShouldNotJoinProject()
     // {
     //     $this->assertTrue(true);
