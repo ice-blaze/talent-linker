@@ -253,6 +253,17 @@ class UserTest extends TestCase
         $this->seePageIs('/login');
     }
 
+    public function testStrangerWantToEditTalentProfile()
+    {
+        $stallone = factory(App\User::class)->create();
+        $stranger = factory(App\User::class)->create();
+        $this->actingAs($stranger)
+            ->visit('/about')
+            ->visit($stallone->path().'/edit')
+            ->seePageIs('/about')
+            ->see('That was not your profile');
+    }
+
     public function testTalentWantToEditandUpdateProfile()
     {
         $general_skills = factory(App\GeneralSkill::class, 3)->create();
