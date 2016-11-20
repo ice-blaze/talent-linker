@@ -24,9 +24,6 @@ Route::get('talents/{user}', 'UserController@show');
 
 
 Route::group(['middleware' => 'auth'], function () {
-});
-
-Route::group(['middleware' => 'auth.basic'], function () {
 
     // Feedbacks
     Route::get('feedbacks', 'FeedbackController@index');
@@ -39,6 +36,11 @@ Route::group(['middleware' => 'auth.basic'], function () {
     Route::post('talents/{user}/chat', 'ChatUserController@store');
     Route::get('talents/{user}/projects', 'UserController@projects');
 
+    // Chat
+    Route::get('chat/{chat}/edit', 'ChatUserController@edit');
+    Route::delete('chat/{chat}/delete', 'ChatUserController@delete');
+    Route::patch('chat/{chat}', 'ChatUserController@update');
+
     // Project
     Route::post('projects/create', 'ProjectController@store');
     Route::get('projects/{project}/edit', 'ProjectController@edit');
@@ -49,6 +51,7 @@ Route::group(['middleware' => 'auth.basic'], function () {
     Route::post('projects/{project}/comments', 'ProjectCommentController@store');
     Route::get('comments/{comment}/edit', 'ProjectCommentController@edit');
     Route::patch('comments/{comment}', 'ProjectCommentController@update');
+    Route::delete('comments/{comment}', 'ProjectCommentController@delete');
 
     // Private project comments
     Route::get('projects/{project}/privateComments', 'ProjectCommentController@private_index');
@@ -63,6 +66,9 @@ Route::group(['middleware' => 'auth.basic'], function () {
     Route::get('talents/{user}/invitations', 'ProjectCollaboratorController@userIndex');
     Route::get('talents/{user}/recruit', 'ProjectCollaboratorController@recruit');
     Route::post('talents/{user}/recruit', 'ProjectCollaboratorController@userStore');
+});
+
+Route::group(['middleware' => 'auth.basic'], function () {
 });
 // Route::get('admin', ['as' =>'admin', 'uses' => 'UserController@index', 'middleware' => ['auth', 'admin']]);
 // Route::get('protected', ['middleware' => ['auth', 'admin'], function() {

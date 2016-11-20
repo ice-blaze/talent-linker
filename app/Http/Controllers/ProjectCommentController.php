@@ -46,17 +46,37 @@ class ProjectCommentController extends Controller
 
     public function edit(ProjectComment $comment)
     {
+        if (Auth::User()->id != $comment->user->id) {
+            return redirect('/')->withErrors('You are not authorized to do this action!');
+        }
+
         return view('project_comments.edit', compact('comment'));
     }
 
-    public function update(ProjectComment $comment)
+    public function update(Request $request, ProjectComment $comment)
     {
+        if (Auth::User()->id != $comment->user->id) {
+            return redirect('/')->withErrors('You are not authorized to do this action!');
+        }
+
         $this->validate($request, [
             'content' => 'required',
-            //TODO user_id
         ]);
         $comment->update(request()->all());
 
-        return back();
+        return redirect($comment->project->path());
+    }
+
+    public function delete(ProjectComment $comment)
+    {
+        if (Auth::User()->id != $comment->user->id) {
+            return redirect('/')->withErrors('You are not authorized to do this action!');
+        }
+
+        $project = $comment->project;
+
+        $comment->delete();
+
+        return redirect($project->path());
     }
 }

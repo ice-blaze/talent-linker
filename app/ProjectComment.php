@@ -17,4 +17,9 @@ class ProjectComment extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function path()
+    {
+        return '/comments/'.$this->id.'/edit';
+    }
 }

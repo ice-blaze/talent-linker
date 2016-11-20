@@ -1,10 +1,10 @@
 <?php
 
-use App\Traits\DatabaseRefreshSeedMigrations;
+use App\Traits\DatabaseTransactionWorking;
 
 class FeedbacksTest extends TestCase
 {
-    use DatabaseRefreshSeedMigrations;
+    use DatabaseTransactionWorking;
 
     public function testVisitorShouldNotSeeFeedbacksButton()
     {
@@ -14,9 +14,8 @@ class FeedbacksTest extends TestCase
 
     public function testVisitorShouldNotAccessFeedbacks()
     {
-        $response = $this->call('GET', '/feedbacks');
-
-        $this->assertEquals(401, $response->status());
+        $this->visit('/feedbacks')
+            ->seePageIs('/login');
     }
 
     public function testUserShouldSeeFeedbackButton()

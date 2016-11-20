@@ -37,7 +37,7 @@ class ProjectCollaboratorController extends Controller
 
             return view('invitations.index_user', compact('user', 'invitations'));
         } else {
-            session()->flash('error', 'That was not your project');
+            session()->flash('error', "You can't access to other users invitation page");
 
             return redirect()->back();
         }
@@ -114,11 +114,11 @@ class ProjectCollaboratorController extends Controller
         // Get user invitation in DB
         $invitation = ProjectCollaborator::where('project_id', '=', $project->id)->where('user_id', '=', $user->id);
 
-        // User is not project admin or did not received an invitation
-        if (Auth::user()->id != $project->owner->user->id && count($invitation) == 0) {
-            $request->session()->flash('error', "You don't have the permission");
-        } else {
+        // User is not project owner or did not received an invitation
+        if ((Auth::user()->id == $project->owner->user->id || Auth::user()->id == $user->id) && count($invitation) == 1) {
             $invitation->update(['accepted' => true, 'accepted_date' => new \DateTime()]);
+        } else {
+            $request->session()->flash('error', "You don't have the permission");
         }
 
         return back();
