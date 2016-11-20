@@ -58,16 +58,15 @@ class UserController extends Controller
 
     public function edit(User $user)
     {
-        if (Auth::check() && Auth::id() == $user->id) {
-            $languages = Language::all();
-            $general_skills = GeneralSkill::all();
-
-            return view('users.edit', compact('user', 'languages', 'general_skills'));
-        } else {
+        if ( !Auth::check() || Auth::id() != $user->id) {
             session()->flash('error', 'That was not your profile');
-
             return redirect()->back();
         }
+
+        $languages = Language::all();
+        $general_skills = GeneralSkill::all();
+
+        return view('users.edit', compact('user', 'languages', 'general_skills'));
     }
 
     public function update(Request $request, User $user)
