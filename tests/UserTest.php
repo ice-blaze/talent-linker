@@ -374,12 +374,7 @@ class UserTest extends TestCase
             ->type('', 'last_name')
             ->type('', 'first_name')
             ->type('', 'email')
-            ->type('', 'general_skills[1]')
-            ->type('', 'general_skills[2]')
-            ->type('', 'general_skills[3]')
-            ->type('', 'general_skills[4]')
-            ->type('', 'general_skills[5]')
-            ->type('', 'general_skills[6]')
+            ->select([], 'general_skills[]')
             ->select([], 'languages[]')
             ->press('submit_user');
         $this->seePageIs('/talents/'.$user1->id.'/edit')
