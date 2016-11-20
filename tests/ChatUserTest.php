@@ -49,12 +49,6 @@ class ChatUserTest extends TestCase
         $chat->sender()->associate($user1);
         $chat->reciever()->associate($user2);
         $chat->save();
-
-        // is reciever/sender/isUserTheOwner already check ?
-        // $this->assertTrue($chat->sender == $user1);
-        // $this->assertTrue($chat->reciever == $user2);
-        // $this->assertTrue($chat->isUserTheOwner($user1));
-        // $this->assertTrue($chat->isUserTheOwner($user2));
     }
 
     public function testChatCreateAndEditAMessage()
