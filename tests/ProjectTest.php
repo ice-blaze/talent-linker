@@ -22,7 +22,7 @@ class ProjectTest extends TestCase
     {
         $this->visit('/');
         $this->visit('/projects/create');
-        $this->seePageIs('/');
+        $this->seePageIs('/login');
     }
 
     /**
