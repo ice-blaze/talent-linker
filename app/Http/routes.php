@@ -11,18 +11,6 @@ Route::get('/about', function () {
     return view('about');
 });
 
-  // Projects
-Route::get('projects/create', 'ProjectController@create');
-Route::get('projects', 'ProjectController@index');
-Route::post('projects', 'ProjectController@index');
-Route::get('projects/{project}', 'ProjectController@show');
-
-  // Users
-Route::get('talents', 'UserController@index');
-Route::post('talents', 'UserController@index');
-Route::get('talents/{user}', 'UserController@show');
-
-
 Route::group(['middleware' => 'auth'], function () {
 
     // Feedbacks
@@ -42,6 +30,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::patch('chat/{chat}', 'ChatUserController@update');
 
     // Project
+    Route::get('projects/create', 'ProjectController@create');
     Route::post('projects/create', 'ProjectController@store');
     Route::get('projects/{project}/edit', 'ProjectController@edit');
     Route::patch('projects/{project}', 'ProjectController@update');
@@ -67,6 +56,16 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('talents/{user}/recruit', 'ProjectCollaboratorController@recruit');
     Route::post('talents/{user}/recruit', 'ProjectCollaboratorController@userStore');
 });
+
+// Projects
+Route::get('projects', 'ProjectController@index');
+Route::post('projects', 'ProjectController@index');
+Route::get('projects/{project}', 'ProjectController@show');
+
+// Users
+Route::get('talents', 'UserController@index');
+Route::post('talents', 'UserController@index');
+Route::get('talents/{user}', 'UserController@show');
 
 Route::group(['middleware' => 'auth.basic'], function () {
 });
