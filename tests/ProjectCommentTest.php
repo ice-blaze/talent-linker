@@ -147,7 +147,7 @@ class ProjectCommentTest extends TestCase
         $stranger = factory(User::class)->create();
 
         $this->actingAs($stranger)
-            ->visit('/')
+            ->visit('/about')
             ->visit($comment->path())
             ->seePageIs('/')
             ->see('You are not authorized to do this action!');
@@ -161,7 +161,7 @@ class ProjectCommentTest extends TestCase
         $stranger = factory(User::class)->create();
 
         $this->actingAs($stranger)
-            ->visit('/');
+            ->visit('/about');
 
         $this->call('DELETE', 'comments/'.$comment->id);
         $this->followRedirects();
