@@ -6,6 +6,7 @@ use App\ChatUser;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class ChatUserController extends Controller
 {
@@ -38,5 +39,34 @@ class ChatUserController extends Controller
         $chat->save();
 
         return back();
+    }
+
+    public function edit(ChatUser $chat)
+    {
+        if (Auth::User()->id != $chat->sender_id) {
+            return redirect('/')->withErrors('You\'re not authorized to access this page!');
+        }
+
+        return view('chats.edit', compact('chat'));
+    }
+
+    public function update(Request $request, ChatUser $chat)
+    {
+        $this->validate($request, [
+            'content' => 'required',
+        ]);
+
+        $chat->update([
+            'content' => $request->content,
+        ]);
+
+        return redirect('talents/'.$chat->reciever_id.'/chat');
+    }
+
+    public function delete(ChatUser $chat)
+    {
+        $chat->delete();
+
+        return redirect('talents/'.$chat->reciever_id.'/chat');
     }
 }

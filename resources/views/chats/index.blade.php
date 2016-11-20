@@ -9,6 +9,16 @@
     <div class="row">
         @forelse($chats as $chat)
             <li class="list-group-item">
+                @if($chat->isEditable($chat->sender_id))
+                    <div class="delete-message">
+                        <form name="delete_message_form" id="form-delete-{{$chat->id}}" method="post" action="/chat/{{$chat->id}}/delete">
+                            {{ method_field('delete') }}
+                            {{ csrf_field() }}
+
+                            <button type="submit" name="delete_message" id="delete_message">x</button>
+                        </form>
+                    </div>
+                @endif
                 {{ $chat->content}}
                 <div class="comment_user text-muted">
                     @if($chat->seen)
@@ -17,6 +27,11 @@
                         unseen
                     @endif
                 </div>
+                @if($chat->isEditable($chat->sender_id))
+                    <div>
+                        <a href="/chat/{{$chat->id}}/edit">Edit</a>
+                    </div>
+                @endif
             </li>
         @empty
             Come on start the conversation !!

@@ -1,10 +1,10 @@
 <?php
 
-use App\Traits\DatabaseRefreshMigrations;
+use App\Traits\DatabaseTransactionWorking;
 
 class UserTest extends TestCase
 {
-    use DatabaseRefreshMigrations;
+    use DatabaseTransactionWorking;
 
     public function testLoginPageShouldBeAccessibleFromHomePage()
     {
@@ -44,13 +44,40 @@ class UserTest extends TestCase
             ->see("We can't find a user with that e-mail address.");
     }
 
-    // TODO no mailer setup
-    // public function sendResetEmailToCorrectAdressShould(){
-    //     $this->visit('/password/reset')
-    //         ->type('', 'email')
-    //         ->press('Send Password')
-    //         ;
-    // }
+    public function testSendResetPassword()
+    {
+        $user = factory(App\User::class)->create();
+
+        $this->visit('/password/reset')
+            ->type('', 'email')
+            ->press('Send Password')
+            ->see('The email field is required.')
+            ->seePageIs('/password/reset')
+            ->type($user->email, 'email')
+            ->press('Send Password')
+            ->see('We have e-mailed your password reset link!');
+
+        $password_reset = DB::table('password_resets')->where('email', '=', $user->email)->first();
+
+        $new_password = 'iLikeTotoroAndAllHisFriends';
+        $token_url = '/password/reset/'.$password_reset->token;
+        $this->visit($token_url)
+            ->press('Reset Password')
+            ->seePageIs($token_url)
+            ->see('The email field is required.')
+            ->see('The password field is required.')
+            ->type($user->email, 'email')
+            ->type($new_password, 'password')
+            ->type($new_password, 'password_confirmation')
+            ->press('Reset Password')
+            ->seePageIs('/')
+            ->visit('/logout')
+            ->visit('/login')
+            ->type($user->email, 'email')
+            ->type($new_password, 'password')
+            ->press('login')
+            ->see($user->name);
+    }
 
     public function testRegisterPageShouldBeAccessibleFromHomePage()
     {
@@ -172,6 +199,30 @@ class UserTest extends TestCase
         $this->dontSee($user2->name);
     }
 
+    public function testTalentNearbySearch()
+    {
+        $heidi = factory(App\User::class)->states('geo_neuchatel')->create();
+        $motoko = factory(App\User::class)->states('geo_osaka')->create();
+        $batoo = factory(App\User::class)->states('geo_osaka')->create();
+
+        $this->visit('/talents')
+            ->dontSee('Near By')
+            ->actingAs($motoko)
+            ->visit('/talents')
+            ->see('Near By')
+            ->see('Near You')
+            ->see('Not Near')
+            ->see($heidi->name)
+            ->see($batoo->name)
+            ->check('near_by')
+            ->press('search_button')
+            ->seePageIs('/talents')
+            ->see('Near You')
+            ->dontSee('Not Near')
+            ->dontSee($heidi->name)
+            ->see($batoo->name);
+    }
+
     public function testTalentSkillSearch()
     {
         $collab1 = factory(App\ProjectCollaborator::class)->states('with_user', 'with_skill', 'with_project', 'owner')->create();
@@ -198,8 +249,8 @@ class UserTest extends TestCase
         $user1 = factory(App\User::class)->create();
         $this->visit('/talents');
         $this->see($user1->name);
-        $response = $this->call('GET', '/talents/'.$user1->id.'/edit');
-        $this->assertEquals(401, $response->status());
+        $this->visit($user1->path().'/edit');
+        $this->seePageIs('/login');
     }
 
     public function testTalentWantToEditandUpdateProfile()
@@ -294,6 +345,8 @@ class UserTest extends TestCase
 
     public function testTalentUpdateProfileWithEmptyFields()
     {
+        $this->truncateDatabase();
+
         $general_skills = factory(App\GeneralSkill::class, 3)->create();
         $general_skills_not_used = factory(App\GeneralSkill::class, 3)->create();
         $languages = factory(App\Language::class, 3)->create();

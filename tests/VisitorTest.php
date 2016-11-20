@@ -1,14 +1,10 @@
 <?php
 
-use App\Traits\DatabaseRefreshMigrations;
-use App\Traits\DatabaseRefreshSeedMigrations;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use App\Traits\DatabaseTransactionWorking;
 
 class VisitorTest extends TestCase
 {
-    // use DatabaseMigrations;
-    use DatabaseRefreshMigrations;
-    // use DatabaseRefreshSeedMigrations;
+    use DatabaseTransactionWorking;
 
     private function initProjects()
     {
@@ -44,6 +40,8 @@ class VisitorTest extends TestCase
 
     public function testVisitorShouldSeeWhenNoProjects()
     {
+        $this->truncateDatabase();
+
         $this->visit('/');
         $this->click('Projects');
         $this->seePageIs('/projects');
@@ -53,6 +51,8 @@ class VisitorTest extends TestCase
 
     public function testVisitorShouldSeeWhenNoTalents()
     {
+        $this->truncateDatabase();
+
         $this->visit('/');
         $this->click('Talents');
         $this->seePageIs('/talents');
