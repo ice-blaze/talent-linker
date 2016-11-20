@@ -60,6 +60,7 @@ class UserController extends Controller
     {
         if (! Auth::check() || Auth::id() != $user->id) {
             session()->flash('error', 'That was not your profile');
+
             return redirect()->back();
         }
 
