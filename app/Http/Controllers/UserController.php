@@ -58,7 +58,7 @@ class UserController extends Controller
 
     public function edit(User $user)
     {
-        if ( !Auth::check() || Auth::id() != $user->id) {
+        if (! Auth::check() || Auth::id() != $user->id) {
             session()->flash('error', 'That was not your profile');
             return redirect()->back();
         }
