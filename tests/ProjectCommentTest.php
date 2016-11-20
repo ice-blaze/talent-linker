@@ -151,6 +151,13 @@ class ProjectCommentTest extends TestCase
             ->visit($comment->path())
             ->seePageIs('/')
             ->see('You are not authorized to do this action!');
+
+        $this->visit('/about');
+        $this->call('PATCH', 'comments/'.$comment->id, ['content', 'stranger message']);
+        $this->followRedirects();
+
+        $this->seePageIs('/')
+            ->see('You are not authorized to do this action!');
     }
 
     public function testStrangerShouldNotDeleteOthersComment()
