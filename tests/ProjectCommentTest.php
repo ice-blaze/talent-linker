@@ -95,4 +95,85 @@ class ProjectCommentTest extends TestCase
         $this->visit($project->path());
         $this->see($comment_public->content);
     }
+
+    public function testUserShouldEditHisComment()
+    {
+        $collab = factory(App\ProjectCollaborator::class)->states('with_skill', 'with_project', 'with_user', 'owner')->create();
+        $user = $collab->user;
+        $project = $collab->project;
+        $comment = factory(ProjectComment::class)->states('public')->make();
+        $comment->user()->associate($user);
+        $comment->project()->associate($project);
+        $comment->save();
+
+        $new_message = 'my new comment message';
+
+        $this->actingAs($user)
+            ->visit($project->path())
+            ->click('comment_edit'.$comment->id)
+            ->seePageIs($comment->path())
+            ->type($new_message, 'content')
+            ->press('update_comment')
+            ->seePageIs($project->path())
+            ->see($new_message);
+    }
+
+    public function testUserShouldDeleteHisComment()
+    {
+        $collab = factory(App\ProjectCollaborator::class)->states('with_skill', 'with_project', 'with_user', 'owner')->create();
+        $user = $collab->user;
+        $project = $collab->project;
+        $comment = factory(ProjectComment::class)->states('public')->make();
+        $comment->user()->associate($user);
+        $comment->project()->associate($project);
+        $comment->save();
+
+        $old_message = $comment->content;
+
+        $this->actingAs($user)
+            ->visit($project->path())
+            ->click('comment_edit'.$comment->id)
+            ->seePageIs($comment->path())
+            ->press('delete_comment')
+            ->seePageIs($project->path())
+            ->dontSee($old_message);
+    }
+
+    public function testStrangerShouldNotEditOthersComment()
+    {
+        $comment = factory(ProjectComment::class)->states('with_project', 'with_user', 'public')->create();
+        $project = $comment->project;
+
+        $stranger = factory(User::class)->create();
+
+        $this->actingAs($stranger)
+            ->visit('/about')
+            ->visit($comment->path())
+            ->seePageIs('/')
+            ->see('You are not authorized to do this action!');
+
+        $this->visit('/about');
+        $this->call('PATCH', 'comments/'.$comment->id, ['content', 'stranger message']);
+        $this->followRedirects();
+
+        $this->seePageIs('/')
+            ->see('You are not authorized to do this action!');
+    }
+
+    public function testStrangerShouldNotDeleteOthersComment()
+    {
+        $comment = factory(ProjectComment::class)->states('with_project', 'with_user', 'public')->create();
+        $project = $comment->project;
+
+        $stranger = factory(User::class)->create();
+
+        $this->actingAs($stranger)
+            ->visit('/about');
+
+        $this->call('DELETE', 'comments/'.$comment->id);
+        $this->followRedirects();
+
+        $this->seePageIs('/')
+            ->see('You are not authorized to do this action!');
+    }
 }

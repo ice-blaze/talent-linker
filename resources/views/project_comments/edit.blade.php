@@ -13,4 +13,9 @@
             <button type="submit" class="btn btn-primary"  name="update_comment">Update comment</button>
         </div>
     </form>
+    <form method="post" action="/comments/{{ $comment->id }}">
+        {{ method_field('delete') }}
+        {{ csrf_field() }}
+        <button type="submit" class="btn btn-danger"  name="delete_comment">Delete</button>
+    </form>
 @endsection

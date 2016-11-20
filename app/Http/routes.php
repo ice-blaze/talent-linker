@@ -51,6 +51,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('projects/{project}/comments', 'ProjectCommentController@store');
     Route::get('comments/{comment}/edit', 'ProjectCommentController@edit');
     Route::patch('comments/{comment}', 'ProjectCommentController@update');
+    Route::delete('comments/{comment}', 'ProjectCommentController@delete');
 
     // Private project comments
     Route::get('projects/{project}/privateComments', 'ProjectCommentController@private_index');
