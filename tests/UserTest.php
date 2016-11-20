@@ -253,26 +253,32 @@ class UserTest extends TestCase
         $this->seePageIs('/login');
     }
 
+    public function testStrangerWantToEditTalentProfile()
+    {
+        $stallone = factory(App\User::class)->create();
+        $stranger = factory(App\User::class)->create();
+        $this->actingAs($stranger)
+            ->visit('/about')
+            ->visit($stallone->path().'/edit')
+            ->seePageIs('/about')
+            ->see('That was not your profile');
+    }
+
     public function testTalentWantToEditandUpdateProfile()
     {
-        $general_skills = factory(App\GeneralSkill::class, 3)->create();
-        $general_skills_not_used = factory(App\GeneralSkill::class, 3)->create();
-        $languages = factory(App\Language::class, 3)->create();
-        $languages_not_used = factory(App\Language::class, 3)->create();
+        $old_general_skills = factory(App\GeneralSkill::class, 3)->create();
+        $old_languages = factory(App\Language::class, 3)->create();
 
         $user1 = factory(App\User::class)->create();
-        $user1->languages()->attach($languages);
-        $user1->generalSkills()->attach($general_skills);
+        $user1->languages()->attach($old_languages);
+        $user1->generalSkills()->attach($old_general_skills);
 
         $general_skills = factory(App\GeneralSkill::class, 3)->create();
-        $general_skills_not_used = factory(App\GeneralSkill::class, 3)->create();
         $languages = factory(App\Language::class, 3)->create();
-        $languages_not_used = factory(App\Language::class, 3)->create();
 
         $user2 = factory(App\User::class)->create();
         $user2->languages()->attach($languages);
         $user2->generalSkills()->attach($general_skills);
-
 
         $this->actingAs($user1)
             ->visit('/talents/'.$user1->id.'/edit')
@@ -296,6 +302,12 @@ class UserTest extends TestCase
             ->type($user2->github_link, 'github_link')
             ->type($user2->stack_overflow, 'stack_overflow')
             ->type($user2->talent_description, 'talent_description')
+            ->select($general_skills[0]->id, 'general_skills[]')
+            ->select($general_skills[1]->id, 'general_skills[]')
+            ->select($general_skills[2]->id, 'general_skills[]')
+            ->select($languages[0]->id, 'languages[]')
+            ->select($languages[1]->id, 'languages[]')
+            ->select($languages[2]->id, 'languages[]')
             ->press('submit_user');
         $this->seePageIs('/talents/'.$user1->id);
 
@@ -309,7 +321,13 @@ class UserTest extends TestCase
             ->see($user2->website)
             ->see($user2->github_link)
             ->see($user2->stack_overflow)
-            ->see($user2->image);
+            ->see($user2->image)
+            ->see($general_skills[0]->name)
+            ->see($general_skills[1]->name)
+            ->see($general_skills[2]->name)
+            ->see($languages[0]->name)
+            ->see($languages[1]->name)
+            ->see($languages[2]->name);
     }
 
     public function testTalentChangeEmailWithAlreadyRegisteredEmail()
@@ -363,12 +381,7 @@ class UserTest extends TestCase
             ->type('', 'last_name')
             ->type('', 'first_name')
             ->type('', 'email')
-            ->type('', 'general_skills[1]')
-            ->type('', 'general_skills[2]')
-            ->type('', 'general_skills[3]')
-            ->type('', 'general_skills[4]')
-            ->type('', 'general_skills[5]')
-            ->type('', 'general_skills[6]')
+            ->select([], 'general_skills[]')
             ->select([], 'languages[]')
             ->press('submit_user');
         $this->seePageIs('/talents/'.$user1->id.'/edit')
