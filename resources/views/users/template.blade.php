@@ -144,8 +144,7 @@
             </div>
             <div class="form-group{{ $errors->has('languages') ? ' has-danger' : '' }}">
                 <label for="languages">Languages</label>
-                <select name="languages[]" id="languages" class="selectpicker {{ $errors->has('name') ? ' form-control-danger' : '' }}" multiple>
-
+            <select name="languages[]" id="languages" class="selectpicker" multiple>
                     @foreach(App\Language::all() as $option)
                         @if (count(collect(old('languages'))) > 0)
                             <option value="{{ $option->id }}" {{ (collect(old('languages'))->contains($option->id)) ? 'selected':'' }}>{{ $option->name }}</option>
