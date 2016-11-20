@@ -67,7 +67,16 @@ class ProjectCommentController extends Controller
         return redirect($comment->project->path());
     }
 
+    public function delete(ProjectComment $comment)
+    {
+        if (Auth::User()->id != $comment->user->id) {
+            return redirect('/')->withErrors("You are not authorized to do this action!");
+        }
 
-        return back();
+        $project = $comment->project;
+
+        $comment->delete();
+
+        return redirect($project->path());
     }
 }
