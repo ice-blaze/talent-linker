@@ -1,8 +1,6 @@
 <?php
 
 Auth::routes();
-Route::get('/logout', 'Auth\LoginController@logout');
-// Global
 
 Route::get('/', function () {
     return view('welcome');
@@ -12,6 +10,7 @@ Route::get('/about', function () {
 });
 
 Route::group(['middleware' => 'auth'], function () {
+    Route::get('/logout', 'Auth\LoginController@logout');
 
     // Feedbacks
     Route::get('feedbacks', 'FeedbackController@index');
@@ -67,15 +66,8 @@ Route::get('talents', 'UserController@index');
 Route::post('talents', 'UserController@index');
 Route::get('talents/{user}', 'UserController@show');
 
-Route::group(['middleware' => 'auth.basic'], function () {
-});
 // Route::get('admin', ['as' =>'admin', 'uses' => 'UserController@index', 'middleware' => ['auth', 'admin']]);
 // Route::get('protected', ['middleware' => ['auth', 'admin'], function() {
 //   Route::get('admin', 'UserController@index');
 //   // return "this page requires that you be logged in and an Admin";
 // }]);
-
-Route::get('profile', ['middleware' => 'auth.basic', function () {
-}]);
-
-// Tags
