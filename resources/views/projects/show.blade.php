@@ -160,11 +160,18 @@
     </div>
 
     <div class="row">
-        @foreach($project->comments as $comment)
+        <label class="col-sm-12"><strong>Comments</strong></label>
+
+        @forelse($project->comments as $comment)
             @include('helpers/user_comment', [
                 'comment' => $comment,
             ])
-        @endforeach
+
+        @empty
+            <div class="lead col-sm-12">
+                No comments...
+            </div>
+        @endforelse
 
         @if(Auth::user())
             <hr>
