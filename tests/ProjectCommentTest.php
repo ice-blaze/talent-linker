@@ -167,6 +167,6 @@ class ProjectCommentTest extends TestCase
         $this->followRedirects();
 
         $this->seePageIs('/')
-            ->see("You are not authorized to do this action!");
+            ->see('You are not authorized to do this action!');
     }
 }
