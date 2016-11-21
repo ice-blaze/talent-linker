@@ -47,7 +47,12 @@ class ChatUserController extends Controller
             return redirect('/')->withErrors('You\'re not authorized to access this page!');
         }
 
-        return view('chats.edit', compact('chat'));
+        $route = 'chat';
+        $object = 'comment';
+
+        $item = $chat;
+
+        return view('layouts.edit_text', compact('item','route','object'));
     }
 
     public function update(Request $request, ChatUser $chat)
