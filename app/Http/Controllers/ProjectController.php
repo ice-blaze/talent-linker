@@ -61,7 +61,7 @@ class ProjectController extends Controller
         $general_skills = GeneralSkill::all();
         $all_users = User::all();
 
-        return view('projects.create', compact('project', 'languages', 'general_skills', 'all_users'));
+        return view('projects.create', compact('languages', 'general_skills', 'all_users'));
     }
 
     public function store(Request $request)
