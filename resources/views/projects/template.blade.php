@@ -102,7 +102,6 @@
                         </li>
                     @else
                         <li>
-
                             {{$option->name}}
                             <input type="number" name="general_skills[{{ $option->id }}]" value="{{ ($skills_array->keys()->contains($option->id)) ? intval($skills_array[$option->id]):0}}" placeholder="0" min="0" step="1">
                         </li>
