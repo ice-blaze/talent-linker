@@ -21,7 +21,7 @@ class Inspire extends Command
      */
     protected $description = 'Display an inspiring quote';
 
-    /**
+    /*
      * Execute the console command.
      *
      * @return mixed
