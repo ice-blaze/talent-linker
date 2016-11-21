@@ -129,7 +129,7 @@
                     @if (count(collect(old('general_skills'))) > 0)
                         <option value="{{ $option->id }}" {{ (collect(old('general_skills'))->contains($option->id)) ? 'selected':'' }}>{{ $option->name }}</option>
                     @else
-                        <option value="{{ $option->id }}" {{ ($general_skills->contains($option->id)) ? 'selected':'' }}>{{ $option->name }}</option>
+                        <option value="{{ $option->id }}" {{ ($user->generalSkills->contains($option->id)) ? 'selected':'' }}>{{ $option->name }}</option>
                     @endif
                 @endforeach
 
@@ -149,7 +149,7 @@
                     @if (count(collect(old('languages'))) > 0)
                         <option value="{{ $option->id }}" {{ (collect(old('languages'))->contains($option->id)) ? 'selected':'' }}>{{ $option->name }}</option>
                     @else
-                        <option value="{{ $option->id }}" {{ ($languages->contains($option->id)) ? 'selected':'' }}>{{ $option->name }}</option>
+                        <option value="{{ $option->id }}" {{ ($user->languages->contains($option->id)) ? 'selected':'' }}>{{ $option->name }}</option>
                     @endif
                 @endforeach
 
