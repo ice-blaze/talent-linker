@@ -55,7 +55,7 @@ class ProjectCommentController extends Controller
 
         $item = $comment;
 
-        return view('layouts.edit_text', compact('item','route','object'));
+        return view('layouts.edit_text', compact('item', 'route', 'object'));
     }
 
     public function update(Request $request, ProjectComment $comment)
