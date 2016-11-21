@@ -52,10 +52,11 @@ class ProjectCommentController extends Controller
 
         $route = 'comments';
         $object = 'message';
+        $routeToDelete = '/comments/'.$comment->id;
 
         $item = $comment;
 
-        return view('layouts.edit_text', compact('item', 'route', 'object'));
+        return view('layouts.edit_text', compact('item', 'route', 'object', 'routeToDelete'));
     }
 
     public function update(Request $request, ProjectComment $comment)

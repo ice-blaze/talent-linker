@@ -85,6 +85,7 @@ class ChatUserTest extends TestCase
         $this->seePageIs($bob->path().'/chat');
         $this->see($message);
 
+        $this->click('Edit');
         $this->press('delete_comment');
         $this->visit($bob->path().'/chat');
         $this->dontSee($message);

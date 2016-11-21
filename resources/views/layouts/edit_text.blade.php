@@ -13,7 +13,7 @@
             <button type="submit" class="btn btn-primary"  name="update_comment">Update {{$object}}</button>
         </div>
     </form>
-    <form method="post" action="/{{$route}}/{{ $item->id }}">
+    <form method="post" action="{{url($routeToDelete)}}">
         {{ method_field('delete') }}
         {{ csrf_field() }}
         <button type="submit" class="btn btn-danger"  name="delete_comment">Delete</button>

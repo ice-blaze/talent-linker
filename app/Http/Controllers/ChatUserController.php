@@ -49,10 +49,11 @@ class ChatUserController extends Controller
 
         $route = 'chat';
         $object = 'comment';
+        $routeToDelete = '/chat/'.$chat->id.'/delete';
 
         $item = $chat;
 
-        return view('layouts.edit_text', compact('item', 'route', 'object'));
+        return view('layouts.edit_text', compact('item', 'route', 'object', 'routeToDelete'));
     }
 
     public function update(Request $request, ChatUser $chat)
