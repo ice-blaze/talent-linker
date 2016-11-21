@@ -21,13 +21,14 @@ class Inspire extends Command
      */
     protected $description = 'Display an inspiring quote';
 
-    /**
+    /*
      * Execute the console command.
      *
      * @return mixed
      */
-    public function handle()
-    {
-        $this->comment(PHP_EOL.Inspiring::quote().PHP_EOL);
-    }
+    // TODO should uncomment when using handle functionality
+    // public function handle()
+    // {
+    //     $this->comment(PHP_EOL.Inspiring::quote().PHP_EOL);
+    // }
 }
