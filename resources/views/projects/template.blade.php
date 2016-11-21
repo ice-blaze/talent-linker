@@ -34,9 +34,10 @@
         <div class="form-group{{ $errors->has('long_description') ? ' has-danger' : '' }}">
             <label for="long_description">Long Description</label>
             <div class="form-control{{ $errors->has('long_description') ? ' form-control-danger' : '' }}">
-                {{-- could be simplified I guess --}}
-                {{ $description = old('long_description') }}
-                @if (isset($project)) {{$description = $project->long_description}} @endif
+                @php ($description = old('long_description'))
+                @if (isset($project))
+                    @php ($description = $project->long_description)
+                @endif
                 @include('helpers/ckeditor', [
                     'name' => "long_description",
                     'content' => $description,
