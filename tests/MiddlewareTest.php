@@ -55,7 +55,7 @@ class MiddlewareTest extends TestCase
     }
 
     /**
-     * Test every routes | GET and some POST
+     * Test every routes | GET and some POST.
      *
      * Guest and Auth only
      *
@@ -67,7 +67,7 @@ class MiddlewareTest extends TestCase
             $user = App\User::find(1);
             Auth::login($user);
         }
-        
+
         $response = $this->call($type, $uri);
         echo sprintf('[%s - %s] : %d - %d | %s %s', $middleware, $type, $responseCode, $response->status(), $uri, PHP_EOL);
         $this->assertEquals($responseCode, $response->status());
