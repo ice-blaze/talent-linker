@@ -1,8 +1,6 @@
 <?php
 
 Auth::routes();
-Route::get('/logout', 'Auth\LoginController@logout');
-// Global
 
 Route::get('/', function () {
     return view('welcome');
@@ -11,19 +9,8 @@ Route::get('/about', function () {
     return view('about');
 });
 
-  // Projects
-Route::get('projects/create', 'ProjectController@create');
-Route::get('projects', 'ProjectController@index');
-Route::post('projects', 'ProjectController@index');
-Route::get('projects/{project}', 'ProjectController@show');
-
-  // Users
-Route::get('talents', 'UserController@index');
-Route::post('talents', 'UserController@index');
-Route::get('talents/{user}', 'UserController@show');
-
-
 Route::group(['middleware' => 'auth'], function () {
+    Route::get('/logout', 'Auth\LoginController@logout');
 
     // Feedbacks
     Route::get('feedbacks', 'FeedbackController@index');
@@ -42,6 +29,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::patch('chat/{chat}', 'ChatUserController@update');
 
     // Project
+    Route::get('projects/create', 'ProjectController@create');
     Route::post('projects/create', 'ProjectController@store');
     Route::get('projects/{project}/edit', 'ProjectController@edit');
     Route::patch('projects/{project}', 'ProjectController@update');
@@ -68,15 +56,18 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('talents/{user}/recruit', 'ProjectCollaboratorController@userStore');
 });
 
-Route::group(['middleware' => 'auth.basic'], function () {
-});
+// Projects
+Route::get('projects', 'ProjectController@index');
+Route::post('projects', 'ProjectController@index');
+Route::get('projects/{project}', 'ProjectController@show');
+
+// Users
+Route::get('talents', 'UserController@index');
+Route::post('talents', 'UserController@index');
+Route::get('talents/{user}', 'UserController@show');
+
 // Route::get('admin', ['as' =>'admin', 'uses' => 'UserController@index', 'middleware' => ['auth', 'admin']]);
 // Route::get('protected', ['middleware' => ['auth', 'admin'], function() {
 //   Route::get('admin', 'UserController@index');
 //   // return "this page requires that you be logged in and an Admin";
 // }]);
-
-Route::get('profile', ['middleware' => 'auth.basic', function () {
-}]);
-
-// Tags

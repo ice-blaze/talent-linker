@@ -120,48 +120,47 @@
         </div>
 
         <div class="form-group{{ $errors->has('general_skills') ? ' has-danger' : '' }}">
-                <label for="general_skills">Skills</label>
-                <ul name="general_skills[]" id="general_skills" >
+            <label for="general_skills">Skills</label>
+            <select name="general_skills[]" id="general_skills" class="selectpicker" multiple>
 
-                    @php ($skills_array = collect(array_pluck($general_skills->toArray(), 'pivot.count', 'id')))
+                @php ($skills_array = collect(array_pluck($general_skills->toArray(), 'pivot.count', 'id')))
 
-                    @foreach(App\GeneralSkill::all() as $option)
-                        @if (count(collect(old('general_skills'))) > 0)
-                            <li>
-                                {{$option->name}}
-                                <input type="number" name="general_skills[{{ $option->id }}]" value="{{ (collect(old('general_skills'))->count() > 0) ? intval(collect(old('general_skills'))->toArray()[$option->id]):0}}" placeholder="0" min="0" step="1">
-                            </li>
-                        @else
-                            <li>
+                @foreach(App\GeneralSkill::all() as $option)
+                    @if (count(collect(old('general_skills'))) > 0)
+                        <option value="{{ $option->id }}" {{ (collect(old('general_skills'))->contains($option->id)) ? 'selected':'' }}>{{ $option->name }}</option>
+                    @else
+                        <option value="{{ $option->id }}" {{ ($user->generalSkills->contains($option->id)) ? 'selected':'' }}>{{ $option->name }}</option>
+                    @endif
+                @endforeach
 
-                                {{$option->name}}
-                                <input type="number" name="general_skills[{{ $option->id }}]" value="{{ ($skills_array->keys()->contains($option->id)) ? intval($skills_array[$option->id]):0}}" placeholder="0" min="0" step="1">
-                            </li>
-                        @endif
-                    @endforeach
+            </select>
+            @if ($errors->has('general_skills'))
+                <br>
+                <span class="help-block form-control-feedback">
+                    <strong>{{ $errors->first('general_skills') }}</strong>
+                </span>
+            @endif
+        </div>
 
-                </ul>
-            </div>
-            <div class="form-group{{ $errors->has('languages') ? ' has-danger' : '' }}">
-                <label for="languages">Languages</label>
-                <select name="languages[]" id="languages" class="selectpicker {{ $errors->has('name') ? ' form-control-danger' : '' }}" multiple>
+        <div class="form-group{{ $errors->has('languages') ? ' has-danger' : '' }}">
+            <label for="languages">Languages</label>
+            <select name="languages[]" id="languages" class="selectpicker" multiple>
+                @foreach(App\Language::all() as $option)
+                    @if (count(collect(old('languages'))) > 0)
+                        <option value="{{ $option->id }}" {{ (collect(old('languages'))->contains($option->id)) ? 'selected':'' }}>{{ $option->name }}</option>
+                    @else
+                        <option value="{{ $option->id }}" {{ ($user->languages->contains($option->id)) ? 'selected':'' }}>{{ $option->name }}</option>
+                    @endif
+                @endforeach
 
-                    @foreach(App\Language::all() as $option)
-                        @if (count(collect(old('languages'))) > 0)
-                            <option value="{{ $option->id }}" {{ (collect(old('languages'))->contains($option->id)) ? 'selected':'' }}>{{ $option->name }}</option>
-                        @else
-                            <option value="{{ $option->id }}" {{ ($languages->contains($option->id)) ? 'selected':'' }}>{{ $option->name }}</option>
-                        @endif
-                    @endforeach
-
-                </select>
-                @if ($errors->has('languages'))
-                    <br>
-                    <span class="help-block form-control-feedback">
-                        <strong>{{ $errors->first('languages') }}</strong>
-                    </span>
-                @endif
-            </div>
+            </select>
+            @if ($errors->has('languages'))
+                <br>
+                <span class="help-block form-control-feedback">
+                    <strong>{{ $errors->first('languages') }}</strong>
+                </span>
+            @endif
+        </div>
 
         <div class="row">
             <label class="col-sm-12"><strong>Your Location</strong> (with the search area)</label>

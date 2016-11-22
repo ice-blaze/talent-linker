@@ -34,9 +34,10 @@
         <div class="form-group{{ $errors->has('long_description') ? ' has-danger' : '' }}">
             <label for="long_description">Long Description</label>
             <div class="form-control{{ $errors->has('long_description') ? ' form-control-danger' : '' }}">
-                {{-- could be simplified I guess --}}
-                {{ $description = old('long_description') }}
-                @if (isset($project)) {{$description = $project->long_description}} @endif
+                @php ($description = old('long_description'))
+                @if (isset($project))
+                    @php ($description = $project->long_description)
+                @endif
                 @include('helpers/ckeditor', [
                     'name' => "long_description",
                     'content' => $description,
@@ -102,7 +103,6 @@
                         </li>
                     @else
                         <li>
-
                             {{$option->name}}
                             <input type="number" name="general_skills[{{ $option->id }}]" value="{{ ($skills_array->keys()->contains($option->id)) ? intval($skills_array[$option->id]):0}}" placeholder="0" min="0" step="1">
                         </li>
@@ -119,7 +119,11 @@
                         @if (count(collect(old('languages'))) > 0)
                             <option value="{{ $option->id }}" {{ (collect(old('languages'))->contains($option->id)) ? 'selected':'' }}>{{ $option->name }}</option>
                         @else
-                            <option value="{{ $option->id }}">{{ $option->name }}</option>
+                            <option value="{{ $option->id }}"
+                                @if (isset($project))
+                                    {{ ($project->languages->contains($option->id)) ? 'selected':'' }}
+                                @endif
+                            >{{ $option->name }}</option>
                         @endif
                     @endforeach
 
