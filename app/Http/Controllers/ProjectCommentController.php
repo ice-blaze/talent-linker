@@ -54,7 +54,7 @@ class ProjectCommentController extends Controller
             'item'          => $comment,
             'route'         => 'comments',
             'object'        => 'message',
-            'routeToDelete' => '/comments/'.$comment->id
+            'routeToDelete' => '/comments/'.$comment->id,
         ]);
     }
 
