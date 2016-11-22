@@ -32,7 +32,6 @@ class MiddlewareTest extends TestCase
             ['GET', '/projects/1', 200, 'auth'],
             ['GET', '/talents', 200, 'auth'],
             ['GET', '/talents/1', 200, 'auth'],
-
             ['GET', '/projects', 200, 'guest'],
             ['POST', '/projects', 200, 'guest'],
             ['GET', '/projects/1', 200, 'guest'],
@@ -40,7 +39,6 @@ class MiddlewareTest extends TestCase
             ['POST', '/talents', 200, 'guest'],
             ['GET', '/talents/1', 200, 'guest'],
             ['GET', '/projects/create', 302, 'guest'],
-
             ['GET', '/talents/1/edit', 302, 'guest'],
             ['GET', '/talents/1/chat', 302, 'guest'],
             ['GET', '/talents/1/projects', 302, 'guest'],
