@@ -55,12 +55,12 @@ class MiddlewareTest extends TestCase
     }
 
     /**
-    * Test every routes | GET and some POST
-    *
-    * Guest and Auth only
-    *
-    * @dataProvider providerAllUrisWithResponseCode
-    **/
+     * Test every routes | GET and some POST
+     *
+     * Guest and Auth only
+     *
+     * @dataProvider providerAllUrisWithResponseCode
+     **/
     public function testApplicationUriResponses($type, $uri, $responseCode, $middleware)
     {
         if ($middleware == 'auth') {
@@ -69,7 +69,7 @@ class MiddlewareTest extends TestCase
         }
         
         $response = $this->call($type, $uri);
-        print sprintf('[%s - %s] : %d - %d | %s %s', $middleware, $type, $responseCode, $response->status(), $uri, PHP_EOL);
+        echo sprintf('[%s - %s] : %d - %d | %s %s', $middleware, $type, $responseCode, $response->status(), $uri, PHP_EOL);
         $this->assertEquals($responseCode, $response->status());
     }
 }
