@@ -22,12 +22,14 @@ class ProjectCommentsTableSeeder extends Seeder
         ProjectComment::create([
             'project_id'       => $project->id,
             'user_id'          => $user_james->id,
+            'private'          => 1,
             'content'          => 'Hello!',
         ]);
 
         ProjectComment::create([
             'project_id'       => $project->id,
             'user_id'          => $user_nico->id,
+            'private'          => 1,
             'content'          => 'Hi!',
         ]);
     }
