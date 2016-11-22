@@ -51,7 +51,7 @@ class ChatUserController extends Controller
             'item'          => $chat,
             'route'         => 'chat',
             'object'        => 'comment',
-            'routeToDelete' => '/chat/'.$chat->id.'/delete'
+            'routeToDelete' => '/chat/'.$chat->id.'/delete',
         ]);
     }
 
