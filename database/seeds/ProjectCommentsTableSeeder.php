@@ -1,4 +1,5 @@
 <?php
+
 use App\User;
 use App\ProjectCollaborator;
 use Illuminate\Database\Seeder;
