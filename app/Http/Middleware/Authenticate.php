@@ -21,6 +21,7 @@ class Authenticate
         if (Auth::guard($guard)->guest()) {
             return redirect()->guest('login');
         }
+        
         return $next($request);
     }
 }
