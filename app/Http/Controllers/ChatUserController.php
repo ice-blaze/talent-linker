@@ -47,13 +47,12 @@ class ChatUserController extends Controller
             return redirect('/')->withErrors('You\'re not authorized to access this page!');
         }
 
-        $route = 'chat';
-        $object = 'comment';
-        $routeToDelete = '/chat/'.$chat->id.'/delete';
-
-        $item = $chat;
-
-        return view('layouts.edit_text', compact('item', 'route', 'object', 'routeToDelete'));
+        return view('layouts.edit_text')->with([
+            'item'          => $chat,
+            'route'         => 'chat',
+            'object'        => 'comment',
+            'routeToDelete' => '/chat/'.$chat->id.'/delete'
+        ]);
     }
 
     public function update(Request $request, ChatUser $chat)
