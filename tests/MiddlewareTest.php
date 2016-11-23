@@ -11,10 +11,10 @@ class MiddlewareTest extends TestCase
      **/
     public function init()
     {
-        $general_skills = factory(App\GeneralSkill::class, 3)->make();
-        $general_skills_not_used = factory(App\GeneralSkill::class, 3)->make();
-        $languages = factory(App\Language::class, 3)->make();
-        $languages_not_used = factory(App\Language::class, 3)->make();
+        $general_skills = factory(App\GeneralSkill::class, 3)->create();
+        $general_skills_not_used = factory(App\GeneralSkill::class, 3)->create();
+        $languages = factory(App\Language::class, 3)->create();
+        $languages_not_used = factory(App\Language::class, 3)->create();
 
         $user1 = factory(App\User::class)->create();
         $user1->languages()->attach($languages);
