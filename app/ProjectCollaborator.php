@@ -20,4 +20,11 @@ class ProjectCollaborator extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public static function getProjectOwnerId(Project $project)
+    {
+        return ProjectCollaborator::where([
+            ['project_id', '=', $project->id],
+            ['is_project_owner', '=', 1]])->first()->user_id;
+    }
 }
