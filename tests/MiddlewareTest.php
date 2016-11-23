@@ -87,31 +87,59 @@ class MiddlewareTest extends TestCase
             ['GET', '/projects/'.$project->id.'/join', 302, 'guest'],
             ['GET', '/talents/'.$user->id.'/invitations', 302, 'guest'],
             ['GET', '/talents/'.$recruit->id.'/recruit', 302, 'guest'],
+            ['GET', '/dashboard', 302, 'guest'],
+            ['GET', '/dashboard', 302, 'auth'],
+            ['GET', '/dashboard', 200, 'admin'],
+            ['GET', '/talents/'.$user->id, 200, 'admin'],
+            ['GET', '/projects/create', 200, 'admin'],
+            ['GET', '/talents/'.$user->id.'/edit', 302, 'admin'],
+            ['GET', '/talents/'.$user->id.'/chat', 200, 'admin'],
+            ['GET', '/talents/'.$user->id.'/projects', 200, 'admin'],
+            ['GET', '/chat/'.$chat->id.'/edit', 302, 'admin'],
+            ['GET', '/projects/create', 200, 'admin'],
+            ['GET', '/projects/'.$project->id.'/edit', 200, 'admin'],
+            ['GET', '/comments/'.$comment_private->id.'/edit', 302, 'admin'],
+            ['GET', '/projects/'.$project->id.'/privateComments', 200, 'admin'],
+            ['GET', '/projects/'.$project->id.'/invitations', 302, 'admin'],
+            ['GET', '/projects/'.$project->id.'/join', 200, 'admin'],
+            ['GET', '/talents/'.$user->id.'/invitations', 302, 'admin'],
+            ['GET', '/talents/'.$recruit->id.'/recruit', 302, 'admin'],
         ];
     }
 
     /**
      * Run Auth Test.
      **/
-    public function runauth($route, $user)
+    public function runAuth($route, $user)
     {
         list($type, $uri, $responseCode, $middleware) = $route;
         $this->actingAs($user);
 
         $response = $this->call($type, $uri);
-        echo sprintf('[%s - %s] : %d - %d | %s %s', $middleware, $type, $responseCode, $response->status(), $uri, PHP_EOL);
+        $this->assertEquals($responseCode, $response->status());
+    }
+
+    /**
+     * Run Admin Test.
+     **/
+    public function runAdmin($route)
+    {
+        list($type, $uri, $responseCode, $middleware) = $route;
+        $adminUser = factory(App\User::class)->states('admin')->create();
+        $this->actingAs($adminUser);
+
+        $response = $this->call($type, $uri);
         $this->assertEquals($responseCode, $response->status());
     }
 
     /**
      * Run Guest Test.
      **/
-    public function runguest($route)
+    public function runGuest($route)
     {
         list($type, $uri, $responseCode, $middleware) = $route;
 
         $response = $this->call($type, $uri);
-        echo sprintf('[%s - %s] : %d - %d | %s %s', $middleware, $type, $responseCode, $response->status(), $uri, PHP_EOL);
         $this->assertEquals($responseCode, $response->status());
     }
 
@@ -125,7 +153,22 @@ class MiddlewareTest extends TestCase
             list($type, $uri, $responseCode, $middleware) = $route;
 
             if ($middleware == 'auth') {
-                $this->runauth($route, $user);
+                $this->runAuth($route, $user);
+            }
+        }
+    }
+
+    public function testAdminMiddleware()
+    {
+        list($user, $project, $chat, $comment_private, $recruit) = $this->init();
+
+        $routes = $this->getRoutes($user, $project, $chat, $comment_private, $recruit);
+
+        foreach ($routes as $route) {
+            list($type, $uri, $responseCode, $middleware) = $route;
+
+            if ($middleware == 'admin') {
+                $this->runAdmin($route);
             }
         }
     }
@@ -140,7 +183,7 @@ class MiddlewareTest extends TestCase
             list($type, $uri, $responseCode, $middleware) = $route;
 
             if ($middleware == 'guest') {
-                $this->runguest($route);
+                $this->runGuest($route);
             }
         }
     }

@@ -294,5 +294,32 @@ class UsersTableSeeder extends Seeder
             'language_id' => $lang_german_id,
             'user_id'     => $user->id,
         ]);
+
+        $user = User::create([
+            'name'               => 'God',
+            'email'              => 'god@god.com',
+            'first_name'         => 'God',
+            'last_name'          => 'All Mighty',
+            'talent_description' => $talent_description,
+            'password'           => bcrypt('god'),
+            'github_link'        => 'http://example.com/my_github',
+            'website'            => 'http://example.com/my_project',
+            'stack_overflow'     => 'http://example.com/stack_overflow',
+            'image'              => 'http://i.imgur.com/eFhCMYv.jpg',
+            'lat'                => $pos_neuchatel['lat'],
+            'lng'                => $pos_neuchatel['lng'],
+            'find_distance'      => 20,
+            'is_admin'           => 1,
+        ]);
+
+        DB::table('general_skill_user')->insert([
+            'general_skill_id' => $skill_music_id,
+            'user_id'          => $user->id,
+        ]);
+
+        DB::table('language_user')->insert([
+            'language_id' => $lang_french_id,
+            'user_id'     => $user->id,
+        ]);
     }
 }
