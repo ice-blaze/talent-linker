@@ -101,12 +101,13 @@ class ProjectController extends Controller
 
     public function edit(Project $project)
     {
-        if (!$this->isProjectOwner($project)) {
+        if (! $this->isProjectOwner($project)) {
             return redirect('/');
         }
 
         $languages = $project->languages;
         $general_skills = $project->generalSkills;
+        
         return view('projects.edit', compact('project', 'languages', 'general_skills'));
     }
 

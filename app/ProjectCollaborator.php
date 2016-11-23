@@ -23,8 +23,8 @@ class ProjectCollaborator extends Model
 
     public static function getProjectOwnerId(Project $project)
     {
-        return ProjectCollaborator::where([
+        return self::where([
             ['project_id', '=', $project->id],
-            ['is_project_owner', '=', 1]])->first()->user_id;
+            ['is_project_owner', '=', 1], ])->first()->user_id;
     }
 }
