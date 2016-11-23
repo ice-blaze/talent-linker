@@ -29,7 +29,7 @@
                 </div>
                 @if($chat->isEditable($chat->sender_id))
                     <div>
-                        <a href="/chat/{{$chat->id}}/edit">Edit</a>
+                        <a name="message_edit{{$chat->id}}" href="/chat/{{$chat->id}}/edit">Edit</a>
                     </div>
                 @endif
             </li>

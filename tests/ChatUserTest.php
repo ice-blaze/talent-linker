@@ -67,7 +67,7 @@ class ChatUserTest extends TestCase
 
         $this->click('Edit');
         $this->type($messageEdited, 'content');
-        $this->press('update_message');
+        $this->press('update_comment');
         $this->seePageIs($bob->path().'/chat');
         $this->see($messageEdited);
     }
@@ -85,7 +85,8 @@ class ChatUserTest extends TestCase
         $this->seePageIs($bob->path().'/chat');
         $this->see($message);
 
-        $this->press('delete_message');
+        $this->click('Edit');
+        $this->press('delete_comment');
         $this->visit($bob->path().'/chat');
         $this->dontSee($message);
     }
