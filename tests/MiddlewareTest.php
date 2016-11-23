@@ -44,7 +44,6 @@ class MiddlewareTest extends TestCase
      **/
     public function getRoutes($user, $project, $chat, $comment_private, $recruit)
     {
-
         return [
             ['GET', '/', 200, 'guest'],
             ['GET', '/about', 200, 'guest'],
