@@ -110,7 +110,7 @@ class MiddlewareTest extends TestCase
     /**
      * Run Auth Test.
      **/
-    public function runauth($route, $user)
+    public function runAuth($route, $user)
     {
         list($type, $uri, $responseCode, $middleware) = $route;
         $this->actingAs($user);
@@ -123,7 +123,7 @@ class MiddlewareTest extends TestCase
     /**
      * Run Admin Test.
      **/
-    public function runadmin($route)
+    public function runAdmin($route)
     {
         list($type, $uri, $responseCode, $middleware) = $route;
         $adminUser = factory(App\User::class)->states('admin')->create();
@@ -137,7 +137,7 @@ class MiddlewareTest extends TestCase
     /**
      * Run Guest Test.
      **/
-    public function runguest($route)
+    public function runGuest($route)
     {
         list($type, $uri, $responseCode, $middleware) = $route;
 
@@ -156,7 +156,7 @@ class MiddlewareTest extends TestCase
             list($type, $uri, $responseCode, $middleware) = $route;
 
             if ($middleware == 'auth') {
-                $this->runauth($route, $user);
+                $this->runAuth($route, $user);
             }
         }
     }
@@ -171,7 +171,7 @@ class MiddlewareTest extends TestCase
             list($type, $uri, $responseCode, $middleware) = $route;
 
             if ($middleware == 'admin') {
-                $this->runadmin($route);
+                $this->runAdmin($route);
             }
         }
     }
@@ -186,7 +186,7 @@ class MiddlewareTest extends TestCase
             list($type, $uri, $responseCode, $middleware) = $route;
 
             if ($middleware == 'guest') {
-                $this->runguest($route);
+                $this->runGuest($route);
             }
         }
     }
