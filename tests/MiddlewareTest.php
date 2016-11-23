@@ -20,15 +20,13 @@ class MiddlewareTest extends TestCase
         $user1->languages()->attach($languages);
         $user1->generalSkills()->attach($general_skills);
 
-        $collab_owner = factory(App\ProjectCollaborator::class)->states('with_skill', 'with_project', 'owner')->create();
+        $collab_owner = factory(App\ProjectCollaborator::class)->states('with_skill', 'with_project', 'owner')->make();
         $collab_owner->user()->associate($user1);
         $collab_owner->save();
         $project = $collab_owner->project;
 
         $user2 = factory(App\User::class)->create();
-        $user2->languages()->attach($languages);
-        $user2->generalSkills()->attach($general_skills);
-        $chat = factory(App\ChatUser::class, 'no_users')->states('seen')->create();
+        $chat = factory(App\ChatUser::class, 'no_users')->states('seen')->make();
         $chat->sender()->associate($user1);
         $chat->reciever()->associate($user2);
         $chat->save();
