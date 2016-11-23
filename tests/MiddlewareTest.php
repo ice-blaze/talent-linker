@@ -11,22 +11,24 @@ class MiddlewareTest extends TestCase
      **/
     public function init()
     {
-        $general_skills = factory(App\GeneralSkill::class, 3)->create();
-        $general_skills_not_used = factory(App\GeneralSkill::class, 3)->create();
-        $languages = factory(App\Language::class, 3)->create();
-        $languages_not_used = factory(App\Language::class, 3)->create();
+        $general_skills = factory(App\GeneralSkill::class, 3)->make();
+        $general_skills_not_used = factory(App\GeneralSkill::class, 3)->make();
+        $languages = factory(App\Language::class, 3)->make();
+        $languages_not_used = factory(App\Language::class, 3)->make();
 
         $user1 = factory(App\User::class)->create();
         $user1->languages()->attach($languages);
         $user1->generalSkills()->attach($general_skills);
 
-        $collab_owner = factory(App\ProjectCollaborator::class)->states('with_skill', 'with_project', 'owner')->make();
+        $collab_owner = factory(App\ProjectCollaborator::class)->states('with_skill', 'with_project', 'owner')->create();
         $collab_owner->user()->associate($user1);
         $collab_owner->save();
         $project = $collab_owner->project;
 
         $user2 = factory(App\User::class)->create();
-        $chat = factory(App\ChatUser::class, 'no_users')->states('seen')->make();
+        $user2->languages()->attach($languages);
+        $user2->generalSkills()->attach($general_skills);
+        $chat = factory(App\ChatUser::class, 'no_users')->states('seen')->create();
         $chat->sender()->associate($user1);
         $chat->reciever()->associate($user2);
         $chat->save();
@@ -92,18 +94,18 @@ class MiddlewareTest extends TestCase
             ['GET', '/dashboard', 200, 'admin'],
             ['GET', '/talents/'.$user->id, 200, 'admin'],
             ['GET', '/projects/create', 200, 'admin'],
-            ['GET', '/talents/'.$user->id.'/edit', 200, 'admin'],
+            ['GET', '/talents/'.$user->id.'/edit', 302, 'admin'],
             ['GET', '/talents/'.$user->id.'/chat', 200, 'admin'],
             ['GET', '/talents/'.$user->id.'/projects', 200, 'admin'],
-            ['GET', '/chat/'.$chat->id.'/edit', 200, 'admin'],
+            ['GET', '/chat/'.$chat->id.'/edit', 302, 'admin'],
             ['GET', '/projects/create', 200, 'admin'],
             ['GET', '/projects/'.$project->id.'/edit', 200, 'admin'],
-            ['GET', '/comments/'.$comment_private->id.'/edit', 200, 'admin'],
+            ['GET', '/comments/'.$comment_private->id.'/edit', 302, 'admin'],
             ['GET', '/projects/'.$project->id.'/privateComments', 200, 'admin'],
-            ['GET', '/projects/'.$project->id.'/invitations', 200, 'admin'],
+            ['GET', '/projects/'.$project->id.'/invitations', 302, 'admin'],
             ['GET', '/projects/'.$project->id.'/join', 200, 'admin'],
-            ['GET', '/talents/'.$user->id.'/invitations', 200, 'admin'],
-            ['GET', '/talents/'.$recruit->id.'/recruit', 200, 'admin'],
+            ['GET', '/talents/'.$user->id.'/invitations', 302, 'admin'],
+            ['GET', '/talents/'.$recruit->id.'/recruit', 302, 'admin'],
         ];
     }
 
@@ -123,10 +125,10 @@ class MiddlewareTest extends TestCase
     /**
      * Run Admin Test.
      **/
-    public function runadmin($route, $user)
+    public function runadmin($route)
     {
         list($type, $uri, $responseCode, $middleware) = $route;
-        $adminUser = factory(App\User::class)->states('admin')->make();
+        $adminUser = factory(App\User::class)->states('admin')->create();
         $this->actingAs($adminUser);
 
         $response = $this->call($type, $uri);
@@ -171,7 +173,7 @@ class MiddlewareTest extends TestCase
             list($type, $uri, $responseCode, $middleware) = $route;
 
             if ($middleware == 'admin') {
-                $this->runadmin($route, $user);
+                $this->runadmin($route);
             }
         }
     }
