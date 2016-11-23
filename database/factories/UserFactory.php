@@ -26,3 +26,9 @@ $factory->state(App\User::class, 'geo_osaka', function ($faker) {
         'lng' => 135.5022,
     ];
 });
+
+$factory->state(App\User::class, 'admin', function ($faker) {
+    return [
+        'is_admin' => 1,
+    ];
+});
