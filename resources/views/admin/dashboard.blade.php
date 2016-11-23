@@ -14,7 +14,8 @@
                             Users
                         </div>
                         <div class="card-block">
-                            {{ App\User::count() }} Users
+                            {{ App\User::count() }} Users <br>
+                            {{ number_format(App\ProjectCollaborator::count() / App\Project::count(), 2, '.', '') }} per project
                         </div>
                     </div>
 
@@ -42,7 +43,8 @@
                             Chat
                         </div>
                         <div class="card-block">
-                            {{ App\ChatUser::count() }} User chat messages
+                            {{ App\ChatUser::count() }} User chat messages <br>
+                            {{ number_format(App\ProjectCollaborator::count() / App\ChatUser::count(), 2, '.', '') }} per project
                         </div>
                     </div>
                 </div>
