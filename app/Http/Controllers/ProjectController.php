@@ -107,7 +107,7 @@ class ProjectController extends Controller
 
         $languages = $project->languages;
         $general_skills = $project->generalSkills;
-        
+
         return view('projects.edit', compact('project', 'languages', 'general_skills'));
     }
 
