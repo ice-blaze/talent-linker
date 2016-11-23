@@ -116,7 +116,6 @@ class MiddlewareTest extends TestCase
         $this->actingAs($user);
 
         $response = $this->call($type, $uri);
-        echo sprintf('[%s - %s] : %d - %d | %s %s', $middleware, $type, $responseCode, $response->status(), $uri, PHP_EOL);
         $this->assertEquals($responseCode, $response->status());
     }
 
@@ -130,7 +129,6 @@ class MiddlewareTest extends TestCase
         $this->actingAs($adminUser);
 
         $response = $this->call($type, $uri);
-        echo sprintf('[%s - %s] : %d - %d | %s %s', $middleware, $type, $responseCode, $response->status(), $uri, PHP_EOL);
         $this->assertEquals($responseCode, $response->status());
     }
 
@@ -142,7 +140,6 @@ class MiddlewareTest extends TestCase
         list($type, $uri, $responseCode, $middleware) = $route;
 
         $response = $this->call($type, $uri);
-        echo sprintf('[%s - %s] : %d - %d | %s %s', $middleware, $type, $responseCode, $response->status(), $uri, PHP_EOL);
         $this->assertEquals($responseCode, $response->status());
     }
 
