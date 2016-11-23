@@ -71,7 +71,7 @@ class ProjectController extends Controller
             'short_description' => 'required',
             'long_description' => 'required',
             'languages' => 'required',
-        ]);
+            ]);
 
         // project creation
         $project = new Project;
@@ -101,10 +101,12 @@ class ProjectController extends Controller
 
     public function edit(Project $project)
     {
+        if (!$this->isProjectOwner($project)) {
+            return redirect('/');
+        }
+
         $languages = $project->languages;
-
         $general_skills = $project->generalSkills;
-
         return view('projects.edit', compact('project', 'languages', 'general_skills'));
     }
 
@@ -129,7 +131,7 @@ class ProjectController extends Controller
             'short_description' => 'required',
             'long_description' => 'required',
             'languages' => 'required',
-        ]);
+            ]);
 
         $project->update([
             'name' => $request->name,
@@ -138,7 +140,7 @@ class ProjectController extends Controller
             'github_link' => $request->github_link,
             'website_link' => $request->website_link,
             'image' => $request->image,
-        ]);
+            ]);
 
         // managed the langauges
         $project->languages()->sync($request->languages);
@@ -154,5 +156,10 @@ class ProjectController extends Controller
         $project->delete();
 
         return redirect()->action('ProjectController@index');
+    }
+
+    public function isProjectOwner(Project $project)
+    {
+        return ProjectCollaborator::getProjectOwnerId($project) == Auth::User()->id || Auth::User()->isAdmin();
     }
 }
