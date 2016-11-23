@@ -7,12 +7,13 @@ use Illuminate\Support\Facades\Auth;
 
 class Admin
 {
-    public function handle($request, Closure $next)
+    // TODO Will be available at #176.
+    /*public function handle($request, Closure $next)
     {
         if (Auth::check() && Auth::user()->is_admin) {
             return $next($request);
         }
 
         return redirect('/');
-    }
+    }*/
 }
