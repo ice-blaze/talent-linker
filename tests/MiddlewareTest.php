@@ -64,7 +64,7 @@ class MiddlewareTest extends TestCase
             ['GET', '/projects/'.$project->id.'/join', 200, 'auth'],
             ['GET', '/talents/'.$user->id.'/invitations', 200, 'auth'],
             ['GET', '/talents/'.$recruit->id.'/recruit', 200, 'auth'],
-            //['GET', '/projects', 200, 'auth'],
+            //['GET', '/projects', 200, 'auth'], TODO Failed asserting that 500 matches expected 200
             ['GET', '/projects/'.$project->id, 200, 'auth'],
             ['GET', '/talents', 200, 'auth'],
             ['GET', '/talents/'.$user->id, 200, 'auth'],
