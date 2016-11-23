@@ -7,7 +7,7 @@ class MiddlewareTest extends TestCase
     use DatabaseTransactionWorking;
 
     /**
-     * Create users / projects / comments / chat
+     * Create users / projects / comments / chat.
      **/
     public function init()
     {
@@ -40,7 +40,7 @@ class MiddlewareTest extends TestCase
     }
 
     /**
-     * Get routes
+     * Get routes.
      **/
     public function getRoutes($user, $project, $chat, $comment_private, $recruit)
     {
@@ -92,7 +92,7 @@ class MiddlewareTest extends TestCase
     }
 
     /**
-     * Run Auth Test
+     * Run Auth Test.
      **/
     public function runauth($route, $user)
     {
@@ -105,7 +105,7 @@ class MiddlewareTest extends TestCase
     }
 
     /**
-     * Run Guest Test
+     * Run Guest Test.
      **/
     public function runguest($route)
     {
