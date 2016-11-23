@@ -50,7 +50,12 @@ class ProjectCommentController extends Controller
             return redirect('/')->withErrors('You are not authorized to do this action!');
         }
 
-        return view('project_comments.edit', compact('comment'));
+        return view('layouts.edit_text')->with([
+            'item'          => $comment,
+            'route'         => 'comments',
+            'object'        => 'message',
+            'routeToDelete' => '/comments/'.$comment->id,
+        ]);
     }
 
     public function update(Request $request, ProjectComment $comment)
