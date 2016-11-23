@@ -54,6 +54,16 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('talents/{user}/invitations', 'ProjectCollaboratorController@userIndex');
     Route::get('talents/{user}/recruit', 'ProjectCollaboratorController@recruit');
     Route::post('talents/{user}/recruit', 'ProjectCollaboratorController@userStore');
+
+    Route::get('/dashboard', function () {
+        return view('admin.dashboard');
+    });
+});
+
+Route::group(['middleware' => 'admin'], function () {
+    Route::get('/dashboard', function () {
+        return view('admin.dashboard');
+    });
 });
 
 // Projects
