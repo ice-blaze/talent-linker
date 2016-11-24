@@ -26,6 +26,37 @@ class ChatUserController extends Controller
         return view('chats.index', compact('user', 'reciever', 'chats'));
     }
 
+    public function inbox()
+    {
+        $user = User::find(Auth::user()->id);
+
+        $chats = ChatUser::where(function ($query) use ($user) {
+            return $query->where('reciever_id', '=', $user->id)
+                ->orWhere('sender_id', '=', $user->id);
+        }
+        )->where(function ($query) use ($user) {
+            return $query->where('sender_id', '=', $user->id)
+                ->orWhere('reciever_id', '=', $user->id);
+        }
+        )->orderBy('updated_at', 'desc')->get();
+
+        $ids = array();
+
+        foreach ($chats as $c) {
+            if (!in_array($c->sender_id, $ids)) {
+                array_push($ids, $c->sender_id);
+            }
+
+            if (!in_array($c->reciever_id, $ids)) {
+                array_push($ids, $c->reciever_id);
+            }
+        }
+
+        $ids = array_diff($ids, array($user->id));
+
+        return view('chats.inbox', compact('user', 'ids'));
+    }
+
     public function store(Request $request, $reciever_id)
     {
         $this->validate($request, [
@@ -48,10 +79,10 @@ class ChatUserController extends Controller
         }
 
         return view('layouts.edit_text')->with([
-            'item'          => $chat,
-            'route'         => 'chat',
-            'object'        => 'comment',
-            'routeToDelete' => '/chat/'.$chat->id.'/delete',
+            'item' => $chat,
+            'route' => 'chat',
+            'object' => 'comment',
+            'routeToDelete' => '/chat/' . $chat->id . '/delete',
         ]);
     }
 
@@ -65,13 +96,28 @@ class ChatUserController extends Controller
             'content' => $request->content,
         ]);
 
-        return redirect('talents/'.$chat->reciever_id.'/chat');
+        return redirect('talents/' . $chat->reciever_id . '/chat');
     }
 
-    public function delete(ChatUser $chat)
+    public function deleteMessage(ChatUser $chat)
     {
         $chat->delete();
 
-        return redirect('talents/'.$chat->reciever_id.'/chat');
+        return redirect('talents/' . $chat->reciever_id . '/chat');
+    }
+
+    public function delete(Request $request, $id)
+    {
+        $chats = ChatUser::where(function ($query) use ($id) {
+            return $query->where('reciever_id', '=', $id)
+                ->orWhere('sender_id', '=', $id);
+        }
+        )->where(function ($query) use ($id) {
+            return $query->where('sender_id', '=', $id)
+                ->orWhere('reciever_id', '=', $id);
+        }
+        )->orderBy('updated_at', 'desc')->delete();
+
+        return redirect('chat/inbox/');
     }
 }

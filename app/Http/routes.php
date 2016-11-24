@@ -25,7 +25,9 @@ Route::group(['middleware' => 'auth'], function () {
 
     // Chat
     Route::get('chat/{chat}/edit', 'ChatUserController@edit');
-    Route::delete('chat/{chat}/delete', 'ChatUserController@delete');
+    Route::get('chat/inbox', 'ChatUserController@inbox');
+    Route::delete('chat/{chat}/delete', 'ChatUserController@deleteMessage');
+    Route::delete('chat/{id}', 'ChatUserController@delete');
     Route::patch('chat/{chat}', 'ChatUserController@update');
 
     // Project
