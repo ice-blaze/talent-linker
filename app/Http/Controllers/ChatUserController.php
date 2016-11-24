@@ -29,16 +29,9 @@ class ChatUserController extends Controller
     public function inbox()
     {
         $user = User::find(Auth::user()->id);
+        $id = $user->id;
 
-        $chats = ChatUser::where(function ($query) use ($user) {
-            return $query->where('reciever_id', '=', $user->id)
-                ->orWhere('sender_id', '=', $user->id);
-        }
-        )->where(function ($query) use ($user) {
-            return $query->where('sender_id', '=', $user->id)
-                ->orWhere('reciever_id', '=', $user->id);
-        }
-        )->orderBy('updated_at', 'desc')->get();
+        $chats = ChatUser::getOrderedChat($id)->get();
 
         $ids = [];
 
@@ -108,15 +101,7 @@ class ChatUserController extends Controller
 
     public function delete(Request $request, $id)
     {
-        $chats = ChatUser::where(function ($query) use ($id) {
-            return $query->where('reciever_id', '=', $id)
-                ->orWhere('sender_id', '=', $id);
-        }
-        )->where(function ($query) use ($id) {
-            return $query->where('sender_id', '=', $id)
-                ->orWhere('reciever_id', '=', $id);
-        }
-        )->orderBy('updated_at', 'desc')->delete();
+        $chats = ChatUser::getOrderedChat($id)->delete();
 
         return redirect('chat/inbox/');
     }

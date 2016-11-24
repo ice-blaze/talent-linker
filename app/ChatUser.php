@@ -52,4 +52,17 @@ class ChatUser extends Model
     {
         return $id == Auth::User()->id;
     }
+
+    public static function getOrderedChat($id)
+    {
+        return self::where(function ($query) use ($id) {
+            return $query->where('reciever_id', '=', $id)
+                ->orWhere('sender_id', '=', $id);
+        }
+        )->where(function ($query) use ($id) {
+            return $query->where('sender_id', '=', $id)
+                ->orWhere('reciever_id', '=', $id);
+        }
+        )->orderBy('updated_at', 'desc');
+    }
 }
