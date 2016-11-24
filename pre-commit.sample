@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+ROOT="./"
+
+echo "php-cs-fixer pre commit hook start"
+
+exit 0
+
+PHP_CS_FIXER="./vendor/friendsofphp/php-cs-fixer/php-cs-fixer"
+HAS_PHP_CS_FIXER=false
+
+if [ -x $PHP_CS_FIXER ]; then
+    HAS_PHP_CS_FIXER=true
+fi
+
+if $HAS_PHP_CS_FIXER; then
+    php $PHP_CS_FIXER fix ./ --config-file=$ROOT/.php_cs --dry-run --diff | grep 'string' &
+    #if [ $? == 0 ]; then
+    #  echo "okidok"
+    #else
+    #  echo "nopinop"
+    #fi
+else
+    echo ""
+    echo "Please install php-cs-fixer, e.g.:"
+    echo ""
+    echo "  composer require --dev fri.../php-cs-fixer:dev-master"
+    echo ""
+fi
+
+exit 1
+
+echo "php-cs-fixer pre commit hook finish"
+
+exit 0
