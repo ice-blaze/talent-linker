@@ -40,19 +40,19 @@ class ChatUserController extends Controller
         }
         )->orderBy('updated_at', 'desc')->get();
 
-        $ids = array();
+        $ids = [];
 
         foreach ($chats as $c) {
-            if (!in_array($c->sender_id, $ids)) {
+            if (! in_array($c->sender_id, $ids)) {
                 array_push($ids, $c->sender_id);
             }
 
-            if (!in_array($c->reciever_id, $ids)) {
+            if (! in_array($c->reciever_id, $ids)) {
                 array_push($ids, $c->reciever_id);
             }
         }
 
-        $ids = array_diff($ids, array($user->id));
+        $ids = array_diff($ids, [$user->id]);
 
         return view('chats.inbox', compact('user', 'ids'));
     }
@@ -82,7 +82,7 @@ class ChatUserController extends Controller
             'item' => $chat,
             'route' => 'chat',
             'object' => 'comment',
-            'routeToDelete' => '/chat/' . $chat->id . '/delete',
+            'routeToDelete' => '/chat/'.$chat->id.'/delete',
         ]);
     }
 
@@ -96,14 +96,14 @@ class ChatUserController extends Controller
             'content' => $request->content,
         ]);
 
-        return redirect('talents/' . $chat->reciever_id . '/chat');
+        return redirect('talents/'.$chat->reciever_id.'/chat');
     }
 
     public function deleteMessage(ChatUser $chat)
     {
         $chat->delete();
 
-        return redirect('talents/' . $chat->reciever_id . '/chat');
+        return redirect('talents/'.$chat->reciever_id.'/chat');
     }
 
     public function delete(Request $request, $id)
