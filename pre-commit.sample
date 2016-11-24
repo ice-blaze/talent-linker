@@ -1,10 +1,7 @@
 #!/usr/bin/env bash
 
 ROOT="./"
-
-echo "php-cs-fixer pre commit hook start"
-
-exit 0
+DRY_RUN=true
 
 PHP_CS_FIXER="./vendor/friendsofphp/php-cs-fixer/php-cs-fixer"
 HAS_PHP_CS_FIXER=false
@@ -14,22 +11,25 @@ if [ -x $PHP_CS_FIXER ]; then
 fi
 
 if $HAS_PHP_CS_FIXER; then
-    php $PHP_CS_FIXER fix ./ --config-file=$ROOT/.php_cs --dry-run --diff | grep 'string' &
-    #if [ $? == 0 ]; then
-    #  echo "okidok"
-    #else
-    #  echo "nopinop"
-    #fi
+    if [ $DRY_RUN ]; then
+        php $PHP_CS_FIXER fix ./ --config-file=$ROOT/.php_cs --dry-run --diff
+    else
+        php $PHP_CS_FIXER fix ./ --config-file=$ROOT/.php_cs --diff
+        echo "Potentially modified files"
+        exit 0
+    fi
+
+    if [ $? != 0 ]; then
+        echo "php-cs-fixer failed"
+        exit 2
+    fi
+
+    echo "php-cs-fixer pass"
+    exit 0
 else
     echo ""
-    echo "Please install php-cs-fixer, e.g.:"
+    echo "Please install php-cs-fixer:"
     echo ""
-    echo "  composer require --dev fri.../php-cs-fixer:dev-master"
-    echo ""
+    echo "  composer update"
+    exit 1
 fi
-
-exit 1
-
-echo "php-cs-fixer pre commit hook finish"
-
-exit 0
