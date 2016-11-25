@@ -29,7 +29,7 @@ class ChatUser extends Model
             return $query->where('reciever_id', '=', $id_2)
                 ->where('sender_id', '=', $id_1);
         }
-        )->orderBy('updated_at', 'desc')
+        )->orderBy('created_at', 'desc')
             ->first()->updated_at;
     }
 
@@ -38,7 +38,7 @@ class ChatUser extends Model
         if (self::where('reciever_id', '=', Auth::user()->id)->where('sender_id', '=', $user_id)->count()) {
             if (self::where('reciever_id', '=', Auth::user()->id)
                     ->where('sender_id', '=', $user_id)
-                    ->orderBy('updated_at', 'desc')->first()
+                    ->orderBy('created_at', 'desc')->first()
                     ->seen == 0
             ) {
                 return true;
@@ -63,6 +63,6 @@ class ChatUser extends Model
             return $query->where('sender_id', '=', $id)
                 ->orWhere('reciever_id', '=', $id);
         }
-        )->orderBy('updated_at', 'desc');
+        )->orderBy('created_at', 'desc');
     }
 }
