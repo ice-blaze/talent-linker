@@ -111,4 +111,79 @@ class ChatUserTest extends TestCase
         $this->visit('/chat/'.$chat_message->id.'/edit');
         $this->see("You're not authorized to access this page!");
     }
+
+    public function testChatUseInbox()
+    {
+        $message = 'Hey pirate Bob !';
+        $alice = factory(App\User::class)->create();
+        $bob = factory(App\User::class)->create();
+        $this->actingAs($alice);
+
+        $this->visit($bob->path());
+        $this->click('Chat with this talent');
+        $this->type($message, 'content');
+        $this->press('send');
+        $this->seePageIs($bob->path().'/chat');
+        $this->see($message);
+
+        $this->actingAs($bob);
+        $this->visit('/chat/inbox');
+        $this->see($alice->name);
+
+        $this->click($alice->name);
+        $this->see($message);
+    }
+
+    public function testChatUseInboxPendingMessage()
+    {
+        $message = 'Hey pirate Bob !';
+        $alice = factory(App\User::class)->create();
+        $bob = factory(App\User::class)->create();
+        $this->actingAs($alice);
+
+        $this->visit($bob->path());
+        $this->click('Chat with this talent');
+        $this->type($message, 'content');
+        $this->press('send');
+        $this->seePageIs($bob->path().'/chat');
+        $this->see($message);
+
+        $this->actingAs($bob);
+
+        $this->visit($alice->path());
+        $this->click('Chat with this talent');
+        $this->type($message.' to ALice', 'content');
+        $this->press('send');
+        $this->seePageIs($alice->path().'/chat');
+        $this->see($message);
+
+        $this->visit('/chat/inbox');
+        $this->see($alice->name);
+
+        $this->click($alice->name);
+        $this->see($message);
+    }
+
+    public function testChatUseInboxDeleteConversation()
+    {
+        $message = 'Hey pirate Bob GO AWAY!';
+        $alice = factory(App\User::class)->create();
+        $bob = factory(App\User::class)->create();
+        $this->actingAs($alice);
+
+        $this->visit($bob->path());
+        $this->click('Chat with this talent');
+        $this->type($message, 'content');
+        $this->press('send');
+        $this->seePageIs($bob->path().'/chat');
+        $this->see($message);
+
+        $this->actingAs($bob);
+        $this->visit('/chat/inbox');
+        $this->see($alice->name);
+
+        $this->press('Delete');
+        $this->visit('/chat/inbox');
+        $this->dontSee($alice->name);
+    }
 }
