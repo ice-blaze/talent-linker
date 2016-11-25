@@ -21,3 +21,5 @@ bootstrap/cache/*
 .vagrant
 /.idea/
 /storage/
+
+.php_cs.cache
