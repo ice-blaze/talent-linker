@@ -10,6 +10,7 @@ $finder = Symfony\Component\Finder\Finder::create()
     ->ignoreVCS(true);
 
 $fixers = [
+    '-psr0',
     'binary_operator_spaces',
     'blank_line_after_namespace',
     'blank_line_after_opening_tag',
