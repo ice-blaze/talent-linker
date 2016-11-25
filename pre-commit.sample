@@ -2,6 +2,16 @@
 
 ROOT="./"
 DRY_RUN=true
+SEPARATOR="----------------------------------"
+
+message_and_quite ()
+{
+    echo ""
+    echo -e $1
+    echo ""
+    echo $SEPARATOR
+    exit $2
+}
 
 PHP_CS_FIXER="./vendor/friendsofphp/php-cs-fixer/php-cs-fixer"
 HAS_PHP_CS_FIXER=false
@@ -10,26 +20,27 @@ if [ -x $PHP_CS_FIXER ]; then
     HAS_PHP_CS_FIXER=true
 fi
 
+echo ""
+echo $SEPARATOR
+
 if $HAS_PHP_CS_FIXER; then
-    if [ $DRY_RUN ]; then
+    if $DRY_RUN; then
         php $PHP_CS_FIXER fix ./ --config-file=$ROOT/.php_cs --dry-run --diff
     else
         php $PHP_CS_FIXER fix ./ --config-file=$ROOT/.php_cs --diff
-        echo "Potentially modified files"
-        exit 0
     fi
 
-    if [ $? != 0 ]; then
-        echo "php-cs-fixer failed"
-        exit 2
+    if [ $? == 0 ]; then
+        message_and_quite "php-cs-fixer: \e[30;48;5;82mPASSED\e[0m" 0
+    else
+        if $DRY_RUN; then
+            message_and_quite "php-cs-fixer: \e[30;48;5;1mFAILED\e[0m" 2
+        else
+            message_and_quite "php-cs-fixer: \e[30;48;5;11mWARNING\e[0m modified files" 2
+        fi
     fi
-
-    echo "php-cs-fixer pass"
-    exit 0
 else
     echo ""
     echo "Please install php-cs-fixer:"
-    echo ""
-    echo "  composer update"
-    exit 1
+    message_and_quite "  composer update" 1
 fi
