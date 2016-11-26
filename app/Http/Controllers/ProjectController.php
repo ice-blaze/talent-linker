@@ -161,6 +161,6 @@ class ProjectController extends Controller
 
     public function isProjectOwner(Project $project)
     {
-        return ProjectCollaborator::getProjectOwnerId($project) == Auth::User()->id || Auth::User()->isAdmin();
+        return $project->owner->user_id == Auth::User()->id || Auth::User()->isAdmin();
     }
 }
