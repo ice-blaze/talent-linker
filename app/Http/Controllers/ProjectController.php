@@ -101,8 +101,11 @@ class ProjectController extends Controller
 
     public function edit(Project $project)
     {
-        $languages = $project->languages;
+        if (! $this->isProjectOwner($project)) {
+            return redirect('/');
+        }
 
+        $languages = $project->languages;
         $general_skills = $project->generalSkills;
 
         return view('projects.edit', compact('project', 'languages', 'general_skills'));
@@ -154,5 +157,10 @@ class ProjectController extends Controller
         $project->delete();
 
         return redirect()->action('ProjectController@index');
+    }
+
+    public function isProjectOwner(Project $project)
+    {
+        return $project->owner->user_id == Auth::User()->id || Auth::User()->isAdmin();
     }
 }
