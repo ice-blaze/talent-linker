@@ -94,4 +94,9 @@ class User extends Authenticatable
 
         return $this->id == Auth::user()->id;
     }
+
+    public function isAdmin()
+    {
+        return $this->is_admin;
+    }
 }
