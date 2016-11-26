@@ -1,3 +1,7 @@
+body {
+  /* background: black; */
+}
+
 .control-label {
   text-align: right;
 }
@@ -33,18 +37,12 @@
 }
 
 .hidden{
-  /*visibility: hidden;
-  height: 0px;
-  width: 0px;*/
   display: none;
 }
 
 .darken:hover{
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
-
-/*{{-- because of the nav bar that stay at the top of the page. Bootstrap solution for their component... --}}
-body { padding-top: 70px; }*/
 
 #delete_form {
     display: inline-block;
