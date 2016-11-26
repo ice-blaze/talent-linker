@@ -71,7 +71,7 @@ class ProjectController extends Controller
             'short_description' => 'required',
             'long_description' => 'required',
             'languages' => 'required',
-            ]);
+        ]);
 
         // project creation
         $project = new Project;
@@ -132,7 +132,7 @@ class ProjectController extends Controller
             'short_description' => 'required',
             'long_description' => 'required',
             'languages' => 'required',
-            ]);
+        ]);
 
         $project->update([
             'name' => $request->name,
@@ -141,7 +141,7 @@ class ProjectController extends Controller
             'github_link' => $request->github_link,
             'website_link' => $request->website_link,
             'image' => $request->image,
-            ]);
+        ]);
 
         // managed the langauges
         $project->languages()->sync($request->languages);
