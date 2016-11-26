@@ -15,10 +15,18 @@ function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
         center: myLatLng,
         zoom: 10,
-        scrollwheel: true,
+        scrollwheel: false,
         disableDefaultUI: true,
         keyboardShortcuts: false,
         disableDoubleClickZoom: true,
+    });
+
+    google.maps.event.addListener(map, 'click', function(event){
+        this.setOptions({scrollwheel:true});
+    });
+
+    google.maps.event.addListener(map, 'mouseout', function(event){
+        this.setOptions({scrollwheel:false});
     });
 
     var marker = new google.maps.Marker({
