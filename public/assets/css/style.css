@@ -81,3 +81,22 @@ body { padding-top: 70px; }*/
   margin-right: -20px;
   margin-top: -15px;
 }
+
+.pending-message{
+  border-color: red;
+}
+
+.btn-delete-conv{
+    float: right;
+}
+
+.btn-delete-conv{
+    background:#007bff;
+    padding:7px 7px;
+    color: white;
+    border: 0;
+}
+
+.btn-delete-conv:hover{
+    background-color:#0056b3;
+}
