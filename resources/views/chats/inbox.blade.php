@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="row">
-        <h1>Inbox</h1>
+        <h1>{{ Trans('chat.title_inbox') }}</h1>
     </div>
 
     <div class="row">
@@ -13,7 +13,7 @@
             ])
         @empty
             <div class="lead col-sm-12">
-                No Conversations ...
+                {{ Trans('chat.no_conversation') }}
             </div>
         @endforelse
     </div>
