@@ -1,0 +1,108 @@
+/**
+ * Talent Linker - SCSS - Forms
+ *
+ * since		28.11.2016
+ * version		1.0.0.0
+ * author		mlbors
+ * copyright	-
+*/
+
+/**************************/
+/********** FORM **********/
+/**************************/
+
+form {
+    
+    p {
+        margin: 0;
+    }
+    
+    label {
+        display: block;
+        margin-bottom: $myDividedGutter/2;
+        text-align: $formLabelTxtAlign;
+        font-weight: $formLabelFontWeight;
+        clear: both;
+    }
+
+    input[type="text"],
+    input[type="password"],
+    input[type="email"],
+    select,
+    textarea {
+        display: block;
+        margin: 0 0 $myDividedGutter/2;
+        @include my-border-radius($formInputBorderRadius);
+        clear: both;
+    }
+
+    input[type="text"],
+    input[type="password"],
+    input[type="email"],
+    textarea {
+        width: 100%;
+        border: $inputFormBorder !important;
+        background-color: $formInputBg;
+        outline: none !important;
+        @include my-box-shadow(none);
+        @include my-border-radius($formInputBorderRadius);
+
+        &:focus {
+            border: $inputFormBorderF !important;
+            outline: none !important;
+            @include my-box-shadow(none);
+        }
+
+    }
+
+    textarea {
+        border: $inputFormBorder !important;
+        resize: none;
+        outline: none !important;
+        @include my-box-shadow(none);
+
+        &:focus {
+            border: $inputFormBorderF !important;
+            outline: none !important;
+            @include my-box-shadow(none);
+        }
+    }
+
+    input[type="submit"] {
+        width: 100%;
+        margin: $formSubmitMargin;
+        padding: $formSubmitPadding;
+        border: $formSubmitBorder;
+        opacity: $formSubmitOpactiy;
+        color: $formSubmitTxtColor;
+        font-size: $formLabelFontSize*1.25;
+        font-family: $formSubmitFontFamily;
+        text-transform: $formSubmitTxtTransform;
+        font-weight: $formSubmitFontWeight;
+        line-height: $formSubmitLineHeight;
+        background: $formSubmitBg;
+        letter-spacing: 1px;
+        @include my-border-radius($formSubmiBorderRadius);
+        @include my-transition(all 0.10s ease);
+
+        &:focus,
+        &:hover {
+            border: $formSubmitBorderH;
+            color: $formSubmitTxtColorH;
+            opacity: $formSubmitOpactiyH;
+            background: $formSubmitBgH;
+            @include my-box-shadow(none);
+            @include my-transition(all 0.10s ease);
+        }
+        
+        &.full-width {
+            width: 100%;   
+        }
+        
+        &.uppercase {
+            text-transform: uppercase;   
+        }
+
+    }
+    
+}

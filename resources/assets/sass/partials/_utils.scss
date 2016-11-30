@@ -1,0 +1,234 @@
+/**
+ * Talent Linker - SCSS - Utils
+ *
+ * since		28.11.2016
+ * version		1.0.0.0
+ * author		mlbors
+ * copyright	-
+*/
+
+/****************************/
+/********** MARGIN **********/
+/****************************/
+
+.no-margin-bottom {
+    margin-bottom: 0 !important;
+}
+
+.no-margin-top {
+    margin-top: 0;
+}
+
+.no-margin-left {
+    margin-left: 0;
+}
+
+.no-margin-right {
+    margin-right: 0;
+}
+
+.no-margin-top-bottom {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.no-margin-left-right {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.no-margin {
+    margin: 0;
+}
+
+.margin-bottom {
+    margin-bottom: $myBasicGutter;
+}
+
+.margin-top {
+    margin-top: $myBasicGutter;
+}
+
+.margin-left {
+    margin-left: $myBasicGutter;
+}
+
+.margin-right {
+    margin-right: $myBasicGutter;
+}
+
+.margin-top-bottom {
+    margin-top: $myBasicGutter;
+    margin-bottom: $myBasicGutter;
+}
+
+.margin-left-right {
+    margin-left: $myBasicGutter;
+    margin-right: $myBasicGutter;
+}
+
+.margin-bottom-divided {
+    margin-bottom: $myDividedGutter;
+}
+
+.margin-top-divided  {
+    margin-top: $myDividedGutter;
+}
+
+.margin-bottom-991  {
+    margin-bottom: 0;
+    @include my-transition(all ease 0.25s);
+}
+
+.margin-bottom-767  {
+    margin-bottom: 0;
+    @include my-transition(all ease 0.25s);
+}
+
+/********************************************************************************/
+/********************************************************************************/
+
+/*****************************/
+/********** PADDING **********/
+/*****************************/
+
+.no-padding-bottom {
+    padding-bottom: 0;
+}
+
+.no-padding-top {
+    padding-top: 0;
+}
+
+.no-padding-left {
+    padding-left: 0;
+}
+
+.no-padding-right {
+    padding-right: 0;
+}
+
+.no-padding-top-bottom {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.no-padding-left-right {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.no-padding {
+    padding: 0 !important;
+}
+
+.padding-bottom {
+    padding-bottom: $myBasicGutter;
+}
+
+.padding-top {
+    padding-top: $myBasicGutter;
+}
+
+.padding-left {
+    padding-left: $myBasicGutter;
+}
+
+.padding-right {
+    padding-right: $myBasicGutter;
+}
+
+.padding-top-bottom {
+    padding-top: $myBasicGutter;
+    padding-bottom: $myBasicGutter;
+}
+
+.padding-left-right {
+    padding-left: $myBasicGutter;
+    padding-right: $myBasicGutter;
+}
+
+.padding-top-bottom-big-size {
+    padding-top: $myQuadrupleGutter;
+    padding-bottom: $myQuadrupleGutter;
+}
+
+.small-padding-top-bottom {
+    padding-top: $myDividedGutter;
+    padding-bottom: $myDividedGutter;
+}
+
+.small-padding-top {
+    padding-top: $myDividedGutter;
+}
+
+.small-padding-bottom {
+    padding-bottom: $myDividedGutter;
+}
+
+/********************************************************************************/
+/********************************************************************************/
+
+/*****************************/
+/********** BORDERS **********/
+/*****************************/
+
+/********************************************************************************/
+/********************************************************************************/
+
+/************************/
+/********** HR **********/
+/************************/
+
+hr {
+    margin: $hrMargin;  
+}
+
+/********************************************************************************/
+/********************************************************************************/
+
+/*******************************/
+/********** SELECTION **********/
+/*******************************/
+
+::selection {
+    color: $mySelectText;
+    background-color: $mySelectBackground;
+}
+::-moz-selection {
+    color: $mySelectText;
+    background-color: $mySelectBackground;
+}
+
+/********************************************************************************/
+/********************************************************************************/
+
+/*****************************/
+/********** OVERLAY **********/
+/*****************************/
+
+.overlay-body {
+    content: ' ';
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    bottom: 0;
+    height: 100%;
+    left: 0;
+    right: 0;
+    top: 0;   
+    z-index: 90000;
+    background-color: rgba(127, 127, 127, 0.75);
+}
+
+/********************************************************************************/
+/********************************************************************************/
+
+/*****************************/
+/********** DISPLAY **********/
+/*****************************/
+
+.display-none {
+    display: none !important;   
+}

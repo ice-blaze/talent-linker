@@ -1,0 +1,170 @@
+/**
+ * Talent Linker - SCSS - Variables - Fonts
+ *
+ * since		28.11.2016
+ * version		1.0.0.0
+ * author		mlbors
+ * copyright	-
+*/
+
+/******************************/
+/********** FAMILIES **********/
+/******************************/ 
+
+$brandFontFamily:                   'Lato', Helvetica, "Lucida Grande", sans-serif;
+$brandHeadingsFontFamily:           'Ubuntu', Helvetica, "Lucida Grande", sans-serif;
+$altBrandFontFamily:                'Raleway', Helvetica, "Lucida Grande", sans-serif;
+
+/********************************************************************************/
+/********************************************************************************/
+
+/****************************/
+/********** BASICS **********/
+/****************************/ 
+
+$myFontSize:                        16px;
+$myFontSizeBase:                    $myFontSize;
+$myFontSizeMiddle:                  $myFontSizeBase*1.5;
+$myFontSizeBig:                     $myFontSizeBase*2;
+$myHeadingFontSize:                 26px;
+$myHeadingFontSizeResp:             24px;
+
+/********************************************************************************/
+/********************************************************************************/
+
+/**************************/
+/********** BODY **********/
+/**************************/ 
+
+$bodyFontFamily:                    $brandFontFamily;
+$bodyFontSize:                      $myFontSize;
+$bodyFontWeight:                    400;
+$bodyTxtTransform:                  none;
+$bodyTxtAlign:                      justify;
+
+/********************************************************************************/
+/********************************************************************************/
+
+/********************************/
+/********** NAVIGATION **********/
+/********************************/ 
+
+$navFontFamily:                     $brandHeadingsFontFamily;
+$navFontSize:                       15px;
+$navFontWeight:                     400;
+$navTextTansform:                   uppercase;
+$navLinkDecoration:                 none;
+$navLinkDecorationH:                none;
+
+/********************************************************************************/
+/********************************************************************************/
+
+/****************************/
+/********** FOOTER **********/
+/****************************/ 
+
+$footerFont:                        $altBrandFontFamily;
+$footerFontSize:                    14px;
+$footerMenuFontSize:                $footerFontSize;
+$footerFontSizeResp:                $footerFontSize;
+$footerMenuFontSizeResp:            $footerFontSize;
+$footerMenuFontTransform:           none;
+$footerMenuFontWeight:              normal;
+$footerFontWeight:                  normal;
+$footerLinkDecoration:              none;
+$footerLinkDecorationH:             none;
+$footerTextAlign:                   right;
+$footerFaFontSize:                  14px;
+
+/********************************************************************************/
+/********************************************************************************/
+
+/***************************/
+/********** LINKS **********/
+/***************************/ 
+
+$txtLinkDecoration:                 none;
+$txtLinkDecorationH:                none;
+
+/********************************************************************************/
+/********************************************************************************/
+
+/***************************/
+/********** FORMS **********/
+/***************************/ 
+
+$formLabelFontSize:                 14px;
+$formLabelFontWeight:               normal;
+$formLabelTxtTransform:             none;
+$formSubmitTxtTransform:            none;
+$formSubmitFontFamily:              $brandHeadingsFontFamily;
+$formSubmitFontWeight:              normal;
+$formSubmitLineHeight:              1;
+$formLabelTxtAlign:                 left;
+$formHasErrorTxtAlign:              left;
+
+/********************************************************************************/
+/********************************************************************************/
+
+/*****************************/
+/********** BUTTONS **********/
+/*****************************/ 
+
+$btnFontSize:                       18px;
+$btnFontFamily:                     $brandFontFamily;
+$btnTxtTransform:                   uppercase;
+$btnFontWeight:                     300;
+$btnLineHeight:                     1;
+
+/********************************************************************************/
+/********************************************************************************/
+
+/***************************/
+/********** LISTS **********/
+/***************************/ 
+
+$UlContentPadding:                  0;
+$UlLiContentPadding:                0;
+$DtTextAlign:                       left;
+$DtFontWeight:                      normal;
+$DdTextAlign:                       left;
+$DdTextAlignCenter:                 center;
+$DdFontWeight:                      normal;
+
+/********************************************************************************/
+/********************************************************************************/
+
+/******************************/
+/********** HEADINGS **********/
+/******************************/ 
+
+$headingFontFamily:                 $brandHeadingsFontFamily;
+$headingsFontWeight:                300;
+$headingsFontTransform:             uppercase;
+$h1FontSize:                        32px;
+$h2FontSize:                        28px;
+$h3FontSize:                        24px;
+$h4FontSize:                        20px;
+$h5FontSize:                        18px;
+$h6FontSize:                        16px;
+
+$h1FontSizeResp1:                   30px;
+$h2FontSizeResp1:                   24px;
+$h3FontSizeResp1:                   22px;
+$h4FontSizeResp1:                   20px;
+$h5FontSizeResp1:                   18px;
+$h6FontSizeResp1:                   16px;
+
+$h1FontSizeResp2:                   28px;
+$h2FontSizeResp2:                   24px;
+$h3FontSizeResp2:                   20px;
+$h4FontSizeResp2:                   20px;
+$h5FontSizeResp2:                   18px;
+$h6FontSizeResp2:                   16px;
+
+$h1FontSizeResp3:                   24px;
+$h2FontSizeResp3:                   22px;
+$h3FontSizeResp3:                   20px;
+$h4FontSizeResp3:                   20px;
+$h5FontSizeResp3:                   18px;
+$h6FontSizeResp3:                   16px;
