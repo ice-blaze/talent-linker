@@ -15,26 +15,10 @@ h1, h2, h3, h4, h5, h6 {
     text-transform: $headingsFontTransform;
 }
 
-h1 {
-    font-size: $h1FontSize;
-}
-
-h2 {
-    font-size: $h2FontSize;
-}
-
-h3 {
-    font-size: $h3FontSize;
-}
-
-h4 {
-    font-size: $h4FontSize;
-}
-
-h5 {
-    font-size: $h5FontSize;
-}
-
-h6 {
-    font-size: $h6FontSize;
+@for $i from 1 through 6 {
+    
+    h#{$i}, .h#{$i} {
+        font-size: map-get( $headings-font-size, h#{$i} ); 
+    }
+    
 }
