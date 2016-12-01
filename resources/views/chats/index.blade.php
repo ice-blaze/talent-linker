@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="row">
-        <h1>Chat with <a href="{{ $reciever->path() }}">{{ $reciever->name }}</a></h1>
+        <h1>{{ Trans('chat.chat_with') }} <a href="{{ $reciever->path() }}">{{ $reciever->name }}</a></h1>
     </div>
 
     <div class="row">
@@ -22,30 +22,30 @@
                 {{ $chat->content}}
                 <div class="comment_user text-muted">
                     @if($chat->seen)
-                        seen
+                        {{ Trans('chat.seen') }}
                     @else
-                        unseen
+                        {{ Trans('chat.unseen') }}
                     @endif
                 </div>
                 @if($chat->isEditable($chat->sender_id))
                     <div>
-                        <a name="message_edit{{$chat->id}}" href="/chat/{{$chat->id}}/edit">Edit</a>
+                        <a name="message_edit{{$chat->id}}" href="/chat/{{$chat->id}}/edit">{{ Trans('chat.edit') }}</a>
                     </div>
                 @endif
             </li>
         @empty
-            Come on start the conversation !!
+            {{ Trans('chat.start_conversation') }}
         @endforelse
         <hr>
 
-        <h3>New message</h3>
+        <h3>{{ Trans('chat.new_message') }}</h3>
         <form method="post" action="/talents/{{ $reciever->id }}/chat">
             {{ csrf_field() }}
             <div class="form-group">
                 <textarea name="content" id="chats-index-user-message" class="form-control"></textarea>
             </div>
             <div class="form-group">
-                <button type="submit" class="btn btn-primary" id="chats-index-message-send" disabled name="send">Send</button>
+                <button type="submit" class="btn btn-primary" id="chats-index-message-send" disabled name="send">{{Trans('chat.send') }}</button>
             </div>
         </form>
     </div>
