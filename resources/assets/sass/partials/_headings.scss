@@ -5,19 +5,16 @@
  * version		1.0.0.0
  * author		mlbors
  * copyright	-
-*/
-
-h1, h2, h3, h4, h5, h6 {
-    margin: $headingsMargin;
-    font-family: $headingFontFamily;
-    color: $headingsColor;
-    font-weight: $headingsFontWeight;
-    text-transform: $headingsFontTransform;
-}
+ */
 
 @for $i from 1 through 6 {
     
     h#{$i}, .h#{$i} {
+        margin: $headingsMargin;
+        font-family: $headingFontFamily;
+        color: $headingsColor;
+        font-weight: $headingsFontWeight;
+        text-transform: $headingsFontTransform;
         font-size: map-get( $headings-font-size, h#{$i} ); 
     }
     

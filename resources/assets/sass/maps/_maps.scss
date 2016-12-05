@@ -5,7 +5,7 @@
  * version		1.0.0.0
  * author		mlbors
  * copyright	-
-*/
+ */
 
 /******************************/
 /********** HEADINGS **********/
@@ -22,3 +22,25 @@ $headings-font-size: (
 
 /********************************************************************************/
 /********************************************************************************/
+
+/******************************/
+/********** SECTIONS **********/
+/******************************/
+
+$section-settings:(
+    'blue-section': (
+        'background-color':         $myBrandPrimaryColor,
+        'color':                    $myWhite,
+        'sub-element-background':   transparent
+    ),
+    'gray-section':(
+        'background-color':         $myBrandGrayLightest,
+        'color':                    $myBrandGray,
+        'sub-element-background':   $myWhite
+    ),
+    'alpha-section':(
+        'background-color':         transparent,
+        'color':                    $myWhite,
+        'sub-element-background':   transparent
+    )
+);

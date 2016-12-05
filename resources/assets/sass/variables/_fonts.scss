@@ -11,9 +11,7 @@
 /********** FAMILIES **********/
 /******************************/ 
 
-$brandFontFamily:                   'Lato', Helvetica, "Lucida Grande", sans-serif;
-$brandHeadingsFontFamily:           'Ubuntu', Helvetica, "Lucida Grande", sans-serif;
-$altBrandFontFamily:                'Raleway', Helvetica, "Lucida Grande", sans-serif;
+$brandFontFamily:                   'Roboto', Helvetica, "Lucida Grande", sans-serif;
 
 /********************************************************************************/
 /********************************************************************************/
@@ -49,7 +47,7 @@ $bodyTxtAlign:                      justify;
 /********** NAVIGATION **********/
 /********************************/ 
 
-$navFontFamily:                     $brandHeadingsFontFamily;
+$navFontFamily:                     $brandFontFamily;
 $navFontSize:                       15px;
 $navFontWeight:                     400;
 $navTextTansform:                   uppercase;
@@ -63,7 +61,7 @@ $navLinkDecorationH:                none;
 /********** FOOTER **********/
 /****************************/ 
 
-$footerFont:                        $altBrandFontFamily;
+$footerFont:                        $brandFontFamily;
 $footerFontSize:                    14px;
 $footerMenuFontSize:                $footerFontSize;
 $footerFontSizeResp:                $footerFontSize;
@@ -97,7 +95,7 @@ $formLabelFontSize:                 14px;
 $formLabelFontWeight:               normal;
 $formLabelTxtTransform:             none;
 $formSubmitTxtTransform:            none;
-$formSubmitFontFamily:              $brandHeadingsFontFamily;
+$formSubmitFontFamily:              $brandFontFamily;
 $formSubmitFontWeight:              normal;
 $formSubmitLineHeight:              1;
 $formLabelTxtAlign:                 left;
@@ -110,11 +108,12 @@ $formHasErrorTxtAlign:              left;
 /********** BUTTONS **********/
 /*****************************/ 
 
-$btnFontSize:                       18px;
+$btnLgFontSize:                     1.5rem;
+$btnSmFontSize:                     1rem;
 $btnFontFamily:                     $brandFontFamily;
 $btnTxtTransform:                   uppercase;
 $btnFontWeight:                     300;
-$btnLineHeight:                     1;
+$btnLineHeight:                     1.25;
 
 /********************************************************************************/
 /********************************************************************************/
@@ -138,7 +137,7 @@ $DdFontWeight:                      normal;
 /********** HEADINGS **********/
 /******************************/ 
 
-$headingFontFamily:                 $brandHeadingsFontFamily;
+$headingFontFamily:                 $brandFontFamily;
 $headingsFontWeight:                300;
 $headingsFontTransform:             uppercase;
 $h1FontSize:                        32px;

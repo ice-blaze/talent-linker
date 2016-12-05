@@ -5,7 +5,7 @@
  * version		1.0.0.0
  * author		mlbors
  * copyright	-
-*/
+ */
 /**
  * Talent Linker - SCSS - Fonts
  *
@@ -13,8 +13,8 @@
  * version		1.0.0.0
  * author		mlbors
  * copyright	-
-*/
-@import url("http://fonts.googleapis.com/css?family=Raleway:400,300,500,700");
+ */
+@import url("https://fonts.googleapis.com/css?family=Roboto:200,300,400,700");
 /**
  * Talent Linker - SCSS - Variables
  *
@@ -22,7 +22,7 @@
  * version		1.0.0.0
  * author		mlbors
  * copyright	-
-*/
+ */
 /**
  * Talent Linker - SCSS - Variables - Settings
  *
@@ -30,7 +30,7 @@
  * version		1.0.0.0
  * author		mlbors
  * copyright	-
-*/
+ */
 /************************************/
 /********** DEFAULT MARGIN **********/
 /************************************/
@@ -163,7 +163,7 @@
  * version		1.0.0.0
  * author		mlbors
  * copyright	-
-*/
+ */
 /**************************/
 /********** BODY **********/
 /**************************/
@@ -189,7 +189,7 @@
  * version		1.0.0.0
  * author		mlbors
  * copyright	-
-*/
+ */
 /****************************/
 /********** HEADER **********/
 /****************************/
@@ -235,7 +235,7 @@
  * version		1.0.0.0
  * author		mlbors
  * copyright	-
-*/
+ */
 /****************************/
 /********** HEADER **********/
 /****************************/
@@ -271,7 +271,7 @@
  * version		1.0.0.0
  * author		mlbors
  * copyright	-
-*/
+ */
 /****************************/
 /********** HEADER **********/
 /****************************/
@@ -307,7 +307,7 @@
  * version		1.0.0.0
  * author		mlbors
  * copyright	-
-*/
+ */
 /********************************/
 /********** NAVIGATION **********/
 /********************************/
@@ -323,7 +323,7 @@
  * version		1.0.0.0
  * author		mlbors
  * copyright	-
-*/
+ */
 /********************************/
 /********** NAVIGATION **********/
 /********************************/
@@ -344,7 +344,7 @@
  * version		1.0.0.0
  * author		mlbors
  * copyright	-
-*/
+ */
 /****************************/
 /********** SELECT **********/
 /****************************/
@@ -355,7 +355,7 @@
  * version		1.0.0.0
  * author		mlbors
  * copyright	-
-*/
+ */
 /**
  * Talent Linker - SCSS - Variables - Backgrounds
  *
@@ -363,7 +363,7 @@
  * version		1.0.0.0
  * author		mlbors
  * copyright	-
-*/
+ */
 /**
  * Talent Linker - SCSS - Mixins
  *
@@ -371,7 +371,7 @@
  * version		1.0.0.0
  * author		mlbors
  * copyright	-
-*/
+ */
 /***********************************/
 /********** BORDER RADIUS **********/
 /***********************************/
@@ -395,6 +395,9 @@
 /********************************/
 /********** TRANSITION **********/
 /********************************/
+.btn, .btn:link, .btn:visited, .btn:hover, .btn:active, .btn:focus {
+  transition: 0.25 all linear; }
+
 /********************************************************************************/
 /********************************************************************************/
 /*******************************/
@@ -437,12 +440,15 @@
  * version		1.0.0.0
  * author		mlbors
  * copyright	-
-*/
+ */
 /******************************/
 /********** HEADINGS **********/
 /******************************/
 /********************************************************************************/
 /********************************************************************************/
+/******************************/
+/********** SECTIONS **********/
+/******************************/
 /**
  * Talent Linker - SCSS - Functions
  *
@@ -502,11 +508,11 @@
  * version		1.0.0.0
  * author		mlbors
  * copyright	-
-*/
+ */
 body {
   position: relative;
-  font-family: "Lato", Helvetica, "Lucida Grande", sans-serif;
-  color: #767474;
+  font-family: "Roboto", Helvetica, "Lucida Grande", sans-serif;
+  color: #B4B0B0;
   font-weight: 400;
   font-size: 16px;
   text-transform: none;
@@ -526,6 +532,28 @@ body {
  * author		mlbors
  * copyright	-
 */
+.btn, .btn:link, .btn:visited {
+  padding: 15px 15px 15px 15px;
+  border: 1px solid #0F6C96;
+  color: #0F6C96;
+  text-transform: uppercase;
+  font-weight: 300;
+  opacity: 1;
+  background-color: transparent;
+  border-radius: 120px; }
+
+.btn:hover, .btn:active, .btn:focus {
+  border: 1px solid #0F6C96 !important;
+  color: #0F6C96 !important;
+  opacity: 0.8;
+  background-color: transparent !important; }
+
+.btn.lg {
+  font-size: 1.5rem; }
+
+.btn.xs {
+  font-size: 1rem; }
+
 /**
  * Talent Linker - SCSS - Footer
  *
@@ -533,7 +561,7 @@ body {
  * version		1.0.0.0
  * author		mlbors
  * copyright	-
-*/
+ */
 /**
  * Talent Linker - SCSS - Forms
  *
@@ -541,7 +569,7 @@ body {
  * version		1.0.0.0
  * author		mlbors
  * copyright	-
-*/
+ */
 /**************************/
 /********** FORM **********/
 /**************************/
@@ -570,7 +598,7 @@ form input[type="password"],
 form input[type="email"],
 form textarea {
   width: 100%;
-  border: 1px solid #2c3e50 !important;
+  border: 1px solid #0F6C96 !important;
   background-color: #ffffff;
   outline: none !important;
   -ms-box-shadow: none;
@@ -581,21 +609,21 @@ form textarea {
   form input[type="password"]:focus,
   form input[type="email"]:focus,
   form textarea:focus {
-    border: 1px solid #3498db !important;
+    border: 1px solid #169edc !important;
     outline: none !important;
     -ms-box-shadow: none;
     -o-box-shadow: none;
     box-shadow: none; }
 
 form textarea {
-  border: 1px solid #2c3e50 !important;
+  border: 1px solid #0F6C96 !important;
   resize: none;
   outline: none !important;
   -ms-box-shadow: none;
   -o-box-shadow: none;
   box-shadow: none; }
   form textarea:focus {
-    border: 1px solid #3498db !important;
+    border: 1px solid #169edc !important;
     outline: none !important;
     -ms-box-shadow: none;
     -o-box-shadow: none;
@@ -605,23 +633,23 @@ form input[type="submit"] {
   width: 100%;
   margin: 15px 0 0;
   padding: 15px 15px 15px 15px;
-  border: 1px solid #2c3e50;
+  border: 1px solid #0F6C96;
   opacity: 1;
   color: #ffffff;
   font-size: 17.5px;
-  font-family: "Ubuntu", Helvetica, "Lucida Grande", sans-serif;
+  font-family: "Roboto", Helvetica, "Lucida Grande", sans-serif;
   text-transform: none;
   font-weight: normal;
   line-height: 1;
-  background: #2c3e50;
+  background: #0F6C96;
   letter-spacing: 1px;
   border-radius: 0;
   transition: all 0.1s ease; }
   form input[type="submit"]:focus, form input[type="submit"]:hover {
-    border: 1px solid #2c3e50;
+    border: 1px solid #0F6C96;
     color: #ffffff;
     opacity: 0.8;
-    background: #2c3e50;
+    background: #0F6C96;
     -ms-box-shadow: none;
     -o-box-shadow: none;
     box-shadow: none;
@@ -638,30 +666,53 @@ form input[type="submit"] {
  * version		1.0.0.0
  * author		mlbors
  * copyright	-
-*/
-h1, h2, h3, h4, h5, h6 {
-  margin: 0 0 30px 0;
-  font-family: "Ubuntu", Helvetica, "Lucida Grande", sans-serif;
-  color: #000000;
-  font-weight: 300;
-  text-transform: uppercase; }
-
+ */
 h1, .h1 {
+  margin: 0 0 30px 0;
+  font-family: "Roboto", Helvetica, "Lucida Grande", sans-serif;
+  color: #0F6C96;
+  font-weight: 300;
+  text-transform: uppercase;
   font-size: 32px; }
 
 h2, .h2 {
+  margin: 0 0 30px 0;
+  font-family: "Roboto", Helvetica, "Lucida Grande", sans-serif;
+  color: #0F6C96;
+  font-weight: 300;
+  text-transform: uppercase;
   font-size: 28px; }
 
 h3, .h3 {
+  margin: 0 0 30px 0;
+  font-family: "Roboto", Helvetica, "Lucida Grande", sans-serif;
+  color: #0F6C96;
+  font-weight: 300;
+  text-transform: uppercase;
   font-size: 24px; }
 
 h4, .h4 {
+  margin: 0 0 30px 0;
+  font-family: "Roboto", Helvetica, "Lucida Grande", sans-serif;
+  color: #0F6C96;
+  font-weight: 300;
+  text-transform: uppercase;
   font-size: 20px; }
 
 h5, .h5 {
+  margin: 0 0 30px 0;
+  font-family: "Roboto", Helvetica, "Lucida Grande", sans-serif;
+  color: #0F6C96;
+  font-weight: 300;
+  text-transform: uppercase;
   font-size: 18px; }
 
 h6, .h6 {
+  margin: 0 0 30px 0;
+  font-family: "Roboto", Helvetica, "Lucida Grande", sans-serif;
+  color: #0F6C96;
+  font-weight: 300;
+  text-transform: uppercase;
   font-size: 16px; }
 
 /**
@@ -671,13 +722,13 @@ h6, .h6 {
  * version		1.0.0.0
  * author		mlbors
  * copyright	-
-*/
+ */
 a, a:link, a:visited {
-  color: #2c3e50;
+  color: #0F6C96;
   text-decoration: none; }
 
 a:hover, a:active, a:focus {
-  color: #3498db;
+  color: #169edc;
   text-decoration: none; }
 
 /**
@@ -687,7 +738,7 @@ a:hover, a:active, a:focus {
  * version		1.0.0.0
  * author		mlbors
  * copyright	-
-*/
+ */
 /**
  * Talent Linker - SCSS - tables
  *
@@ -695,7 +746,7 @@ a:hover, a:active, a:focus {
  * version		1.0.0.0
  * author		mlbors
  * copyright	-
-*/
+ */
 /**
  * Talent Linker - SCSS - Typography
  *
@@ -703,7 +754,7 @@ a:hover, a:active, a:focus {
  * version		1.0.0.0
  * author		mlbors
  * copyright	-
-*/
+ */
 p {
   margin: 0 0 30px 0;
   line-height: 1.5; }
@@ -717,7 +768,7 @@ p {
  * version		1.0.0.0
  * author		mlbors
  * copyright	-
-*/
+ */
 /**
  * Talent Linker - SCSS - Utils
  *
@@ -868,14 +919,14 @@ hr {
 /*******************************/
 ::-moz-selection {
   color: #ffffff;
-  background-color: #3498db; }
+  background-color: #169edc; }
 ::selection {
   color: #ffffff;
-  background-color: #3498db; }
+  background-color: #169edc; }
 
 ::-moz-selection {
   color: #ffffff;
-  background-color: #3498db; }
+  background-color: #169edc; }
 
 /********************************************************************************/
 /********************************************************************************/
@@ -911,7 +962,7 @@ hr {
  * version		1.0.0.0
  * author		mlbors
  * copyright	-
-*/
+ */
 /***************************************/
 /********** MAX-WIDTH: 1170px **********/
 /***************************************/

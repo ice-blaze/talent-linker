@@ -13,11 +13,11 @@
 
 $myBlack:                           #000000;
 $myGrayDarkest:                     #222222;
-$myGrayDark:                        #222222;
-$myGray:                            #9D9EA0;
+$myGrayDark:                        #7D7A7A;
+$myGray:                            #B4B0B0;
 $myMiddleGray:                      #b5b5b5;
 $myGrayLight:                       #cccccc;
-$myGrayLightest:                    #f4f4f4;
+$myGrayLightest:                    #F0F0F0;
 $myWhite:                           #ffffff;
 
 /********************************************************************************/
@@ -27,11 +27,11 @@ $myWhite:                           #ffffff;
 /********** COLORS **********/
 /****************************/
 
-$myBlue:                            #2c3e50;
-$myBlueLight:                       #3498db;
-$myBlueLightest:                    #80c0eb;
-$myBlueDark:                        #0c1e30;
-$myBlueDarkest:                     #01162a;
+$myBlue:                            #0F6C96;
+$myBlueLight:                       lighten( $myBlue, 15% );
+$myBlueLightest:                    lighten( $myBlue, 30% );
+$myBlueDark:                        darken( $myBlue, 15% );
+$myBlueDarkest:                     darken( $myBlue, 30% );
 
 /********************************************************************************/
 /********************************************************************************/
@@ -40,8 +40,11 @@ $myBlueDarkest:                     #01162a;
 /********** BRAND / PRIMARY **********/
 /*************************************/
 
-$myBrandGray:                       #767474;
-$myBrandGrayLight:                  #c9c9c9;
+$myBrandGray:                       $myGray;
+$myBrandGrayLight:                  $myGrayLight;
+$myBrandGrayLightest:               $myGrayLightest;
+$myBrandGrayDark:                   $myGrayDark;
+$myBrandGrayDarkest:                $myGrayDarkest;
 
 $myBrandPrimaryColor:               $myBlue;
 $myBrandPrimaryColorLight:          $myBlueLight;
@@ -116,7 +119,7 @@ $navbarScrolledToggleBgH:           $myBrandPrimaryColorLight;
 /********** HEADINGS **********/
 /******************************/
 
-$headingsColor:                     $myBlack;
+$headingsColor:                     $myBrandPrimaryColor;
 
 /********************************************************************************/
 /********************************************************************************/
@@ -162,11 +165,7 @@ $formSubmitTxtColorH:               $myWhite;
 /********** BUTTONS **********/
 /*****************************/
 
-$btnTxtColor:                       $myWhite;
-$btnTxtColorH:                      $myWhite;
-$btnOutlineTxtColor:                $myWhite;
-$btnOutlineTxtColorH:               $myWhite;
-$btnBgColor:                        $myBrandPrimaryColor;
-$btnBgColorH:                       $myBrandPrimaryColor;
-$btnOutlineBgColor:                 transparent;
-$btnOutlineBgColorH:                transparent;
+$btnTxtColor:                       $myBrandPrimaryColor;
+$btnTxtColorH:                      $myBrandPrimaryColor;
+$btnBgColor:                        transparent;
+$btnBgColorH:                       transparent;

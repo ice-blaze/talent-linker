@@ -7,9 +7,38 @@
  * copyright	-
 */
 
-.btn,
-.btn-normal {
-
+.btn {
     
-
+    &,
+    &:link,
+    &:visited {
+        padding: $paddingBtn;
+        border: $btnBorder;
+        color: $btnTxtColor;
+        text-transform: $btnTxtTransform;
+        font-weight: $btnFontWeight;
+        opacity: $btnOpactiy;
+        background-color: $btnBgColor;
+        @include my-border-radius($btnBorderRadius);
+        @extend %my-standard-transition;
+    }
+    
+    &:hover,
+    &:active,
+    &:focus {
+        border: $btnBorderH !important;
+        color: $btnTxtColorH !important;
+        opacity: $btnOpactiyH;
+        background-color: $btnBgColor !important;
+        @extend %my-standard-transition;
+    }
+    
+    &.lg {
+        font-size: $btnLgFontSize;
+    }
+    
+    &.xs {
+        font-size: $btnSmFontSize; 
+    }
+    
 }
