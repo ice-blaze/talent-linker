@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\GeneralSkill;
-use App\Language;
-use App\Project;
-use App\ProjectCollaborator;
 use App\User;
+use App\Project;
+use App\Language;
+use App\GeneralSkill;
+use App\ProjectCollaborator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\ChatUser;
 use App\User;
+use App\ChatUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
