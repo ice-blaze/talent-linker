@@ -1,11 +1,11 @@
 <?php
 
-use App\GeneralSkill;
-use App\Language;
-use App\Project;
-use App\ProjectCollaborator;
 use App\User;
+use App\Project;
+use App\Language;
 use Carbon\Carbon;
+use App\GeneralSkill;
+use App\ProjectCollaborator;
 use Illuminate\Database\Seeder;
 
 class ProjectsTableSeeder extends Seeder
