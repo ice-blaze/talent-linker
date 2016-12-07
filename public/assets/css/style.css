@@ -14,7 +14,7 @@
  * author		mlbors
  * copyright	-
  */
-@import url("https://fonts.googleapis.com/css?family=Roboto:200,300,400,700");
+@import url("https://fonts.googleapis.com/css?family=Roboto:100,300,400,700");
 /**
  * Talent Linker - SCSS - Variables
  *
@@ -420,6 +420,11 @@
 /********************************/
 /********************************************************************************/
 /********************************************************************************/
+/***************************/
+/********** LINKS **********/
+/***************************/
+/********************************************************************************/
+/********************************************************************************/
 /**************************/
 /********** FONT **********/
 /**************************/
@@ -531,7 +536,7 @@ body {
  * version		1.0.0.0
  * author		mlbors
  * copyright	-
-*/
+ */
 .btn, .btn:link, .btn:visited {
   padding: 15px 15px 15px 15px;
   border: 1px solid #0F6C96;
@@ -671,49 +676,49 @@ h1, .h1 {
   margin: 0 0 30px 0;
   font-family: "Roboto", Helvetica, "Lucida Grande", sans-serif;
   color: #0F6C96;
-  font-weight: 300;
+  font-weight: 100;
   text-transform: uppercase;
-  font-size: 32px; }
+  font-size: 4.5rem; }
 
 h2, .h2 {
   margin: 0 0 30px 0;
   font-family: "Roboto", Helvetica, "Lucida Grande", sans-serif;
   color: #0F6C96;
-  font-weight: 300;
+  font-weight: 100;
   text-transform: uppercase;
-  font-size: 28px; }
+  font-size: 3.5rem; }
 
 h3, .h3 {
   margin: 0 0 30px 0;
   font-family: "Roboto", Helvetica, "Lucida Grande", sans-serif;
   color: #0F6C96;
-  font-weight: 300;
+  font-weight: 100;
   text-transform: uppercase;
-  font-size: 24px; }
+  font-size: 3rem; }
 
 h4, .h4 {
   margin: 0 0 30px 0;
   font-family: "Roboto", Helvetica, "Lucida Grande", sans-serif;
   color: #0F6C96;
-  font-weight: 300;
+  font-weight: 100;
   text-transform: uppercase;
-  font-size: 20px; }
+  font-size: 2.5rem; }
 
 h5, .h5 {
   margin: 0 0 30px 0;
   font-family: "Roboto", Helvetica, "Lucida Grande", sans-serif;
   color: #0F6C96;
-  font-weight: 300;
+  font-weight: 100;
   text-transform: uppercase;
-  font-size: 18px; }
+  font-size: 2rem; }
 
 h6, .h6 {
   margin: 0 0 30px 0;
   font-family: "Roboto", Helvetica, "Lucida Grande", sans-serif;
   color: #0F6C96;
-  font-weight: 300;
+  font-weight: 100;
   text-transform: uppercase;
-  font-size: 16px; }
+  font-size: 1.5rem; }
 
 /**
  * Talent Linker - SCSS - Links
@@ -739,6 +744,38 @@ a:hover, a:active, a:focus {
  * author		mlbors
  * copyright	-
  */
+/**
+ * Talent Linker - SCSS - Sections
+ *
+ * since		07.12.2016
+ * version		1.0.0.0
+ * author		mlbors
+ * copyright	-
+ */
+.blue-section {
+  color: #ffffff;
+  background-color: #0F6C96; }
+  .blue-section a, .blue-section a:link, .blue-section a:visited {
+    color: #ffffff; }
+  .blue-section a:hover, .blue-section a:active, .blue-section a:focus {
+    color: #ffffff; }
+
+.gray-section {
+  color: #B4B0B0;
+  background-color: #F0F0F0; }
+  .gray-section a, .gray-section a:link, .gray-section a:visited {
+    color: #0F6C96; }
+  .gray-section a:hover, .gray-section a:active, .gray-section a:focus {
+    color: #169edc; }
+
+.alpha-section {
+  color: #ffffff;
+  background-color: transparent; }
+  .alpha-section a, .alpha-section a:link, .alpha-section a:visited {
+    color: #ffffff; }
+  .alpha-section a:hover, .alpha-section a:active, .alpha-section a:focus {
+    color: #ffffff; }
+
 /**
  * Talent Linker - SCSS - tables
  *

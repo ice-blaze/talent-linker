@@ -31,16 +31,22 @@ $section-settings:(
     'blue-section': (
         'background-color':         $myBrandPrimaryColor,
         'color':                    $myWhite,
-        'sub-element-background':   transparent
+        'sub-element-background':   transparent,
+        'link-color':               $myWhite,
+        'link-color-h':             $myWhite
     ),
     'gray-section':(
         'background-color':         $myBrandGrayLightest,
         'color':                    $myBrandGray,
-        'sub-element-background':   $myWhite
+        'sub-element-background':   $myWhite,
+        'link-color':               $txtLink,
+        'link-color-h':             $txtLinkH
     ),
     'alpha-section':(
         'background-color':         transparent,
         'color':                    $myWhite,
-        'sub-element-background':   transparent
+        'sub-element-background':   transparent,
+        'link-color':               $myWhite,
+        'link-color-h':             $myWhite
     )
 );
