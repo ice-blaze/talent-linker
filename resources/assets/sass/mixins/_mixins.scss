@@ -84,7 +84,7 @@
 }
 
 %my-standard-transition {
-    @include my-transition(0.25 all linear);
+    @include my-transition(all 0.25s linear);
 }
 
 /********************************************************************************/
@@ -245,21 +245,31 @@
 /********** LINKS **********/
 /***************************/
 
-@mixin my-links-setter($color: $txtLink, $colorH: $txtLinkH, $textDecoration: none, $opactiy: 1, $opactiyH: 0.8) {
+@mixin my-links-setter($color: $txtLink, $colorH: $txtLinkH, $textDecoration: none, $textDecorationH: none, $opacity: 1, $opacityH: 0.8, $transition: true) {
     
     a {
         
         &,
         &:link,
         &:visited {
-            
+            color: $color;
+            text-decoration: $textDecoration;
+            opacity: $opacity;
+            @if $transition == true {
+                @extend %my-standard-transition;
+            }
         }
         
         &:hover,
         &:active,
         &:focus,
         &.active {
-            
+            color: $colorH;
+            text-decoration: $textDecorationH;
+            opacity: $opacityH;
+            @if $transition == true {
+                @extend %my-standard-transition;
+            }
         }
         
     }

@@ -12,19 +12,7 @@
         color: map-get($val, color);
         background-color: map-get($val, background-color);
         
-        a {
+        @include my-links-setter(map-get($val, link-color), map-get($val, link-color-h), $txtLinkDecoration, $txtLinkDecorationH, $linkOpacity, $linkOpacityH, $transition: true);
             
-            &,
-            &:link,
-            &:visited {
-                color: map-get($val, link-color);
-            }
-            
-            &:hover,
-            &:active,
-            &:focus {
-                color: map-get($val, link-color-h);
-            }
-        }
     }
 }

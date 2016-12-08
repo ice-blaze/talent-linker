@@ -17,7 +17,7 @@
         color: $btnTxtColor;
         text-transform: $btnTxtTransform;
         font-weight: $btnFontWeight;
-        opacity: $btnOpactiy;
+        opacity: $btnOpacity;
         background-color: $btnBgColor;
         @include my-border-radius($btnBorderRadius);
         @extend %my-standard-transition;
@@ -28,7 +28,7 @@
     &:focus {
         border: $btnBorderH !important;
         color: $btnTxtColorH !important;
-        opacity: $btnOpactiyH;
+        opacity: $btnOpacityH;
         background-color: $btnBgColor !important;
         @extend %my-standard-transition;
     }

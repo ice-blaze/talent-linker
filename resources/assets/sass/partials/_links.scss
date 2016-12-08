@@ -7,19 +7,4 @@
  * copyright	-
  */
 
-a {
-
-    &,
-    &:link,
-    &:visited {
-        color: $txtLink;
-        text-decoration: $txtLinkDecoration;
-    }
-
-    &:hover,
-    &:active,
-    &:focus {
-        color: $txtLinkH;
-        text-decoration: $txtLinkDecorationH;
-    }
-}
+@include my-links-setter($txtLink, $txtLinkH, $txtLinkDecoration, $txtLinkDecoration, $linkOpacity, $linkOpacityH, $transition: true)

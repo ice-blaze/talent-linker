@@ -73,7 +73,7 @@ form {
         margin: $formSubmitMargin;
         padding: $formSubmitPadding;
         border: $formSubmitBorder;
-        opacity: $formSubmitOpactiy;
+        opacity: $formSubmitOpacity;
         color: $formSubmitTxtColor;
         font-size: $formLabelFontSize*1.25;
         font-family: $formSubmitFontFamily;
@@ -89,7 +89,7 @@ form {
         &:hover {
             border: $formSubmitBorderH;
             color: $formSubmitTxtColorH;
-            opacity: $formSubmitOpactiyH;
+            opacity: $formSubmitOpacityH;
             background: $formSubmitBgH;
             @include my-box-shadow(none);
             @include my-transition(all 0.10s ease);
