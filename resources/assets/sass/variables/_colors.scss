@@ -1,0 +1,171 @@
+/**
+ * Talent Linker - SCSS - Variables - Colors
+ *
+ * since		28.11.2016
+ * version		1.0.0.0
+ * author		mlbors
+ * copyright	-
+*/
+
+/*******************************************/
+/********** BLACK / GRAYS / WHITE **********/
+/*******************************************/
+
+$myBlack:                           #000000;
+$myGrayDarkest:                     #222222;
+$myGrayDark:                        #7D7A7A;
+$myGray:                            #B4B0B0;
+$myMiddleGray:                      #b5b5b5;
+$myGrayLight:                       #cccccc;
+$myGrayLightest:                    #F0F0F0;
+$myWhite:                           #ffffff;
+
+/********************************************************************************/
+/********************************************************************************/
+
+/****************************/
+/********** COLORS **********/
+/****************************/
+
+$myBlue:                            #0F6C96;
+$myBlueLight:                       lighten( $myBlue, 15% );
+$myBlueLightest:                    lighten( $myBlue, 30% );
+$myBlueDark:                        darken( $myBlue, 15% );
+$myBlueDarkest:                     darken( $myBlue, 30% );
+
+/********************************************************************************/
+/********************************************************************************/
+
+/*************************************/
+/********** BRAND / PRIMARY **********/
+/*************************************/
+
+$myBrandGray:                       $myGray;
+$myBrandGrayLight:                  $myGrayLight;
+$myBrandGrayLightest:               $myGrayLightest;
+$myBrandGrayDark:                   $myGrayDark;
+$myBrandGrayDarkest:                $myGrayDarkest;
+
+$myBrandPrimaryColor:               $myBlue;
+$myBrandPrimaryColorLight:          $myBlueLight;
+$myBrandPrimaryColorLightest:       $myBlueLightest;
+$myBrandPrimaryColorDark:           $myBlueDark;
+$myBrandPrimaryColorDarkest:        $myBlueDarkest;
+
+/********************************************************************************/
+/********************************************************************************/
+
+/****************************/
+/********** ERRORS **********/
+/****************************/
+
+$myErrorDarkRed:                    #FF4948;
+$myErrorLightRed:                   #FFE1D0;
+$myErrorDarkGreen:                  #7FAD56;
+$myErrorLightGreen:                 #F4F7E1;
+
+/********************************************************************************/
+/********************************************************************************/
+
+/**************************/
+/********** BODY **********/
+/**************************/
+
+$bodyBg:                            $myWhite;
+$bodyTxtColor:                      $myBrandGray;
+
+/********************************************************************************/
+/********************************************************************************/
+
+/****************************/
+/********** HEADER **********/
+/****************************/
+
+$headerBg:                          transparent;
+
+/********************************************************************************/
+/********************************************************************************/
+
+/********************************/
+/********** NAVIGATION **********/
+/********************************/
+
+$navBg:                             $myWhite;
+$navLiBg:                           transparent;
+$navLiBgH:                          transparent;
+$navABg:                            transparent;
+$navABgH:                           transparent;
+$navLinkColor:                      $myBrandPrimaryColor;
+$navLinkColorH:                     $myBrandPrimaryColorLight;
+$navbarToggleColor:                 $myWhite;
+$navbarToggleColorH:                $myWhite;
+$navbarToggleBg:                    $myBrandPrimaryColor;
+$navbarToggleBgH:                   $myBrandPrimaryColorLight;
+
+$navScrolledBg:                     $myWhite;
+$navScrolledABg:                    transparent;
+$navScrolledABgH:                   transparent;
+$navScrolledLinkColor:              $myBrandPrimaryColor;
+$navScrolledLinkColorH:             $myBrandPrimaryColorLight;
+$navbarScrolledToggleColor:         $myWhite;
+$navbarScrolledToggleColorH:        $myWhite;
+$navbarScrolledToggleBg:            $myBrandPrimaryColor;
+$navbarScrolledToggleBgH:           $myBrandPrimaryColorLight;
+
+/********************************************************************************/
+/********************************************************************************/
+
+/******************************/
+/********** HEADINGS **********/
+/******************************/
+
+$headingsColor:                     $myBrandPrimaryColor;
+
+/********************************************************************************/
+/********************************************************************************/
+
+/****************************/
+/********** FOOTER **********/
+/****************************/
+
+$footerBg:                          $myBrandPrimaryColor;
+$footerTxtColor:                    $myWhite;
+$footerLink:                        $myWhite;
+$footerLinkH:                       $myWhite;
+
+/********************************************************************************/
+/********************************************************************************/
+
+/***************************/
+/********** LINKS **********/
+/***************************/
+
+$txtLink:                           $myBrandPrimaryColor;
+$txtLinkH:                          $myBrandPrimaryColorLight;
+
+/********************************************************************************/
+/********************************************************************************/
+
+/***************************/
+/********** FORMS **********/
+/***************************/
+
+$formInputBg:                       $myWhite;
+$formInputBgF:                      $myWhite;
+$forumInputTxtColor:                $bodyTxtColor;
+$formSubmitBg:                      $myBrandPrimaryColor;
+$formSubmitBgH:                     $myBrandPrimaryColor;
+$formSubmitTxtColor:                $myWhite;
+$formSubmitTxtColorH:               $myWhite;
+
+/********************************************************************************/
+/********************************************************************************/
+
+/*****************************/
+/********** BUTTONS **********/
+/*****************************/
+
+$btnTxtColor:                       $myBrandPrimaryColor;
+$btnTxtColorH:                      $myBrandPrimaryColor;
+$btnBgColor:                        transparent;
+$btnBgColorH:                       transparent;

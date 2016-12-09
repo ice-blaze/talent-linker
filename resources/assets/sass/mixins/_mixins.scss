@@ -1,0 +1,346 @@
+/**
+ * Talent Linker - SCSS - Mixins
+ *
+ * since		28.11.2016
+ * version		1.0.0.0
+ * author		mlbors
+ * copyright	-
+ */
+
+/***********************************/
+/********** BORDER RADIUS **********/
+/***********************************/
+
+@mixin my-border-radius($radius) {
+    -webkit-border-radius: $radius;
+       -moz-border-radius: $radius;
+        -ms-border-radius: $radius;
+         -o-border-radius: $radius;
+            border-radius: $radius;
+}
+
+/********************************************************************************/
+/********************************************************************************/
+
+/********************************/
+/********** BOX SHADOW **********/
+/********************************/
+
+@mixin my-box-shadow($shadow) {
+    -webkit-box-shadow: $shadow;
+       -moz-box-shadow: $shadow;
+        -ms-box-shadow: $shadow;
+         -o-box-shadow: $shadow;
+            box-shadow: $shadow;
+}
+
+%my-flat-box-shadow {
+    -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+       -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+        -ms-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+         -o-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+} 
+
+/********************************************************************************/
+/********************************************************************************/
+
+/********************************/
+/********** BOX SIZING **********/
+/********************************/
+
+@mixin my-box-sizing($boxmodel) {
+  -webkit-box-sizing: $boxmodel;
+     -moz-box-sizing: $boxmodel;
+      -ms-box-sizing: $boxmodel;
+       -o-box-sizing: $boxmodel;
+          box-sizing: $boxmodel;
+}
+
+/********************************************************************************/
+/********************************************************************************/
+
+/*********************************/
+/********** TEXT SHADOW **********/
+/*********************************/
+
+@mixin my-text-shadow($textShadow) {
+    text-shadow: $textShadow;
+}
+
+/********************************************************************************/
+/********************************************************************************/
+
+/********************************/
+/********** TRANSITION **********/
+/********************************/
+
+@mixin my-transition($transition) {
+    -webkit-transition: $transition;
+       -moz-transition: $transition;
+        -ms-transition: $transition;
+         -o-transition: $transition;
+            transition: $transition;
+}
+
+%my-standard-transition {
+    @include my-transition(all 0.25s linear);
+}
+
+/********************************************************************************/
+/********************************************************************************/
+
+/*******************************/
+/********** TRANSFORM **********/
+/*******************************/
+
+@mixin my-transform($transform) {
+    -webkit-transform: $transform;
+       -moz-transform: $transform;
+        -ms-transform: $transform;
+         -o-transform: $transform;
+            transform: $transform;
+}
+
+/********************************************************************************/
+/********************************************************************************/
+
+/******************************/
+/********** GRADIENT **********/
+/******************************/
+
+@mixin my-gradient($startColor, $endColor) {
+    background-color: $endColor;
+    background-image: -moz-linear-gradient(left, $startColor, $endColor);
+    background-image: -webkit-gradient(linear, 0 0, 100% 0, from($startColor), to($endColor));
+    background-image: -webkit-linear-gradient(left, $startColor, $endColor);
+    background-image: -o-linear-gradient(left, $startColor, $endColor);
+    background-image: linear-gradient(to right, $startColor, $endColor);
+    background-repeat: repeat-x;
+    filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=1)",argb($startColor),argb($endColor)));
+}
+
+/********************************************************************************/
+/********************************************************************************/
+
+/******************************/
+/********** FLEX BOX **********/
+/******************************/
+
+%display-my-flex-box {
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+}
+
+%display-my-inline-flex-box {
+    display: -webkit-inline-flex;
+    display: -moz-inline-flex;
+    display: -ms-inline-flex;
+    display: -o-inline-flex;
+    display: inline-flex;
+}
+
+@mixin my-flex-box-flex( $flex ) {
+    -webkit-flex: unquote( $flex );
+       -moz-flex: unquote( $flex );
+        -ms-flex: unquote( $flex );
+         -o-flex: unquote( $flex );
+            flex: unquote( $flex );
+}
+
+@mixin my-flex-box-flow( $flow ) {
+    -webkit-flex-flow: unquote( $flow );
+       -moz-flex-flow: unquote( $flow );
+        -ms-flex-flow: unquote( $flow );
+         -o-flex-flow: unquote( $flow );
+            flex-flow: unquote( $flow );
+}
+
+@mixin my-flex-box-justify( $justify ) {
+    -webkit-justify-content: unquote( $justify );
+       -moz-justify-content: unquote( $justify );
+        -ms-justify-content: unquote( $justify );
+         -o-justify-content: unquote( $justify );
+            justify-content: unquote( $justify );
+}
+
+@mixin my-flex-align-content( $align ) {
+    -webkit-align-content: unquote( $align );
+       -moz-align-content: unquote( $align );
+        -ms-align-content: unquote( $align );
+         -o-align-content: unquote( $align );
+            align-content: unquote( $align );
+}
+
+@mixin my-flex-direction( $direction ) {
+    -webkit-flex-direction: unquote( $direction );
+       -moz-flex-direction: unquote( $direction );
+        -ms-flex-direction: unquote( $direction );
+         -o-flex-direction: unquote( $direction );
+            flex-direction: unquote( $direction );
+}
+
+@mixin my-flex-wrap( $wrap ) {
+    -webkit-flex-wrap: unquote( $wrap );
+       -moz-flex-wrap: unquote( $wrap );
+        -ms-flex-wrap: unquote( $wrap );
+         -o-flex-wrap: unquote( $wrap );
+            flex-wrap: unquote( $wrap );
+}
+
+@mixin my-flex-item-grow( $grow ) {
+    -webkit-flex-grow: $grow;
+       -moz-flex-grow: $grow;
+        -ms-flex-grow: $grow;
+         -o-flex-grow: $grow;
+            flex-grow: $grow;
+}
+
+@mixin my-flex-item-shrink( $shrink ) {
+    -webkit-flex-shrink: $shrink;
+       -moz-flex-shrink: $shrink;
+        -ms-flex-shrink: $shrink;
+         -o-flex-shrink: $shrink;
+            flex-shrink: $shrink;
+}
+
+@mixin my-flex-item-align-self( $align ) {
+    -webkit-align-self: unquote( $align );
+       -moz-align-self: unquote( $align );
+        -ms-align-self: unquote( $align );
+         -o-align-self: unquote( $align );
+            align-self: unquote( $align );
+}
+
+@mixin my-flex-item-align-items( $align ) {
+    -webkit-align-items: unquote( $align );
+       -moz-align-items: unquote( $align );
+        -ms-align-items: unquote( $align );
+         -o-align-items: unquote( $align );
+            align-items: unquote( $align );
+}
+
+/********************************************************************************/
+/********************************************************************************/
+
+/********************************/
+/********** BACKGROUND **********/
+/********************************/
+
+@mixin my-background-size($size) {
+    -webkit-background-size: $size;
+       -moz-background-size: $size;
+        -ms-background-size: $size;
+         -o-background-size: $size;
+            background-size: $size;
+}
+
+/********************************************************************************/
+/********************************************************************************/
+
+/***************************/
+/********** LINKS **********/
+/***************************/
+
+@mixin my-links-setter($color: $txtLink, $colorH: $txtLinkH, $textDecoration: none, $textDecorationH: none, $opacity: 1, $opacityH: 0.8, $transition: true) {
+    
+    a {
+        
+        &,
+        &:link,
+        &:visited {
+            color: $color;
+            text-decoration: $textDecoration;
+            opacity: $opacity;
+            @if $transition == true {
+                @extend %my-standard-transition;
+            }
+        }
+        
+        &:hover,
+        &:active,
+        &:focus,
+        &.active {
+            color: $colorH;
+            text-decoration: $textDecorationH;
+            opacity: $opacityH;
+            @if $transition == true {
+                @extend %my-standard-transition;
+            }
+        }
+        
+    }
+    
+}
+
+/********************************************************************************/
+/********************************************************************************/
+
+/**************************/
+/********** FONT **********/
+/**************************/
+
+@mixin my-font-smoothing {
+    -moz-osx-font-smoothing: grayscale;
+     -webkit-font-smoothing: antialiased;
+        -moz-font-smoothing: grayscale;
+         -ms-font-smoothing: antialiased;
+          -o-font-smoothing: antialiased;
+             font-smoothing: antialiased;
+}
+
+/********************************************************************************/
+/********************************************************************************/
+
+/**************************/
+/********** REST **********/
+/**************************/
+
+%reset-after-before {
+    position: static;
+    content: normal;
+    display: none;
+    box-sizing: content-box;
+    top: auto;
+    right: auto;
+    bottom: auto;
+    left: auto;
+    width: 0;
+    height: 0;
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+    background: transparent;
+    background-image: none;
+    opacity: 0;
+    visibility: hidden;
+    overflow: hidden;
+    clear: none;
+}
+
+/********************************************************************************/
+/********************************************************************************/
+
+/*************************/
+/********** @2X **********/
+/*************************/
+
+@mixin at2x($path, $ext: "jpg", $w: auto, $h: auto) {
+  $at1x_path: "#{$path}.#{$ext}";
+  $at2x_path: "#{$path}@2x.#{$ext}";
+
+  background-image: url("#{$at1x_path}");
+
+  @media all and (-webkit-min-device-pixel-ratio : 1.5),
+         all and (-o-min-device-pixel-ratio: 3/2),
+         all and (min--moz-device-pixel-ratio: 1.5),
+         all and (min-device-pixel-ratio: 1.5) {
+           background-image: url("#{$at2x_path}");
+           background-size: $w $h;
+  }
+    
+}

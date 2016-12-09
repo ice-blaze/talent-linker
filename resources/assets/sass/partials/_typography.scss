@@ -1,0 +1,18 @@
+/**
+ * Talent Linker - SCSS - Typography
+ *
+ * since		28.11.2016
+ * version		1.0.0.0
+ * author		mlbors
+ * copyright	-
+ */
+
+p {
+    margin: $pMargin;
+    line-height: $pLineHeight;
+
+    &:last-child {
+        margin: 0;
+    }
+    
+}

@@ -1,9 +1,9 @@
 <?php
 
-use App\Traits\DatabaseTransactionWorking;
 use App\User;
 use App\ProjectComment;
 use App\ProjectCollaborator;
+use App\Traits\DatabaseTransactionWorking;
 
 class ProjectCommentTest extends TestCase
 {

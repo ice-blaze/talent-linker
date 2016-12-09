@@ -1,0 +1,44 @@
+/**
+ * Talent Linker - SCSS - Buttons
+ *
+ * since		28.11.2016
+ * version		1.0.0.0
+ * author		mlbors
+ * copyright	-
+ */
+
+.btn {
+    
+    &,
+    &:link,
+    &:visited {
+        padding: $paddingBtn;
+        border: $btnBorder;
+        color: $btnTxtColor;
+        text-transform: $btnTxtTransform;
+        font-weight: $btnFontWeight;
+        opacity: $btnOpacity;
+        background-color: $btnBgColor;
+        @include my-border-radius($btnBorderRadius);
+        @extend %my-standard-transition;
+    }
+    
+    &:hover,
+    &:active,
+    &:focus {
+        border: $btnBorderH !important;
+        color: $btnTxtColorH !important;
+        opacity: $btnOpacityH;
+        background-color: $btnBgColor !important;
+        @extend %my-standard-transition;
+    }
+    
+    &.lg {
+        font-size: $btnLgFontSize;
+    }
+    
+    &.xs {
+        font-size: $btnSmFontSize; 
+    }
+    
+}

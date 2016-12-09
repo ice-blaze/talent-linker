@@ -1,0 +1,21 @@
+/**
+ * Talent Linker - SCSS - Heading
+ *
+ * since		28.11.2016
+ * version		1.0.0.0
+ * author		mlbors
+ * copyright	-
+ */
+
+@for $i from 1 through 6 {
+    
+    h#{$i}, .h#{$i} {
+        margin: $headingsMargin;
+        font-family: $headingFontFamily;
+        color: $headingsColor;
+        font-weight: $headingsFontWeight;
+        text-transform: $headingsFontTransform;
+        font-size: map-get( $headings-font-size, h#{$i} ); 
+    }
+    
+}

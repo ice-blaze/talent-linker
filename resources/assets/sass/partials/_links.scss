@@ -1,0 +1,10 @@
+/**
+ * Talent Linker - SCSS - Links
+ *
+ * since		28.11.2016
+ * version		1.0.0.0
+ * author		mlbors
+ * copyright	-
+ */
+
+@include my-links-setter($txtLink, $txtLinkH, $txtLinkDecoration, $txtLinkDecoration, $linkOpacity, $linkOpacityH, $transition: true)

@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\GeneralSkill;
-use App\Language;
 use App\User;
+use App\Language;
+use App\GeneralSkill;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
