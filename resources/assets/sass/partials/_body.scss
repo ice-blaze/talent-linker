@@ -1,0 +1,28 @@
+/**
+ * Talent Linker - SCSS - Body
+ *
+ * since		28.11.2016
+ * version		1.0.0.0
+ * author		mlbors
+ * copyright	-
+ */
+
+body, html {
+    
+}
+
+body {
+    position: relative;
+    font-family: $bodyFontFamily;
+    color: $bodyTxtColor;
+    font-weight: $bodyFontWeight;
+    font-size: $bodyFontSize;
+    text-transform: $bodyTxtTransform;
+    text-align: $bodyTxtAlign;
+    line-height: $bodyLineHeight;
+    background-color: $bodyBg;
+    background-position: center center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+}

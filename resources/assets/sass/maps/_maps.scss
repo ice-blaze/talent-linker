@@ -1,0 +1,52 @@
+/**
+ * Talent Linker - SCSS - Mixins
+ *
+ * since		29.11.2016
+ * version		1.0.0.0
+ * author		mlbors
+ * copyright	-
+ */
+
+/******************************/
+/********** HEADINGS **********/
+/******************************/
+
+$headings-font-size: (
+    'h1': $h1FontSize,
+    'h2': $h2FontSize,
+    'h3': $h3FontSize,
+    'h4': $h4FontSize,
+    'h5': $h5FontSize,
+    'h6': $h6FontSize
+);
+
+/********************************************************************************/
+/********************************************************************************/
+
+/******************************/
+/********** SECTIONS **********/
+/******************************/
+
+$section-settings:(
+    'blue-section': (
+        'background-color':         $myBrandPrimaryColor,
+        'color':                    $myWhite,
+        'sub-element-background':   transparent,
+        'link-color':               $myWhite,
+        'link-color-h':             $myWhite
+    ),
+    'gray-section':(
+        'background-color':         $myBrandGrayLightest,
+        'color':                    $myBrandGray,
+        'sub-element-background':   $myWhite,
+        'link-color':               $txtLink,
+        'link-color-h':             $txtLinkH
+    ),
+    'alpha-section':(
+        'background-color':         transparent,
+        'color':                    $myWhite,
+        'sub-element-background':   transparent,
+        'link-color':               $myWhite,
+        'link-color-h':             $myWhite
+    )
+);
