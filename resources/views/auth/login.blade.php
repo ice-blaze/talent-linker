@@ -31,7 +31,7 @@
                                 <div class="col-md-6 offset-md-6">
                                     <div class="checkbox">
                                         <label>
-                                            <input type="checkbox" name="remember"> Remember Me
+                                            <input type="checkbox" name="remember"> {{ Trans('auth.remember_me') }}
                                         </label>
                                     </div>
                                 </div>
@@ -43,7 +43,7 @@
                                     Login
                                     </button>
 
-                                    <a class="btn btn-link" href="{{ url('/password/reset') }}">Forgot Your Password?</a>
+                                    <a class="btn btn-link" href="{{ url('/password/reset') }}">{{ Trans('auth.forgot_your_password') }}</a>
                                 </div>
                             </div>
                         </form>
