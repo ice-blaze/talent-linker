@@ -5,7 +5,7 @@
 
         <input type="hidden" value="{{$user->id}}" name="id">
 
-        <button name="delete_conv" class="btn-delete-conv" type="submit">Delete</button>
+        <button name="delete_conv" class="btn-delete-conv" type="submit">{{ Trans('helpers.delete') }}</button>
     </form>
     <a class="media-left" href="{{url($user->path().'/chat')}}">
         <img class="media-object image-64"
@@ -15,7 +15,7 @@
     <div class="media-body">
         <div class="media-heading">
             <a href="{{url($user->path().'/chat')}}"> <span class="h4">{{$user->name}} </span></a>
-            <span class="text-muted"> - Last message: {{\App\ChatUser::lastCommunicationDate(Auth::user()->id, $user->id)}} </span>
+            <span class="text-muted"> - {{ Trans('helpers.last_message') }}: {{\App\ChatUser::lastCommunicationDate(Auth::user()->id, $user->id)}} </span>
         </div>
     </div>
 </div>

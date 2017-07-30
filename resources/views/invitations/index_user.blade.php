@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="row">
-        <h1>Your invitations</h1>
+        <h1>{{ Trans('invitations.your_invitations') }}</h1>
     </div>
 
     <div class="row">
@@ -10,19 +10,19 @@
             <li class="list-group-item">
                 <a href="{{$invitation->user->path()}}">{{$invitation->user->name}}</a> -
                 <a href="{{$invitation->project->path()}}">{{$invitation->project->name}}</a>
-                - skill: {{$invitation->skill->name}}
-                - invited the {{$invitation->created_at}}
+                - {{ Trans('invitations.skills') }}: {{$invitation->skill->name}}
+                - {{ Trans('invitations.invited_the') }} {{$invitation->created_at}}
                 {{-- accepted the 11.11.1111 --}}
                 @if($invitation->accepted)
-                    - accepted {{$invitation->accepted_date}}
+                    - {{ Trans('invitations.accepted') }} {{$invitation->accepted_date}}
                 @else
-                    - pending ...
+                    - {{ Trans('invitations.pending') }} ...
                     @if($user->id == Auth::user()->id && !$invitation->from_collaborator)
                         <form method="post" action="/invitations/{{ $invitation->project->id }}/{{ $invitation->user->id }}/accept">
                             {{ method_field('patch') }}
                             {{ csrf_field() }}
                             <div class="form-group text-right">
-                                <button type="submit" class="btn btn-primary" name="accept{{ $invitation->id }}">Accept</button>
+                                <button type="submit" class="btn btn-primary" name="accept{{ $invitation->id }}">{{ Trans('invitations.accept') }}</button>
                             </div>
                         </form>
                     @endif
@@ -34,9 +34,9 @@
                         <div class="form-group text-right">
                             <button type="submit" class="btn btn-danger" name="delete{{ $invitation->id }}">
                                 @if($invitation->accepted)
-                                    Quit Project (Delete)
+                                    {{ Trans('invitations.quit_project') }}
                                 @else
-                                    Delete Request
+                                    {{ Trans('invitations.delete_request') }}
                                 @endif
                             </button>
                         </div>
@@ -45,7 +45,7 @@
             </li>
         @empty
             <br>
-            <span class="lead col-centered">No invitations...</span>
+            <span class="lead col-centered">{{ Trans('invitations.no_invitations') }} ...</span>
         @endforelse
     </div>
 @endsection
