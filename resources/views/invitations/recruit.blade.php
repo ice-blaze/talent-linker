@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="row">
-        <h1>Invite <a href="{{$user->path()}}">{{$user->name}}</a></h1>
+        <h1>{{ Trans('invitations.invite') }} <a href="{{$user->path()}}">{{$user->name}}</a></h1>
     </div>
 
     <div class="row">
@@ -28,8 +28,8 @@
             </div>
 
             <div class="form-group">
-                <button type="submit" class="btn btn-primary" name="invite">Invite</button>
-                <a class="btn btn-default" href="{{URL::previous() }}"  name="cancel">Cancel</a>
+                <button type="submit" class="btn btn-primary" name="invite">{{ Trans('invitations.invite') }}</button>
+                <a class="btn btn-default" href="{{URL::previous() }}"  name="cancel">{{ Trans('invitations.cancel') }}</a>
             </div>
         </form>
     </div>
