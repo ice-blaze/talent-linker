@@ -30,7 +30,7 @@
     <body>
         @if(Auth::user())
         <a id="feedback" href="/feedbacks">
-            <div>feedback</div>
+            <div>{{ Trans('layouts.feedback') }}</div>
         </a>
         @endif
 
