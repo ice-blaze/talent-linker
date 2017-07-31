@@ -56,16 +56,16 @@
                             <h4 class="card-title"><a href="{{ $user->path() }}">{{ $user->name }}</a></h4>
                             @if (Auth::user())
                                 @if($user->isInSearchDistance(Auth::user()))
-                                    <span class="tag tag-pill tag-primary"><i class="fa fa-map-marker" aria-hidden="true"></i> Near You</span>
+                                    <span class="tag tag-pill tag-primary"><i class="fa fa-map-marker" aria-hidden="true"></i> {{ Trans('users.near_you') }}</span>
                                 @else
-                                    <span class="tag tag-pill tag-danger"><i class="fa fa-map-marker" aria-hidden="true"></i> Not Near</span>
+                                    <span class="tag tag-pill tag-danger"><i class="fa fa-map-marker" aria-hidden="true"></i> {{ Trans('users.not_near') }}</span>
                                 @endif
                             @endif
                             <br>
                             @forelse($user->generalSkills as $skill)
                                 <span class="tag tag-primary">{{$skill->name}}</span>
                             @empty
-                                No Skills...
+                                {{ Trans('users.no_skills') }}...
                             @endforelse
                         </div>
                     </div>
@@ -74,7 +74,7 @@
         @empty
           <div class="row">
             <div class="col-md-12 col-centered">
-              <h2>No Talents...</h2>
+              <h2>{{ Trans('users.no_talents') }}...</h2>
             </div>
           </div>
         @endforelse
