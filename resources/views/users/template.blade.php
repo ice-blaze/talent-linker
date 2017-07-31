@@ -7,7 +7,7 @@
         {{ csrf_field() }}
 
         <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
-            <label for="name">Name</label>
+            <label for="name">{{ Trans('users.name') }}</label>
             <input name="name" type="text" class="form-control{{ $errors->has('name') ? ' form-control-danger' : '' }}" id="name" placeholder="User Name"
             value="{{ $user->name or '' }}">
 
@@ -19,7 +19,7 @@
         </div>
 
         <div class="form-group{{ $errors->has('email') ? ' has-danger' : '' }}">
-            <label for="email">Email</label>
+            <label for="email">{{ Trans('users.email') }}</label>
             <input name="email" type="email" class="form-control{{ $errors->has('email') ? ' form-control-danger' : '' }}" id="email"
             placeholder="User Email" value="{{ $user->email or '' }}">
 
@@ -32,7 +32,7 @@
 
 
         <div class="form-group{{ $errors->has('last_name') ? ' has-danger' : '' }}">
-            <label for="last_name">Last Name</label>
+            <label for="last_name">{{ Trans('users.last_name') }}</label>
             <input name="last_name" type="text" class="form-control{{ $errors->has('last_name') ? ' form-control-danger' : '' }}" id="last_name"
             placeholder="User Last Name" value="{{ $user->last_name or old('last_name') }}">
 
@@ -44,7 +44,7 @@
         </div>
 
         <div class="form-group{{ $errors->has('first_name') ? ' has-danger' : '' }}">
-            <label for="first_name">First Name</label>
+            <label for="first_name">{{ Trans('users.first_name') }}</label>
             <input name="first_name" type="text" class="form-control{{ $errors->has('first_name') ? ' form-control-danger' : '' }}" id="first_name"
             placeholder="User First Name" value="{{ $user->first_name or old('first_name') }}">
 
@@ -56,7 +56,7 @@
         </div>
 
         <div class="form-group{{ $errors->has('talent_description') ? ' has-danger' : '' }}">
-            <label for="talent_description">Talent Description</label>
+            <label for="talent_description">{{ Trans('users.talent_description') }}</label>
             <div class="form-control{{ $errors->has('talent_description') ? ' form-control-danger' : '' }}">
                 @include('helpers/ckeditor', [
                     'name' => "talent_description",
@@ -72,7 +72,7 @@
         </div>
 
         <div class="form-group{{ $errors->has('image') ? ' has-danger' : '' }}">
-            <label for="image">Image</label>
+            <label for="image">{{ Trans('users.image') }}</label>
             <input name="image" type="url" class="form-control{{ $errors->has('image') ? ' form-control-danger' : '' }}" id="image"
             placeholder="Image URL" value="{{ $user->image or old('image') }}">
 
@@ -84,7 +84,7 @@
         </div>
 
         <div class="form-group{{ $errors->has('website') ? ' has-danger' : '' }}">
-            <label for="website">Website</label>
+            <label for="website">{{ Trans('users.website') }}</label>
             <input name="website" type="url" class="form-control{{ $errors->has('website') ? ' form-control-danger' : '' }}" id="website"
             placeholder="User Website" value="{{ $user->website or old('website') }}">
 
@@ -120,7 +120,7 @@
         </div>
 
         <div class="form-group{{ $errors->has('general_skills') ? ' has-danger' : '' }}">
-            <label for="general_skills">Skills</label>
+            <label for="general_skills">{{ Trans('users.skills') }}</label>
             <select name="general_skills[]" id="general_skills" class="selectpicker" multiple>
 
                 @php ($skills_array = collect(array_pluck($general_skills->toArray(), 'pivot.count', 'id')))
@@ -143,7 +143,7 @@
         </div>
 
         <div class="form-group{{ $errors->has('languages') ? ' has-danger' : '' }}">
-            <label for="languages">Languages</label>
+            <label for="languages">{{ Trans('users.languages') }}</label>
             <select name="languages[]" id="languages" class="selectpicker" multiple>
                 @foreach(App\Language::all() as $option)
                     @if (count(collect(old('languages'))) > 0)
@@ -163,7 +163,7 @@
         </div>
 
         <div class="row">
-            <label class="col-sm-12"><strong>Your Location</strong> (with the search area)</label>
+            <label class="col-sm-12"><strong>{{ Trans('users.your_location') }}</strong> ({{ Trans('users.with_the_search_area') }})</label>
             <div class="col-sm-12">
                 @include('helpers.gmap', [
                     "class" => "gm-show",
@@ -176,7 +176,7 @@
             <div class="col-sm-12">
                 <input type="text" hidden="true" id="lat" value="{{$user->lat}}" name="lat">
                 <input type="text" hidden="true" id="lng" value="{{$user->lng}}" name="lng">
-                Distance :
+                {{ Trans('users.distance') }} :
                 <input type="number" class="form-control{{ $errors->has('name') ? ' form-control-danger' : '' }}" id="find_distance" value="{{$user->find_distance}}"
                 name="find_distance" min="1" step="1" max="200"><br><br>
             </div>
@@ -186,7 +186,7 @@
             <button type="submit" class="btn btn-primary"  name="submit_user">
                 @yield('button_name')
             </button>
-            <a class="btn btn-default" href="/talents/{{ $user->id }}">Cancel</a>
+            <a class="btn btn-default" href="/talents/{{ $user->id }}">{{ Trans('users.cancel') }}</a>
         </div>
     </form>
 @endsection
