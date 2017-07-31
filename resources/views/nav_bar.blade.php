@@ -1,5 +1,5 @@
 <nav class="navbar navbar-light bg-faded">
-    <a class="navbar-brand" href="/">Talent Linker</a>
+    <a class="navbar-brand" href="/">{{ Trans('global.website_name') }}</a>
     <ul class="nav navbar-nav">
         <li class="nav-item {{Request::is('projects*') ? 'active':''}}">
             <a class="nav-link" href="/projects">{{ Trans('views.projects') }}</a>
