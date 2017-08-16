@@ -17,9 +17,12 @@ bootstrap/cache/*
 # Rocketeer PHP task runner and deployment package. https://github.com/rocketeers/rocketeer
 .rocketeer/
 
-#Vagrant
+# Vagrant
 .vagrant
 /.idea/
 /storage/
 
 .php_cs.cache
+
+# MacOS
+.DS_Store
