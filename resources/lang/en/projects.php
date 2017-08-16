@@ -12,7 +12,7 @@ return [
     'not_near' => 'Not near',
     'last_update' => 'Last update',
     'no_projects' => 'No projects',
-    'see_pendings' => 'See pending',
+    'see_pendings' => 'See pendings',
     'private_chat' => 'Private chat',
     'delete' => 'Delete',
     'invitation_is_pending' => 'Invitation is pending',

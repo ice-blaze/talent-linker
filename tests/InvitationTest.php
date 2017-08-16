@@ -185,7 +185,7 @@ class InvitationTest extends TestCase
 
         // Quite project
         $this->visit($user->path().'/invitations');
-        $this->press('Quit Project');
+        $this->press('Quit project');
         $this->seePageIs($user->path().'/invitations');
 
         // Check project don't exist anymore
