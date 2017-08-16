@@ -9,7 +9,7 @@ return [
     'start_conversation' => 'Come on start the conversation !!',
     'new_message' => 'New message',
     'chat_with' => 'Chat with',
-    'edit' => 'edit',
-    'send' => 'send',
+    'edit' => 'Edit',
+    'send' => 'Send',
 
 ];
