@@ -34,6 +34,9 @@
         ]
     },
     "scripts": {
+        "pre-install-cmd": [
+            "cp .env.example .env"
+        ], 
         "post-root-package-install": [
             "php -r \"copy('.env.example', '.env');\""
         ],
@@ -43,6 +46,8 @@
         "post-install-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postInstall",
             "php artisan optimize",
+            "bash postsetup.sh",
+            "vagrant up",
             "php artisan migrate:refresh --seed --force"
         ],
         "post-update-cmd": [
