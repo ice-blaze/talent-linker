@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Feedback;
 use App\User;
+use App\Feedback;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
