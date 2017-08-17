@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\GeneralSkill;
-use App\Project;
-use App\ProjectCollaborator;
 use App\User;
+use App\Project;
+use App\GeneralSkill;
+use App\ProjectCollaborator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -136,7 +136,7 @@ class ProjectCollaboratorController extends Controller
         if ($project->owner->user_id == $user->id) {
             ProjectCollaborator::where('project_id', '=', $project->id)->delete();
             $project->delete();
-        // Elsewhere if it's only a collaborator, remove the link
+            // Elsewhere if it's only a collaborator, remove the link
         } else {
             ProjectCollaborator::where('project_id', '=', $project->id)->where('user_id', '=', $user->id)->delete();
         }
