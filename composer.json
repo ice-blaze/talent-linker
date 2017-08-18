@@ -34,6 +34,9 @@
         ]
     },
     "scripts": {
+        "create-testing-database": [
+            "mysql -e 'create database testing;' -u homestead -psecret"
+        ],
         "post-root-package-install": [
             "php -r \"copy('.env.example', '.env');\""
         ],
