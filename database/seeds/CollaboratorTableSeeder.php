@@ -1,9 +1,9 @@
 <?php
 
-use App\GeneralSkill;
-use App\Project;
-use App\ProjectCollaborator;
 use App\User;
+use App\Project;
+use App\GeneralSkill;
+use App\ProjectCollaborator;
 use Illuminate\Database\Seeder;
 
 class CollaboratorTableSeeder extends Seeder

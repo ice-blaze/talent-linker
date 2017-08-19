@@ -1,9 +1,9 @@
 <?php
 
 use App\User;
+use App\ProjectComment;
 use App\ProjectCollaborator;
 use Illuminate\Database\Seeder;
-use App\ProjectComment;
 
 class ProjectCommentsTableSeeder extends Seeder
 {
