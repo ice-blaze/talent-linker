@@ -35,6 +35,9 @@
         ]
     },
     "scripts": {
+        "create-testing-database": [
+            "sed -i '/databases:/a \\ \\ \\ \\ - testing' Homestead.yaml"
+        ],
         "post-root-package-install": [
             "php -r \"copy('.env.example', '.env');\""
         ],
