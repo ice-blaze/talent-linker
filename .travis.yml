@@ -1,7 +1,7 @@
 language: php
 
 php:
-  - 5.6
+  - 7.1
 
 install:
   - sudo pip install codecov
@@ -9,17 +9,12 @@ install:
 before_script:
   - psql -c 'create database travis_ci_test;' -U postgres
   - cp .env.travis .env
-  - mysql -e 'create database homestead;'
-  - composer self-update
   - composer install --no-interaction
-  - php artisan migrate:refresh --seed --force
   - php artisan key:generate
-  - php artisan migrate:rollback
+  - php artisan migrate:refresh --seed
 
 script:
-  - php artisan migrate:refresh
   - vendor/bin/phpunit --coverage-clover=coverage.xml
-  - php artisan migrate:refresh --seed
 
 services:
   - postgresql
