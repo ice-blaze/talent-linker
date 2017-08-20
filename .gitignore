@@ -23,3 +23,5 @@ bootstrap/cache/*
 /storage/
 
 .php_cs.cache
+/aliases
+/after.sh
