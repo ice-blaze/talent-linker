@@ -196,5 +196,27 @@ class ProjectsTableSeeder extends Seeder
             'invite_message'    => 'initial seed',
             'accepted_date'     => Carbon::now(),
         ]);
+
+        // create empty projects for the pagination
+        function createRandomProject($projectId, $user, $skill) {
+            $project = Project::create([
+                'name'              => 'Empty'.$projectId,
+                'short_description' => 'Empty short description '.$projectId,
+                'long_description'  => 'Empty long description '.$projectId,
+            ]);
+            ProjectCollaborator::create([
+                'skill_id'          => $skill->id,
+                'project_id'        => $project->id,
+                'is_project_owner'  => true,
+                'user_id'           => $user->id,
+                'accepted'          => true,
+                'from_collaborator' => false,
+                'invite_message'    => 'initial seed',
+                'accepted_date'     => Carbon::now(),
+            ]);
+        }
+        foreach (range(0, 100) as $number) {
+            createRandomProject($number, $user_richard, $skill_prog);
+        }
     }
 }

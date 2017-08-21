@@ -78,6 +78,12 @@
             </div>
           </div>
         @endforelse
+        {{ $users->links() }}
     </div>
 
+@endsection
+
+@section('scripts')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jscroll/2.3.9/jquery.jscroll.min.js"></script>
+    <script src="{{URL::asset('assets/js/infinite_scroll.js')}}" charset="utf-8"></script>
 @endsection

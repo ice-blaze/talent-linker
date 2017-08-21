@@ -14,12 +14,12 @@ class UserController extends Controller
     {
         $request->flash(); // to have the old functionality (don't understand why it's necessary here)
 
-        $users = User::all();
+        $paginate = 30;
 
         if ($request->search) {
-            $users = User::like('name', $request->search)->get();
+            $users = User::orderBy('created_at', 'asc')->like('name', $request->search)->get()->paginate($paginate);
         } else {
-            $users = User::all();
+            $users = User::orderBy('created_at', 'asc')->paginate($paginate);
         }
 
         $general_skills = GeneralSkill::all();

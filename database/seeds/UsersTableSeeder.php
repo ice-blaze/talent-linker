@@ -321,5 +321,28 @@ class UsersTableSeeder extends Seeder
             'language_id' => $lang_french_id,
             'user_id'     => $user->id,
         ]);
+
+        // create random users for the pagination
+        function createRandomUser($userId) {
+            User::create([
+                'name'               => "empty_user".$userId,
+                'email'              => "empty_user".$userId.'@test.com',
+                'first_name'         => "empty_user".$userId,
+                'last_name'          => '',
+                'talent_description' => '',
+                'password'           => bcrypt('test'),
+                'github_link'        => 'http://example.com/my_github',
+                'website'            => 'http://example.com/my_project',
+                'stack_overflow'     => 'http://example.com/stack_overflow',
+                'image'              => 'http://i.imgur.com/wDSw3m5.jpg',
+                'lat'                => 0,
+                'lng'                => 0,
+                'find_distance'      => 20,
+            ]);
+        }
+
+        foreach (range(0, 100) as $number) {
+            createRandomUser($number);
+        }
     }
 }

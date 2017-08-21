@@ -15,13 +15,14 @@ class ProjectController extends Controller
     public function index(Request $request)
     {
         $request->flash();
+        $paginate = 30;
 
         $general_skills = GeneralSkill::all();
 
         if ($request->search) {
-            $projects = Project::like('name', $request->search)->get();
+            $projects = Project::orderBy('created_at', 'asc')->like('name', $request->search)->get()->paginate($paginate);
         } else {
-            $projects = Project::all();
+            $projects = Project::orderBy('created_at', 'asc')->paginate($paginate);
         }
 
         if ($request->skills) {
