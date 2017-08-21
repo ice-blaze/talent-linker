@@ -323,11 +323,12 @@ class UsersTableSeeder extends Seeder
         ]);
 
         // create random users for the pagination
-        function createRandomUser($userId) {
+        function createRandomUser($userId)
+        {
             User::create([
-                'name'               => "empty_user".$userId,
-                'email'              => "empty_user".$userId.'@test.com',
-                'first_name'         => "empty_user".$userId,
+                'name'               => 'empty_user'.$userId,
+                'email'              => 'empty_user'.$userId.'@test.com',
+                'first_name'         => 'empty_user'.$userId,
                 'last_name'          => '',
                 'talent_description' => '',
                 'password'           => bcrypt('test'),

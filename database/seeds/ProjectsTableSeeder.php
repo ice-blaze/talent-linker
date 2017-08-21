@@ -198,7 +198,8 @@ class ProjectsTableSeeder extends Seeder
         ]);
 
         // create empty projects for the pagination
-        function createRandomProject($projectId, $user, $skill) {
+        function createRandomProject($projectId, $user, $skill)
+        {
             $project = Project::create([
                 'name'              => 'Empty'.$projectId,
                 'short_description' => 'Empty short description '.$projectId,
@@ -215,6 +216,7 @@ class ProjectsTableSeeder extends Seeder
                 'accepted_date'     => Carbon::now(),
             ]);
         }
+
         foreach (range(0, 100) as $number) {
             createRandomProject($number, $user_richard, $skill_prog);
         }
