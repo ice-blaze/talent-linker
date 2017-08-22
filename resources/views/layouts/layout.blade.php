@@ -86,5 +86,7 @@
         <script>
             $('#flash-overlay-modal').modal();
         </script>
+
+       @yield('scripts')
     </body>
 </html>
