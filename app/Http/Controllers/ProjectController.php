@@ -20,7 +20,7 @@ class ProjectController extends Controller
         $general_skills = GeneralSkill::all();
 
         if ($request->search) {
-            $projects = Project::orderBy('created_at', 'asc')->like('name', $request->search)->get()->paginate($paginate);
+            $projects = Project::orderBy('created_at', 'asc')->like('name', $request->search)->paginate($paginate);
         } else {
             $projects = Project::orderBy('created_at', 'asc')->paginate($paginate);
         }
