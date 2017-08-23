@@ -6,5 +6,5 @@ return [
     'update' => 'Update',
     'delete' => 'Delete',
     'feedback' => 'Feedback',
-    
+
 ];
