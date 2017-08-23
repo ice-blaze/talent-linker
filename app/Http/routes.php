@@ -2,26 +2,14 @@
 
 Auth::routes();
 
-Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
-    Route::get('/', function () {
-        return view('welcome');
-    });
-    Route::get('/about', function () {
-        return view('about');
-    });
-
-    // Projects
-    Route::get('projects', 'ProjectController@index');
-    Route::post('projects', 'ProjectController@index');
-    Route::get('projects/{project}', 'ProjectController@show');
-
-    // Users
-    Route::get('talents', 'UserController@index');
-    Route::post('talents', 'UserController@index');
-    Route::get('talents/{user}', 'UserController@show');
+Route::get('/', function () {
+    return view('welcome');
+});
+Route::get('/about', function () {
+    return view('about');
 });
 
-Route::group(['middleware' => 'auth', 'prefix' => LaravelLocalization::setLocale()], function () {
+Route::group(['middleware' => 'auth'], function () {
     Route::get('/logout', 'Auth\LoginController@logout');
 
     // Feedbacks
@@ -74,11 +62,21 @@ Route::group(['middleware' => 'auth', 'prefix' => LaravelLocalization::setLocale
     });
 });
 
-Route::group(['middleware' => 'admin', 'prefix' => LaravelLocalization::setLocale()], function () {
+Route::group(['middleware' => 'admin'], function () {
     Route::get('/dashboard', function () {
         return view('admin.dashboard');
     });
 });
+
+// Projects
+Route::get('projects', 'ProjectController@index');
+Route::post('projects', 'ProjectController@index');
+Route::get('projects/{project}', 'ProjectController@show');
+
+// Users
+Route::get('talents', 'UserController@index');
+Route::post('talents', 'UserController@index');
+Route::get('talents/{user}', 'UserController@show');
 
 // Route::get('admin', ['as' =>'admin', 'uses' => 'UserController@index', 'middleware' => ['auth', 'admin']]);
 // Route::get('protected', ['middleware' => ['auth', 'admin'], function() {

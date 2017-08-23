@@ -11,7 +11,6 @@ $factory->define(App\Project::class, function (Faker\Generator $faker) {
     ];
 });
 
-
 // Example of how to use imap_thread
 // $collab_owner = factory(App\ProjectCollaborator::class)->states('with_skill', 'with_project', 'with_user', 'owner')->create();
 // $language = factory(App\Language::class)->create();

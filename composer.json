@@ -5,12 +5,12 @@
     "license": "MIT",
     "type": "project",
     "require": {
-        "php": ">=5.5.9",
+        "php": "^7.0",
         "laravel/framework": "5.3.*",
         "laracasts/flash": "^2.0",
         "doctrine/dbal": "v2.4.2",
         "pusher/pusher-php-server": "^2.6",
-	"mcamara/laravel-localization": "1.1.*"
+        "mcamara/laravel-localization": "1.1.*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -19,7 +19,7 @@
         "symfony/css-selector": "3.1.*",
         "symfony/dom-crawler": "3.1.*",
         "laravel/homestead": "^3.0",
-        "friendsofphp/php-cs-fixer": "^1.12"
+        "friendsofphp/php-cs-fixer": ">=2.4"
     },
     "autoload": {
         "classmap": [
@@ -35,6 +35,9 @@
         ]
     },
     "scripts": {
+        "create-testing-database": [
+            "sed -i '' -e 's/.- homestead.*/ - testing \\\n   &/g' Homestead.yaml"
+        ],
         "post-root-package-install": [
             "php -r \"copy('.env.example', '.env');\""
         ],
@@ -43,13 +46,17 @@
         ],
         "post-install-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postInstall",
-            "php artisan optimize",
-            "php artisan migrate:refresh --seed --force"
+            "php artisan optimize"
         ],
         "post-update-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postUpdate",
-            "php artisan optimize",
-            "php artisan migrate:refresh --seed --force"
+            "php artisan optimize"
+        ],
+        "seed": [
+            "php artisan migrate:refresh --seed"
+        ],
+        "migrate": [
+            "php artisan migrate"
         ]
     },
     "config": {
