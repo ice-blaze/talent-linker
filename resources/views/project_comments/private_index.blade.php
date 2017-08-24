@@ -8,12 +8,12 @@
 
         {{-- use template ? --}}
         @foreach($project->privateComments as $comment)
-        <li class="list-group-item">
-            {{ $comment->content}}
-            <div class="comment_user">
-                <a href="{{ $comment->user->path() }}">{{$comment->user->name}}</a> - {{$comment->date}}
-            </div>
-        </li>
+            <li class="list-group-item">
+                {{ $comment->content}}
+                <div class="comment_user">
+                    <a href="{{ $comment->user->path() }}">{{$comment->user->name}}</a> - {{$comment->date}}
+                </div>
+            </li>
         @endforeach
 
         <hr>
