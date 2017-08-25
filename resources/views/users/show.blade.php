@@ -3,12 +3,12 @@
 @section('content')
     <div class="row col-centered">
         @if($user->isCurrentAuth())
-            <a class="btn btn-primary" href="/talents/{{ $user->id }}/edit">Edit Profile</a>
-            <a class="btn btn-primary" href="/talents/{{ $user->id }}/invitations">Invitations</a>
+            <a class="btn btn-primary" href="/talents/{{ $user->id }}/edit">{{ Trans('users.edit_profile') }}</a>
+            <a class="btn btn-primary" href="/talents/{{ $user->id }}/invitations">{{ Trans('users.invitations') }}</a>
         @endif
         @if(Auth::user() && !$user->isCurrentAuth())
-            <a class="btn btn-primary" href="/talents/{{ $user->id }}/chat">Chat with this talent</a>
-            <a class="btn btn-primary" href="/talents/{{ $user->id }}/recruit">Recruit for one project</a>
+            <a class="btn btn-primary" href="/talents/{{ $user->id }}/chat">{{ Trans('users.chat_with_this_talent') }}</a>
+            <a class="btn btn-primary" href="/talents/{{ $user->id }}/recruit">{{ Trans('users.recruit_for_one_project') }}</a>
         @endif
     </div>
     <br>
@@ -27,9 +27,9 @@
         <div class="col-sm-12">
             @if (Auth::user())
                 @if ($user->isInSearchDistance(Auth::user()))
-                    <span class="tag tag-pill tag-primary"><i class="fa fa-map-marker" aria-hidden="true"></i> Near You</span>
+                    <span class="tag tag-pill tag-primary"><i class="fa fa-map-marker" aria-hidden="true"></i> {{ Trans('users.near_you') }}</span>
                 @else
-                    <span class="tag tag-pill tag-danger"><i class="fa fa-map-marker" aria-hidden="true"></i> Not Near</span>
+                    <span class="tag tag-pill tag-danger"><i class="fa fa-map-marker" aria-hidden="true"></i> {{ Trans('users.not_near') }}</span>
                 @endif
             @endif
             <h1>{{$user->name}}</h1>
@@ -52,19 +52,19 @@
 
     <br>
     <div class="row">
-        <label class="col-sm-2"><strong>Skills</strong></label>
+        <label class="col-sm-2"><strong>{{ Trans('users.skills') }}</strong></label>
         <div class="col-sm-10">
             @forelse($user->generalSkills as $skill)
                 <span class="tag tag-primary">{{$skill->name}}</span>
             @empty
-                No Skills
+                {{ Trans('users.no_skills') }}
             @endforelse
         </div>
     </div>
 
     <br>
     <div class="row">
-        <label class="col-sm-2"><strong>Languages</strong></label>
+        <label class="col-sm-2"><strong>{{ Trans('users.languages') }}</strong></label>
         <div class="col-sm-10">
             @foreach($user->languages as $language)
                 <span class="tag tag-pill tag-primary">
@@ -75,7 +75,7 @@
     </div>
 
     <div class="row">
-        <label class="col-sm-12"><strong>Place</strong></label>
+        <label class="col-sm-12"><strong>{{ Trans('users.place') }}</strong></label>
         <div class="col-sm-12">
             @include('helpers.gmap', [
                 "class" => "gm-show",
@@ -98,7 +98,7 @@
     @endif
     @if($user->website)
         <div class="row">
-            <label class="col-sm-3 col-lg-2"><strong>Website</strong></label>
+            <label class="col-sm-3 col-lg-2"><strong>{{ Trans('users.website') }}</strong></label>
             <div class="col-sm-9 col-md-3">
                 <a href="{{$user->website}}">{{$user->website}}</a>
             </div>
@@ -115,7 +115,7 @@
     @if($user->collaborations)
         <br>
         <div class="row">
-            <label for="col-md-12"><strong>Projects</strong></label>
+            <label for="col-md-12"><strong>{{ Trans('users.projects') }}</strong></label>
             <div class="col-md-12">
                 @foreach ($user->collaborations as $collaboration)
                     <div class="col-xl-3 col-lg-4 col-md-6 col-xs-12">
@@ -135,7 +135,7 @@
                                 </a>
                                 <span class="tag tag-primary">{{$collaboration->skill->name}}</span>
                                 @if($collaboration->is_project_owner)
-                                    <span class="tag tag-pill tag-danger">Owner</span>
+                                    <span class="tag tag-pill tag-danger">{{ Trans('users.owner') }}</span>
                                 @endif
                               </div>
                         </div>

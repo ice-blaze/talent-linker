@@ -106,7 +106,7 @@ class ProjectTest extends TestCase
         // Create project trough the interface
         $this->actingAs($user);
         $this->visit('/projects');
-        $this->click('Create Project');
+        $this->click('Create project');
         $this->type($project_github_link, 'github_link');
         $this->type($project_image, 'image');
         $this->type($project_skill_1_count, 'general_skills['.$project_skill_1->id.']');

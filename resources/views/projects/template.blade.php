@@ -9,7 +9,7 @@
         @yield('owner_skill')
 
         <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
-            <label for="name">Title</label>
+            <label for="name">{{ Trans('projects.title') }}</label>
             <input name="name" class="form-control{{ $errors->has('name') ? ' form-control-danger' : '' }}" id="name" placeholder="Project Title"
             value="{{ $project->name or old('name') }}">
 
@@ -21,7 +21,7 @@
         </div>
 
         <div class="form-group{{ $errors->has('short_description') ? ' has-danger' : '' }}">
-            <label for="short_description">Short Description</label>
+            <label for="short_description">{{ Trans('projects.short_description') }}</label>
             <textarea name="short_description" class="form-control{{ $errors->has('short_description') ? ' form-control-danger' : '' }}" id="short_description" placeholder="Project Short Description">{{ $project->short_description or old('short_description') }}</textarea>
 
             @if ($errors->has('short_description'))
@@ -32,7 +32,7 @@
         </div>
 
         <div class="form-group{{ $errors->has('long_description') ? ' has-danger' : '' }}">
-            <label for="long_description">Long Description</label>
+            <label for="long_description">{{ Trans('projects.long_description') }}</label>
             <div class="form-control{{ $errors->has('long_description') ? ' form-control-danger' : '' }}">
                 @php ($description = old('long_description'))
                 @if (isset($project))
@@ -52,7 +52,7 @@
             </div>
 
             <div class="form-group{{ $errors->has('image') ? ' has-danger' : '' }}">
-                <label for="image">Image</label>
+                <label for="image">{{ Trans('projects.image') }}</label>
                 <input name="image" type="url" class="form-control{{ $errors->has('image') ? ' form-control-danger' : '' }}" id="image"
                 placeholder="Image URL" value="{{ $project->image or old('image') }}">
 
@@ -64,7 +64,7 @@
             </div>
 
             <div class="form-group{{ $errors->has('github_link') ? ' has-danger' : '' }}">
-                <label for="github_link">GithHub</label>
+                <label for="github_link">GitHub</label>
                 <input name="github_link" type="url" class="form-control{{ $errors->has('github_link') ? ' form-control-danger' : '' }}" id="github_link"
                 placeholder="GitHub Project URL" value="{{ $project->github_link or old('github_link') }}">
 
@@ -76,7 +76,7 @@
             </div>
 
             <div class="form-group{{ $errors->has('website_link') ? ' has-danger' : '' }}">
-                <label for="website_link">Website</label>
+                <label for="website_link">{{ Trans('projects.website') }}</label>
                 <input name="website_link" type="url" class="form-control{{ $errors->has('website_link') ? ' form-control-danger' : '' }}" id="website_link"
                 placeholder="Stack Overflow URL" value="{{ $project->website_link or old('website_link') }}">
 
@@ -90,7 +90,7 @@
             @yield('collaborators')
 
             <div class="form-group{{ $errors->has('general_skills') ? ' has-danger' : '' }}">
-                <label for="general_skills">Skills</label>
+                <label for="general_skills">{{ Trans('projects.skills') }}</label>
                 <ul name="general_skills[]" id="general_skills" >
 
                     @php ($skills_array = collect(array_pluck($general_skills->toArray(), 'pivot.count', 'id')))
@@ -112,7 +112,7 @@
                 </ul>
             </div>
             <div class="form-group{{ $errors->has('languages') ? ' has-danger' : '' }}">
-                <label for="languages">Languages</label>
+                <label for="languages">{{ Trans('projects.languages') }}</label>
                 <select name="languages[]" id="languages" class="selectpicker {{ $errors->has('name') ? ' form-control-danger' : '' }}" multiple>
 
                     @foreach(App\Language::all() as $option)

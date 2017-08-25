@@ -4,22 +4,20 @@
     <div class="container-fluid">
         <div class="row">
             <div class="jumbotron">
-                <h1 class="display-3">Create some projects !</h1>
+                <h1 class="display-3">{{ Trans('views.create_some_projects') }} !</h1>
                 <p class="lead">
-                  Welcome on XXXX, a web site that helps people to find other talents in the world or in their region for
-                  audio-visual-multimedia projects.
+                    {{ Trans('views.index_welcome_message') }}
                 </p>
                 <hr class="m-y-2">
-                <p class="lead">You have two choices</p>
+                <p class="lead">{{ Trans('views.you_have_two_choices') }}</p>
                 <div class="row">
                     <div class="col-xs-6 col-centered">
-                        <a class="btn btn-primary btn-lg" href="/projects" role="button">Find projects</a>
+                        <a class="btn btn-primary btn-lg" href="/projects" role="button">{{ Trans('views.find_projects') }}</a>
                     </div>
                     <div class="col-xs-6 col-centered">
-                        <a class="btn btn-primary btn-lg" href="/talents" role="button">Find talents</a>
+                        <a class="btn btn-primary btn-lg" href="/talents" role="button">{{ Trans('views.find_talents') }}</a>
                     </div>
                 </div>
-                </p>
             </div>
         </div>
     </div>

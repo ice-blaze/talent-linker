@@ -5,12 +5,12 @@
 @endsection
 
 @section('button_name')
-    Create project
+    {{ Trans('projects.create_project') }}
 @endsection
 
 @section('owner_skill')
     <div class="form-group">
-        <label for="project">Your skill as project owner</label>
+        <label for="project">{{ Trans('projects.your_skill_as_project_owner') }}</label>
         <select name="skill" class="custom-select">
             @foreach($general_skills as $skill)
                 <option value="{{$skill->id}}">{{$skill->name}}</option>

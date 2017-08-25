@@ -6,17 +6,8 @@
 
 @section('collaborators')
     <div class="form-group">
-        <label for="collaborators">Collaborators</label>
-        can only delete collaborators
-        {{-- <select name="collaborators[]" class="selectpicker" multiple>
-          @foreach($all_users as $user)
-            <option value="{{$user->id}}"
-              @if(isset($project))
-                {{ $project->collaborators->contains('id', $user->id) ? "selected" : ""}}
-              @endif
-            >{{$user->name}}</option>
-          @endforeach
-        </select> --}}
+        <label for="collaborators">{{ Trans('projects.collaborators') }}</label>
+        {{ Trans('projects.can_only_delete_collaborators') }}
     </div>
 @endsection
 
@@ -25,5 +16,5 @@
 @endsection
 
 @section('button_name')
-    Edit project
+    {{ Trans('projects.edit_project') }}
 @endsection

@@ -9,5 +9,5 @@
 @endsection
 
 @section('button_name')
-    Save User
+    {{ Trans('users.save_user') }}
 @endsection
