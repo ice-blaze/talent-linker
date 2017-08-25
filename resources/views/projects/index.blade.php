@@ -48,46 +48,46 @@
         @forelse(array_chunk($projects->all(), 3) as $threeProjects)
             <div class="card-deck">
                 @foreach($threeProjects as $project)
-                <div class="card">
-                    <a href="{{ $project->path() }}">
-                        <img class="card-img-top img-fluid m-x-auto"
-                            @if($project->image)
-                                src="{{$project->image}}"
-                            @else
-                                src="{{asset('assets/images/default_project.png')}}"
+                    <div class="card">
+                        <a href="{{ $project->path() }}">
+                            <img class="card-img-top img-fluid m-x-auto"
+                                @if($project->image)
+                                    src="{{$project->image}}"
+                                @else
+                                    src="{{asset('assets/images/default_project.png')}}"
+                                @endif
+                            alt="Project image">
+                        </a>
+                        <div class="card-block">
+                            <h4 class="card-title"><a href="{{ $project->path() }}">{{ $project->name }}</a></h4>
+                            @if (Auth::user())
+                                @if($project->isInSearchDistance(Auth::user()))
+                                    <span class="tag tag-pill tag-primary"><i class="fa fa-map-marker" aria-hidden="true"></i> {{ Trans('projects.near_you') }}</span>
+                                @else
+                                    <span class="tag tag-pill tag-danger"><i class="fa fa-map-marker" aria-hidden="true"></i> {{ Trans('projects.not_near') }}</span>
+                                @endif
                             @endif
-                        alt="Project image">
-                    </a>
-                    <div class="card-block">
-                        <h4 class="card-title"><a href="{{ $project->path() }}">{{ $project->name }}</a></h4>
-                        @if (Auth::user())
-                            @if($project->isInSearchDistance(Auth::user()))
-                                <span class="tag tag-pill tag-primary"><i class="fa fa-map-marker" aria-hidden="true"></i> {{ Trans('projects.near_you') }}</span>
-                            @else
-                                <span class="tag tag-pill tag-danger"><i class="fa fa-map-marker" aria-hidden="true"></i> {{ Trans('projects.not_near') }}</span>
-                            @endif
-                        @endif
+                        </div>
+                        {{-- <img class="card-img-top" src="..." alt="Card image cap"> --}}
+                        <div class="card-block">
+                            <p class="card-text">{{ $project->short_description }}</p>
+                            <p>
+                                @foreach($project->currentSkillAndWanted() as $skill)
+                                    <span
+                                        @if($skill['wanted'] > 0 && $skill['have'] >= $skill['wanted'])
+                                            class="tag tag-primary"
+                                        @else
+                                            <span class="tag tag-default"
+                                        @endif
+                                    >
+                                        {{$skill['skill']->name}} {{$skill['have']}} / {{$skill['wanted']}}
+                                    </span>
+                                @endforeach
+                                <br>
+                            </p>
+                            <p class="card-text"><small class="text-muted">{{ Trans('projects.last_update') }} {{$project->updated_at->diffForHumans()}}</small></p>
+                        </div>
                     </div>
-                    {{-- <img class="card-img-top" src="..." alt="Card image cap"> --}}
-                    <div class="card-block">
-                        <p class="card-text">{{ $project->short_description }}</p>
-                        <p>
-                            @foreach($project->currentSkillAndWanted() as $skill)
-                                <span
-                                    @if($skill['wanted'] > 0 && $skill['have'] >= $skill['wanted'])
-                                        class="tag tag-primary"
-                                    @else
-                                        <span class="tag tag-default"
-                                    @endif
-                                >
-                                    {{$skill['skill']->name}} {{$skill['have']}} / {{$skill['wanted']}}
-                                </span>
-                            @endforeach
-                        <br>
-                        </p>
-                        <p class="card-text"><small class="text-muted">{{ Trans('projects.last_update') }} {{$project->updated_at->diffForHumans()}}</small></p>
-                    </div>
-                </div>
                 @endforeach
             </div>
         @empty
