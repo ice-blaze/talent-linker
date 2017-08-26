@@ -1,0 +1,3 @@
+[submodule "laradock-talent-linker"]
+	path = laradock-talent-linker
+	url = https://github.com/Laradock/laradock.git
