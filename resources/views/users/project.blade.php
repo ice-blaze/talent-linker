@@ -30,7 +30,7 @@
                                 </a>
                                 <span class="tag tag-primary">{{$collaboration->skill->name}}</span>
                                 @if($collaboration->is_project_owner)
-                                    <span class="tag tag-pill tag-danger">Owner</span>
+                                    <span class="tag tag-pill tag-danger">{{ Trans('users.owner') }}</span>
                                 @endif
                             </div>
                         </div>
@@ -38,11 +38,11 @@
                 @empty
                     <div class="row">
                         <div class="col-md-12 col-centered">
-                            <h2>No Projects...</h2>
+                            <h2>{{ Trans('users.no_projects') }}...</h2>
                         </div>
                     </div>
                     <div class="row">
-                        <p class="col-centered">Do you want to <a href="{{"/projects/create"}}">create a project</a> or <a href="{{"/projects"}}">join a project</a> ?</p>
+                        <p class="col-centered">{{ Trans('users.do_you_want_to') }} <a href="{{"/projects/create"}}">{{ Trans('users.create_a_project') }}</a> {{ Trans('users.or') }} <a href="{{"/projects"}}">{{ Trans('users.join_a_project') }}</a> ?</p>
                     </div>
                 @endforelse
             </div>

@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>Talent Linker</title>
+        <title>{{ Trans('global.website_name') }}</title>
 
         <!-- Latest compiled and minified CSS -->
         {{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -30,7 +30,7 @@
     <body>
         @if(Auth::user())
         <a id="feedback" href="/feedbacks">
-            <div>feedback</div>
+            <div>{{ Trans('layouts.feedback') }}</div>
         </a>
         @endif
 

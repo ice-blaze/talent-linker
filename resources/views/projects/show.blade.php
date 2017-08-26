@@ -4,8 +4,8 @@
 
     <div class="row text-right col-centered">
         @if( Auth::user() && ($project->isUserTheOwner(Auth::user()) || $project->isUserACollaborator(Auth::user())))
-            <a class="btn btn-primary" href="/projects/{{ $project->id }}/invitations">See pendings</a>
-            <a class="btn btn-primary" href="/projects/{{ $project->id }}/privateComments">Private chat</a>
+            <a class="btn btn-primary" href="/projects/{{ $project->id }}/invitations">{{ Trans('projects.see_pendings') }}</a>
+            <a class="btn btn-primary" href="/projects/{{ $project->id }}/privateComments">{{ Trans('projects.private_chat') }}</a>
         @endif
 
         @if(Auth::user() && $project->isUserTheOwner(Auth::user()))
@@ -15,14 +15,14 @@
                 {{ method_field('delete') }}
                 {{ csrf_field() }}
                 <div class="form-group">
-                    <button type="submit" class="btn btn-danger" name="delete">Delete</button>
+                    <button type="submit" class="btn btn-danger" name="delete">{{ Trans('projects.delete') }}</button>
                 </div>
             </form>
         @endif
 
         @if( Auth::user() && $project->isPendingUser(Auth::user()))
             <div class="btn btn-default disabled">
-                Invitation is pending...
+                {{ Trans('projects.invitation_is_pending') }}...
             </div>
         @endif
 
@@ -30,7 +30,7 @@
             <form method="get" action="/projects/{{ $project->id }}/join">
                 {{ csrf_field() }}
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary"  name="join_project">Join the project</button>
+                    <button type="submit" class="btn btn-primary"  name="join_project">{{ Trans('projects.join_the_project') }}</button>
                 </div>
             </form>
         @endif
@@ -41,9 +41,9 @@
             <h1>{{$project->name}}</h1>
             @if (Auth::user())
                 @if ($project->isInSearchDistance(Auth::user()))
-                    <span class="tag tag-pill tag-primary"><i class="fa fa-map-marker" aria-hidden="true"></i> Near You</span>
+                    <span class="tag tag-pill tag-primary"><i class="fa fa-map-marker" aria-hidden="true"></i> {{ Trans('projects.near_you') }}</span>
                 @else
-                    <span class="tag tag-pill tag-danger"><i class="fa fa-map-marker" aria-hidden="true"></i> Not Near</span>
+                    <span class="tag tag-pill tag-danger"><i class="fa fa-map-marker" aria-hidden="true"></i> {{ Trans('projects.not_near') }}</span>
                 @endif
             @endif
         </div>
@@ -93,7 +93,7 @@
 
     <br>
     <div class="row">
-        <label class="col-sm-12"><strong>Collaborators</strong></label>
+        <label class="col-sm-12"><strong>{{ Trans('projects.collaborators') }}</strong></label>
         @foreach($project->collaborators as $collaborator)
             <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-xs-12">
                 <div class="media card card-outline-primary ">
@@ -110,7 +110,7 @@
                         <a href="{{$collaborator->user->path()}}"><h4 class="media-heading">{{$collaborator->user->name}}</h4></a>
                         <span class="tag tag-primary">{{$collaborator->skill->name}}</span>
                         @if($collaborator->is_project_owner)
-                            <span class="tag tag-pill tag-danger">Owner</span>
+                            <span class="tag tag-pill tag-danger">{{ Trans('projects.owner') }}</span>
                         @endif
                     </div>
                 </div>
@@ -120,7 +120,7 @@
 
     <br>
     <div class="row">
-        <label class="col-sm-2"><strong>Languages</strong></label>
+        <label class="col-sm-2"><strong>{{ Trans('projects.languages') }}</strong></label>
         <div class="col-sm-10">
             @foreach($project->languages as $language)
                 <span class="tag tag-pill tag-primary">
@@ -131,7 +131,7 @@
     </div>
 
     <div class="row">
-        <label class="col-sm-12"><strong>Place</strong></label>
+        <label class="col-sm-12"><strong>{{ Trans('projects.place') }}</strong></label>
         <div class="col-sm-12">
             @include('helpers.gmap', [
                 "class" => "gm-show",
@@ -152,7 +152,7 @@
             </div>
         @endif
         @if($project->website_link)
-            <label class="col-sm-2"><strong>Website</strong></label>
+            <label class="col-sm-2"><strong>{{ Trans('projects.website') }}</strong></label>
             <div class="col-sm-10 col-md-4">
                 <a href="{{$project->website_link}}">{{$project->website_link}}</a>
             </div>
@@ -160,7 +160,7 @@
     </div>
 
     <div class="row">
-        <label class="col-sm-12"><strong>Comments</strong></label>
+        <label class="col-sm-12"><strong>{{ Trans('projects.comments') }}</strong></label>
 
         @forelse($project->comments as $comment)
             @include('helpers/user_comment', [
@@ -169,20 +169,20 @@
 
         @empty
             <div class="lead col-sm-12">
-                No comments...
+                {{ Trans('projects.no_comments') }}...
             </div>
         @endforelse
 
         @if(Auth::user())
             <hr>
-            <h3>Add a comment</h3>
+            <h3>{{ Trans('projects.add_a_comment') }}</h3>
             <form method="post" action="/projects/{{ $project->id }}/comments">
                 {{ csrf_field() }}
                 <div class="form-group">
                     <textarea name="content" class="form-control"></textarea>
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary" name="comment">Comment</button>
+                    <button type="submit" class="btn btn-primary" name="comment">{{ Trans('projects.comment') }}</button>
                 </div>
             </form>
         @endif
